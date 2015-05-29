@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="de.hska.wi.awp.datasource.model.Field" />
+	<import class="de.hska.wi.awp.datasource.model.Issue" />
+	<import class="de.hska.wi.awp.datasource.model.JiraUser" />
+	<import class="de.hska.wi.awp.datasource.model.Status" />
+	<import class="de.hska.wi.awp.datasource.model.Student" />
+	<class name="de.hska.wi.awp.datasource.model.impl.FieldImpl" table="jira_Field">
+		<cache usage="read-write" />
+		<id name="fieldId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="resolutionDate" type="org.hibernate.type.TimestampType" />
+		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+		<property name="creatorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="assigneeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="de.hska.wi.awp.datasource.model.impl.IssueImpl" table="jira_Issue">
+		<cache usage="read-write" />
+		<id name="issueId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="id" type="com.liferay.portal.dao.orm.hibernate.StringType" column="id_" />
+		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
+		<property name="self" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fieldId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="de.hska.wi.awp.datasource.model.impl.JiraUserImpl" table="jira_JiraUser">
+		<cache usage="read-write" />
+		<id name="creatorId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="displayname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.hska.wi.awp.datasource.model.impl.StatusImpl" table="jira_Status">
+		<cache usage="read-write" />
+		<id name="statusId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.hska.wi.awp.datasource.model.impl.StudentImpl" table="jira_Student">
+		<cache usage="read-write" />
+		<id name="studentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="studentAge" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="studentGender" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="studentAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

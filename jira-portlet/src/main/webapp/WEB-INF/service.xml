@@ -1,0 +1,59 @@
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+
+<service-builder package-path="de.hska.wi.awp.datasource">
+	<namespace>jira</namespace>
+	<entity name="Student" local-service="true" remote-service="true">
+		<!-- PK fields -->
+		<column name="studentId" type="long" primary="true" />
+		<column name="firstName" type="String" />
+		<column name="lastName" type="String" />
+		<column name="studentAge" type="int" />
+		<column name="studentGender" type="int" />
+		<column name="studentAddress" type="String" />
+		<!-- Finder methods -->
+		<finder name="Gender" return-type="Collection">
+			<finder-column name="studentGender" />
+		</finder>
+	</entity>
+
+	<entity name="Status" local-service="true" remote-service="true">
+		<column name="statusId" primary="true" type="long"></column>
+		<column name="name" type="String"></column>
+		<finder name="statusName" return-type="Collection">
+			<finder-column name="name" />
+		</finder>
+	</entity>
+
+	<entity name="Issue" local-service="true" remote-service="true">
+		<column name="issueId" primary="true" type="long"></column>
+		<column name="id" type="String"></column>
+		<column name="key" type="String"></column>
+		<column name="self" type="String"></column>
+		<column name="fieldId" type="long"></column>
+		<finder name="IssueId" return-type="Collection">
+			<finder-column name="issueId"></finder-column>
+		</finder>
+	</entity>
+
+	<entity name="Field" local-service="true" remote-service="true">
+		<column name="fieldId" primary="true" type="long"></column>
+		<column name="createdDate" type="Date"></column>
+		<column name="resolutionDate" type="Date"></column>
+		<column name="summary" type="String"></column>
+		<column name="updated" type="Date"></column>
+		<column name="creatorId" type="long"></column>
+		<column name="assigneeId" type="long"></column>
+		<column name="statusId" type="long"></column>
+	</entity>
+
+	<entity name="JiraUser" local-service="true" remote-service="true">
+		<column name="creatorId" primary="true" type="String"></column>
+		<column name="displayname" type="String"></column>
+		<finder name="byName" return-type="JiraUser">
+			<finder-column name="displayname"></finder-column>
+		</finder>
+	</entity>
+
+
+
+</service-builder>

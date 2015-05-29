@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="de.hska.wi.awp.datasource.model.Field">
+		<field name="fieldId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="resolutionDate" type="Date" />
+		<field name="summary" type="String" />
+		<field name="updated" type="Date" />
+		<field name="creatorId" type="long" />
+		<field name="assigneeId" type="long" />
+		<field name="statusId" type="long" />
+	</model>
+	<model name="de.hska.wi.awp.datasource.model.Issue">
+		<field name="issueId" type="long" />
+		<field name="id" type="String" />
+		<field name="key" type="String" />
+		<field name="self" type="String" />
+		<field name="fieldId" type="long" />
+	</model>
+	<model name="de.hska.wi.awp.datasource.model.JiraUser">
+		<field name="creatorId" type="String" />
+		<field name="displayname" type="String" />
+	</model>
+	<model name="de.hska.wi.awp.datasource.model.Status">
+		<field name="statusId" type="long" />
+		<field name="name" type="String" />
+	</model>
+	<model name="de.hska.wi.awp.datasource.model.Student">
+		<field name="studentId" type="long" />
+		<field name="firstName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="studentAge" type="int" />
+		<field name="studentGender" type="int" />
+		<field name="studentAddress" type="String" />
+	</model>
+</model-hints>

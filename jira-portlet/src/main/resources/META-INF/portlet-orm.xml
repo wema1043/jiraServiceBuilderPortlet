@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.FieldModelImpl">
+		<attributes>
+			<id name="fieldId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="resolutionDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="summary" />
+			<basic name="updated">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="creatorId" />
+			<basic name="assigneeId" />
+			<basic name="statusId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.IssueModelImpl">
+		<attributes>
+			<id name="issueId" />
+			<basic name="id">
+				<column name="ID_" />
+			</basic>
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="self" />
+			<basic name="fieldId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.JiraUserModelImpl">
+		<attributes>
+			<id name="creatorId" />
+			<basic name="displayname" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.StatusModelImpl">
+		<attributes>
+			<id name="statusId" />
+			<basic name="name" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.StudentModelImpl">
+		<attributes>
+			<id name="studentId" />
+			<basic name="firstName" />
+			<basic name="lastName" />
+			<basic name="studentAge" />
+			<basic name="studentGender" />
+			<basic name="studentAddress" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="de.hska.wi.awp.datasource.model.impl.FieldImpl" name="Field">
+		<table name="jira_Field" />
+		<attributes />
+	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.IssueImpl" name="Issue">
+		<table name="jira_Issue" />
+		<attributes />
+	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.JiraUserImpl" name="JiraUser">
+		<table name="jira_JiraUser" />
+		<attributes />
+	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.StatusImpl" name="Status">
+		<table name="jira_Status" />
+		<attributes />
+	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.StudentImpl" name="Student">
+		<table name="jira_Student" />
+		<attributes />
+	</entity>
+</entity-mappings>

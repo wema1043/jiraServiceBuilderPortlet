@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="de.hska.wi.awp.datasource.service.FieldLocalService" class="de.hska.wi.awp.datasource.service.impl.FieldLocalServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.FieldService" class="de.hska.wi.awp.datasource.service.impl.FieldServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.persistence.FieldPersistence" class="de.hska.wi.awp.datasource.service.persistence.FieldPersistenceImpl" parent="basePersistence" />
+	<bean id="de.hska.wi.awp.datasource.service.IssueLocalService" class="de.hska.wi.awp.datasource.service.impl.IssueLocalServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.IssueService" class="de.hska.wi.awp.datasource.service.impl.IssueServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.persistence.IssuePersistence" class="de.hska.wi.awp.datasource.service.persistence.IssuePersistenceImpl" parent="basePersistence" />
+	<bean id="de.hska.wi.awp.datasource.service.JiraUserLocalService" class="de.hska.wi.awp.datasource.service.impl.JiraUserLocalServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.JiraUserService" class="de.hska.wi.awp.datasource.service.impl.JiraUserServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.persistence.JiraUserPersistence" class="de.hska.wi.awp.datasource.service.persistence.JiraUserPersistenceImpl" parent="basePersistence" />
+	<bean id="de.hska.wi.awp.datasource.service.StatusLocalService" class="de.hska.wi.awp.datasource.service.impl.StatusLocalServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.StatusService" class="de.hska.wi.awp.datasource.service.impl.StatusServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.persistence.StatusPersistence" class="de.hska.wi.awp.datasource.service.persistence.StatusPersistenceImpl" parent="basePersistence" />
+	<bean id="de.hska.wi.awp.datasource.service.StudentLocalService" class="de.hska.wi.awp.datasource.service.impl.StudentLocalServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.StudentService" class="de.hska.wi.awp.datasource.service.impl.StudentServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.persistence.StudentPersistence" class="de.hska.wi.awp.datasource.service.persistence.StudentPersistenceImpl" parent="basePersistence" />
+</beans>
