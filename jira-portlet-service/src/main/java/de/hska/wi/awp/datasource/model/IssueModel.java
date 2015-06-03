@@ -34,43 +34,29 @@ public interface IssueModel extends BaseModel<Issue> {
      *
      * @return the primary key of this issue
      */
-    public long getPrimaryKey();
+    public String getPrimaryKey();
 
     /**
      * Sets the primary key of this issue.
      *
      * @param primaryKey the primary key of this issue
      */
-    public void setPrimaryKey(long primaryKey);
+    public void setPrimaryKey(String primaryKey);
 
     /**
      * Returns the issue ID of this issue.
      *
      * @return the issue ID of this issue
      */
-    public long getIssueId();
+    @AutoEscape
+    public String getIssueId();
 
     /**
      * Sets the issue ID of this issue.
      *
      * @param issueId the issue ID of this issue
      */
-    public void setIssueId(long issueId);
-
-    /**
-     * Returns the ID of this issue.
-     *
-     * @return the ID of this issue
-     */
-    @AutoEscape
-    public String getId();
-
-    /**
-     * Sets the ID of this issue.
-     *
-     * @param id the ID of this issue
-     */
-    public void setId(String id);
+    public void setIssueId(String issueId);
 
     /**
      * Returns the key of this issue.

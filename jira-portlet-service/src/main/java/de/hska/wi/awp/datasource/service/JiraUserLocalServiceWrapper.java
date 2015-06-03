@@ -274,6 +274,21 @@ public class JiraUserLocalServiceWrapper implements JiraUserLocalService,
             arguments);
     }
 
+    @Override
+    public java.lang.String getAllMembers(java.lang.String projectId) {
+        return _jiraUserLocalService.getAllMembers(projectId);
+    }
+
+    @Override
+    public void ParseJsonToMember(java.lang.String response) {
+        _jiraUserLocalService.ParseJsonToMember(response);
+    }
+
+    @Override
+    public void deleteAllJiraUser() {
+        _jiraUserLocalService.deleteAllJiraUser();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

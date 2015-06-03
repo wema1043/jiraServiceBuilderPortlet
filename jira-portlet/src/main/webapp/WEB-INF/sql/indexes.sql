@@ -1,3 +1,5 @@
+create index IX_6F1D4F4D on jira_Field (assigneeId);
+
 create index IX_3DB73B16 on jira_Issue (issueId);
 
 create index IX_CA68C5CD on jira_JiraUser (displayname);

@@ -3,7 +3,6 @@ package de.hska.wi.awp.datasource.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +41,15 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
         attributes.put("resolutionDate", getResolutionDate());
         attributes.put("summary", getSummary());
         attributes.put("updated", getUpdated());
+        attributes.put("timespent", getTimespent());
+        attributes.put("timeestimate", getTimeestimate());
+        attributes.put("timeoriginalestimate", getTimeoriginalestimate());
+        attributes.put("aggregatetimespent", getAggregatetimespent());
+        attributes.put("aggregatetimeoriginalestimate",
+            getAggregatetimeoriginalestimate());
+        attributes.put("aggregatetimeestimate", getAggregatetimeestimate());
+        attributes.put("description", getDescription());
+        attributes.put("storypoints", getStorypoints());
         attributes.put("creatorId", getCreatorId());
         attributes.put("assigneeId", getAssigneeId());
         attributes.put("statusId", getStatusId());
@@ -57,13 +65,13 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
             setFieldId(fieldId);
         }
 
-        Date createdDate = (Date) attributes.get("createdDate");
+        String createdDate = (String) attributes.get("createdDate");
 
         if (createdDate != null) {
             setCreatedDate(createdDate);
         }
 
-        Date resolutionDate = (Date) attributes.get("resolutionDate");
+        String resolutionDate = (String) attributes.get("resolutionDate");
 
         if (resolutionDate != null) {
             setResolutionDate(resolutionDate);
@@ -75,19 +83,71 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
             setSummary(summary);
         }
 
-        Date updated = (Date) attributes.get("updated");
+        String updated = (String) attributes.get("updated");
 
         if (updated != null) {
             setUpdated(updated);
         }
 
-        Long creatorId = (Long) attributes.get("creatorId");
+        String timespent = (String) attributes.get("timespent");
+
+        if (timespent != null) {
+            setTimespent(timespent);
+        }
+
+        String timeestimate = (String) attributes.get("timeestimate");
+
+        if (timeestimate != null) {
+            setTimeestimate(timeestimate);
+        }
+
+        String timeoriginalestimate = (String) attributes.get(
+                "timeoriginalestimate");
+
+        if (timeoriginalestimate != null) {
+            setTimeoriginalestimate(timeoriginalestimate);
+        }
+
+        String aggregatetimespent = (String) attributes.get(
+                "aggregatetimespent");
+
+        if (aggregatetimespent != null) {
+            setAggregatetimespent(aggregatetimespent);
+        }
+
+        String aggregatetimeoriginalestimate = (String) attributes.get(
+                "aggregatetimeoriginalestimate");
+
+        if (aggregatetimeoriginalestimate != null) {
+            setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
+        }
+
+        String aggregatetimeestimate = (String) attributes.get(
+                "aggregatetimeestimate");
+
+        if (aggregatetimeestimate != null) {
+            setAggregatetimeestimate(aggregatetimeestimate);
+        }
+
+        String description = (String) attributes.get("description");
+
+        if (description != null) {
+            setDescription(description);
+        }
+
+        Long storypoints = (Long) attributes.get("storypoints");
+
+        if (storypoints != null) {
+            setStorypoints(storypoints);
+        }
+
+        String creatorId = (String) attributes.get("creatorId");
 
         if (creatorId != null) {
             setCreatorId(creatorId);
         }
 
-        Long assigneeId = (Long) attributes.get("assigneeId");
+        String assigneeId = (String) attributes.get("assigneeId");
 
         if (assigneeId != null) {
             setAssigneeId(assigneeId);
@@ -146,7 +206,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the created date of this field
     */
     @Override
-    public java.util.Date getCreatedDate() {
+    public java.lang.String getCreatedDate() {
         return _field.getCreatedDate();
     }
 
@@ -156,7 +216,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param createdDate the created date of this field
     */
     @Override
-    public void setCreatedDate(java.util.Date createdDate) {
+    public void setCreatedDate(java.lang.String createdDate) {
         _field.setCreatedDate(createdDate);
     }
 
@@ -166,7 +226,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the resolution date of this field
     */
     @Override
-    public java.util.Date getResolutionDate() {
+    public java.lang.String getResolutionDate() {
         return _field.getResolutionDate();
     }
 
@@ -176,7 +236,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param resolutionDate the resolution date of this field
     */
     @Override
-    public void setResolutionDate(java.util.Date resolutionDate) {
+    public void setResolutionDate(java.lang.String resolutionDate) {
         _field.setResolutionDate(resolutionDate);
     }
 
@@ -206,7 +266,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the updated of this field
     */
     @Override
-    public java.util.Date getUpdated() {
+    public java.lang.String getUpdated() {
         return _field.getUpdated();
     }
 
@@ -216,8 +276,169 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param updated the updated of this field
     */
     @Override
-    public void setUpdated(java.util.Date updated) {
+    public void setUpdated(java.lang.String updated) {
         _field.setUpdated(updated);
+    }
+
+    /**
+    * Returns the timespent of this field.
+    *
+    * @return the timespent of this field
+    */
+    @Override
+    public java.lang.String getTimespent() {
+        return _field.getTimespent();
+    }
+
+    /**
+    * Sets the timespent of this field.
+    *
+    * @param timespent the timespent of this field
+    */
+    @Override
+    public void setTimespent(java.lang.String timespent) {
+        _field.setTimespent(timespent);
+    }
+
+    /**
+    * Returns the timeestimate of this field.
+    *
+    * @return the timeestimate of this field
+    */
+    @Override
+    public java.lang.String getTimeestimate() {
+        return _field.getTimeestimate();
+    }
+
+    /**
+    * Sets the timeestimate of this field.
+    *
+    * @param timeestimate the timeestimate of this field
+    */
+    @Override
+    public void setTimeestimate(java.lang.String timeestimate) {
+        _field.setTimeestimate(timeestimate);
+    }
+
+    /**
+    * Returns the timeoriginalestimate of this field.
+    *
+    * @return the timeoriginalestimate of this field
+    */
+    @Override
+    public java.lang.String getTimeoriginalestimate() {
+        return _field.getTimeoriginalestimate();
+    }
+
+    /**
+    * Sets the timeoriginalestimate of this field.
+    *
+    * @param timeoriginalestimate the timeoriginalestimate of this field
+    */
+    @Override
+    public void setTimeoriginalestimate(java.lang.String timeoriginalestimate) {
+        _field.setTimeoriginalestimate(timeoriginalestimate);
+    }
+
+    /**
+    * Returns the aggregatetimespent of this field.
+    *
+    * @return the aggregatetimespent of this field
+    */
+    @Override
+    public java.lang.String getAggregatetimespent() {
+        return _field.getAggregatetimespent();
+    }
+
+    /**
+    * Sets the aggregatetimespent of this field.
+    *
+    * @param aggregatetimespent the aggregatetimespent of this field
+    */
+    @Override
+    public void setAggregatetimespent(java.lang.String aggregatetimespent) {
+        _field.setAggregatetimespent(aggregatetimespent);
+    }
+
+    /**
+    * Returns the aggregatetimeoriginalestimate of this field.
+    *
+    * @return the aggregatetimeoriginalestimate of this field
+    */
+    @Override
+    public java.lang.String getAggregatetimeoriginalestimate() {
+        return _field.getAggregatetimeoriginalestimate();
+    }
+
+    /**
+    * Sets the aggregatetimeoriginalestimate of this field.
+    *
+    * @param aggregatetimeoriginalestimate the aggregatetimeoriginalestimate of this field
+    */
+    @Override
+    public void setAggregatetimeoriginalestimate(
+        java.lang.String aggregatetimeoriginalestimate) {
+        _field.setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
+    }
+
+    /**
+    * Returns the aggregatetimeestimate of this field.
+    *
+    * @return the aggregatetimeestimate of this field
+    */
+    @Override
+    public java.lang.String getAggregatetimeestimate() {
+        return _field.getAggregatetimeestimate();
+    }
+
+    /**
+    * Sets the aggregatetimeestimate of this field.
+    *
+    * @param aggregatetimeestimate the aggregatetimeestimate of this field
+    */
+    @Override
+    public void setAggregatetimeestimate(java.lang.String aggregatetimeestimate) {
+        _field.setAggregatetimeestimate(aggregatetimeestimate);
+    }
+
+    /**
+    * Returns the description of this field.
+    *
+    * @return the description of this field
+    */
+    @Override
+    public java.lang.String getDescription() {
+        return _field.getDescription();
+    }
+
+    /**
+    * Sets the description of this field.
+    *
+    * @param description the description of this field
+    */
+    @Override
+    public void setDescription(java.lang.String description) {
+        _field.setDescription(description);
+    }
+
+    /**
+    * Returns the storypoints of this field.
+    *
+    * @return the storypoints of this field
+    */
+    @Override
+    public long getStorypoints() {
+        return _field.getStorypoints();
+    }
+
+    /**
+    * Sets the storypoints of this field.
+    *
+    * @param storypoints the storypoints of this field
+    */
+    @Override
+    public void setStorypoints(long storypoints) {
+        _field.setStorypoints(storypoints);
     }
 
     /**
@@ -226,7 +447,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the creator ID of this field
     */
     @Override
-    public long getCreatorId() {
+    public java.lang.String getCreatorId() {
         return _field.getCreatorId();
     }
 
@@ -236,7 +457,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param creatorId the creator ID of this field
     */
     @Override
-    public void setCreatorId(long creatorId) {
+    public void setCreatorId(java.lang.String creatorId) {
         _field.setCreatorId(creatorId);
     }
 
@@ -246,7 +467,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the assignee ID of this field
     */
     @Override
-    public long getAssigneeId() {
+    public java.lang.String getAssigneeId() {
         return _field.getAssigneeId();
     }
 
@@ -256,7 +477,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param assigneeId the assignee ID of this field
     */
     @Override
-    public void setAssigneeId(long assigneeId) {
+    public void setAssigneeId(java.lang.String assigneeId) {
         _field.setAssigneeId(assigneeId);
     }
 

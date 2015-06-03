@@ -7,13 +7,15 @@ import de.hska.wi.awp.datasource.service.ClpSerializer;
 import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.FieldServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.IssuePriorityLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.IssuePriorityServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueServiceUtil;
+import de.hska.wi.awp.datasource.service.IssueTypeLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.IssueTypeServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserServiceUtil;
 import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.StatusServiceUtil;
-import de.hska.wi.awp.datasource.service.StudentLocalServiceUtil;
-import de.hska.wi.awp.datasource.service.StudentServiceUtil;
 
 
 public class ClpMessageListener extends BaseMessageListener {
@@ -34,15 +36,18 @@ public class ClpMessageListener extends BaseMessageListener {
             IssueLocalServiceUtil.clearService();
 
             IssueServiceUtil.clearService();
+            IssuePriorityLocalServiceUtil.clearService();
+
+            IssuePriorityServiceUtil.clearService();
+            IssueTypeLocalServiceUtil.clearService();
+
+            IssueTypeServiceUtil.clearService();
             JiraUserLocalServiceUtil.clearService();
 
             JiraUserServiceUtil.clearService();
             StatusLocalServiceUtil.clearService();
 
             StatusServiceUtil.clearService();
-            StudentLocalServiceUtil.clearService();
-
-            StudentServiceUtil.clearService();
         }
     }
 }

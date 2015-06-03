@@ -3,7 +3,6 @@ package de.hska.wi.awp.datasource.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,12 +14,20 @@ import java.util.List;
  */
 public class FieldSoap implements Serializable {
     private long _fieldId;
-    private Date _createdDate;
-    private Date _resolutionDate;
+    private String _createdDate;
+    private String _resolutionDate;
     private String _summary;
-    private Date _updated;
-    private long _creatorId;
-    private long _assigneeId;
+    private String _updated;
+    private String _timespent;
+    private String _timeestimate;
+    private String _timeoriginalestimate;
+    private String _aggregatetimespent;
+    private String _aggregatetimeoriginalestimate;
+    private String _aggregatetimeestimate;
+    private String _description;
+    private long _storypoints;
+    private String _creatorId;
+    private String _assigneeId;
     private long _statusId;
 
     public FieldSoap() {
@@ -34,6 +41,14 @@ public class FieldSoap implements Serializable {
         soapModel.setResolutionDate(model.getResolutionDate());
         soapModel.setSummary(model.getSummary());
         soapModel.setUpdated(model.getUpdated());
+        soapModel.setTimespent(model.getTimespent());
+        soapModel.setTimeestimate(model.getTimeestimate());
+        soapModel.setTimeoriginalestimate(model.getTimeoriginalestimate());
+        soapModel.setAggregatetimespent(model.getAggregatetimespent());
+        soapModel.setAggregatetimeoriginalestimate(model.getAggregatetimeoriginalestimate());
+        soapModel.setAggregatetimeestimate(model.getAggregatetimeestimate());
+        soapModel.setDescription(model.getDescription());
+        soapModel.setStorypoints(model.getStorypoints());
         soapModel.setCreatorId(model.getCreatorId());
         soapModel.setAssigneeId(model.getAssigneeId());
         soapModel.setStatusId(model.getStatusId());
@@ -93,19 +108,19 @@ public class FieldSoap implements Serializable {
         _fieldId = fieldId;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return _createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         _createdDate = createdDate;
     }
 
-    public Date getResolutionDate() {
+    public String getResolutionDate() {
         return _resolutionDate;
     }
 
-    public void setResolutionDate(Date resolutionDate) {
+    public void setResolutionDate(String resolutionDate) {
         _resolutionDate = resolutionDate;
     }
 
@@ -117,27 +132,92 @@ public class FieldSoap implements Serializable {
         _summary = summary;
     }
 
-    public Date getUpdated() {
+    public String getUpdated() {
         return _updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(String updated) {
         _updated = updated;
     }
 
-    public long getCreatorId() {
+    public String getTimespent() {
+        return _timespent;
+    }
+
+    public void setTimespent(String timespent) {
+        _timespent = timespent;
+    }
+
+    public String getTimeestimate() {
+        return _timeestimate;
+    }
+
+    public void setTimeestimate(String timeestimate) {
+        _timeestimate = timeestimate;
+    }
+
+    public String getTimeoriginalestimate() {
+        return _timeoriginalestimate;
+    }
+
+    public void setTimeoriginalestimate(String timeoriginalestimate) {
+        _timeoriginalestimate = timeoriginalestimate;
+    }
+
+    public String getAggregatetimespent() {
+        return _aggregatetimespent;
+    }
+
+    public void setAggregatetimespent(String aggregatetimespent) {
+        _aggregatetimespent = aggregatetimespent;
+    }
+
+    public String getAggregatetimeoriginalestimate() {
+        return _aggregatetimeoriginalestimate;
+    }
+
+    public void setAggregatetimeoriginalestimate(
+        String aggregatetimeoriginalestimate) {
+        _aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
+    }
+
+    public String getAggregatetimeestimate() {
+        return _aggregatetimeestimate;
+    }
+
+    public void setAggregatetimeestimate(String aggregatetimeestimate) {
+        _aggregatetimeestimate = aggregatetimeestimate;
+    }
+
+    public String getDescription() {
+        return _description;
+    }
+
+    public void setDescription(String description) {
+        _description = description;
+    }
+
+    public long getStorypoints() {
+        return _storypoints;
+    }
+
+    public void setStorypoints(long storypoints) {
+        _storypoints = storypoints;
+    }
+
+    public String getCreatorId() {
         return _creatorId;
     }
 
-    public void setCreatorId(long creatorId) {
+    public void setCreatorId(String creatorId) {
         _creatorId = creatorId;
     }
 
-    public long getAssigneeId() {
+    public String getAssigneeId() {
         return _assigneeId;
     }
 
-    public void setAssigneeId(long assigneeId) {
+    public void setAssigneeId(String assigneeId) {
         _assigneeId = assigneeId;
     }
 

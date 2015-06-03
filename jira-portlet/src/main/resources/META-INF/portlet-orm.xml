@@ -10,16 +10,18 @@
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.FieldModelImpl">
 		<attributes>
 			<id name="fieldId" />
-			<basic name="createdDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="resolutionDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
+			<basic name="createdDate" />
+			<basic name="resolutionDate" />
 			<basic name="summary" />
-			<basic name="updated">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
+			<basic name="updated" />
+			<basic name="timespent" />
+			<basic name="timeestimate" />
+			<basic name="timeoriginalestimate" />
+			<basic name="aggregatetimespent" />
+			<basic name="aggregatetimeoriginalestimate" />
+			<basic name="aggregatetimeestimate" />
+			<basic name="description" />
+			<basic name="storypoints" />
 			<basic name="creatorId" />
 			<basic name="assigneeId" />
 			<basic name="statusId" />
@@ -31,14 +33,29 @@
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.IssueModelImpl">
 		<attributes>
 			<id name="issueId" />
-			<basic name="id">
-				<column name="ID_" />
-			</basic>
 			<basic name="key">
 				<column name="KEY_" />
 			</basic>
 			<basic name="self" />
 			<basic name="fieldId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.IssuePriorityModelImpl">
+		<attributes>
+			<id name="priorityId" />
+			<basic name="priorityName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.IssueTypeModelImpl">
+		<attributes>
+			<id name="issueId" />
+			<basic name="issueName" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -62,19 +79,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.StudentModelImpl">
-		<attributes>
-			<id name="studentId" />
-			<basic name="firstName" />
-			<basic name="lastName" />
-			<basic name="studentAge" />
-			<basic name="studentGender" />
-			<basic name="studentAddress" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<entity class="de.hska.wi.awp.datasource.model.impl.FieldImpl" name="Field">
 		<table name="jira_Field" />
 		<attributes />
@@ -83,16 +87,20 @@
 		<table name="jira_Issue" />
 		<attributes />
 	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.IssuePriorityImpl" name="IssuePriority">
+		<table name="jira_IssuePriority" />
+		<attributes />
+	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.IssueTypeImpl" name="IssueType">
+		<table name="jira_IssueType" />
+		<attributes />
+	</entity>
 	<entity class="de.hska.wi.awp.datasource.model.impl.JiraUserImpl" name="JiraUser">
 		<table name="jira_JiraUser" />
 		<attributes />
 	</entity>
 	<entity class="de.hska.wi.awp.datasource.model.impl.StatusImpl" name="Status">
 		<table name="jira_Status" />
-		<attributes />
-	</entity>
-	<entity class="de.hska.wi.awp.datasource.model.impl.StudentImpl" name="Student">
-		<table name="jira_Student" />
 		<attributes />
 	</entity>
 </entity-mappings>

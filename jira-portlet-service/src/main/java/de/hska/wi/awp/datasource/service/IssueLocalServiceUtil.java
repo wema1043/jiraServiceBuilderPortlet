@@ -47,7 +47,7 @@ public class IssueLocalServiceUtil {
     * @return the new issue
     */
     public static de.hska.wi.awp.datasource.model.Issue createIssue(
-        long issueId) {
+        java.lang.String issueId) {
         return getService().createIssue(issueId);
     }
 
@@ -60,7 +60,7 @@ public class IssueLocalServiceUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue deleteIssue(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService().deleteIssue(issueId);
@@ -169,7 +169,8 @@ public class IssueLocalServiceUtil {
         return getService().dynamicQueryCount(dynamicQuery, projection);
     }
 
-    public static de.hska.wi.awp.datasource.model.Issue fetchIssue(long issueId)
+    public static de.hska.wi.awp.datasource.model.Issue fetchIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getService().fetchIssue(issueId);
     }
@@ -182,7 +183,8 @@ public class IssueLocalServiceUtil {
     * @throws PortalException if a issue with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static de.hska.wi.awp.datasource.model.Issue getIssue(long issueId)
+    public static de.hska.wi.awp.datasource.model.Issue getIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService().getIssue(issueId);
@@ -259,6 +261,20 @@ public class IssueLocalServiceUtil {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return getService().invokeMethod(name, parameterTypes, arguments);
+    }
+
+    public static java.lang.String getAllIssues() throws java.lang.Exception {
+        return getService().getAllIssues();
+    }
+
+    public static void ParseJsonToIssue(java.lang.String response)
+        throws java.lang.Exception {
+        getService().ParseJsonToIssue(response);
+    }
+
+    public static void deleteAllIssues()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getService().deleteAllIssues();
     }
 
     public static void clearService() {

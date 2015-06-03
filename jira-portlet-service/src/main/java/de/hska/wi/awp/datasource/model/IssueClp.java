@@ -19,8 +19,7 @@ import java.util.Map;
 
 
 public class IssueClp extends BaseModelImpl<Issue> implements Issue {
-    private long _issueId;
-    private String _id;
+    private String _issueId;
     private String _key;
     private String _self;
     private long _fieldId;
@@ -41,12 +40,12 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
     }
 
     @Override
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _issueId;
     }
 
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(String primaryKey) {
         setIssueId(primaryKey);
     }
 
@@ -57,7 +56,7 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey(((Long) primaryKeyObj).longValue());
+        setPrimaryKey((String) primaryKeyObj);
     }
 
     @Override
@@ -65,7 +64,6 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("issueId", getIssueId());
-        attributes.put("id", getId());
         attributes.put("key", getKey());
         attributes.put("self", getSelf());
         attributes.put("fieldId", getFieldId());
@@ -75,16 +73,10 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long issueId = (Long) attributes.get("issueId");
+        String issueId = (String) attributes.get("issueId");
 
         if (issueId != null) {
             setIssueId(issueId);
-        }
-
-        String id = (String) attributes.get("id");
-
-        if (id != null) {
-            setId(id);
         }
 
         String key = (String) attributes.get("key");
@@ -107,43 +99,21 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
     }
 
     @Override
-    public long getIssueId() {
+    public String getIssueId() {
         return _issueId;
     }
 
     @Override
-    public void setIssueId(long issueId) {
+    public void setIssueId(String issueId) {
         _issueId = issueId;
 
         if (_issueRemoteModel != null) {
             try {
                 Class<?> clazz = _issueRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setIssueId", long.class);
+                Method method = clazz.getMethod("setIssueId", String.class);
 
                 method.invoke(_issueRemoteModel, issueId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public String getId() {
-        return _id;
-    }
-
-    @Override
-    public void setId(String id) {
-        _id = id;
-
-        if (_issueRemoteModel != null) {
-            try {
-                Class<?> clazz = _issueRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setId", String.class);
-
-                method.invoke(_issueRemoteModel, id);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -284,7 +254,6 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
         IssueClp clone = new IssueClp();
 
         clone.setIssueId(getIssueId());
-        clone.setId(getId());
         clone.setKey(getKey());
         clone.setSelf(getSelf());
         clone.setFieldId(getFieldId());
@@ -294,15 +263,9 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
     @Override
     public int compareTo(Issue issue) {
-        long primaryKey = issue.getPrimaryKey();
+        String primaryKey = issue.getPrimaryKey();
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return getPrimaryKey().compareTo(primaryKey);
     }
 
     @Override
@@ -317,9 +280,9 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
         IssueClp issue = (IssueClp) obj;
 
-        long primaryKey = issue.getPrimaryKey();
+        String primaryKey = issue.getPrimaryKey();
 
-        if (getPrimaryKey() == primaryKey) {
+        if (getPrimaryKey().equals(primaryKey)) {
             return true;
         } else {
             return false;
@@ -332,17 +295,15 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
     @Override
     public int hashCode() {
-        return (int) getPrimaryKey();
+        return getPrimaryKey().hashCode();
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(11);
+        StringBundler sb = new StringBundler(9);
 
         sb.append("{issueId=");
         sb.append(getIssueId());
-        sb.append(", id=");
-        sb.append(getId());
         sb.append(", key=");
         sb.append(getKey());
         sb.append(", self=");
@@ -356,7 +317,7 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(19);
+        StringBundler sb = new StringBundler(16);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.Issue");
@@ -365,10 +326,6 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
         sb.append(
             "<column><column-name>issueId</column-name><column-value><![CDATA[");
         sb.append(getIssueId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>id</column-name><column-value><![CDATA[");
-        sb.append(getId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>key</column-name><column-value><![CDATA[");

@@ -2,19 +2,6 @@
 
 <service-builder package-path="de.hska.wi.awp.datasource">
 	<namespace>jira</namespace>
-	<entity name="Student" local-service="true" remote-service="true">
-		<!-- PK fields -->
-		<column name="studentId" type="long" primary="true" />
-		<column name="firstName" type="String" />
-		<column name="lastName" type="String" />
-		<column name="studentAge" type="int" />
-		<column name="studentGender" type="int" />
-		<column name="studentAddress" type="String" />
-		<!-- Finder methods -->
-		<finder name="Gender" return-type="Collection">
-			<finder-column name="studentGender" />
-		</finder>
-	</entity>
 
 	<entity name="Status" local-service="true" remote-service="true">
 		<column name="statusId" primary="true" type="long"></column>
@@ -25,8 +12,7 @@
 	</entity>
 
 	<entity name="Issue" local-service="true" remote-service="true">
-		<column name="issueId" primary="true" type="long"></column>
-		<column name="id" type="String"></column>
+		<column name="issueId" primary="true" type="String"></column>
 		<column name="key" type="String"></column>
 		<column name="self" type="String"></column>
 		<column name="fieldId" type="long"></column>
@@ -37,13 +23,25 @@
 
 	<entity name="Field" local-service="true" remote-service="true">
 		<column name="fieldId" primary="true" type="long"></column>
-		<column name="createdDate" type="Date"></column>
-		<column name="resolutionDate" type="Date"></column>
+		<column name="createdDate" type="String"></column>
+		<column name="resolutionDate" type="String"></column>
 		<column name="summary" type="String"></column>
-		<column name="updated" type="Date"></column>
-		<column name="creatorId" type="long"></column>
-		<column name="assigneeId" type="long"></column>
+		<column name="updated" type="String"></column>
+		<column name="timespent" type="String"></column>
+		<column name="timeestimate" type="String"></column>
+		<column name="timeoriginalestimate" type="String"></column>
+		<column name="aggregatetimespent" type="String"></column>
+		<column name="aggregatetimeoriginalestimate" type="String"></column>
+		<column name="aggregatetimeestimate" type="String"></column>
+		<column name="description" type="String"></column>
+		<column name="storypoints" type="long"></column>
+		<column name="creatorId" type="String"></column>
+		<column name="assigneeId" type="String"></column>
 		<column name="statusId" type="long"></column>
+		
+		<finder name="FieldsForUser" return-type="Collection">
+			<finder-column name="assigneeId"></finder-column>
+		</finder>
 	</entity>
 
 	<entity name="JiraUser" local-service="true" remote-service="true">
@@ -54,6 +52,17 @@
 		</finder>
 	</entity>
 
+
+	<entity name="IssueType" local-service="true" remote-service="true">
+		<column name="issueId" primary="true" type="long"></column>
+		<column name="issueName" type="String"></column>
+	</entity>
+
+
+	<entity name="IssuePriority" local-service="true" remote-service="true">
+		<column name="priorityId" primary="true" type="long"></column>
+		<column name="priorityName" type="String"></column>
+	</entity>
 
 
 </service-builder>

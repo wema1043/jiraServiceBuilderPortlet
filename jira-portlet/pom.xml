@@ -40,7 +40,7 @@
 			<artifactId>jira-portlet-service</artifactId>
 			<version>${pom.version}</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
 			<version>${liferay.version}</version>
@@ -82,7 +82,7 @@
 			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
-	<dependency>
+		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
@@ -163,9 +163,9 @@
 			<version>1.19</version>
 		</dependency>
 		<dependency>
-        	<groupId>com.sun.jersey</groupId>
-        	<artifactId>jersey-client</artifactId>
-        	<version>1.8</version>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
 		</dependency>
 	</dependencies>
 	<repositories>

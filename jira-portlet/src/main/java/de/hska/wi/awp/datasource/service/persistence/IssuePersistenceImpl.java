@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -75,7 +76,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
             IssueModelImpl.FINDER_CACHE_ENABLED, IssueImpl.class,
             FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByIssueId",
             new String[] {
-                Long.class.getName(),
+                String.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
@@ -84,13 +85,15 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
         new FinderPath(IssueModelImpl.ENTITY_CACHE_ENABLED,
             IssueModelImpl.FINDER_CACHE_ENABLED, IssueImpl.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByIssueId",
-            new String[] { Long.class.getName() },
+            new String[] { String.class.getName() },
             IssueModelImpl.ISSUEID_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_ISSUEID = new FinderPath(IssueModelImpl.ENTITY_CACHE_ENABLED,
             IssueModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByIssueId",
-            new String[] { Long.class.getName() });
+            new String[] { String.class.getName() });
+    private static final String _FINDER_COLUMN_ISSUEID_ISSUEID_1 = "issue.issueId IS NULL";
     private static final String _FINDER_COLUMN_ISSUEID_ISSUEID_2 = "issue.issueId = ?";
+    private static final String _FINDER_COLUMN_ISSUEID_ISSUEID_3 = "(issue.issueId IS NULL OR issue.issueId = '')";
     private static final String _SQL_SELECT_ISSUE = "SELECT issue FROM Issue issue";
     private static final String _SQL_SELECT_ISSUE_WHERE = "SELECT issue FROM Issue issue WHERE ";
     private static final String _SQL_COUNT_ISSUE = "SELECT COUNT(issue) FROM Issue issue";
@@ -102,7 +105,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
                 PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
     private static Log _log = LogFactoryUtil.getLog(IssuePersistenceImpl.class);
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-                "id", "key"
+                "key"
             });
     private static Issue _nullIssue = new IssueImpl() {
             @Override
@@ -135,7 +138,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<Issue> findByIssueId(long issueId) throws SystemException {
+    public List<Issue> findByIssueId(String issueId) throws SystemException {
         return findByIssueId(issueId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
     }
 
@@ -153,7 +156,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<Issue> findByIssueId(long issueId, int start, int end)
+    public List<Issue> findByIssueId(String issueId, int start, int end)
         throws SystemException {
         return findByIssueId(issueId, start, end, null);
     }
@@ -173,7 +176,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<Issue> findByIssueId(long issueId, int start, int end,
+    public List<Issue> findByIssueId(String issueId, int start, int end,
         OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
@@ -194,7 +197,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
 
         if ((list != null) && !list.isEmpty()) {
             for (Issue issue : list) {
-                if ((issueId != issue.getIssueId())) {
+                if (!Validator.equals(issueId, issue.getIssueId())) {
                     list = null;
 
                     break;
@@ -214,7 +217,17 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
 
             query.append(_SQL_SELECT_ISSUE_WHERE);
 
-            query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_2);
+            boolean bindIssueId = false;
+
+            if (issueId == null) {
+                query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_1);
+            } else if (issueId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_3);
+            } else {
+                bindIssueId = true;
+
+                query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_2);
+            }
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -235,7 +248,9 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(issueId);
+                if (bindIssueId) {
+                    qPos.add(issueId);
+                }
 
                 if (!pagination) {
                     list = (List<Issue>) QueryUtil.list(q, getDialect(), start,
@@ -274,7 +289,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue findByIssueId_First(long issueId,
+    public Issue findByIssueId_First(String issueId,
         OrderByComparator orderByComparator)
         throws NoSuchIssueException, SystemException {
         Issue issue = fetchByIssueId_First(issueId, orderByComparator);
@@ -304,7 +319,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue fetchByIssueId_First(long issueId,
+    public Issue fetchByIssueId_First(String issueId,
         OrderByComparator orderByComparator) throws SystemException {
         List<Issue> list = findByIssueId(issueId, 0, 1, orderByComparator);
 
@@ -325,7 +340,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue findByIssueId_Last(long issueId,
+    public Issue findByIssueId_Last(String issueId,
         OrderByComparator orderByComparator)
         throws NoSuchIssueException, SystemException {
         Issue issue = fetchByIssueId_Last(issueId, orderByComparator);
@@ -355,7 +370,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue fetchByIssueId_Last(long issueId,
+    public Issue fetchByIssueId_Last(String issueId,
         OrderByComparator orderByComparator) throws SystemException {
         int count = countByIssueId(issueId);
 
@@ -380,7 +395,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByIssueId(long issueId) throws SystemException {
+    public void removeByIssueId(String issueId) throws SystemException {
         for (Issue issue : findByIssueId(issueId, QueryUtil.ALL_POS,
                 QueryUtil.ALL_POS, null)) {
             remove(issue);
@@ -395,7 +410,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByIssueId(long issueId) throws SystemException {
+    public int countByIssueId(String issueId) throws SystemException {
         FinderPath finderPath = FINDER_PATH_COUNT_BY_ISSUEID;
 
         Object[] finderArgs = new Object[] { issueId };
@@ -408,7 +423,17 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
 
             query.append(_SQL_COUNT_ISSUE_WHERE);
 
-            query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_2);
+            boolean bindIssueId = false;
+
+            if (issueId == null) {
+                query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_1);
+            } else if (issueId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_3);
+            } else {
+                bindIssueId = true;
+
+                query.append(_FINDER_COLUMN_ISSUEID_ISSUEID_2);
+            }
 
             String sql = query.toString();
 
@@ -421,7 +446,9 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(issueId);
+                if (bindIssueId) {
+                    qPos.add(issueId);
+                }
 
                 count = (Long) q.uniqueResult();
 
@@ -522,7 +549,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @return the new issue
      */
     @Override
-    public Issue create(long issueId) {
+    public Issue create(String issueId) {
         Issue issue = new IssueImpl();
 
         issue.setNew(true);
@@ -540,7 +567,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue remove(long issueId)
+    public Issue remove(String issueId)
         throws NoSuchIssueException, SystemException {
         return remove((Serializable) issueId);
     }
@@ -678,7 +705,6 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
         issueImpl.setPrimaryKey(issue.getPrimaryKey());
 
         issueImpl.setIssueId(issue.getIssueId());
-        issueImpl.setId(issue.getId());
         issueImpl.setKey(issue.getKey());
         issueImpl.setSelf(issue.getSelf());
         issueImpl.setFieldId(issue.getFieldId());
@@ -720,7 +746,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue findByPrimaryKey(long issueId)
+    public Issue findByPrimaryKey(String issueId)
         throws NoSuchIssueException, SystemException {
         return findByPrimaryKey((Serializable) issueId);
     }
@@ -777,7 +803,7 @@ public class IssuePersistenceImpl extends BasePersistenceImpl<Issue>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Issue fetchByPrimaryKey(long issueId) throws SystemException {
+    public Issue fetchByPrimaryKey(String issueId) throws SystemException {
         return fetchByPrimaryKey((Serializable) issueId);
     }
 

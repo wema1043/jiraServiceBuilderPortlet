@@ -9,8 +9,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
-import java.util.Date;
-
 /**
  * The base model interface for the Field service. Represents a row in the &quot;jira_Field&quot; database table, with each column mapped to a property of this class.
  *
@@ -64,28 +62,30 @@ public interface FieldModel extends BaseModel<Field> {
      *
      * @return the created date of this field
      */
-    public Date getCreatedDate();
+    @AutoEscape
+    public String getCreatedDate();
 
     /**
      * Sets the created date of this field.
      *
      * @param createdDate the created date of this field
      */
-    public void setCreatedDate(Date createdDate);
+    public void setCreatedDate(String createdDate);
 
     /**
      * Returns the resolution date of this field.
      *
      * @return the resolution date of this field
      */
-    public Date getResolutionDate();
+    @AutoEscape
+    public String getResolutionDate();
 
     /**
      * Sets the resolution date of this field.
      *
      * @param resolutionDate the resolution date of this field
      */
-    public void setResolutionDate(Date resolutionDate);
+    public void setResolutionDate(String resolutionDate);
 
     /**
      * Returns the summary of this field.
@@ -107,42 +107,165 @@ public interface FieldModel extends BaseModel<Field> {
      *
      * @return the updated of this field
      */
-    public Date getUpdated();
+    @AutoEscape
+    public String getUpdated();
 
     /**
      * Sets the updated of this field.
      *
      * @param updated the updated of this field
      */
-    public void setUpdated(Date updated);
+    public void setUpdated(String updated);
+
+    /**
+     * Returns the timespent of this field.
+     *
+     * @return the timespent of this field
+     */
+    @AutoEscape
+    public String getTimespent();
+
+    /**
+     * Sets the timespent of this field.
+     *
+     * @param timespent the timespent of this field
+     */
+    public void setTimespent(String timespent);
+
+    /**
+     * Returns the timeestimate of this field.
+     *
+     * @return the timeestimate of this field
+     */
+    @AutoEscape
+    public String getTimeestimate();
+
+    /**
+     * Sets the timeestimate of this field.
+     *
+     * @param timeestimate the timeestimate of this field
+     */
+    public void setTimeestimate(String timeestimate);
+
+    /**
+     * Returns the timeoriginalestimate of this field.
+     *
+     * @return the timeoriginalestimate of this field
+     */
+    @AutoEscape
+    public String getTimeoriginalestimate();
+
+    /**
+     * Sets the timeoriginalestimate of this field.
+     *
+     * @param timeoriginalestimate the timeoriginalestimate of this field
+     */
+    public void setTimeoriginalestimate(String timeoriginalestimate);
+
+    /**
+     * Returns the aggregatetimespent of this field.
+     *
+     * @return the aggregatetimespent of this field
+     */
+    @AutoEscape
+    public String getAggregatetimespent();
+
+    /**
+     * Sets the aggregatetimespent of this field.
+     *
+     * @param aggregatetimespent the aggregatetimespent of this field
+     */
+    public void setAggregatetimespent(String aggregatetimespent);
+
+    /**
+     * Returns the aggregatetimeoriginalestimate of this field.
+     *
+     * @return the aggregatetimeoriginalestimate of this field
+     */
+    @AutoEscape
+    public String getAggregatetimeoriginalestimate();
+
+    /**
+     * Sets the aggregatetimeoriginalestimate of this field.
+     *
+     * @param aggregatetimeoriginalestimate the aggregatetimeoriginalestimate of this field
+     */
+    public void setAggregatetimeoriginalestimate(
+        String aggregatetimeoriginalestimate);
+
+    /**
+     * Returns the aggregatetimeestimate of this field.
+     *
+     * @return the aggregatetimeestimate of this field
+     */
+    @AutoEscape
+    public String getAggregatetimeestimate();
+
+    /**
+     * Sets the aggregatetimeestimate of this field.
+     *
+     * @param aggregatetimeestimate the aggregatetimeestimate of this field
+     */
+    public void setAggregatetimeestimate(String aggregatetimeestimate);
+
+    /**
+     * Returns the description of this field.
+     *
+     * @return the description of this field
+     */
+    @AutoEscape
+    public String getDescription();
+
+    /**
+     * Sets the description of this field.
+     *
+     * @param description the description of this field
+     */
+    public void setDescription(String description);
+
+    /**
+     * Returns the storypoints of this field.
+     *
+     * @return the storypoints of this field
+     */
+    public long getStorypoints();
+
+    /**
+     * Sets the storypoints of this field.
+     *
+     * @param storypoints the storypoints of this field
+     */
+    public void setStorypoints(long storypoints);
 
     /**
      * Returns the creator ID of this field.
      *
      * @return the creator ID of this field
      */
-    public long getCreatorId();
+    @AutoEscape
+    public String getCreatorId();
 
     /**
      * Sets the creator ID of this field.
      *
      * @param creatorId the creator ID of this field
      */
-    public void setCreatorId(long creatorId);
+    public void setCreatorId(String creatorId);
 
     /**
      * Returns the assignee ID of this field.
      *
      * @return the assignee ID of this field
      */
-    public long getAssigneeId();
+    @AutoEscape
+    public String getAssigneeId();
 
     /**
      * Sets the assignee ID of this field.
      *
      * @param assigneeId the assignee ID of this field
      */
-    public void setAssigneeId(long assigneeId);
+    public void setAssigneeId(String assigneeId);
 
     /**
      * Returns the status ID of this field.

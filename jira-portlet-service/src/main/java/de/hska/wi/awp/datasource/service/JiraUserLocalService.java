@@ -240,4 +240,11 @@ public interface JiraUserLocalService extends BaseLocalService,
     public java.lang.Object invokeMethod(java.lang.String name,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getAllMembers(java.lang.String projectId);
+
+    public void ParseJsonToMember(java.lang.String response);
+
+    public void deleteAllJiraUser();
 }

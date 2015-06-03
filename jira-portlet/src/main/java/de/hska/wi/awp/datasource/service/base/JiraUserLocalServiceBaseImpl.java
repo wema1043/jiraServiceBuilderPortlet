@@ -21,9 +21,10 @@ import de.hska.wi.awp.datasource.model.JiraUser;
 import de.hska.wi.awp.datasource.service.JiraUserLocalService;
 import de.hska.wi.awp.datasource.service.persistence.FieldPersistence;
 import de.hska.wi.awp.datasource.service.persistence.IssuePersistence;
+import de.hska.wi.awp.datasource.service.persistence.IssuePriorityPersistence;
+import de.hska.wi.awp.datasource.service.persistence.IssueTypePersistence;
 import de.hska.wi.awp.datasource.service.persistence.JiraUserPersistence;
 import de.hska.wi.awp.datasource.service.persistence.StatusPersistence;
-import de.hska.wi.awp.datasource.service.persistence.StudentPersistence;
 
 import java.io.Serializable;
 
@@ -57,6 +58,18 @@ public abstract class JiraUserLocalServiceBaseImpl extends BaseLocalServiceImpl
     protected de.hska.wi.awp.datasource.service.IssueService issueService;
     @BeanReference(type = IssuePersistence.class)
     protected IssuePersistence issuePersistence;
+    @BeanReference(type = de.hska.wi.awp.datasource.service.IssuePriorityLocalService.class)
+    protected de.hska.wi.awp.datasource.service.IssuePriorityLocalService issuePriorityLocalService;
+    @BeanReference(type = de.hska.wi.awp.datasource.service.IssuePriorityService.class)
+    protected de.hska.wi.awp.datasource.service.IssuePriorityService issuePriorityService;
+    @BeanReference(type = IssuePriorityPersistence.class)
+    protected IssuePriorityPersistence issuePriorityPersistence;
+    @BeanReference(type = de.hska.wi.awp.datasource.service.IssueTypeLocalService.class)
+    protected de.hska.wi.awp.datasource.service.IssueTypeLocalService issueTypeLocalService;
+    @BeanReference(type = de.hska.wi.awp.datasource.service.IssueTypeService.class)
+    protected de.hska.wi.awp.datasource.service.IssueTypeService issueTypeService;
+    @BeanReference(type = IssueTypePersistence.class)
+    protected IssueTypePersistence issueTypePersistence;
     @BeanReference(type = de.hska.wi.awp.datasource.service.JiraUserLocalService.class)
     protected de.hska.wi.awp.datasource.service.JiraUserLocalService jiraUserLocalService;
     @BeanReference(type = de.hska.wi.awp.datasource.service.JiraUserService.class)
@@ -69,12 +82,6 @@ public abstract class JiraUserLocalServiceBaseImpl extends BaseLocalServiceImpl
     protected de.hska.wi.awp.datasource.service.StatusService statusService;
     @BeanReference(type = StatusPersistence.class)
     protected StatusPersistence statusPersistence;
-    @BeanReference(type = de.hska.wi.awp.datasource.service.StudentLocalService.class)
-    protected de.hska.wi.awp.datasource.service.StudentLocalService studentLocalService;
-    @BeanReference(type = de.hska.wi.awp.datasource.service.StudentService.class)
-    protected de.hska.wi.awp.datasource.service.StudentService studentService;
-    @BeanReference(type = StudentPersistence.class)
-    protected StudentPersistence studentPersistence;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
     @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
@@ -421,6 +428,120 @@ public abstract class JiraUserLocalServiceBaseImpl extends BaseLocalServiceImpl
     }
 
     /**
+     * Returns the issue priority local service.
+     *
+     * @return the issue priority local service
+     */
+    public de.hska.wi.awp.datasource.service.IssuePriorityLocalService getIssuePriorityLocalService() {
+        return issuePriorityLocalService;
+    }
+
+    /**
+     * Sets the issue priority local service.
+     *
+     * @param issuePriorityLocalService the issue priority local service
+     */
+    public void setIssuePriorityLocalService(
+        de.hska.wi.awp.datasource.service.IssuePriorityLocalService issuePriorityLocalService) {
+        this.issuePriorityLocalService = issuePriorityLocalService;
+    }
+
+    /**
+     * Returns the issue priority remote service.
+     *
+     * @return the issue priority remote service
+     */
+    public de.hska.wi.awp.datasource.service.IssuePriorityService getIssuePriorityService() {
+        return issuePriorityService;
+    }
+
+    /**
+     * Sets the issue priority remote service.
+     *
+     * @param issuePriorityService the issue priority remote service
+     */
+    public void setIssuePriorityService(
+        de.hska.wi.awp.datasource.service.IssuePriorityService issuePriorityService) {
+        this.issuePriorityService = issuePriorityService;
+    }
+
+    /**
+     * Returns the issue priority persistence.
+     *
+     * @return the issue priority persistence
+     */
+    public IssuePriorityPersistence getIssuePriorityPersistence() {
+        return issuePriorityPersistence;
+    }
+
+    /**
+     * Sets the issue priority persistence.
+     *
+     * @param issuePriorityPersistence the issue priority persistence
+     */
+    public void setIssuePriorityPersistence(
+        IssuePriorityPersistence issuePriorityPersistence) {
+        this.issuePriorityPersistence = issuePriorityPersistence;
+    }
+
+    /**
+     * Returns the issue type local service.
+     *
+     * @return the issue type local service
+     */
+    public de.hska.wi.awp.datasource.service.IssueTypeLocalService getIssueTypeLocalService() {
+        return issueTypeLocalService;
+    }
+
+    /**
+     * Sets the issue type local service.
+     *
+     * @param issueTypeLocalService the issue type local service
+     */
+    public void setIssueTypeLocalService(
+        de.hska.wi.awp.datasource.service.IssueTypeLocalService issueTypeLocalService) {
+        this.issueTypeLocalService = issueTypeLocalService;
+    }
+
+    /**
+     * Returns the issue type remote service.
+     *
+     * @return the issue type remote service
+     */
+    public de.hska.wi.awp.datasource.service.IssueTypeService getIssueTypeService() {
+        return issueTypeService;
+    }
+
+    /**
+     * Sets the issue type remote service.
+     *
+     * @param issueTypeService the issue type remote service
+     */
+    public void setIssueTypeService(
+        de.hska.wi.awp.datasource.service.IssueTypeService issueTypeService) {
+        this.issueTypeService = issueTypeService;
+    }
+
+    /**
+     * Returns the issue type persistence.
+     *
+     * @return the issue type persistence
+     */
+    public IssueTypePersistence getIssueTypePersistence() {
+        return issueTypePersistence;
+    }
+
+    /**
+     * Sets the issue type persistence.
+     *
+     * @param issueTypePersistence the issue type persistence
+     */
+    public void setIssueTypePersistence(
+        IssueTypePersistence issueTypePersistence) {
+        this.issueTypePersistence = issueTypePersistence;
+    }
+
+    /**
      * Returns the jira user local service.
      *
      * @return the jira user local service
@@ -530,62 +651,6 @@ public abstract class JiraUserLocalServiceBaseImpl extends BaseLocalServiceImpl
      */
     public void setStatusPersistence(StatusPersistence statusPersistence) {
         this.statusPersistence = statusPersistence;
-    }
-
-    /**
-     * Returns the student local service.
-     *
-     * @return the student local service
-     */
-    public de.hska.wi.awp.datasource.service.StudentLocalService getStudentLocalService() {
-        return studentLocalService;
-    }
-
-    /**
-     * Sets the student local service.
-     *
-     * @param studentLocalService the student local service
-     */
-    public void setStudentLocalService(
-        de.hska.wi.awp.datasource.service.StudentLocalService studentLocalService) {
-        this.studentLocalService = studentLocalService;
-    }
-
-    /**
-     * Returns the student remote service.
-     *
-     * @return the student remote service
-     */
-    public de.hska.wi.awp.datasource.service.StudentService getStudentService() {
-        return studentService;
-    }
-
-    /**
-     * Sets the student remote service.
-     *
-     * @param studentService the student remote service
-     */
-    public void setStudentService(
-        de.hska.wi.awp.datasource.service.StudentService studentService) {
-        this.studentService = studentService;
-    }
-
-    /**
-     * Returns the student persistence.
-     *
-     * @return the student persistence
-     */
-    public StudentPersistence getStudentPersistence() {
-        return studentPersistence;
-    }
-
-    /**
-     * Sets the student persistence.
-     *
-     * @param studentPersistence the student persistence
-     */
-    public void setStudentPersistence(StudentPersistence studentPersistence) {
-        this.studentPersistence = studentPersistence;
     }
 
     /**

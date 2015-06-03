@@ -104,7 +104,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static java.util.List<de.hska.wi.awp.datasource.model.Issue> findByIssueId(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence().findByIssueId(issueId);
     }
@@ -123,7 +123,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static java.util.List<de.hska.wi.awp.datasource.model.Issue> findByIssueId(
-        long issueId, int start, int end)
+        java.lang.String issueId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence().findByIssueId(issueId, start, end);
     }
@@ -143,7 +143,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static java.util.List<de.hska.wi.awp.datasource.model.Issue> findByIssueId(
-        long issueId, int start, int end,
+        java.lang.String issueId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
@@ -160,7 +160,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue findByIssueId_First(
-        long issueId,
+        java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueException {
@@ -176,7 +176,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue fetchByIssueId_First(
-        long issueId,
+        java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence().fetchByIssueId_First(issueId, orderByComparator);
@@ -192,7 +192,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue findByIssueId_Last(
-        long issueId,
+        java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueException {
@@ -208,7 +208,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue fetchByIssueId_Last(
-        long issueId,
+        java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence().fetchByIssueId_Last(issueId, orderByComparator);
@@ -220,7 +220,7 @@ public class IssueUtil {
     * @param issueId the issue ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByIssueId(long issueId)
+    public static void removeByIssueId(java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         getPersistence().removeByIssueId(issueId);
     }
@@ -232,7 +232,7 @@ public class IssueUtil {
     * @return the number of matching issues
     * @throws SystemException if a system exception occurred
     */
-    public static int countByIssueId(long issueId)
+    public static int countByIssueId(java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence().countByIssueId(issueId);
     }
@@ -262,7 +262,8 @@ public class IssueUtil {
     * @param issueId the primary key for the new issue
     * @return the new issue
     */
-    public static de.hska.wi.awp.datasource.model.Issue create(long issueId) {
+    public static de.hska.wi.awp.datasource.model.Issue create(
+        java.lang.String issueId) {
         return getPersistence().create(issueId);
     }
 
@@ -274,7 +275,8 @@ public class IssueUtil {
     * @throws de.hska.wi.awp.datasource.NoSuchIssueException if a issue with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static de.hska.wi.awp.datasource.model.Issue remove(long issueId)
+    public static de.hska.wi.awp.datasource.model.Issue remove(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueException {
         return getPersistence().remove(issueId);
@@ -295,7 +297,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue findByPrimaryKey(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueException {
         return getPersistence().findByPrimaryKey(issueId);
@@ -309,7 +311,7 @@ public class IssueUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Issue fetchByPrimaryKey(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence().fetchByPrimaryKey(issueId);
     }

@@ -14,19 +14,26 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class FieldClp extends BaseModelImpl<Field> implements Field {
     private long _fieldId;
-    private Date _createdDate;
-    private Date _resolutionDate;
+    private String _createdDate;
+    private String _resolutionDate;
     private String _summary;
-    private Date _updated;
-    private long _creatorId;
-    private long _assigneeId;
+    private String _updated;
+    private String _timespent;
+    private String _timeestimate;
+    private String _timeoriginalestimate;
+    private String _aggregatetimespent;
+    private String _aggregatetimeoriginalestimate;
+    private String _aggregatetimeestimate;
+    private String _description;
+    private long _storypoints;
+    private String _creatorId;
+    private String _assigneeId;
     private long _statusId;
     private BaseModel<?> _fieldRemoteModel;
     private Class<?> _clpSerializerClass = de.hska.wi.awp.datasource.service.ClpSerializer.class;
@@ -73,6 +80,15 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         attributes.put("resolutionDate", getResolutionDate());
         attributes.put("summary", getSummary());
         attributes.put("updated", getUpdated());
+        attributes.put("timespent", getTimespent());
+        attributes.put("timeestimate", getTimeestimate());
+        attributes.put("timeoriginalestimate", getTimeoriginalestimate());
+        attributes.put("aggregatetimespent", getAggregatetimespent());
+        attributes.put("aggregatetimeoriginalestimate",
+            getAggregatetimeoriginalestimate());
+        attributes.put("aggregatetimeestimate", getAggregatetimeestimate());
+        attributes.put("description", getDescription());
+        attributes.put("storypoints", getStorypoints());
         attributes.put("creatorId", getCreatorId());
         attributes.put("assigneeId", getAssigneeId());
         attributes.put("statusId", getStatusId());
@@ -88,13 +104,13 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
             setFieldId(fieldId);
         }
 
-        Date createdDate = (Date) attributes.get("createdDate");
+        String createdDate = (String) attributes.get("createdDate");
 
         if (createdDate != null) {
             setCreatedDate(createdDate);
         }
 
-        Date resolutionDate = (Date) attributes.get("resolutionDate");
+        String resolutionDate = (String) attributes.get("resolutionDate");
 
         if (resolutionDate != null) {
             setResolutionDate(resolutionDate);
@@ -106,19 +122,71 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
             setSummary(summary);
         }
 
-        Date updated = (Date) attributes.get("updated");
+        String updated = (String) attributes.get("updated");
 
         if (updated != null) {
             setUpdated(updated);
         }
 
-        Long creatorId = (Long) attributes.get("creatorId");
+        String timespent = (String) attributes.get("timespent");
+
+        if (timespent != null) {
+            setTimespent(timespent);
+        }
+
+        String timeestimate = (String) attributes.get("timeestimate");
+
+        if (timeestimate != null) {
+            setTimeestimate(timeestimate);
+        }
+
+        String timeoriginalestimate = (String) attributes.get(
+                "timeoriginalestimate");
+
+        if (timeoriginalestimate != null) {
+            setTimeoriginalestimate(timeoriginalestimate);
+        }
+
+        String aggregatetimespent = (String) attributes.get(
+                "aggregatetimespent");
+
+        if (aggregatetimespent != null) {
+            setAggregatetimespent(aggregatetimespent);
+        }
+
+        String aggregatetimeoriginalestimate = (String) attributes.get(
+                "aggregatetimeoriginalestimate");
+
+        if (aggregatetimeoriginalestimate != null) {
+            setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
+        }
+
+        String aggregatetimeestimate = (String) attributes.get(
+                "aggregatetimeestimate");
+
+        if (aggregatetimeestimate != null) {
+            setAggregatetimeestimate(aggregatetimeestimate);
+        }
+
+        String description = (String) attributes.get("description");
+
+        if (description != null) {
+            setDescription(description);
+        }
+
+        Long storypoints = (Long) attributes.get("storypoints");
+
+        if (storypoints != null) {
+            setStorypoints(storypoints);
+        }
+
+        String creatorId = (String) attributes.get("creatorId");
 
         if (creatorId != null) {
             setCreatorId(creatorId);
         }
 
-        Long assigneeId = (Long) attributes.get("assigneeId");
+        String assigneeId = (String) attributes.get("assigneeId");
 
         if (assigneeId != null) {
             setAssigneeId(assigneeId);
@@ -154,19 +222,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return _createdDate;
     }
 
     @Override
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         _createdDate = createdDate;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setCreatedDate", Date.class);
+                Method method = clazz.getMethod("setCreatedDate", String.class);
 
                 method.invoke(_fieldRemoteModel, createdDate);
             } catch (Exception e) {
@@ -176,19 +244,20 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public Date getResolutionDate() {
+    public String getResolutionDate() {
         return _resolutionDate;
     }
 
     @Override
-    public void setResolutionDate(Date resolutionDate) {
+    public void setResolutionDate(String resolutionDate) {
         _resolutionDate = resolutionDate;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setResolutionDate", Date.class);
+                Method method = clazz.getMethod("setResolutionDate",
+                        String.class);
 
                 method.invoke(_fieldRemoteModel, resolutionDate);
             } catch (Exception e) {
@@ -220,19 +289,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public Date getUpdated() {
+    public String getUpdated() {
         return _updated;
     }
 
     @Override
-    public void setUpdated(Date updated) {
+    public void setUpdated(String updated) {
         _updated = updated;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setUpdated", Date.class);
+                Method method = clazz.getMethod("setUpdated", String.class);
 
                 method.invoke(_fieldRemoteModel, updated);
             } catch (Exception e) {
@@ -242,19 +311,200 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public long getCreatorId() {
+    public String getTimespent() {
+        return _timespent;
+    }
+
+    @Override
+    public void setTimespent(String timespent) {
+        _timespent = timespent;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setTimespent", String.class);
+
+                method.invoke(_fieldRemoteModel, timespent);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getTimeestimate() {
+        return _timeestimate;
+    }
+
+    @Override
+    public void setTimeestimate(String timeestimate) {
+        _timeestimate = timeestimate;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setTimeestimate", String.class);
+
+                method.invoke(_fieldRemoteModel, timeestimate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getTimeoriginalestimate() {
+        return _timeoriginalestimate;
+    }
+
+    @Override
+    public void setTimeoriginalestimate(String timeoriginalestimate) {
+        _timeoriginalestimate = timeoriginalestimate;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setTimeoriginalestimate",
+                        String.class);
+
+                method.invoke(_fieldRemoteModel, timeoriginalestimate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getAggregatetimespent() {
+        return _aggregatetimespent;
+    }
+
+    @Override
+    public void setAggregatetimespent(String aggregatetimespent) {
+        _aggregatetimespent = aggregatetimespent;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setAggregatetimespent",
+                        String.class);
+
+                method.invoke(_fieldRemoteModel, aggregatetimespent);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getAggregatetimeoriginalestimate() {
+        return _aggregatetimeoriginalestimate;
+    }
+
+    @Override
+    public void setAggregatetimeoriginalestimate(
+        String aggregatetimeoriginalestimate) {
+        _aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setAggregatetimeoriginalestimate",
+                        String.class);
+
+                method.invoke(_fieldRemoteModel, aggregatetimeoriginalestimate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getAggregatetimeestimate() {
+        return _aggregatetimeestimate;
+    }
+
+    @Override
+    public void setAggregatetimeestimate(String aggregatetimeestimate) {
+        _aggregatetimeestimate = aggregatetimeestimate;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setAggregatetimeestimate",
+                        String.class);
+
+                method.invoke(_fieldRemoteModel, aggregatetimeestimate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getDescription() {
+        return _description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        _description = description;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDescription", String.class);
+
+                method.invoke(_fieldRemoteModel, description);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public long getStorypoints() {
+        return _storypoints;
+    }
+
+    @Override
+    public void setStorypoints(long storypoints) {
+        _storypoints = storypoints;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStorypoints", long.class);
+
+                method.invoke(_fieldRemoteModel, storypoints);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getCreatorId() {
         return _creatorId;
     }
 
     @Override
-    public void setCreatorId(long creatorId) {
+    public void setCreatorId(String creatorId) {
         _creatorId = creatorId;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setCreatorId", long.class);
+                Method method = clazz.getMethod("setCreatorId", String.class);
 
                 method.invoke(_fieldRemoteModel, creatorId);
             } catch (Exception e) {
@@ -264,19 +514,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public long getAssigneeId() {
+    public String getAssigneeId() {
         return _assigneeId;
     }
 
     @Override
-    public void setAssigneeId(long assigneeId) {
+    public void setAssigneeId(String assigneeId) {
         _assigneeId = assigneeId;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setAssigneeId", long.class);
+                Method method = clazz.getMethod("setAssigneeId", String.class);
 
                 method.invoke(_fieldRemoteModel, assigneeId);
             } catch (Exception e) {
@@ -379,6 +629,14 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         clone.setResolutionDate(getResolutionDate());
         clone.setSummary(getSummary());
         clone.setUpdated(getUpdated());
+        clone.setTimespent(getTimespent());
+        clone.setTimeestimate(getTimeestimate());
+        clone.setTimeoriginalestimate(getTimeoriginalestimate());
+        clone.setAggregatetimespent(getAggregatetimespent());
+        clone.setAggregatetimeoriginalestimate(getAggregatetimeoriginalestimate());
+        clone.setAggregatetimeestimate(getAggregatetimeestimate());
+        clone.setDescription(getDescription());
+        clone.setStorypoints(getStorypoints());
         clone.setCreatorId(getCreatorId());
         clone.setAssigneeId(getAssigneeId());
         clone.setStatusId(getStatusId());
@@ -431,7 +689,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(17);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{fieldId=");
         sb.append(getFieldId());
@@ -443,6 +701,22 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         sb.append(getSummary());
         sb.append(", updated=");
         sb.append(getUpdated());
+        sb.append(", timespent=");
+        sb.append(getTimespent());
+        sb.append(", timeestimate=");
+        sb.append(getTimeestimate());
+        sb.append(", timeoriginalestimate=");
+        sb.append(getTimeoriginalestimate());
+        sb.append(", aggregatetimespent=");
+        sb.append(getAggregatetimespent());
+        sb.append(", aggregatetimeoriginalestimate=");
+        sb.append(getAggregatetimeoriginalestimate());
+        sb.append(", aggregatetimeestimate=");
+        sb.append(getAggregatetimeestimate());
+        sb.append(", description=");
+        sb.append(getDescription());
+        sb.append(", storypoints=");
+        sb.append(getStorypoints());
         sb.append(", creatorId=");
         sb.append(getCreatorId());
         sb.append(", assigneeId=");
@@ -456,7 +730,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(28);
+        StringBundler sb = new StringBundler(52);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.Field");
@@ -481,6 +755,38 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         sb.append(
             "<column><column-name>updated</column-name><column-value><![CDATA[");
         sb.append(getUpdated());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>timespent</column-name><column-value><![CDATA[");
+        sb.append(getTimespent());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>timeestimate</column-name><column-value><![CDATA[");
+        sb.append(getTimeestimate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>timeoriginalestimate</column-name><column-value><![CDATA[");
+        sb.append(getTimeoriginalestimate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>aggregatetimespent</column-name><column-value><![CDATA[");
+        sb.append(getAggregatetimespent());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>aggregatetimeoriginalestimate</column-name><column-value><![CDATA[");
+        sb.append(getAggregatetimeoriginalestimate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>aggregatetimeestimate</column-name><column-value><![CDATA[");
+        sb.append(getAggregatetimeestimate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>description</column-name><column-value><![CDATA[");
+        sb.append(getDescription());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>storypoints</column-name><column-value><![CDATA[");
+        sb.append(getStorypoints());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>creatorId</column-name><column-value><![CDATA[");

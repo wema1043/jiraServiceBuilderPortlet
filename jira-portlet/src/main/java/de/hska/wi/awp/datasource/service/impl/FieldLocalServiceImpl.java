@@ -1,6 +1,13 @@
 package de.hska.wi.awp.datasource.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.service.base.FieldLocalServiceBaseImpl;
+import de.hska.wi.awp.datasource.service.persistence.FieldUtil;
 
 /**
  * The implementation of the field local service.
@@ -22,4 +29,17 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
      *
      * Never reference this interface directly. Always use {@link de.hska.wi.awp.datasource.service.FieldLocalServiceUtil} to access the field local service.
      */
+	
+	public Integer countAllFieldsForAssignee(String assigneeId){
+		
+		List<Field> allFieldsForAssignee = new ArrayList<Field>();
+		try {
+			allFieldsForAssignee = FieldUtil.findByFieldsForUser(assigneeId);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allFieldsForAssignee.size();
+		
+	}
 }

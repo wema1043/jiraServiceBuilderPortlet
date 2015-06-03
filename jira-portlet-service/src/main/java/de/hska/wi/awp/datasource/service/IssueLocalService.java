@@ -51,7 +51,8 @@ public interface IssueLocalService extends BaseLocalService,
     * @param issueId the primary key for the new issue
     * @return the new issue
     */
-    public de.hska.wi.awp.datasource.model.Issue createIssue(long issueId);
+    public de.hska.wi.awp.datasource.model.Issue createIssue(
+        java.lang.String issueId);
 
     /**
     * Deletes the issue with the primary key from the database. Also notifies the appropriate model listeners.
@@ -62,7 +63,8 @@ public interface IssueLocalService extends BaseLocalService,
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-    public de.hska.wi.awp.datasource.model.Issue deleteIssue(long issueId)
+    public de.hska.wi.awp.datasource.model.Issue deleteIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -156,7 +158,8 @@ public interface IssueLocalService extends BaseLocalService,
         throws com.liferay.portal.kernel.exception.SystemException;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public de.hska.wi.awp.datasource.model.Issue fetchIssue(long issueId)
+    public de.hska.wi.awp.datasource.model.Issue fetchIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
@@ -168,7 +171,8 @@ public interface IssueLocalService extends BaseLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public de.hska.wi.awp.datasource.model.Issue getIssue(long issueId)
+    public de.hska.wi.awp.datasource.model.Issue getIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -236,4 +240,13 @@ public interface IssueLocalService extends BaseLocalService,
     public java.lang.Object invokeMethod(java.lang.String name,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getAllIssues() throws java.lang.Exception;
+
+    public void ParseJsonToIssue(java.lang.String response)
+        throws java.lang.Exception;
+
+    public void deleteAllIssues()
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

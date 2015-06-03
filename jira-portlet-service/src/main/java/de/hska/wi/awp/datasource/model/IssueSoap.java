@@ -13,8 +13,7 @@ import java.util.List;
  * @generated
  */
 public class IssueSoap implements Serializable {
-    private long _issueId;
-    private String _id;
+    private String _issueId;
     private String _key;
     private String _self;
     private long _fieldId;
@@ -26,7 +25,6 @@ public class IssueSoap implements Serializable {
         IssueSoap soapModel = new IssueSoap();
 
         soapModel.setIssueId(model.getIssueId());
-        soapModel.setId(model.getId());
         soapModel.setKey(model.getKey());
         soapModel.setSelf(model.getSelf());
         soapModel.setFieldId(model.getFieldId());
@@ -70,28 +68,20 @@ public class IssueSoap implements Serializable {
         return soapModels.toArray(new IssueSoap[soapModels.size()]);
     }
 
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _issueId;
     }
 
-    public void setPrimaryKey(long pk) {
+    public void setPrimaryKey(String pk) {
         setIssueId(pk);
     }
 
-    public long getIssueId() {
+    public String getIssueId() {
         return _issueId;
     }
 
-    public void setIssueId(long issueId) {
+    public void setIssueId(String issueId) {
         _issueId = issueId;
-    }
-
-    public String getId() {
-        return _id;
-    }
-
-    public void setId(String id) {
-        _id = id;
     }
 
     public String getKey() {

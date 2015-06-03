@@ -268,6 +268,12 @@ public class FieldLocalServiceWrapper implements FieldLocalService,
         return _fieldLocalService.invokeMethod(name, parameterTypes, arguments);
     }
 
+    @Override
+    public java.lang.Integer countAllFieldsForAssignee(
+        java.lang.String assigneeId) {
+        return _fieldLocalService.countAllFieldsForAssignee(assigneeId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

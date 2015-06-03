@@ -13,9 +13,10 @@ import com.liferay.portal.model.BaseModel;
 
 import de.hska.wi.awp.datasource.model.FieldClp;
 import de.hska.wi.awp.datasource.model.IssueClp;
+import de.hska.wi.awp.datasource.model.IssuePriorityClp;
+import de.hska.wi.awp.datasource.model.IssueTypeClp;
 import de.hska.wi.awp.datasource.model.JiraUserClp;
 import de.hska.wi.awp.datasource.model.StatusClp;
-import de.hska.wi.awp.datasource.model.StudentClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -100,16 +101,20 @@ public class ClpSerializer {
             return translateInputIssue(oldModel);
         }
 
+        if (oldModelClassName.equals(IssuePriorityClp.class.getName())) {
+            return translateInputIssuePriority(oldModel);
+        }
+
+        if (oldModelClassName.equals(IssueTypeClp.class.getName())) {
+            return translateInputIssueType(oldModel);
+        }
+
         if (oldModelClassName.equals(JiraUserClp.class.getName())) {
             return translateInputJiraUser(oldModel);
         }
 
         if (oldModelClassName.equals(StatusClp.class.getName())) {
             return translateInputStatus(oldModel);
-        }
-
-        if (oldModelClassName.equals(StudentClp.class.getName())) {
-            return translateInputStudent(oldModel);
         }
 
         return oldModel;
@@ -147,6 +152,26 @@ public class ClpSerializer {
         return newModel;
     }
 
+    public static Object translateInputIssuePriority(BaseModel<?> oldModel) {
+        IssuePriorityClp oldClpModel = (IssuePriorityClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getIssuePriorityRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
+    public static Object translateInputIssueType(BaseModel<?> oldModel) {
+        IssueTypeClp oldClpModel = (IssueTypeClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getIssueTypeRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
     public static Object translateInputJiraUser(BaseModel<?> oldModel) {
         JiraUserClp oldClpModel = (JiraUserClp) oldModel;
 
@@ -161,16 +186,6 @@ public class ClpSerializer {
         StatusClp oldClpModel = (StatusClp) oldModel;
 
         BaseModel<?> newModel = oldClpModel.getStatusRemoteModel();
-
-        newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-        return newModel;
-    }
-
-    public static Object translateInputStudent(BaseModel<?> oldModel) {
-        StudentClp oldClpModel = (StudentClp) oldModel;
-
-        BaseModel<?> newModel = oldClpModel.getStudentRemoteModel();
 
         newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -263,6 +278,76 @@ public class ClpSerializer {
         }
 
         if (oldModelClassName.equals(
+                    "de.hska.wi.awp.datasource.model.impl.IssuePriorityImpl")) {
+            return translateOutputIssuePriority(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "de.hska.wi.awp.datasource.model.impl.IssueTypeImpl")) {
+            return translateOutputIssueType(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
                     "de.hska.wi.awp.datasource.model.impl.JiraUserImpl")) {
             return translateOutputJiraUser(oldModel);
         } else if (oldModelClassName.endsWith("Clp")) {
@@ -300,41 +385,6 @@ public class ClpSerializer {
         if (oldModelClassName.equals(
                     "de.hska.wi.awp.datasource.model.impl.StatusImpl")) {
             return translateOutputStatus(oldModel);
-        } else if (oldModelClassName.endsWith("Clp")) {
-            try {
-                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-                Method getClpSerializerClassMethod = oldModelClass.getMethod(
-                        "getClpSerializerClass");
-
-                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
-
-                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-                        BaseModel.class);
-
-                Class<?> oldModelModelClass = oldModel.getModelClass();
-
-                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-                        oldModelModelClass.getSimpleName() + "RemoteModel");
-
-                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
-                        oldRemoteModel);
-
-                return newModel;
-            } catch (Throwable t) {
-                if (_log.isInfoEnabled()) {
-                    _log.info("Unable to translate " + oldModelClassName, t);
-                }
-            }
-        }
-
-        if (oldModelClassName.equals(
-                    "de.hska.wi.awp.datasource.model.impl.StudentImpl")) {
-            return translateOutputStudent(oldModel);
         } else if (oldModelClassName.endsWith("Clp")) {
             try {
                 ClassLoader classLoader = ClpSerializer.class.getClassLoader();
@@ -452,16 +502,22 @@ public class ClpSerializer {
         }
 
         if (className.equals(
+                    "de.hska.wi.awp.datasource.NoSuchIssuePriorityException")) {
+            return new de.hska.wi.awp.datasource.NoSuchIssuePriorityException();
+        }
+
+        if (className.equals(
+                    "de.hska.wi.awp.datasource.NoSuchIssueTypeException")) {
+            return new de.hska.wi.awp.datasource.NoSuchIssueTypeException();
+        }
+
+        if (className.equals(
                     "de.hska.wi.awp.datasource.NoSuchJiraUserException")) {
             return new de.hska.wi.awp.datasource.NoSuchJiraUserException();
         }
 
         if (className.equals("de.hska.wi.awp.datasource.NoSuchStatusException")) {
             return new de.hska.wi.awp.datasource.NoSuchStatusException();
-        }
-
-        if (className.equals("de.hska.wi.awp.datasource.NoSuchStudentException")) {
-            return new de.hska.wi.awp.datasource.NoSuchStudentException();
         }
 
         return throwable;
@@ -487,6 +543,26 @@ public class ClpSerializer {
         return newModel;
     }
 
+    public static Object translateOutputIssuePriority(BaseModel<?> oldModel) {
+        IssuePriorityClp newModel = new IssuePriorityClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setIssuePriorityRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputIssueType(BaseModel<?> oldModel) {
+        IssueTypeClp newModel = new IssueTypeClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setIssueTypeRemoteModel(oldModel);
+
+        return newModel;
+    }
+
     public static Object translateOutputJiraUser(BaseModel<?> oldModel) {
         JiraUserClp newModel = new JiraUserClp();
 
@@ -503,16 +579,6 @@ public class ClpSerializer {
         newModel.setModelAttributes(oldModel.getModelAttributes());
 
         newModel.setStatusRemoteModel(oldModel);
-
-        return newModel;
-    }
-
-    public static Object translateOutputStudent(BaseModel<?> oldModel) {
-        StudentClp newModel = new StudentClp();
-
-        newModel.setModelAttributes(oldModel.getModelAttributes());
-
-        newModel.setStudentRemoteModel(oldModel);
 
         return newModel;
     }

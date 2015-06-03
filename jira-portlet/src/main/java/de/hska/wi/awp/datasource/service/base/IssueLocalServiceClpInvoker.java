@@ -41,10 +41,16 @@ public class IssueLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName58;
-    private String[] _methodParameterTypes58;
-    private String _methodName59;
-    private String[] _methodParameterTypes59;
+    private String _methodName64;
+    private String[] _methodParameterTypes64;
+    private String _methodName65;
+    private String[] _methodParameterTypes65;
+    private String _methodName70;
+    private String[] _methodParameterTypes70;
+    private String _methodName71;
+    private String[] _methodParameterTypes71;
+    private String _methodName72;
+    private String[] _methodParameterTypes72;
 
     public IssueLocalServiceClpInvoker() {
         _methodName0 = "addIssue";
@@ -55,11 +61,11 @@ public class IssueLocalServiceClpInvoker {
 
         _methodName1 = "createIssue";
 
-        _methodParameterTypes1 = new String[] { "long" };
+        _methodParameterTypes1 = new String[] { "java.lang.String" };
 
         _methodName2 = "deleteIssue";
 
-        _methodParameterTypes2 = new String[] { "long" };
+        _methodParameterTypes2 = new String[] { "java.lang.String" };
 
         _methodName3 = "deleteIssue";
 
@@ -105,11 +111,11 @@ public class IssueLocalServiceClpInvoker {
 
         _methodName10 = "fetchIssue";
 
-        _methodParameterTypes10 = new String[] { "long" };
+        _methodParameterTypes10 = new String[] { "java.lang.String" };
 
         _methodName11 = "getIssue";
 
-        _methodParameterTypes11 = new String[] { "long" };
+        _methodParameterTypes11 = new String[] { "java.lang.String" };
 
         _methodName12 = "getPersistedModel";
 
@@ -129,13 +135,25 @@ public class IssueLocalServiceClpInvoker {
                 "de.hska.wi.awp.datasource.model.Issue"
             };
 
-        _methodName58 = "getBeanIdentifier";
+        _methodName64 = "getBeanIdentifier";
 
-        _methodParameterTypes58 = new String[] {  };
+        _methodParameterTypes64 = new String[] {  };
 
-        _methodName59 = "setBeanIdentifier";
+        _methodName65 = "setBeanIdentifier";
 
-        _methodParameterTypes59 = new String[] { "java.lang.String" };
+        _methodParameterTypes65 = new String[] { "java.lang.String" };
+
+        _methodName70 = "getAllIssues";
+
+        _methodParameterTypes70 = new String[] {  };
+
+        _methodName71 = "ParseJsonToIssue";
+
+        _methodParameterTypes71 = new String[] { "java.lang.String" };
+
+        _methodName72 = "deleteAllIssues";
+
+        _methodParameterTypes72 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -147,12 +165,12 @@ public class IssueLocalServiceClpInvoker {
 
         if (_methodName1.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-            return IssueLocalServiceUtil.createIssue(((Long) arguments[0]).longValue());
+            return IssueLocalServiceUtil.createIssue((java.lang.String) arguments[0]);
         }
 
         if (_methodName2.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-            return IssueLocalServiceUtil.deleteIssue(((Long) arguments[0]).longValue());
+            return IssueLocalServiceUtil.deleteIssue((java.lang.String) arguments[0]);
         }
 
         if (_methodName3.equals(name) &&
@@ -198,12 +216,12 @@ public class IssueLocalServiceClpInvoker {
 
         if (_methodName10.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-            return IssueLocalServiceUtil.fetchIssue(((Long) arguments[0]).longValue());
+            return IssueLocalServiceUtil.fetchIssue((java.lang.String) arguments[0]);
         }
 
         if (_methodName11.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-            return IssueLocalServiceUtil.getIssue(((Long) arguments[0]).longValue());
+            return IssueLocalServiceUtil.getIssue((java.lang.String) arguments[0]);
         }
 
         if (_methodName12.equals(name) &&
@@ -227,14 +245,33 @@ public class IssueLocalServiceClpInvoker {
             return IssueLocalServiceUtil.updateIssue((de.hska.wi.awp.datasource.model.Issue) arguments[0]);
         }
 
-        if (_methodName58.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+        if (_methodName64.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
             return IssueLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName59.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+        if (_methodName65.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
             IssueLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
+
+            return null;
+        }
+
+        if (_methodName70.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+            return IssueLocalServiceUtil.getAllIssues();
+        }
+
+        if (_methodName71.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+            IssueLocalServiceUtil.ParseJsonToIssue((java.lang.String) arguments[0]);
+
+            return null;
+        }
+
+        if (_methodName72.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+            IssueLocalServiceUtil.deleteAllIssues();
 
             return null;
         }

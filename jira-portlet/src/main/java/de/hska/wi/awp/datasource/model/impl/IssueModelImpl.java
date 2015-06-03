@@ -8,10 +8,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.ServiceContext;
-
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import de.hska.wi.awp.datasource.model.Issue;
 import de.hska.wi.awp.datasource.model.IssueModel;
@@ -48,13 +44,12 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
      */
     public static final String TABLE_NAME = "jira_Issue";
     public static final Object[][] TABLE_COLUMNS = {
-            { "issueId", Types.BIGINT },
-            { "id_", Types.VARCHAR },
+            { "issueId", Types.VARCHAR },
             { "key_", Types.VARCHAR },
             { "self", Types.VARCHAR },
             { "fieldId", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_Issue (issueId LONG not null primary key,id_ VARCHAR(75) null,key_ VARCHAR(75) null,self VARCHAR(75) null,fieldId LONG)";
+    public static final String TABLE_SQL_CREATE = "create table jira_Issue (issueId VARCHAR(75) not null primary key,key_ VARCHAR(75) null,self VARCHAR(75) null,fieldId LONG)";
     public static final String TABLE_SQL_DROP = "drop table jira_Issue";
     public static final String ORDER_BY_JPQL = " ORDER BY issue.issueId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY jira_Issue.issueId ASC";
@@ -75,10 +70,8 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.Issue"));
     private static ClassLoader _classLoader = Issue.class.getClassLoader();
     private static Class<?>[] _escapedModelInterfaces = new Class[] { Issue.class };
-    private long _issueId;
-    private long _originalIssueId;
-    private boolean _setOriginalIssueId;
-    private String _id;
+    private String _issueId;
+    private String _originalIssueId;
     private String _key;
     private String _self;
     private long _fieldId;
@@ -102,7 +95,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         Issue model = new IssueImpl();
 
         model.setIssueId(soapModel.getIssueId());
-        model.setId(soapModel.getId());
         model.setKey(soapModel.getKey());
         model.setSelf(soapModel.getSelf());
         model.setFieldId(soapModel.getFieldId());
@@ -131,12 +123,12 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
     }
 
     @Override
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _issueId;
     }
 
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(String primaryKey) {
         setIssueId(primaryKey);
     }
 
@@ -147,7 +139,7 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey(((Long) primaryKeyObj).longValue());
+        setPrimaryKey((String) primaryKeyObj);
     }
 
     @Override
@@ -165,7 +157,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("issueId", getIssueId());
-        attributes.put("id", getId());
         attributes.put("key", getKey());
         attributes.put("self", getSelf());
         attributes.put("fieldId", getFieldId());
@@ -175,16 +166,10 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long issueId = (Long) attributes.get("issueId");
+        String issueId = (String) attributes.get("issueId");
 
         if (issueId != null) {
             setIssueId(issueId);
-        }
-
-        String id = (String) attributes.get("id");
-
-        if (id != null) {
-            setId(id);
         }
 
         String key = (String) attributes.get("key");
@@ -208,40 +193,27 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @JSON
     @Override
-    public long getIssueId() {
-        return _issueId;
+    public String getIssueId() {
+        if (_issueId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _issueId;
+        }
     }
 
     @Override
-    public void setIssueId(long issueId) {
+    public void setIssueId(String issueId) {
         _columnBitmask |= ISSUEID_COLUMN_BITMASK;
 
-        if (!_setOriginalIssueId) {
-            _setOriginalIssueId = true;
-
+        if (_originalIssueId == null) {
             _originalIssueId = _issueId;
         }
 
         _issueId = issueId;
     }
 
-    public long getOriginalIssueId() {
-        return _originalIssueId;
-    }
-
-    @JSON
-    @Override
-    public String getId() {
-        if (_id == null) {
-            return StringPool.BLANK;
-        } else {
-            return _id;
-        }
-    }
-
-    @Override
-    public void setId(String id) {
-        _id = id;
+    public String getOriginalIssueId() {
+        return GetterUtil.getString(_originalIssueId);
     }
 
     @JSON
@@ -290,19 +262,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
     }
 
     @Override
-    public ExpandoBridge getExpandoBridge() {
-        return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
-            Issue.class.getName(), getPrimaryKey());
-    }
-
-    @Override
-    public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-        ExpandoBridge expandoBridge = getExpandoBridge();
-
-        expandoBridge.setAttributes(serviceContext);
-    }
-
-    @Override
     public Issue toEscapedModel() {
         if (_escapedModel == null) {
             _escapedModel = (Issue) ProxyUtil.newProxyInstance(_classLoader,
@@ -317,7 +276,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         IssueImpl issueImpl = new IssueImpl();
 
         issueImpl.setIssueId(getIssueId());
-        issueImpl.setId(getId());
         issueImpl.setKey(getKey());
         issueImpl.setSelf(getSelf());
         issueImpl.setFieldId(getFieldId());
@@ -329,15 +287,9 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @Override
     public int compareTo(Issue issue) {
-        long primaryKey = issue.getPrimaryKey();
+        String primaryKey = issue.getPrimaryKey();
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return getPrimaryKey().compareTo(primaryKey);
     }
 
     @Override
@@ -352,9 +304,9 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
         Issue issue = (Issue) obj;
 
-        long primaryKey = issue.getPrimaryKey();
+        String primaryKey = issue.getPrimaryKey();
 
-        if (getPrimaryKey() == primaryKey) {
+        if (getPrimaryKey().equals(primaryKey)) {
             return true;
         } else {
             return false;
@@ -363,7 +315,7 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @Override
     public int hashCode() {
-        return (int) getPrimaryKey();
+        return getPrimaryKey().hashCode();
     }
 
     @Override
@@ -371,8 +323,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         IssueModelImpl issueModelImpl = this;
 
         issueModelImpl._originalIssueId = issueModelImpl._issueId;
-
-        issueModelImpl._setOriginalIssueId = false;
 
         issueModelImpl._columnBitmask = 0;
     }
@@ -383,12 +333,10 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
         issueCacheModel.issueId = getIssueId();
 
-        issueCacheModel.id = getId();
+        String issueId = issueCacheModel.issueId;
 
-        String id = issueCacheModel.id;
-
-        if ((id != null) && (id.length() == 0)) {
-            issueCacheModel.id = null;
+        if ((issueId != null) && (issueId.length() == 0)) {
+            issueCacheModel.issueId = null;
         }
 
         issueCacheModel.key = getKey();
@@ -414,12 +362,10 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(11);
+        StringBundler sb = new StringBundler(9);
 
         sb.append("{issueId=");
         sb.append(getIssueId());
-        sb.append(", id=");
-        sb.append(getId());
         sb.append(", key=");
         sb.append(getKey());
         sb.append(", self=");
@@ -433,7 +379,7 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(19);
+        StringBundler sb = new StringBundler(16);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.Issue");
@@ -442,10 +388,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         sb.append(
             "<column><column-name>issueId</column-name><column-value><![CDATA[");
         sb.append(getIssueId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>id</column-name><column-value><![CDATA[");
-        sb.append(getId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>key</column-name><column-value><![CDATA[");

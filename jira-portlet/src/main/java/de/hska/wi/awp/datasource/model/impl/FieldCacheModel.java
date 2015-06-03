@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import java.util.Date;
-
 /**
  * The cache model class for representing Field in entity cache.
  *
@@ -22,17 +20,25 @@ import java.util.Date;
  */
 public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public long fieldId;
-    public long createdDate;
-    public long resolutionDate;
+    public String createdDate;
+    public String resolutionDate;
     public String summary;
-    public long updated;
-    public long creatorId;
-    public long assigneeId;
+    public String updated;
+    public String timespent;
+    public String timeestimate;
+    public String timeoriginalestimate;
+    public String aggregatetimespent;
+    public String aggregatetimeoriginalestimate;
+    public String aggregatetimeestimate;
+    public String description;
+    public long storypoints;
+    public String creatorId;
+    public String assigneeId;
     public long statusId;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(17);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{fieldId=");
         sb.append(fieldId);
@@ -44,6 +50,22 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
         sb.append(summary);
         sb.append(", updated=");
         sb.append(updated);
+        sb.append(", timespent=");
+        sb.append(timespent);
+        sb.append(", timeestimate=");
+        sb.append(timeestimate);
+        sb.append(", timeoriginalestimate=");
+        sb.append(timeoriginalestimate);
+        sb.append(", aggregatetimespent=");
+        sb.append(aggregatetimespent);
+        sb.append(", aggregatetimeoriginalestimate=");
+        sb.append(aggregatetimeoriginalestimate);
+        sb.append(", aggregatetimeestimate=");
+        sb.append(aggregatetimeestimate);
+        sb.append(", description=");
+        sb.append(description);
+        sb.append(", storypoints=");
+        sb.append(storypoints);
         sb.append(", creatorId=");
         sb.append(creatorId);
         sb.append(", assigneeId=");
@@ -61,16 +83,16 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
 
         fieldImpl.setFieldId(fieldId);
 
-        if (createdDate == Long.MIN_VALUE) {
-            fieldImpl.setCreatedDate(null);
+        if (createdDate == null) {
+            fieldImpl.setCreatedDate(StringPool.BLANK);
         } else {
-            fieldImpl.setCreatedDate(new Date(createdDate));
+            fieldImpl.setCreatedDate(createdDate);
         }
 
-        if (resolutionDate == Long.MIN_VALUE) {
-            fieldImpl.setResolutionDate(null);
+        if (resolutionDate == null) {
+            fieldImpl.setResolutionDate(StringPool.BLANK);
         } else {
-            fieldImpl.setResolutionDate(new Date(resolutionDate));
+            fieldImpl.setResolutionDate(resolutionDate);
         }
 
         if (summary == null) {
@@ -79,14 +101,68 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             fieldImpl.setSummary(summary);
         }
 
-        if (updated == Long.MIN_VALUE) {
-            fieldImpl.setUpdated(null);
+        if (updated == null) {
+            fieldImpl.setUpdated(StringPool.BLANK);
         } else {
-            fieldImpl.setUpdated(new Date(updated));
+            fieldImpl.setUpdated(updated);
         }
 
-        fieldImpl.setCreatorId(creatorId);
-        fieldImpl.setAssigneeId(assigneeId);
+        if (timespent == null) {
+            fieldImpl.setTimespent(StringPool.BLANK);
+        } else {
+            fieldImpl.setTimespent(timespent);
+        }
+
+        if (timeestimate == null) {
+            fieldImpl.setTimeestimate(StringPool.BLANK);
+        } else {
+            fieldImpl.setTimeestimate(timeestimate);
+        }
+
+        if (timeoriginalestimate == null) {
+            fieldImpl.setTimeoriginalestimate(StringPool.BLANK);
+        } else {
+            fieldImpl.setTimeoriginalestimate(timeoriginalestimate);
+        }
+
+        if (aggregatetimespent == null) {
+            fieldImpl.setAggregatetimespent(StringPool.BLANK);
+        } else {
+            fieldImpl.setAggregatetimespent(aggregatetimespent);
+        }
+
+        if (aggregatetimeoriginalestimate == null) {
+            fieldImpl.setAggregatetimeoriginalestimate(StringPool.BLANK);
+        } else {
+            fieldImpl.setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
+        }
+
+        if (aggregatetimeestimate == null) {
+            fieldImpl.setAggregatetimeestimate(StringPool.BLANK);
+        } else {
+            fieldImpl.setAggregatetimeestimate(aggregatetimeestimate);
+        }
+
+        if (description == null) {
+            fieldImpl.setDescription(StringPool.BLANK);
+        } else {
+            fieldImpl.setDescription(description);
+        }
+
+        fieldImpl.setStorypoints(storypoints);
+
+        if (creatorId == null) {
+            fieldImpl.setCreatorId(StringPool.BLANK);
+        } else {
+            fieldImpl.setCreatorId(creatorId);
+        }
+
+        if (assigneeId == null) {
+            fieldImpl.setAssigneeId(StringPool.BLANK);
+        } else {
+            fieldImpl.setAssigneeId(assigneeId);
+        }
+
         fieldImpl.setStatusId(statusId);
 
         fieldImpl.resetOriginalValues();
@@ -97,12 +173,20 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         fieldId = objectInput.readLong();
-        createdDate = objectInput.readLong();
-        resolutionDate = objectInput.readLong();
+        createdDate = objectInput.readUTF();
+        resolutionDate = objectInput.readUTF();
         summary = objectInput.readUTF();
-        updated = objectInput.readLong();
-        creatorId = objectInput.readLong();
-        assigneeId = objectInput.readLong();
+        updated = objectInput.readUTF();
+        timespent = objectInput.readUTF();
+        timeestimate = objectInput.readUTF();
+        timeoriginalestimate = objectInput.readUTF();
+        aggregatetimespent = objectInput.readUTF();
+        aggregatetimeoriginalestimate = objectInput.readUTF();
+        aggregatetimeestimate = objectInput.readUTF();
+        description = objectInput.readUTF();
+        storypoints = objectInput.readLong();
+        creatorId = objectInput.readUTF();
+        assigneeId = objectInput.readUTF();
         statusId = objectInput.readLong();
     }
 
@@ -110,8 +194,18 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
         objectOutput.writeLong(fieldId);
-        objectOutput.writeLong(createdDate);
-        objectOutput.writeLong(resolutionDate);
+
+        if (createdDate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(createdDate);
+        }
+
+        if (resolutionDate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(resolutionDate);
+        }
 
         if (summary == null) {
             objectOutput.writeUTF(StringPool.BLANK);
@@ -119,9 +213,68 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             objectOutput.writeUTF(summary);
         }
 
-        objectOutput.writeLong(updated);
-        objectOutput.writeLong(creatorId);
-        objectOutput.writeLong(assigneeId);
+        if (updated == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(updated);
+        }
+
+        if (timespent == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(timespent);
+        }
+
+        if (timeestimate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(timeestimate);
+        }
+
+        if (timeoriginalestimate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(timeoriginalestimate);
+        }
+
+        if (aggregatetimespent == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(aggregatetimespent);
+        }
+
+        if (aggregatetimeoriginalestimate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(aggregatetimeoriginalestimate);
+        }
+
+        if (aggregatetimeestimate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(aggregatetimeestimate);
+        }
+
+        if (description == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(description);
+        }
+
+        objectOutput.writeLong(storypoints);
+
+        if (creatorId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(creatorId);
+        }
+
+        if (assigneeId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(assigneeId);
+        }
+
         objectOutput.writeLong(statusId);
     }
 }

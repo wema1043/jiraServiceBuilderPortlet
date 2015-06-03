@@ -41,10 +41,10 @@ public class StatusLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName58;
-    private String[] _methodParameterTypes58;
-    private String _methodName59;
-    private String[] _methodParameterTypes59;
+    private String _methodName64;
+    private String[] _methodParameterTypes64;
+    private String _methodName65;
+    private String[] _methodParameterTypes65;
 
     public StatusLocalServiceClpInvoker() {
         _methodName0 = "addStatus";
@@ -129,13 +129,13 @@ public class StatusLocalServiceClpInvoker {
                 "de.hska.wi.awp.datasource.model.Status"
             };
 
-        _methodName58 = "getBeanIdentifier";
+        _methodName64 = "getBeanIdentifier";
 
-        _methodParameterTypes58 = new String[] {  };
+        _methodParameterTypes64 = new String[] {  };
 
-        _methodName59 = "setBeanIdentifier";
+        _methodName65 = "setBeanIdentifier";
 
-        _methodParameterTypes59 = new String[] { "java.lang.String" };
+        _methodParameterTypes65 = new String[] { "java.lang.String" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,13 +227,13 @@ public class StatusLocalServiceClpInvoker {
             return StatusLocalServiceUtil.updateStatus((de.hska.wi.awp.datasource.model.Status) arguments[0]);
         }
 
-        if (_methodName58.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+        if (_methodName64.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
             return StatusLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName59.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+        if (_methodName65.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
             StatusLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;

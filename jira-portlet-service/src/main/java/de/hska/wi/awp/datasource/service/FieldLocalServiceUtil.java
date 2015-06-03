@@ -261,6 +261,11 @@ public class FieldLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.lang.Integer countAllFieldsForAssignee(
+        java.lang.String assigneeId) {
+        return getService().countAllFieldsForAssignee(assigneeId);
+    }
+
     public static void clearService() {
         _service = null;
     }

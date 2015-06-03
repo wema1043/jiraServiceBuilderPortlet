@@ -38,7 +38,8 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     * @return the new issue
     */
     @Override
-    public de.hska.wi.awp.datasource.model.Issue createIssue(long issueId) {
+    public de.hska.wi.awp.datasource.model.Issue createIssue(
+        java.lang.String issueId) {
         return _issueLocalService.createIssue(issueId);
     }
 
@@ -51,7 +52,8 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Override
-    public de.hska.wi.awp.datasource.model.Issue deleteIssue(long issueId)
+    public de.hska.wi.awp.datasource.model.Issue deleteIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return _issueLocalService.deleteIssue(issueId);
@@ -168,7 +170,8 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     }
 
     @Override
-    public de.hska.wi.awp.datasource.model.Issue fetchIssue(long issueId)
+    public de.hska.wi.awp.datasource.model.Issue fetchIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return _issueLocalService.fetchIssue(issueId);
     }
@@ -182,7 +185,8 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Override
-    public de.hska.wi.awp.datasource.model.Issue getIssue(long issueId)
+    public de.hska.wi.awp.datasource.model.Issue getIssue(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return _issueLocalService.getIssue(issueId);
@@ -266,6 +270,23 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return _issueLocalService.invokeMethod(name, parameterTypes, arguments);
+    }
+
+    @Override
+    public java.lang.String getAllIssues() throws java.lang.Exception {
+        return _issueLocalService.getAllIssues();
+    }
+
+    @Override
+    public void ParseJsonToIssue(java.lang.String response)
+        throws java.lang.Exception {
+        _issueLocalService.ParseJsonToIssue(response);
+    }
+
+    @Override
+    public void deleteAllIssues()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _issueLocalService.deleteAllIssues();
     }
 
     /**

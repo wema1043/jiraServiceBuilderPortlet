@@ -19,20 +19,17 @@ import java.io.ObjectOutput;
  * @generated
  */
 public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
-    public long issueId;
-    public String id;
+    public String issueId;
     public String key;
     public String self;
     public long fieldId;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(11);
+        StringBundler sb = new StringBundler(9);
 
         sb.append("{issueId=");
         sb.append(issueId);
-        sb.append(", id=");
-        sb.append(id);
         sb.append(", key=");
         sb.append(key);
         sb.append(", self=");
@@ -48,12 +45,10 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
     public Issue toEntityModel() {
         IssueImpl issueImpl = new IssueImpl();
 
-        issueImpl.setIssueId(issueId);
-
-        if (id == null) {
-            issueImpl.setId(StringPool.BLANK);
+        if (issueId == null) {
+            issueImpl.setIssueId(StringPool.BLANK);
         } else {
-            issueImpl.setId(id);
+            issueImpl.setIssueId(issueId);
         }
 
         if (key == null) {
@@ -77,8 +72,7 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
 
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
-        issueId = objectInput.readLong();
-        id = objectInput.readUTF();
+        issueId = objectInput.readUTF();
         key = objectInput.readUTF();
         self = objectInput.readUTF();
         fieldId = objectInput.readLong();
@@ -87,12 +81,10 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
     @Override
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
-        objectOutput.writeLong(issueId);
-
-        if (id == null) {
+        if (issueId == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(id);
+            objectOutput.writeUTF(issueId);
         }
 
         if (key == null) {

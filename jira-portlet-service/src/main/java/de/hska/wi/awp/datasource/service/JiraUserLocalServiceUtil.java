@@ -263,6 +263,18 @@ public class JiraUserLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.lang.String getAllMembers(java.lang.String projectId) {
+        return getService().getAllMembers(projectId);
+    }
+
+    public static void ParseJsonToMember(java.lang.String response) {
+        getService().ParseJsonToMember(response);
+    }
+
+    public static void deleteAllJiraUser() {
+        getService().deleteAllJiraUser();
+    }
+
     public static void clearService() {
         _service = null;
     }

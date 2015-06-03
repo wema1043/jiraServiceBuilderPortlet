@@ -37,7 +37,6 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("issueId", getIssueId());
-        attributes.put("id", getId());
         attributes.put("key", getKey());
         attributes.put("self", getSelf());
         attributes.put("fieldId", getFieldId());
@@ -47,16 +46,10 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long issueId = (Long) attributes.get("issueId");
+        String issueId = (String) attributes.get("issueId");
 
         if (issueId != null) {
             setIssueId(issueId);
-        }
-
-        String id = (String) attributes.get("id");
-
-        if (id != null) {
-            setId(id);
         }
 
         String key = (String) attributes.get("key");
@@ -84,7 +77,7 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
     * @return the primary key of this issue
     */
     @Override
-    public long getPrimaryKey() {
+    public java.lang.String getPrimaryKey() {
         return _issue.getPrimaryKey();
     }
 
@@ -94,7 +87,7 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
     * @param primaryKey the primary key of this issue
     */
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(java.lang.String primaryKey) {
         _issue.setPrimaryKey(primaryKey);
     }
 
@@ -104,7 +97,7 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
     * @return the issue ID of this issue
     */
     @Override
-    public long getIssueId() {
+    public java.lang.String getIssueId() {
         return _issue.getIssueId();
     }
 
@@ -114,28 +107,8 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
     * @param issueId the issue ID of this issue
     */
     @Override
-    public void setIssueId(long issueId) {
+    public void setIssueId(java.lang.String issueId) {
         _issue.setIssueId(issueId);
-    }
-
-    /**
-    * Returns the ID of this issue.
-    *
-    * @return the ID of this issue
-    */
-    @Override
-    public java.lang.String getId() {
-        return _issue.getId();
-    }
-
-    /**
-    * Sets the ID of this issue.
-    *
-    * @param id the ID of this issue
-    */
-    @Override
-    public void setId(java.lang.String id) {
-        _issue.setId(id);
     }
 
     /**

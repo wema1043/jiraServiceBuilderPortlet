@@ -97,6 +97,172 @@ public class FieldUtil {
     }
 
     /**
+    * Returns all the fields where assigneeId = &#63;.
+    *
+    * @param assigneeId the assignee ID
+    * @return the matching fields
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<de.hska.wi.awp.datasource.model.Field> findByFieldsForUser(
+        java.lang.String assigneeId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByFieldsForUser(assigneeId);
+    }
+
+    /**
+    * Returns a range of all the fields where assigneeId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param assigneeId the assignee ID
+    * @param start the lower bound of the range of fields
+    * @param end the upper bound of the range of fields (not inclusive)
+    * @return the range of matching fields
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<de.hska.wi.awp.datasource.model.Field> findByFieldsForUser(
+        java.lang.String assigneeId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByFieldsForUser(assigneeId, start, end);
+    }
+
+    /**
+    * Returns an ordered range of all the fields where assigneeId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param assigneeId the assignee ID
+    * @param start the lower bound of the range of fields
+    * @param end the upper bound of the range of fields (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching fields
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<de.hska.wi.awp.datasource.model.Field> findByFieldsForUser(
+        java.lang.String assigneeId, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByFieldsForUser(assigneeId, start, end,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the first field in the ordered set where assigneeId = &#63;.
+    *
+    * @param assigneeId the assignee ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching field
+    * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Field findByFieldsForUser_First(
+        java.lang.String assigneeId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            de.hska.wi.awp.datasource.NoSuchFieldException {
+        return getPersistence()
+                   .findByFieldsForUser_First(assigneeId, orderByComparator);
+    }
+
+    /**
+    * Returns the first field in the ordered set where assigneeId = &#63;.
+    *
+    * @param assigneeId the assignee ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching field, or <code>null</code> if a matching field could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Field fetchByFieldsForUser_First(
+        java.lang.String assigneeId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByFieldsForUser_First(assigneeId, orderByComparator);
+    }
+
+    /**
+    * Returns the last field in the ordered set where assigneeId = &#63;.
+    *
+    * @param assigneeId the assignee ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching field
+    * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Field findByFieldsForUser_Last(
+        java.lang.String assigneeId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            de.hska.wi.awp.datasource.NoSuchFieldException {
+        return getPersistence()
+                   .findByFieldsForUser_Last(assigneeId, orderByComparator);
+    }
+
+    /**
+    * Returns the last field in the ordered set where assigneeId = &#63;.
+    *
+    * @param assigneeId the assignee ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching field, or <code>null</code> if a matching field could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Field fetchByFieldsForUser_Last(
+        java.lang.String assigneeId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByFieldsForUser_Last(assigneeId, orderByComparator);
+    }
+
+    /**
+    * Returns the fields before and after the current field in the ordered set where assigneeId = &#63;.
+    *
+    * @param fieldId the primary key of the current field
+    * @param assigneeId the assignee ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the previous, current, and next field
+    * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a field with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Field[] findByFieldsForUser_PrevAndNext(
+        long fieldId, java.lang.String assigneeId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            de.hska.wi.awp.datasource.NoSuchFieldException {
+        return getPersistence()
+                   .findByFieldsForUser_PrevAndNext(fieldId, assigneeId,
+            orderByComparator);
+    }
+
+    /**
+    * Removes all the fields where assigneeId = &#63; from the database.
+    *
+    * @param assigneeId the assignee ID
+    * @throws SystemException if a system exception occurred
+    */
+    public static void removeByFieldsForUser(java.lang.String assigneeId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getPersistence().removeByFieldsForUser(assigneeId);
+    }
+
+    /**
+    * Returns the number of fields where assigneeId = &#63;.
+    *
+    * @param assigneeId the assignee ID
+    * @return the number of matching fields
+    * @throws SystemException if a system exception occurred
+    */
+    public static int countByFieldsForUser(java.lang.String assigneeId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().countByFieldsForUser(assigneeId);
+    }
+
+    /**
     * Caches the field in the entity cache if it is enabled.
     *
     * @param field the field
