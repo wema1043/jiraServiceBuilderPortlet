@@ -34,28 +34,29 @@ public interface StatusModel extends BaseModel<Status> {
      *
      * @return the primary key of this status
      */
-    public long getPrimaryKey();
+    public String getPrimaryKey();
 
     /**
      * Sets the primary key of this status.
      *
      * @param primaryKey the primary key of this status
      */
-    public void setPrimaryKey(long primaryKey);
+    public void setPrimaryKey(String primaryKey);
 
     /**
      * Returns the status ID of this status.
      *
      * @return the status ID of this status
      */
-    public long getStatusId();
+    @AutoEscape
+    public String getStatusId();
 
     /**
      * Sets the status ID of this status.
      *
      * @param statusId the status ID of this status
      */
-    public void setStatusId(long statusId);
+    public void setStatusId(String statusId);
 
     /**
      * Returns the name of this status.

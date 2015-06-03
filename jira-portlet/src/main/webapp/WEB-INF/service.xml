@@ -4,7 +4,7 @@
 	<namespace>jira</namespace>
 
 	<entity name="Status" local-service="true" remote-service="true">
-		<column name="statusId" primary="true" type="long"></column>
+		<column name="statusId" primary="true" type="String"></column>
 		<column name="name" type="String"></column>
 		<finder name="statusName" return-type="Collection">
 			<finder-column name="name" />
@@ -54,7 +54,7 @@
 
 
 	<entity name="IssueType" local-service="true" remote-service="true">
-		<column name="issueId" primary="true" type="long"></column>
+		<column name="issueId" primary="true" type="String"></column>
 		<column name="issueName" type="String"></column>
 	</entity>
 

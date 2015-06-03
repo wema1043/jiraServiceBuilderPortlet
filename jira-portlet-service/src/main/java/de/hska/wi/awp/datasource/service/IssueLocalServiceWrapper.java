@@ -273,19 +273,17 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     }
 
     @Override
-    public java.lang.String getAllIssues() throws java.lang.Exception {
+    public java.lang.String getAllIssues() {
         return _issueLocalService.getAllIssues();
     }
 
     @Override
-    public void ParseJsonToIssue(java.lang.String response)
-        throws java.lang.Exception {
+    public void ParseJsonToIssue(java.lang.String response) {
         _issueLocalService.ParseJsonToIssue(response);
     }
 
     @Override
-    public void deleteAllIssues()
-        throws com.liferay.portal.kernel.exception.SystemException {
+    public void deleteAllIssues() {
         _issueLocalService.deleteAllIssues();
     }
 

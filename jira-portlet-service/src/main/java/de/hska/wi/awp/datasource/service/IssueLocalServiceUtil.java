@@ -263,17 +263,15 @@ public class IssueLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.lang.String getAllIssues() throws java.lang.Exception {
+    public static java.lang.String getAllIssues() {
         return getService().getAllIssues();
     }
 
-    public static void ParseJsonToIssue(java.lang.String response)
-        throws java.lang.Exception {
+    public static void ParseJsonToIssue(java.lang.String response) {
         getService().ParseJsonToIssue(response);
     }
 
-    public static void deleteAllIssues()
-        throws com.liferay.portal.kernel.exception.SystemException {
+    public static void deleteAllIssues() {
         getService().deleteAllIssues();
     }
 

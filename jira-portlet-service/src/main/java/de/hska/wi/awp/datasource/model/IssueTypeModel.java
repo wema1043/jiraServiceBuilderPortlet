@@ -34,28 +34,29 @@ public interface IssueTypeModel extends BaseModel<IssueType> {
      *
      * @return the primary key of this issue type
      */
-    public long getPrimaryKey();
+    public String getPrimaryKey();
 
     /**
      * Sets the primary key of this issue type.
      *
      * @param primaryKey the primary key of this issue type
      */
-    public void setPrimaryKey(long primaryKey);
+    public void setPrimaryKey(String primaryKey);
 
     /**
      * Returns the issue ID of this issue type.
      *
      * @return the issue ID of this issue type
      */
-    public long getIssueId();
+    @AutoEscape
+    public String getIssueId();
 
     /**
      * Sets the issue ID of this issue type.
      *
      * @param issueId the issue ID of this issue type
      */
-    public void setIssueId(long issueId);
+    public void setIssueId(String issueId);
 
     /**
      * Returns the issue name of this issue type.

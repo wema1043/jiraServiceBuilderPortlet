@@ -20,7 +20,7 @@ import java.io.ObjectOutput;
  */
 public class IssueTypeCacheModel implements CacheModel<IssueType>,
     Externalizable {
-    public long issueId;
+    public String issueId;
     public String issueName;
 
     @Override
@@ -40,7 +40,11 @@ public class IssueTypeCacheModel implements CacheModel<IssueType>,
     public IssueType toEntityModel() {
         IssueTypeImpl issueTypeImpl = new IssueTypeImpl();
 
-        issueTypeImpl.setIssueId(issueId);
+        if (issueId == null) {
+            issueTypeImpl.setIssueId(StringPool.BLANK);
+        } else {
+            issueTypeImpl.setIssueId(issueId);
+        }
 
         if (issueName == null) {
             issueTypeImpl.setIssueName(StringPool.BLANK);
@@ -55,14 +59,18 @@ public class IssueTypeCacheModel implements CacheModel<IssueType>,
 
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
-        issueId = objectInput.readLong();
+        issueId = objectInput.readUTF();
         issueName = objectInput.readUTF();
     }
 
     @Override
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
-        objectOutput.writeLong(issueId);
+        if (issueId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(issueId);
+        }
 
         if (issueName == null) {
             objectOutput.writeUTF(StringPool.BLANK);

@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 public class StatusClp extends BaseModelImpl<Status> implements Status {
-    private long _statusId;
+    private String _statusId;
     private String _name;
     private BaseModel<?> _statusRemoteModel;
     private Class<?> _clpSerializerClass = de.hska.wi.awp.datasource.service.ClpSerializer.class;
@@ -38,12 +38,12 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
     }
 
     @Override
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _statusId;
     }
 
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(String primaryKey) {
         setStatusId(primaryKey);
     }
 
@@ -54,7 +54,7 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey(((Long) primaryKeyObj).longValue());
+        setPrimaryKey((String) primaryKeyObj);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long statusId = (Long) attributes.get("statusId");
+        String statusId = (String) attributes.get("statusId");
 
         if (statusId != null) {
             setStatusId(statusId);
@@ -83,19 +83,19 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
     }
 
     @Override
-    public long getStatusId() {
+    public String getStatusId() {
         return _statusId;
     }
 
     @Override
-    public void setStatusId(long statusId) {
+    public void setStatusId(String statusId) {
         _statusId = statusId;
 
         if (_statusRemoteModel != null) {
             try {
                 Class<?> clazz = _statusRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setStatusId", long.class);
+                Method method = clazz.getMethod("setStatusId", String.class);
 
                 method.invoke(_statusRemoteModel, statusId);
             } catch (Exception e) {
@@ -201,15 +201,9 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
 
     @Override
     public int compareTo(Status status) {
-        long primaryKey = status.getPrimaryKey();
+        String primaryKey = status.getPrimaryKey();
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return getPrimaryKey().compareTo(primaryKey);
     }
 
     @Override
@@ -224,9 +218,9 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
 
         StatusClp status = (StatusClp) obj;
 
-        long primaryKey = status.getPrimaryKey();
+        String primaryKey = status.getPrimaryKey();
 
-        if (getPrimaryKey() == primaryKey) {
+        if (getPrimaryKey().equals(primaryKey)) {
             return true;
         } else {
             return false;
@@ -239,7 +233,7 @@ public class StatusClp extends BaseModelImpl<Status> implements Status {
 
     @Override
     public int hashCode() {
-        return (int) getPrimaryKey();
+        return getPrimaryKey().hashCode();
     }
 
     @Override

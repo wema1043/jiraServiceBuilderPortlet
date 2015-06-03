@@ -55,11 +55,11 @@ public class IssueTypeLocalServiceClpInvoker {
 
         _methodName1 = "createIssueType";
 
-        _methodParameterTypes1 = new String[] { "long" };
+        _methodParameterTypes1 = new String[] { "java.lang.String" };
 
         _methodName2 = "deleteIssueType";
 
-        _methodParameterTypes2 = new String[] { "long" };
+        _methodParameterTypes2 = new String[] { "java.lang.String" };
 
         _methodName3 = "deleteIssueType";
 
@@ -105,11 +105,11 @@ public class IssueTypeLocalServiceClpInvoker {
 
         _methodName10 = "fetchIssueType";
 
-        _methodParameterTypes10 = new String[] { "long" };
+        _methodParameterTypes10 = new String[] { "java.lang.String" };
 
         _methodName11 = "getIssueType";
 
-        _methodParameterTypes11 = new String[] { "long" };
+        _methodParameterTypes11 = new String[] { "java.lang.String" };
 
         _methodName12 = "getPersistedModel";
 
@@ -147,12 +147,12 @@ public class IssueTypeLocalServiceClpInvoker {
 
         if (_methodName1.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-            return IssueTypeLocalServiceUtil.createIssueType(((Long) arguments[0]).longValue());
+            return IssueTypeLocalServiceUtil.createIssueType((java.lang.String) arguments[0]);
         }
 
         if (_methodName2.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-            return IssueTypeLocalServiceUtil.deleteIssueType(((Long) arguments[0]).longValue());
+            return IssueTypeLocalServiceUtil.deleteIssueType((java.lang.String) arguments[0]);
         }
 
         if (_methodName3.equals(name) &&
@@ -198,12 +198,12 @@ public class IssueTypeLocalServiceClpInvoker {
 
         if (_methodName10.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-            return IssueTypeLocalServiceUtil.fetchIssueType(((Long) arguments[0]).longValue());
+            return IssueTypeLocalServiceUtil.fetchIssueType((java.lang.String) arguments[0]);
         }
 
         if (_methodName11.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-            return IssueTypeLocalServiceUtil.getIssueType(((Long) arguments[0]).longValue());
+            return IssueTypeLocalServiceUtil.getIssueType((java.lang.String) arguments[0]);
         }
 
         if (_methodName12.equals(name) &&

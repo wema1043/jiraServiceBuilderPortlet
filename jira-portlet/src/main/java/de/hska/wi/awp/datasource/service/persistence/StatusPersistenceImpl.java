@@ -395,7 +395,7 @@ public class StatusPersistenceImpl extends BasePersistenceImpl<Status>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Status[] findBystatusName_PrevAndNext(long statusId, String name,
+    public Status[] findBystatusName_PrevAndNext(String statusId, String name,
         OrderByComparator orderByComparator)
         throws NoSuchStatusException, SystemException {
         Status status = findByPrimaryKey(statusId);
@@ -693,7 +693,7 @@ public class StatusPersistenceImpl extends BasePersistenceImpl<Status>
      * @return the new status
      */
     @Override
-    public Status create(long statusId) {
+    public Status create(String statusId) {
         Status status = new StatusImpl();
 
         status.setNew(true);
@@ -711,7 +711,7 @@ public class StatusPersistenceImpl extends BasePersistenceImpl<Status>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Status remove(long statusId)
+    public Status remove(String statusId)
         throws NoSuchStatusException, SystemException {
         return remove((Serializable) statusId);
     }
@@ -890,7 +890,7 @@ public class StatusPersistenceImpl extends BasePersistenceImpl<Status>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Status findByPrimaryKey(long statusId)
+    public Status findByPrimaryKey(String statusId)
         throws NoSuchStatusException, SystemException {
         return findByPrimaryKey((Serializable) statusId);
     }
@@ -947,7 +947,7 @@ public class StatusPersistenceImpl extends BasePersistenceImpl<Status>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Status fetchByPrimaryKey(long statusId) throws SystemException {
+    public Status fetchByPrimaryKey(String statusId) throws SystemException {
         return fetchByPrimaryKey((Serializable) statusId);
     }
 

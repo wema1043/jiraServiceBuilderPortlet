@@ -9,16 +9,24 @@ import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserServiceUtil;
+import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 
 @ManagedBean
 public class StudentBean {
 
 	@PostConstruct
 	public void init() {
-		countMarcsIssues = FieldLocalServiceUtil.countAllFieldsForAssignee("wema1043");
+
 		String str2 = JiraUserLocalServiceUtil.getAllMembers("HWB");
 		JiraUserLocalServiceUtil.ParseJsonToMember(str2);
 
+		String str1 = IssueLocalServiceUtil.getAllIssues();
+		IssueLocalServiceUtil.ParseJsonToIssue(str1);
+
+		String stati = StatusLocalServiceUtil.getAllStatus();
+		StatusLocalServiceUtil.ParseJsonToStatus(stati);
+
+		countMarcsIssues = FieldLocalServiceUtil.countAllFieldsForAssignee("wema1043");
 	}
 
 	private Integer countMarcsIssues;

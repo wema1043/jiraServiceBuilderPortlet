@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.primefaces.json.JSONArray;
+import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
 
 import com.liferay.portal.kernel.exception.SystemException;
@@ -16,8 +17,10 @@ import com.sun.jersey.core.util.Base64;
 
 import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
+import de.hska.wi.awp.datasource.model.Status;
 import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.base.IssueLocalServiceBaseImpl;
 import de.hska.wi.awp.datasource.utils.Constants;
 
@@ -48,14 +51,13 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 	 * issue local service.
 	 */
 
-	private String username = "stda1024";
-	private String password = "hoppe1gang";
-
-	public String getAllIssues() throws Exception {
+	public String getAllIssues() {
 		System.out.println("BEGINN getAllIssues()");
 
-		String url = Constants.JIRA_HOST_NAME + "/rest/api/2/search?jql=project=HWB&maxResults=-1";
-		String auth = new String(Base64.encode(username + ":" + password));
+		String url = Constants.JIRA_HOST_NAME
+				+ "/rest/api/2/search?jql=project=HWB&maxResults=-1";
+		String auth = new String(Base64.encode(Constants.JIRA_USERNAME + ":"
+				+ Constants.JIRA_PASSWORD));
 
 		// get Date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
@@ -77,84 +79,143 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 		return responseBody;
 	}
 
-	public void ParseJsonToIssue(String response) throws Exception {
+	public void ParseJsonToIssue(String response) {
 		System.out.println("BEGINN ParseJsonToIssue()");
 
-		IssueLocalServiceUtil.deleteAllIssues();
+		try {
+			IssueLocalServiceUtil.deleteAllIssues();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		JSONObject jsonObject = new JSONObject(response);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(response);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		JSONArray tasks = jsonObject.getJSONArray("issues");
+		JSONArray tasks = null;
+		try {
+			tasks = jsonObject.getJSONArray("issues");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		for (int zl = 0; zl < tasks.length(); zl++) {
-			Issue myIssue = IssueLocalServiceUtil.createIssue(tasks
-					.getJSONObject(zl).getString("id"));
-			Field myField = FieldLocalServiceUtil.createField(zl);
+			Integer counter = zl;
+			Issue myIssue;
+			try {
+				myIssue = IssueLocalServiceUtil.createIssue(tasks
+						.getJSONObject(zl).getString("id"));
 
-			myIssue.setKey(tasks.getJSONObject(zl).getString("key"));
-			myIssue.setSelf(tasks.getJSONObject(zl).getString("self"));
+				Field myField = FieldLocalServiceUtil.createField(zl);
 
-			myIssue.setFieldId(zl);
+				myIssue.setKey(tasks.getJSONObject(zl).getString("key"));
+				
+				String self = Constants.JIRA_HOST_NAME + "/browse/" + tasks.getJSONObject(zl).getString("key");			
+				myIssue.setSelf(self);
 
-			myField.setSummary(tasks.getJSONObject(zl).getJSONObject("fields")
-					.getString("summary"));
-			myField.setCreatedDate(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("created"));
-			myField.setResolutionDate(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("resolutiondate"));
-			myField.setUpdated(tasks.getJSONObject(zl).getJSONObject("fields")
-					.getString("updated"));
+				myIssue.setFieldId(zl);
 
-			myField.setTimespent(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("timespent"));
-			myField.setTimeestimate(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("timeestimate"));
-			myField.setTimeoriginalestimate(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("timeoriginalestimate"));
-			myField.setAggregatetimespent(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("aggregatetimespent"));
-			myField.setAggregatetimeoriginalestimate(tasks.getJSONObject(zl)
-					.getJSONObject("fields")
-					.getString("aggregatetimeoriginalestimate"));
-			myField.setAggregatetimeestimate(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("aggregatetimeestimate"));
-			myField.setDescription(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getString("description"));
+				myField.setSummary(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("summary"));
+				myField.setCreatedDate(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("created"));
+				myField.setResolutionDate(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("resolutiondate"));
+				myField.setUpdated(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("updated"));
 
-			if (!tasks.getJSONObject(zl).getJSONObject("fields")
-					.isNull("customfield_10002")) {
-				myField.setStorypoints(tasks.getJSONObject(zl)
-						.getJSONObject("fields").getLong("customfield_10002"));
-			}
+				myField.setTimespent(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("timespent"));
+				myField.setTimeestimate(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("timeestimate"));
+				myField.setTimeoriginalestimate(tasks.getJSONObject(zl)
+						.getJSONObject("fields")
+						.getString("timeoriginalestimate"));
+				myField.setAggregatetimespent(tasks.getJSONObject(zl)
+						.getJSONObject("fields")
+						.getString("aggregatetimespent"));
+				myField.setAggregatetimeoriginalestimate(tasks
+						.getJSONObject(zl).getJSONObject("fields")
+						.getString("aggregatetimeoriginalestimate"));
+				myField.setAggregatetimeestimate(tasks.getJSONObject(zl)
+						.getJSONObject("fields")
+						.getString("aggregatetimeestimate"));
+				myField.setDescription(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getString("description"));
 
-			myField.setCreatorId(tasks.getJSONObject(zl)
-					.getJSONObject("fields").getJSONObject("creator")
-					.getString("name"));
-			if (!tasks.getJSONObject(zl).getJSONObject("fields")
-					.isNull("assignee")) {
-				myField.setAssigneeId(tasks.getJSONObject(zl)
-						.getJSONObject("fields").getJSONObject("assignee")
+				if (!tasks.getJSONObject(zl).getJSONObject("fields")
+						.isNull("customfield_10002")) {
+					myField.setStorypoints(tasks.getJSONObject(zl)
+							.getJSONObject("fields")
+							.getLong("customfield_10002"));
+				}
+
+				myField.setCreatorId(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getJSONObject("creator")
 						.getString("name"));
+				if (!tasks.getJSONObject(zl).getJSONObject("fields")
+						.isNull("assignee")) {
+					myField.setAssigneeId(tasks.getJSONObject(zl)
+							.getJSONObject("fields").getJSONObject("assignee")
+							.getString("name"));
+				}
+
+				myField.setStatusId(tasks.getJSONObject(zl)
+						.getJSONObject("fields").getJSONObject("status")
+						.getLong("id"));
+
+				FieldLocalServiceUtil.addField(myField);
+				IssueLocalServiceUtil.addIssue(myIssue);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
-			FieldLocalServiceUtil.addField(myField);
-			IssueLocalServiceUtil.addIssue(myIssue);
 		}
 		System.out.println("END ParseJsonToIssue()");
 
 	}
 
-	public void deleteAllIssues() throws SystemException {
-		List<Issue> allIssues = IssueLocalServiceUtil.getIssues(0,
-				IssueLocalServiceUtil.getIssuesCount());
+	public void deleteAllIssues() {
+		List<Issue> allIssues = null;
+		try {
+			allIssues = IssueLocalServiceUtil.getIssues(0,
+					IssueLocalServiceUtil.getIssuesCount());
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (int zl = 0; zl < allIssues.size(); zl++) {
-			IssueLocalServiceUtil.deleteIssue(allIssues.get(zl));
+			try {
+				IssueLocalServiceUtil.deleteIssue(allIssues.get(zl));
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
-		List<Field> allFields = FieldLocalServiceUtil.getFields(0,
-				FieldLocalServiceUtil.getFieldsCount());
+		List<Field> allFields = null;
+		try {
+			allFields = FieldLocalServiceUtil.getFields(0,
+					FieldLocalServiceUtil.getFieldsCount());
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (int zl = 0; zl < allFields.size(); zl++) {
-			FieldLocalServiceUtil.deleteField(allFields.get(zl));
+			try {
+				FieldLocalServiceUtil.deleteField(allFields.get(zl));
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

@@ -676,7 +676,7 @@ public class IssueLocalServiceClp implements IssueLocalService {
     }
 
     @Override
-    public java.lang.String getAllIssues() throws java.lang.Exception {
+    public java.lang.String getAllIssues() {
         Object returnObj = null;
 
         try {
@@ -684,10 +684,6 @@ public class IssueLocalServiceClp implements IssueLocalService {
                     _methodParameterTypes19, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof java.lang.Exception) {
-                throw (java.lang.Exception) t;
-            }
 
             if (t instanceof RuntimeException) {
                 throw (RuntimeException) t;
@@ -701,18 +697,13 @@ public class IssueLocalServiceClp implements IssueLocalService {
     }
 
     @Override
-    public void ParseJsonToIssue(java.lang.String response)
-        throws java.lang.Exception {
+    public void ParseJsonToIssue(java.lang.String response) {
         try {
             _invokableLocalService.invokeMethod(_methodName20,
                 _methodParameterTypes20,
                 new Object[] { ClpSerializer.translateInput(response) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof java.lang.Exception) {
-                throw (java.lang.Exception) t;
-            }
 
             if (t instanceof RuntimeException) {
                 throw (RuntimeException) t;
@@ -724,17 +715,12 @@ public class IssueLocalServiceClp implements IssueLocalService {
     }
 
     @Override
-    public void deleteAllIssues()
-        throws com.liferay.portal.kernel.exception.SystemException {
+    public void deleteAllIssues() {
         try {
             _invokableLocalService.invokeMethod(_methodName21,
                 _methodParameterTypes21, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-                throw (com.liferay.portal.kernel.exception.SystemException) t;
-            }
 
             if (t instanceof RuntimeException) {
                 throw (RuntimeException) t;

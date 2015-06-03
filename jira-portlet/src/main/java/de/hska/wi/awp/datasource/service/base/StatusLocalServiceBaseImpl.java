@@ -124,7 +124,7 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
      * @return the new status
      */
     @Override
-    public Status createStatus(long statusId) {
+    public Status createStatus(String statusId) {
         return statusPersistence.create(statusId);
     }
 
@@ -138,7 +138,7 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
      */
     @Indexable(type = IndexableType.DELETE)
     @Override
-    public Status deleteStatus(long statusId)
+    public Status deleteStatus(String statusId)
         throws PortalException, SystemException {
         return statusPersistence.remove(statusId);
     }
@@ -248,7 +248,7 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
     }
 
     @Override
-    public Status fetchStatus(long statusId) throws SystemException {
+    public Status fetchStatus(String statusId) throws SystemException {
         return statusPersistence.fetchByPrimaryKey(statusId);
     }
 
@@ -261,7 +261,7 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Status getStatus(long statusId)
+    public Status getStatus(String statusId)
         throws PortalException, SystemException {
         return statusPersistence.findByPrimaryKey(statusId);
     }

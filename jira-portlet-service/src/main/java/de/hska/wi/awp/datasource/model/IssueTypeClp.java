@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType {
-    private long _issueId;
+    private String _issueId;
     private String _issueName;
     private BaseModel<?> _issueTypeRemoteModel;
     private Class<?> _clpSerializerClass = de.hska.wi.awp.datasource.service.ClpSerializer.class;
@@ -38,12 +38,12 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
     }
 
     @Override
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _issueId;
     }
 
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(String primaryKey) {
         setIssueId(primaryKey);
     }
 
@@ -54,7 +54,7 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey(((Long) primaryKeyObj).longValue());
+        setPrimaryKey((String) primaryKeyObj);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long issueId = (Long) attributes.get("issueId");
+        String issueId = (String) attributes.get("issueId");
 
         if (issueId != null) {
             setIssueId(issueId);
@@ -83,19 +83,19 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
     }
 
     @Override
-    public long getIssueId() {
+    public String getIssueId() {
         return _issueId;
     }
 
     @Override
-    public void setIssueId(long issueId) {
+    public void setIssueId(String issueId) {
         _issueId = issueId;
 
         if (_issueTypeRemoteModel != null) {
             try {
                 Class<?> clazz = _issueTypeRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setIssueId", long.class);
+                Method method = clazz.getMethod("setIssueId", String.class);
 
                 method.invoke(_issueTypeRemoteModel, issueId);
             } catch (Exception e) {
@@ -201,15 +201,9 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
     @Override
     public int compareTo(IssueType issueType) {
-        long primaryKey = issueType.getPrimaryKey();
+        String primaryKey = issueType.getPrimaryKey();
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return getPrimaryKey().compareTo(primaryKey);
     }
 
     @Override
@@ -224,9 +218,9 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
         IssueTypeClp issueType = (IssueTypeClp) obj;
 
-        long primaryKey = issueType.getPrimaryKey();
+        String primaryKey = issueType.getPrimaryKey();
 
-        if (getPrimaryKey() == primaryKey) {
+        if (getPrimaryKey().equals(primaryKey)) {
             return true;
         } else {
             return false;
@@ -239,7 +233,7 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
     @Override
     public int hashCode() {
-        return (int) getPrimaryKey();
+        return getPrimaryKey().hashCode();
     }
 
     @Override

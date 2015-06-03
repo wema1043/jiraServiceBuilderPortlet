@@ -47,7 +47,7 @@ public class IssueTypeLocalServiceUtil {
     * @return the new issue type
     */
     public static de.hska.wi.awp.datasource.model.IssueType createIssueType(
-        long issueId) {
+        java.lang.String issueId) {
         return getService().createIssueType(issueId);
     }
 
@@ -60,7 +60,7 @@ public class IssueTypeLocalServiceUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.IssueType deleteIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService().deleteIssueType(issueId);
@@ -170,7 +170,7 @@ public class IssueTypeLocalServiceUtil {
     }
 
     public static de.hska.wi.awp.datasource.model.IssueType fetchIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getService().fetchIssueType(issueId);
     }
@@ -184,7 +184,7 @@ public class IssueTypeLocalServiceUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.IssueType getIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService().getIssueType(issueId);

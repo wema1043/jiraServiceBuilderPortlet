@@ -47,7 +47,7 @@
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.IssueTypeImpl" table="jira_IssueType">
 		<cache usage="read-write" />
-		<id name="issueId" type="long">
+		<id name="issueId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
 		<property name="issueName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -61,7 +61,7 @@
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.StatusImpl" table="jira_Status">
 		<cache usage="read-write" />
-		<id name="statusId" type="long">
+		<id name="statusId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />

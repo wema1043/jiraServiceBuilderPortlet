@@ -242,11 +242,9 @@ public interface IssueLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.lang.String getAllIssues() throws java.lang.Exception;
+    public java.lang.String getAllIssues();
 
-    public void ParseJsonToIssue(java.lang.String response)
-        throws java.lang.Exception;
+    public void ParseJsonToIssue(java.lang.String response);
 
-    public void deleteAllIssues()
-        throws com.liferay.portal.kernel.exception.SystemException;
+    public void deleteAllIssues();
 }

@@ -182,7 +182,7 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
      * @return the new issue type
      */
     @Override
-    public IssueType create(long issueId) {
+    public IssueType create(String issueId) {
         IssueType issueType = new IssueTypeImpl();
 
         issueType.setNew(true);
@@ -200,7 +200,7 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType remove(long issueId)
+    public IssueType remove(String issueId)
         throws NoSuchIssueTypeException, SystemException {
         return remove((Serializable) issueId);
     }
@@ -362,7 +362,7 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType findByPrimaryKey(long issueId)
+    public IssueType findByPrimaryKey(String issueId)
         throws NoSuchIssueTypeException, SystemException {
         return findByPrimaryKey((Serializable) issueId);
     }
@@ -420,7 +420,8 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType fetchByPrimaryKey(long issueId) throws SystemException {
+    public IssueType fetchByPrimaryKey(String issueId)
+        throws SystemException {
         return fetchByPrimaryKey((Serializable) issueId);
     }
 

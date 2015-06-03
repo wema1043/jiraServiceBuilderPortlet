@@ -13,7 +13,7 @@ import java.util.List;
  * @generated
  */
 public class IssueTypeSoap implements Serializable {
-    private long _issueId;
+    private String _issueId;
     private String _issueName;
 
     public IssueTypeSoap() {
@@ -64,19 +64,19 @@ public class IssueTypeSoap implements Serializable {
         return soapModels.toArray(new IssueTypeSoap[soapModels.size()]);
     }
 
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _issueId;
     }
 
-    public void setPrimaryKey(long pk) {
+    public void setPrimaryKey(String pk) {
         setIssueId(pk);
     }
 
-    public long getIssueId() {
+    public String getIssueId() {
         return _issueId;
     }
 
-    public void setIssueId(long issueId) {
+    public void setIssueId(String issueId) {
         _issueId = issueId;
     }
 

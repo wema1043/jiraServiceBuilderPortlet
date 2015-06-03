@@ -13,7 +13,7 @@ import java.util.List;
  * @generated
  */
 public class StatusSoap implements Serializable {
-    private long _statusId;
+    private String _statusId;
     private String _name;
 
     public StatusSoap() {
@@ -64,19 +64,19 @@ public class StatusSoap implements Serializable {
         return soapModels.toArray(new StatusSoap[soapModels.size()]);
     }
 
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _statusId;
     }
 
-    public void setPrimaryKey(long pk) {
+    public void setPrimaryKey(String pk) {
         setStatusId(pk);
     }
 
-    public long getStatusId() {
+    public String getStatusId() {
         return _statusId;
     }
 
-    public void setStatusId(long statusId) {
+    public void setStatusId(String statusId) {
         _statusId = statusId;
     }
 

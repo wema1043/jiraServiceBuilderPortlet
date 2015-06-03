@@ -51,7 +51,8 @@ public interface StatusLocalService extends BaseLocalService,
     * @param statusId the primary key for the new status
     * @return the new status
     */
-    public de.hska.wi.awp.datasource.model.Status createStatus(long statusId);
+    public de.hska.wi.awp.datasource.model.Status createStatus(
+        java.lang.String statusId);
 
     /**
     * Deletes the status with the primary key from the database. Also notifies the appropriate model listeners.
@@ -62,7 +63,8 @@ public interface StatusLocalService extends BaseLocalService,
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-    public de.hska.wi.awp.datasource.model.Status deleteStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status deleteStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -156,7 +158,8 @@ public interface StatusLocalService extends BaseLocalService,
         throws com.liferay.portal.kernel.exception.SystemException;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public de.hska.wi.awp.datasource.model.Status fetchStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status fetchStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
@@ -168,7 +171,8 @@ public interface StatusLocalService extends BaseLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public de.hska.wi.awp.datasource.model.Status getStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status getStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -236,4 +240,11 @@ public interface StatusLocalService extends BaseLocalService,
     public java.lang.Object invokeMethod(java.lang.String name,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getAllStatus();
+
+    public void ParseJsonToStatus(java.lang.String response);
+
+    public void deleteAllStatus();
 }

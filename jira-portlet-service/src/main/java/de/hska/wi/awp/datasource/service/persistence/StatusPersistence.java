@@ -137,7 +137,7 @@ public interface StatusPersistence extends BasePersistence<Status> {
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.Status[] findBystatusName_PrevAndNext(
-        long statusId, java.lang.String name,
+        java.lang.String statusId, java.lang.String name,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchStatusException;
@@ -182,7 +182,8 @@ public interface StatusPersistence extends BasePersistence<Status> {
     * @param statusId the primary key for the new status
     * @return the new status
     */
-    public de.hska.wi.awp.datasource.model.Status create(long statusId);
+    public de.hska.wi.awp.datasource.model.Status create(
+        java.lang.String statusId);
 
     /**
     * Removes the status with the primary key from the database. Also notifies the appropriate model listeners.
@@ -192,7 +193,8 @@ public interface StatusPersistence extends BasePersistence<Status> {
     * @throws de.hska.wi.awp.datasource.NoSuchStatusException if a status with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public de.hska.wi.awp.datasource.model.Status remove(long statusId)
+    public de.hska.wi.awp.datasource.model.Status remove(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchStatusException;
 
@@ -209,7 +211,7 @@ public interface StatusPersistence extends BasePersistence<Status> {
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.Status findByPrimaryKey(
-        long statusId)
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchStatusException;
 
@@ -221,7 +223,7 @@ public interface StatusPersistence extends BasePersistence<Status> {
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.Status fetchByPrimaryKey(
-        long statusId)
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**

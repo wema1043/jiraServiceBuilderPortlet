@@ -47,7 +47,7 @@ public class StatusLocalServiceUtil {
     * @return the new status
     */
     public static de.hska.wi.awp.datasource.model.Status createStatus(
-        long statusId) {
+        java.lang.String statusId) {
         return getService().createStatus(statusId);
     }
 
@@ -60,7 +60,7 @@ public class StatusLocalServiceUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Status deleteStatus(
-        long statusId)
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService().deleteStatus(statusId);
@@ -170,7 +170,7 @@ public class StatusLocalServiceUtil {
     }
 
     public static de.hska.wi.awp.datasource.model.Status fetchStatus(
-        long statusId)
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getService().fetchStatus(statusId);
     }
@@ -184,7 +184,7 @@ public class StatusLocalServiceUtil {
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Status getStatus(
-        long statusId)
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService().getStatus(statusId);
@@ -261,6 +261,18 @@ public class StatusLocalServiceUtil {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return getService().invokeMethod(name, parameterTypes, arguments);
+    }
+
+    public static java.lang.String getAllStatus() {
+        return getService().getAllStatus();
+    }
+
+    public static void ParseJsonToStatus(java.lang.String response) {
+        getService().ParseJsonToStatus(response);
+    }
+
+    public static void deleteAllStatus() {
+        getService().deleteAllStatus();
     }
 
     public static void clearService() {

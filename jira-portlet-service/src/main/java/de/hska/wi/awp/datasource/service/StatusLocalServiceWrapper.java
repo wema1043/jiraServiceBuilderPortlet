@@ -38,7 +38,8 @@ public class StatusLocalServiceWrapper implements StatusLocalService,
     * @return the new status
     */
     @Override
-    public de.hska.wi.awp.datasource.model.Status createStatus(long statusId) {
+    public de.hska.wi.awp.datasource.model.Status createStatus(
+        java.lang.String statusId) {
         return _statusLocalService.createStatus(statusId);
     }
 
@@ -51,7 +52,8 @@ public class StatusLocalServiceWrapper implements StatusLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Override
-    public de.hska.wi.awp.datasource.model.Status deleteStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status deleteStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return _statusLocalService.deleteStatus(statusId);
@@ -168,7 +170,8 @@ public class StatusLocalServiceWrapper implements StatusLocalService,
     }
 
     @Override
-    public de.hska.wi.awp.datasource.model.Status fetchStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status fetchStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return _statusLocalService.fetchStatus(statusId);
     }
@@ -182,7 +185,8 @@ public class StatusLocalServiceWrapper implements StatusLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Override
-    public de.hska.wi.awp.datasource.model.Status getStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status getStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return _statusLocalService.getStatus(statusId);
@@ -266,6 +270,21 @@ public class StatusLocalServiceWrapper implements StatusLocalService,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return _statusLocalService.invokeMethod(name, parameterTypes, arguments);
+    }
+
+    @Override
+    public java.lang.String getAllStatus() {
+        return _statusLocalService.getAllStatus();
+    }
+
+    @Override
+    public void ParseJsonToStatus(java.lang.String response) {
+        _statusLocalService.ParseJsonToStatus(response);
+    }
+
+    @Override
+    public void deleteAllStatus() {
+        _statusLocalService.deleteAllStatus();
     }
 
     /**

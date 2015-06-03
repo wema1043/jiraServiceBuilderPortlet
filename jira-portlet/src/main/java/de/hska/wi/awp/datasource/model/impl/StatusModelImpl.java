@@ -8,10 +8,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.ServiceContext;
-
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import de.hska.wi.awp.datasource.model.Status;
 import de.hska.wi.awp.datasource.model.StatusModel;
@@ -49,10 +45,10 @@ public class StatusModelImpl extends BaseModelImpl<Status>
      */
     public static final String TABLE_NAME = "jira_Status";
     public static final Object[][] TABLE_COLUMNS = {
-            { "statusId", Types.BIGINT },
+            { "statusId", Types.VARCHAR },
             { "name", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_Status (statusId LONG not null primary key,name VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table jira_Status (statusId VARCHAR(75) not null primary key,name VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table jira_Status";
     public static final String ORDER_BY_JPQL = " ORDER BY status.statusId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY jira_Status.statusId ASC";
@@ -74,7 +70,7 @@ public class StatusModelImpl extends BaseModelImpl<Status>
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.Status"));
     private static ClassLoader _classLoader = Status.class.getClassLoader();
     private static Class<?>[] _escapedModelInterfaces = new Class[] { Status.class };
-    private long _statusId;
+    private String _statusId;
     private String _name;
     private String _originalName;
     private long _columnBitmask;
@@ -123,12 +119,12 @@ public class StatusModelImpl extends BaseModelImpl<Status>
     }
 
     @Override
-    public long getPrimaryKey() {
+    public String getPrimaryKey() {
         return _statusId;
     }
 
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(String primaryKey) {
         setStatusId(primaryKey);
     }
 
@@ -139,7 +135,7 @@ public class StatusModelImpl extends BaseModelImpl<Status>
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey(((Long) primaryKeyObj).longValue());
+        setPrimaryKey((String) primaryKeyObj);
     }
 
     @Override
@@ -164,7 +160,7 @@ public class StatusModelImpl extends BaseModelImpl<Status>
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long statusId = (Long) attributes.get("statusId");
+        String statusId = (String) attributes.get("statusId");
 
         if (statusId != null) {
             setStatusId(statusId);
@@ -179,12 +175,16 @@ public class StatusModelImpl extends BaseModelImpl<Status>
 
     @JSON
     @Override
-    public long getStatusId() {
-        return _statusId;
+    public String getStatusId() {
+        if (_statusId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _statusId;
+        }
     }
 
     @Override
-    public void setStatusId(long statusId) {
+    public void setStatusId(String statusId) {
         _statusId = statusId;
     }
 
@@ -218,19 +218,6 @@ public class StatusModelImpl extends BaseModelImpl<Status>
     }
 
     @Override
-    public ExpandoBridge getExpandoBridge() {
-        return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
-            Status.class.getName(), getPrimaryKey());
-    }
-
-    @Override
-    public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-        ExpandoBridge expandoBridge = getExpandoBridge();
-
-        expandoBridge.setAttributes(serviceContext);
-    }
-
-    @Override
     public Status toEscapedModel() {
         if (_escapedModel == null) {
             _escapedModel = (Status) ProxyUtil.newProxyInstance(_classLoader,
@@ -254,15 +241,9 @@ public class StatusModelImpl extends BaseModelImpl<Status>
 
     @Override
     public int compareTo(Status status) {
-        long primaryKey = status.getPrimaryKey();
+        String primaryKey = status.getPrimaryKey();
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return getPrimaryKey().compareTo(primaryKey);
     }
 
     @Override
@@ -277,9 +258,9 @@ public class StatusModelImpl extends BaseModelImpl<Status>
 
         Status status = (Status) obj;
 
-        long primaryKey = status.getPrimaryKey();
+        String primaryKey = status.getPrimaryKey();
 
-        if (getPrimaryKey() == primaryKey) {
+        if (getPrimaryKey().equals(primaryKey)) {
             return true;
         } else {
             return false;
@@ -288,7 +269,7 @@ public class StatusModelImpl extends BaseModelImpl<Status>
 
     @Override
     public int hashCode() {
-        return (int) getPrimaryKey();
+        return getPrimaryKey().hashCode();
     }
 
     @Override
@@ -305,6 +286,12 @@ public class StatusModelImpl extends BaseModelImpl<Status>
         StatusCacheModel statusCacheModel = new StatusCacheModel();
 
         statusCacheModel.statusId = getStatusId();
+
+        String statusId = statusCacheModel.statusId;
+
+        if ((statusId != null) && (statusId.length() == 0)) {
+            statusCacheModel.statusId = null;
+        }
 
         statusCacheModel.name = getName();
 

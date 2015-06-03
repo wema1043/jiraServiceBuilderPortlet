@@ -44,7 +44,7 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long issueId = (Long) attributes.get("issueId");
+        String issueId = (String) attributes.get("issueId");
 
         if (issueId != null) {
             setIssueId(issueId);
@@ -63,7 +63,7 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     * @return the primary key of this issue type
     */
     @Override
-    public long getPrimaryKey() {
+    public java.lang.String getPrimaryKey() {
         return _issueType.getPrimaryKey();
     }
 
@@ -73,7 +73,7 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     * @param primaryKey the primary key of this issue type
     */
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(java.lang.String primaryKey) {
         _issueType.setPrimaryKey(primaryKey);
     }
 
@@ -83,7 +83,7 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     * @return the issue ID of this issue type
     */
     @Override
-    public long getIssueId() {
+    public java.lang.String getIssueId() {
         return _issueType.getIssueId();
     }
 
@@ -93,7 +93,7 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     * @param issueId the issue ID of this issue type
     */
     @Override
-    public void setIssueId(long issueId) {
+    public void setIssueId(java.lang.String issueId) {
         _issueType.setIssueId(issueId);
     }
 

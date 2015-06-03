@@ -44,6 +44,12 @@ public class StatusLocalServiceClp implements StatusLocalService {
     private String[] _methodParameterTypes16;
     private String _methodName17;
     private String[] _methodParameterTypes17;
+    private String _methodName19;
+    private String[] _methodParameterTypes19;
+    private String _methodName20;
+    private String[] _methodParameterTypes20;
+    private String _methodName21;
+    private String[] _methodParameterTypes21;
 
     public StatusLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -56,11 +62,11 @@ public class StatusLocalServiceClp implements StatusLocalService {
 
         _methodName1 = "createStatus";
 
-        _methodParameterTypes1 = new String[] { "long" };
+        _methodParameterTypes1 = new String[] { "java.lang.String" };
 
         _methodName2 = "deleteStatus";
 
-        _methodParameterTypes2 = new String[] { "long" };
+        _methodParameterTypes2 = new String[] { "java.lang.String" };
 
         _methodName3 = "deleteStatus";
 
@@ -106,11 +112,11 @@ public class StatusLocalServiceClp implements StatusLocalService {
 
         _methodName10 = "fetchStatus";
 
-        _methodParameterTypes10 = new String[] { "long" };
+        _methodParameterTypes10 = new String[] { "java.lang.String" };
 
         _methodName11 = "getStatus";
 
-        _methodParameterTypes11 = new String[] { "long" };
+        _methodParameterTypes11 = new String[] { "java.lang.String" };
 
         _methodName12 = "getPersistedModel";
 
@@ -137,6 +143,18 @@ public class StatusLocalServiceClp implements StatusLocalService {
         _methodName17 = "setBeanIdentifier";
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
+
+        _methodName19 = "getAllStatus";
+
+        _methodParameterTypes19 = new String[] {  };
+
+        _methodName20 = "ParseJsonToStatus";
+
+        _methodParameterTypes20 = new String[] { "java.lang.String" };
+
+        _methodName21 = "deleteAllStatus";
+
+        _methodParameterTypes21 = new String[] {  };
     }
 
     @Override
@@ -168,12 +186,14 @@ public class StatusLocalServiceClp implements StatusLocalService {
     }
 
     @Override
-    public de.hska.wi.awp.datasource.model.Status createStatus(long statusId) {
+    public de.hska.wi.awp.datasource.model.Status createStatus(
+        java.lang.String statusId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName1,
-                    _methodParameterTypes1, new Object[] { statusId });
+                    _methodParameterTypes1,
+                    new Object[] { ClpSerializer.translateInput(statusId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -189,14 +209,16 @@ public class StatusLocalServiceClp implements StatusLocalService {
     }
 
     @Override
-    public de.hska.wi.awp.datasource.model.Status deleteStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status deleteStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName2,
-                    _methodParameterTypes2, new Object[] { statusId });
+                    _methodParameterTypes2,
+                    new Object[] { ClpSerializer.translateInput(statusId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -433,13 +455,15 @@ public class StatusLocalServiceClp implements StatusLocalService {
     }
 
     @Override
-    public de.hska.wi.awp.datasource.model.Status fetchStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status fetchStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName10,
-                    _methodParameterTypes10, new Object[] { statusId });
+                    _methodParameterTypes10,
+                    new Object[] { ClpSerializer.translateInput(statusId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -459,14 +483,16 @@ public class StatusLocalServiceClp implements StatusLocalService {
     }
 
     @Override
-    public de.hska.wi.awp.datasource.model.Status getStatus(long statusId)
+    public de.hska.wi.awp.datasource.model.Status getStatus(
+        java.lang.String statusId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName11,
-                    _methodParameterTypes11, new Object[] { statusId });
+                    _methodParameterTypes11,
+                    new Object[] { ClpSerializer.translateInput(statusId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -647,5 +673,61 @@ public class StatusLocalServiceClp implements StatusLocalService {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public java.lang.String getAllStatus() {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName19,
+                    _methodParameterTypes19, new Object[] {  });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.String) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public void ParseJsonToStatus(java.lang.String response) {
+        try {
+            _invokableLocalService.invokeMethod(_methodName20,
+                _methodParameterTypes20,
+                new Object[] { ClpSerializer.translateInput(response) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    @Override
+    public void deleteAllStatus() {
+        try {
+            _invokableLocalService.invokeMethod(_methodName21,
+                _methodParameterTypes21, new Object[] {  });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
     }
 }

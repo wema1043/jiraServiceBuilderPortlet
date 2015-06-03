@@ -40,7 +40,7 @@ public class IssueTypeLocalServiceWrapper implements IssueTypeLocalService,
     */
     @Override
     public de.hska.wi.awp.datasource.model.IssueType createIssueType(
-        long issueId) {
+        java.lang.String issueId) {
         return _issueTypeLocalService.createIssueType(issueId);
     }
 
@@ -54,7 +54,7 @@ public class IssueTypeLocalServiceWrapper implements IssueTypeLocalService,
     */
     @Override
     public de.hska.wi.awp.datasource.model.IssueType deleteIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return _issueTypeLocalService.deleteIssueType(issueId);
@@ -172,7 +172,7 @@ public class IssueTypeLocalServiceWrapper implements IssueTypeLocalService,
 
     @Override
     public de.hska.wi.awp.datasource.model.IssueType fetchIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return _issueTypeLocalService.fetchIssueType(issueId);
     }
@@ -186,7 +186,8 @@ public class IssueTypeLocalServiceWrapper implements IssueTypeLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Override
-    public de.hska.wi.awp.datasource.model.IssueType getIssueType(long issueId)
+    public de.hska.wi.awp.datasource.model.IssueType getIssueType(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return _issueTypeLocalService.getIssueType(issueId);

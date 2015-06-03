@@ -44,7 +44,7 @@ public class StatusWrapper implements Status, ModelWrapper<Status> {
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long statusId = (Long) attributes.get("statusId");
+        String statusId = (String) attributes.get("statusId");
 
         if (statusId != null) {
             setStatusId(statusId);
@@ -63,7 +63,7 @@ public class StatusWrapper implements Status, ModelWrapper<Status> {
     * @return the primary key of this status
     */
     @Override
-    public long getPrimaryKey() {
+    public java.lang.String getPrimaryKey() {
         return _status.getPrimaryKey();
     }
 
@@ -73,7 +73,7 @@ public class StatusWrapper implements Status, ModelWrapper<Status> {
     * @param primaryKey the primary key of this status
     */
     @Override
-    public void setPrimaryKey(long primaryKey) {
+    public void setPrimaryKey(java.lang.String primaryKey) {
         _status.setPrimaryKey(primaryKey);
     }
 
@@ -83,7 +83,7 @@ public class StatusWrapper implements Status, ModelWrapper<Status> {
     * @return the status ID of this status
     */
     @Override
-    public long getStatusId() {
+    public java.lang.String getStatusId() {
         return _status.getStatusId();
     }
 
@@ -93,7 +93,7 @@ public class StatusWrapper implements Status, ModelWrapper<Status> {
     * @param statusId the status ID of this status
     */
     @Override
-    public void setStatusId(long statusId) {
+    public void setStatusId(java.lang.String statusId) {
         _status.setStatusId(statusId);
     }
 

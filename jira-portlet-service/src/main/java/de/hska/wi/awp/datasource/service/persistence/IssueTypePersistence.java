@@ -44,7 +44,8 @@ public interface IssueTypePersistence extends BasePersistence<IssueType> {
     * @param issueId the primary key for the new issue type
     * @return the new issue type
     */
-    public de.hska.wi.awp.datasource.model.IssueType create(long issueId);
+    public de.hska.wi.awp.datasource.model.IssueType create(
+        java.lang.String issueId);
 
     /**
     * Removes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
@@ -54,7 +55,8 @@ public interface IssueTypePersistence extends BasePersistence<IssueType> {
     * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public de.hska.wi.awp.datasource.model.IssueType remove(long issueId)
+    public de.hska.wi.awp.datasource.model.IssueType remove(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueTypeException;
 
@@ -71,7 +73,7 @@ public interface IssueTypePersistence extends BasePersistence<IssueType> {
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.IssueType findByPrimaryKey(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueTypeException;
 
@@ -83,7 +85,7 @@ public interface IssueTypePersistence extends BasePersistence<IssueType> {
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.IssueType fetchByPrimaryKey(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**

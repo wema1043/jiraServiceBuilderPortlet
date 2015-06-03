@@ -52,7 +52,7 @@ public interface IssueTypeLocalService extends BaseLocalService,
     * @return the new issue type
     */
     public de.hska.wi.awp.datasource.model.IssueType createIssueType(
-        long issueId);
+        java.lang.String issueId);
 
     /**
     * Deletes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
@@ -64,7 +64,7 @@ public interface IssueTypeLocalService extends BaseLocalService,
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
     public de.hska.wi.awp.datasource.model.IssueType deleteIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -159,7 +159,7 @@ public interface IssueTypeLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public de.hska.wi.awp.datasource.model.IssueType fetchIssueType(
-        long issueId)
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
@@ -171,7 +171,8 @@ public interface IssueTypeLocalService extends BaseLocalService,
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public de.hska.wi.awp.datasource.model.IssueType getIssueType(long issueId)
+    public de.hska.wi.awp.datasource.model.IssueType getIssueType(
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

@@ -19,7 +19,7 @@ import java.io.ObjectOutput;
  * @generated
  */
 public class StatusCacheModel implements CacheModel<Status>, Externalizable {
-    public long statusId;
+    public String statusId;
     public String name;
 
     @Override
@@ -39,7 +39,11 @@ public class StatusCacheModel implements CacheModel<Status>, Externalizable {
     public Status toEntityModel() {
         StatusImpl statusImpl = new StatusImpl();
 
-        statusImpl.setStatusId(statusId);
+        if (statusId == null) {
+            statusImpl.setStatusId(StringPool.BLANK);
+        } else {
+            statusImpl.setStatusId(statusId);
+        }
 
         if (name == null) {
             statusImpl.setName(StringPool.BLANK);
@@ -54,14 +58,18 @@ public class StatusCacheModel implements CacheModel<Status>, Externalizable {
 
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
-        statusId = objectInput.readLong();
+        statusId = objectInput.readUTF();
         name = objectInput.readUTF();
     }
 
     @Override
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
-        objectOutput.writeLong(statusId);
+        if (statusId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(statusId);
+        }
 
         if (name == null) {
             objectOutput.writeUTF(StringPool.BLANK);

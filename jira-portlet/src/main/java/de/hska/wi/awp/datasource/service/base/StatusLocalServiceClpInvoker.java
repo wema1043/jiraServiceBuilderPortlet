@@ -45,6 +45,12 @@ public class StatusLocalServiceClpInvoker {
     private String[] _methodParameterTypes64;
     private String _methodName65;
     private String[] _methodParameterTypes65;
+    private String _methodName70;
+    private String[] _methodParameterTypes70;
+    private String _methodName71;
+    private String[] _methodParameterTypes71;
+    private String _methodName72;
+    private String[] _methodParameterTypes72;
 
     public StatusLocalServiceClpInvoker() {
         _methodName0 = "addStatus";
@@ -55,11 +61,11 @@ public class StatusLocalServiceClpInvoker {
 
         _methodName1 = "createStatus";
 
-        _methodParameterTypes1 = new String[] { "long" };
+        _methodParameterTypes1 = new String[] { "java.lang.String" };
 
         _methodName2 = "deleteStatus";
 
-        _methodParameterTypes2 = new String[] { "long" };
+        _methodParameterTypes2 = new String[] { "java.lang.String" };
 
         _methodName3 = "deleteStatus";
 
@@ -105,11 +111,11 @@ public class StatusLocalServiceClpInvoker {
 
         _methodName10 = "fetchStatus";
 
-        _methodParameterTypes10 = new String[] { "long" };
+        _methodParameterTypes10 = new String[] { "java.lang.String" };
 
         _methodName11 = "getStatus";
 
-        _methodParameterTypes11 = new String[] { "long" };
+        _methodParameterTypes11 = new String[] { "java.lang.String" };
 
         _methodName12 = "getPersistedModel";
 
@@ -136,6 +142,18 @@ public class StatusLocalServiceClpInvoker {
         _methodName65 = "setBeanIdentifier";
 
         _methodParameterTypes65 = new String[] { "java.lang.String" };
+
+        _methodName70 = "getAllStatus";
+
+        _methodParameterTypes70 = new String[] {  };
+
+        _methodName71 = "ParseJsonToStatus";
+
+        _methodParameterTypes71 = new String[] { "java.lang.String" };
+
+        _methodName72 = "deleteAllStatus";
+
+        _methodParameterTypes72 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -147,12 +165,12 @@ public class StatusLocalServiceClpInvoker {
 
         if (_methodName1.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-            return StatusLocalServiceUtil.createStatus(((Long) arguments[0]).longValue());
+            return StatusLocalServiceUtil.createStatus((java.lang.String) arguments[0]);
         }
 
         if (_methodName2.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-            return StatusLocalServiceUtil.deleteStatus(((Long) arguments[0]).longValue());
+            return StatusLocalServiceUtil.deleteStatus((java.lang.String) arguments[0]);
         }
 
         if (_methodName3.equals(name) &&
@@ -198,12 +216,12 @@ public class StatusLocalServiceClpInvoker {
 
         if (_methodName10.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-            return StatusLocalServiceUtil.fetchStatus(((Long) arguments[0]).longValue());
+            return StatusLocalServiceUtil.fetchStatus((java.lang.String) arguments[0]);
         }
 
         if (_methodName11.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-            return StatusLocalServiceUtil.getStatus(((Long) arguments[0]).longValue());
+            return StatusLocalServiceUtil.getStatus((java.lang.String) arguments[0]);
         }
 
         if (_methodName12.equals(name) &&
@@ -235,6 +253,25 @@ public class StatusLocalServiceClpInvoker {
         if (_methodName65.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
             StatusLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
+
+            return null;
+        }
+
+        if (_methodName70.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+            return StatusLocalServiceUtil.getAllStatus();
+        }
+
+        if (_methodName71.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+            StatusLocalServiceUtil.ParseJsonToStatus((java.lang.String) arguments[0]);
+
+            return null;
+        }
+
+        if (_methodName72.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+            StatusLocalServiceUtil.deleteAllStatus();
 
             return null;
         }
