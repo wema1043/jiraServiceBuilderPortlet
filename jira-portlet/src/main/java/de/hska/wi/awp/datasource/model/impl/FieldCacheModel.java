@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing Field in entity cache.
  *
@@ -21,10 +23,10 @@ import java.io.ObjectOutput;
 public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public long fieldId;
     public String issueId;
-    public String createdDate;
-    public String resolutionDate;
+    public long createdDate;
+    public long resolutionDate;
     public String summary;
-    public String updated;
+    public long updated;
     public String timespent;
     public String timeestimate;
     public String timeoriginalestimate;
@@ -92,16 +94,16 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             fieldImpl.setIssueId(issueId);
         }
 
-        if (createdDate == null) {
-            fieldImpl.setCreatedDate(StringPool.BLANK);
+        if (createdDate == Long.MIN_VALUE) {
+            fieldImpl.setCreatedDate(null);
         } else {
-            fieldImpl.setCreatedDate(createdDate);
+            fieldImpl.setCreatedDate(new Date(createdDate));
         }
 
-        if (resolutionDate == null) {
-            fieldImpl.setResolutionDate(StringPool.BLANK);
+        if (resolutionDate == Long.MIN_VALUE) {
+            fieldImpl.setResolutionDate(null);
         } else {
-            fieldImpl.setResolutionDate(resolutionDate);
+            fieldImpl.setResolutionDate(new Date(resolutionDate));
         }
 
         if (summary == null) {
@@ -110,10 +112,10 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             fieldImpl.setSummary(summary);
         }
 
-        if (updated == null) {
-            fieldImpl.setUpdated(StringPool.BLANK);
+        if (updated == Long.MIN_VALUE) {
+            fieldImpl.setUpdated(null);
         } else {
-            fieldImpl.setUpdated(updated);
+            fieldImpl.setUpdated(new Date(updated));
         }
 
         if (timespent == null) {
@@ -183,10 +185,10 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public void readExternal(ObjectInput objectInput) throws IOException {
         fieldId = objectInput.readLong();
         issueId = objectInput.readUTF();
-        createdDate = objectInput.readUTF();
-        resolutionDate = objectInput.readUTF();
+        createdDate = objectInput.readLong();
+        resolutionDate = objectInput.readLong();
         summary = objectInput.readUTF();
-        updated = objectInput.readUTF();
+        updated = objectInput.readLong();
         timespent = objectInput.readUTF();
         timeestimate = objectInput.readUTF();
         timeoriginalestimate = objectInput.readUTF();
@@ -211,17 +213,8 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             objectOutput.writeUTF(issueId);
         }
 
-        if (createdDate == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(createdDate);
-        }
-
-        if (resolutionDate == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(resolutionDate);
-        }
+        objectOutput.writeLong(createdDate);
+        objectOutput.writeLong(resolutionDate);
 
         if (summary == null) {
             objectOutput.writeUTF(StringPool.BLANK);
@@ -229,11 +222,7 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             objectOutput.writeUTF(summary);
         }
 
-        if (updated == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(updated);
-        }
+        objectOutput.writeLong(updated);
 
         if (timespent == null) {
             objectOutput.writeUTF(StringPool.BLANK);

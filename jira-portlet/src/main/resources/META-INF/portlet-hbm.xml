@@ -15,10 +15,10 @@
 			<generator class="assigned" />
 		</id>
 		<property name="issueId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createdDate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="resolutionDate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="resolutionDate" type="org.hibernate.type.TimestampType" />
 		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="updated" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="timespent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="timeestimate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="timeoriginalestimate" type="com.liferay.portal.dao.orm.hibernate.StringType" />

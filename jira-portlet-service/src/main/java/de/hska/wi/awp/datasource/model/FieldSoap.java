@@ -3,6 +3,7 @@ package de.hska.wi.awp.datasource.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,10 +16,10 @@ import java.util.List;
 public class FieldSoap implements Serializable {
     private long _fieldId;
     private String _issueId;
-    private String _createdDate;
-    private String _resolutionDate;
+    private Date _createdDate;
+    private Date _resolutionDate;
     private String _summary;
-    private String _updated;
+    private Date _updated;
     private String _timespent;
     private String _timeestimate;
     private String _timeoriginalestimate;
@@ -118,19 +119,19 @@ public class FieldSoap implements Serializable {
         _issueId = issueId;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return _createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         _createdDate = createdDate;
     }
 
-    public String getResolutionDate() {
+    public Date getResolutionDate() {
         return _resolutionDate;
     }
 
-    public void setResolutionDate(String resolutionDate) {
+    public void setResolutionDate(Date resolutionDate) {
         _resolutionDate = resolutionDate;
     }
 
@@ -142,11 +143,11 @@ public class FieldSoap implements Serializable {
         _summary = summary;
     }
 
-    public String getUpdated() {
+    public Date getUpdated() {
         return _updated;
     }
 
-    public void setUpdated(String updated) {
+    public void setUpdated(Date updated) {
         _updated = updated;
     }
 

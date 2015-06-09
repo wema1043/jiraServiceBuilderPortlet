@@ -38,10 +38,10 @@
 	<entity name="Field" local-service="true" remote-service="true">
 		<column name="fieldId" primary="true" type="long"></column>
 		<column name="issueId" type="String"></column>
-		<column name="createdDate" type="String"></column>
-		<column name="resolutionDate" type="String"></column>
+		<column name="createdDate" type="Date"></column>
+		<column name="resolutionDate" type="Date"></column>
 		<column name="summary" type="String"></column>
-		<column name="updated" type="String"></column>
+		<column name="updated" type="Date"></column>
 		<column name="timespent" type="String"></column>
 		<column name="timeestimate" type="String"></column>
 		<column name="timeoriginalestimate" type="String"></column>

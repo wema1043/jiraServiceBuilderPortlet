@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,10 +22,10 @@ import java.util.Map;
 public class FieldClp extends BaseModelImpl<Field> implements Field {
     private long _fieldId;
     private String _issueId;
-    private String _createdDate;
-    private String _resolutionDate;
+    private Date _createdDate;
+    private Date _resolutionDate;
     private String _summary;
-    private String _updated;
+    private Date _updated;
     private String _timespent;
     private String _timeestimate;
     private String _timeoriginalestimate;
@@ -112,13 +113,13 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
             setIssueId(issueId);
         }
 
-        String createdDate = (String) attributes.get("createdDate");
+        Date createdDate = (Date) attributes.get("createdDate");
 
         if (createdDate != null) {
             setCreatedDate(createdDate);
         }
 
-        String resolutionDate = (String) attributes.get("resolutionDate");
+        Date resolutionDate = (Date) attributes.get("resolutionDate");
 
         if (resolutionDate != null) {
             setResolutionDate(resolutionDate);
@@ -130,7 +131,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
             setSummary(summary);
         }
 
-        String updated = (String) attributes.get("updated");
+        Date updated = (Date) attributes.get("updated");
 
         if (updated != null) {
             setUpdated(updated);
@@ -252,19 +253,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return _createdDate;
     }
 
     @Override
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         _createdDate = createdDate;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setCreatedDate", String.class);
+                Method method = clazz.getMethod("setCreatedDate", Date.class);
 
                 method.invoke(_fieldRemoteModel, createdDate);
             } catch (Exception e) {
@@ -274,20 +275,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getResolutionDate() {
+    public Date getResolutionDate() {
         return _resolutionDate;
     }
 
     @Override
-    public void setResolutionDate(String resolutionDate) {
+    public void setResolutionDate(Date resolutionDate) {
         _resolutionDate = resolutionDate;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setResolutionDate",
-                        String.class);
+                Method method = clazz.getMethod("setResolutionDate", Date.class);
 
                 method.invoke(_fieldRemoteModel, resolutionDate);
             } catch (Exception e) {
@@ -319,19 +319,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getUpdated() {
+    public Date getUpdated() {
         return _updated;
     }
 
     @Override
-    public void setUpdated(String updated) {
+    public void setUpdated(Date updated) {
         _updated = updated;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setUpdated", String.class);
+                Method method = clazz.getMethod("setUpdated", Date.class);
 
                 method.invoke(_fieldRemoteModel, updated);
             } catch (Exception e) {

@@ -1,9 +1,11 @@
 package de.hska.wi.awp.datasource.service.impl;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.primefaces.json.JSONArray;
@@ -122,6 +124,10 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 
 		for (int zl = 0; zl < tasks.length(); zl++) {
 			Integer counter = zl;
@@ -142,12 +148,24 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 				myField.setIssueId(tasks.getJSONObject(zl).getString("id"));
 				myField.setSummary(tasks.getJSONObject(zl)
 						.getJSONObject("fields").getString("summary"));
-				myField.setCreatedDate(tasks.getJSONObject(zl)
-						.getJSONObject("fields").getString("created"));
-				myField.setResolutionDate(tasks.getJSONObject(zl)
-						.getJSONObject("fields").getString("resolutiondate"));
-				myField.setUpdated(tasks.getJSONObject(zl)
-						.getJSONObject("fields").getString("updated"));
+				
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("created")) {
+					String createdDateString = tasks.getJSONObject(zl).getJSONObject("fields").getString("created").substring(0, 10) + " " +  tasks.getJSONObject(zl).getJSONObject("fields").getString("created").substring(11, 16);
+					Date createdDate = format.parse(createdDateString);
+					myField.setCreatedDate(createdDate);
+				}
+				
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("resolutiondate")) {
+					String resolutionDateString = tasks.getJSONObject(zl).getJSONObject("fields").getString("resolutiondate").substring(0, 10) + " " + tasks.getJSONObject(zl).getJSONObject("fields").getString("resolutiondate").substring(11, 16);
+					Date resolutionDate = format.parse(resolutionDateString);
+					myField.setResolutionDate(resolutionDate);
+				}
+				
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("updated")) {
+					String updatedDateString = tasks.getJSONObject(zl).getJSONObject("fields").getString("updated").substring(0, 10) + " " + tasks.getJSONObject(zl).getJSONObject("fields").getString("updated").substring(11, 16);
+					Date updatedDate = format.parse(updatedDateString);
+					myField.setUpdated(updatedDate);
+				}
 
 				myField.setTimespent(tasks.getJSONObject(zl)
 						.getJSONObject("fields").getString("timespent"));

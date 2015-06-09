@@ -3,6 +3,7 @@ package de.hska.wi.awp.datasource.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,13 +73,13 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
             setIssueId(issueId);
         }
 
-        String createdDate = (String) attributes.get("createdDate");
+        Date createdDate = (Date) attributes.get("createdDate");
 
         if (createdDate != null) {
             setCreatedDate(createdDate);
         }
 
-        String resolutionDate = (String) attributes.get("resolutionDate");
+        Date resolutionDate = (Date) attributes.get("resolutionDate");
 
         if (resolutionDate != null) {
             setResolutionDate(resolutionDate);
@@ -90,7 +91,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
             setSummary(summary);
         }
 
-        String updated = (String) attributes.get("updated");
+        Date updated = (Date) attributes.get("updated");
 
         if (updated != null) {
             setUpdated(updated);
@@ -233,7 +234,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the created date of this field
     */
     @Override
-    public java.lang.String getCreatedDate() {
+    public java.util.Date getCreatedDate() {
         return _field.getCreatedDate();
     }
 
@@ -243,7 +244,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param createdDate the created date of this field
     */
     @Override
-    public void setCreatedDate(java.lang.String createdDate) {
+    public void setCreatedDate(java.util.Date createdDate) {
         _field.setCreatedDate(createdDate);
     }
 
@@ -253,7 +254,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the resolution date of this field
     */
     @Override
-    public java.lang.String getResolutionDate() {
+    public java.util.Date getResolutionDate() {
         return _field.getResolutionDate();
     }
 
@@ -263,7 +264,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param resolutionDate the resolution date of this field
     */
     @Override
-    public void setResolutionDate(java.lang.String resolutionDate) {
+    public void setResolutionDate(java.util.Date resolutionDate) {
         _field.setResolutionDate(resolutionDate);
     }
 
@@ -293,7 +294,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the updated of this field
     */
     @Override
-    public java.lang.String getUpdated() {
+    public java.util.Date getUpdated() {
         return _field.getUpdated();
     }
 
@@ -303,7 +304,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param updated the updated of this field
     */
     @Override
-    public void setUpdated(java.lang.String updated) {
+    public void setUpdated(java.util.Date updated) {
         _field.setUpdated(updated);
     }
 

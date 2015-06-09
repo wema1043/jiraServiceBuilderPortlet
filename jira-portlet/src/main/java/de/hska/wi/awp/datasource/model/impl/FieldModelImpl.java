@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +51,10 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     public static final Object[][] TABLE_COLUMNS = {
             { "fieldId", Types.BIGINT },
             { "issueId", Types.VARCHAR },
-            { "createdDate", Types.VARCHAR },
-            { "resolutionDate", Types.VARCHAR },
+            { "createdDate", Types.TIMESTAMP },
+            { "resolutionDate", Types.TIMESTAMP },
             { "summary", Types.VARCHAR },
-            { "updated", Types.VARCHAR },
+            { "updated", Types.TIMESTAMP },
             { "timespent", Types.VARCHAR },
             { "timeestimate", Types.VARCHAR },
             { "timeoriginalestimate", Types.VARCHAR },
@@ -66,7 +67,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             { "assigneeId", Types.VARCHAR },
             { "statusId", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,issueId VARCHAR(75) null,createdDate VARCHAR(75) null,resolutionDate VARCHAR(75) null,summary VARCHAR(1000) null,updated VARCHAR(75) null,timespent VARCHAR(75) null,timeestimate VARCHAR(75) null,timeoriginalestimate VARCHAR(75) null,aggregatetimespent VARCHAR(75) null,aggregatetimeoriginalestimate VARCHAR(75) null,aggregatetimeestimate VARCHAR(75) null,description VARCHAR(1000) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
+    public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,issueId VARCHAR(75) null,createdDate DATE null,resolutionDate DATE null,summary VARCHAR(1000) null,updated DATE null,timespent VARCHAR(75) null,timeestimate VARCHAR(75) null,timeoriginalestimate VARCHAR(75) null,aggregatetimespent VARCHAR(75) null,aggregatetimeoriginalestimate VARCHAR(75) null,aggregatetimeestimate VARCHAR(75) null,description VARCHAR(1000) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
     public static final String TABLE_SQL_DROP = "drop table jira_Field";
     public static final String ORDER_BY_JPQL = " ORDER BY field.fieldId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY jira_Field.fieldId ASC";
@@ -93,10 +94,10 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     private long _fieldId;
     private String _issueId;
     private String _originalIssueId;
-    private String _createdDate;
-    private String _resolutionDate;
+    private Date _createdDate;
+    private Date _resolutionDate;
     private String _summary;
-    private String _updated;
+    private Date _updated;
     private String _timespent;
     private String _timeestimate;
     private String _timeoriginalestimate;
@@ -241,13 +242,13 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             setIssueId(issueId);
         }
 
-        String createdDate = (String) attributes.get("createdDate");
+        Date createdDate = (Date) attributes.get("createdDate");
 
         if (createdDate != null) {
             setCreatedDate(createdDate);
         }
 
-        String resolutionDate = (String) attributes.get("resolutionDate");
+        Date resolutionDate = (Date) attributes.get("resolutionDate");
 
         if (resolutionDate != null) {
             setResolutionDate(resolutionDate);
@@ -259,7 +260,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             setSummary(summary);
         }
 
-        String updated = (String) attributes.get("updated");
+        Date updated = (Date) attributes.get("updated");
 
         if (updated != null) {
             setUpdated(updated);
@@ -374,31 +375,23 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @JSON
     @Override
-    public String getCreatedDate() {
-        if (_createdDate == null) {
-            return StringPool.BLANK;
-        } else {
-            return _createdDate;
-        }
+    public Date getCreatedDate() {
+        return _createdDate;
     }
 
     @Override
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         _createdDate = createdDate;
     }
 
     @JSON
     @Override
-    public String getResolutionDate() {
-        if (_resolutionDate == null) {
-            return StringPool.BLANK;
-        } else {
-            return _resolutionDate;
-        }
+    public Date getResolutionDate() {
+        return _resolutionDate;
     }
 
     @Override
-    public void setResolutionDate(String resolutionDate) {
+    public void setResolutionDate(Date resolutionDate) {
         _resolutionDate = resolutionDate;
     }
 
@@ -419,16 +412,12 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @JSON
     @Override
-    public String getUpdated() {
-        if (_updated == null) {
-            return StringPool.BLANK;
-        } else {
-            return _updated;
-        }
+    public Date getUpdated() {
+        return _updated;
     }
 
     @Override
-    public void setUpdated(String updated) {
+    public void setUpdated(Date updated) {
         _updated = updated;
     }
 
@@ -734,20 +723,20 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             fieldCacheModel.issueId = null;
         }
 
-        fieldCacheModel.createdDate = getCreatedDate();
+        Date createdDate = getCreatedDate();
 
-        String createdDate = fieldCacheModel.createdDate;
-
-        if ((createdDate != null) && (createdDate.length() == 0)) {
-            fieldCacheModel.createdDate = null;
+        if (createdDate != null) {
+            fieldCacheModel.createdDate = createdDate.getTime();
+        } else {
+            fieldCacheModel.createdDate = Long.MIN_VALUE;
         }
 
-        fieldCacheModel.resolutionDate = getResolutionDate();
+        Date resolutionDate = getResolutionDate();
 
-        String resolutionDate = fieldCacheModel.resolutionDate;
-
-        if ((resolutionDate != null) && (resolutionDate.length() == 0)) {
-            fieldCacheModel.resolutionDate = null;
+        if (resolutionDate != null) {
+            fieldCacheModel.resolutionDate = resolutionDate.getTime();
+        } else {
+            fieldCacheModel.resolutionDate = Long.MIN_VALUE;
         }
 
         fieldCacheModel.summary = getSummary();
@@ -758,12 +747,12 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             fieldCacheModel.summary = null;
         }
 
-        fieldCacheModel.updated = getUpdated();
+        Date updated = getUpdated();
 
-        String updated = fieldCacheModel.updated;
-
-        if ((updated != null) && (updated.length() == 0)) {
-            fieldCacheModel.updated = null;
+        if (updated != null) {
+            fieldCacheModel.updated = updated.getTime();
+        } else {
+            fieldCacheModel.updated = Long.MIN_VALUE;
         }
 
         fieldCacheModel.timespent = getTimespent();

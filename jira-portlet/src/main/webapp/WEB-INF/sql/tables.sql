@@ -1,10 +1,10 @@
 create table jira_Field (
 	fieldId LONG not null primary key,
 	issueId VARCHAR(75) null,
-	createdDate VARCHAR(75) null,
-	resolutionDate VARCHAR(75) null,
+	createdDate DATE null,
+	resolutionDate DATE null,
 	summary VARCHAR(1000) null,
-	updated VARCHAR(75) null,
+	updated DATE null,
 	timespent VARCHAR(75) null,
 	timeestimate VARCHAR(75) null,
 	timeoriginalestimate VARCHAR(75) null,

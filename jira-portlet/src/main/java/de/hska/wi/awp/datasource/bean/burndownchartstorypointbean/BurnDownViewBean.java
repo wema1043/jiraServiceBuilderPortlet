@@ -1,9 +1,16 @@
 package de.hska.wi.awp.datasource.bean.burndownchartstorypointbean;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
@@ -41,49 +48,53 @@ public class BurnDownViewBean {
 		List<Field> allFields = FieldLocalServiceUtil
 				.getAllFieldsForIsses(allIssues);
 
-		storyPointVelocity = new TreeMap<String, Integer>();
+		storyPointVelocity = new TreeMap<String, Integer>();	
+		
+		
+		Date firstDate = allFields.get(1).getCreatedDate();
+		System.out.println(firstDate);
 
-		for (int zl = 0; zl < allFields.size(); zl++) {
-			if (storyPointVelocity.containsKey(allFields.get(zl)
-					.getCreatedDate().substring(0, 10))) {
-				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
-				// System.out.println("plus " +
-				// allFields.get(zl).getStorypoints());
-
-				storyPointVelocity.put(allFields.get(zl).getCreatedDate()
-						.substring(0, 10), currentStoryPoints);
-
-			} else {
-				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
-				// System.out.println("plus " +
-				// allFields.get(zl).getStorypoints());
-				storyPointVelocity.put(allFields.get(zl).getCreatedDate()
-						.substring(0, 10), currentStoryPoints);
-			}
-			if (!allFields.get(zl).getResolutionDate().equals("null")) {
-
-				if (storyPointVelocity.containsKey(allFields.get(zl)
-						.getResolutionDate().substring(0, 10))) {
-					// System.out.println("minus " +
-					// allFields.get(zl).getStorypoints());
-					currentStoryPoints -= (int) allFields.get(zl)
-							.getStorypoints();
-					storyPointVelocity.put(allFields.get(zl)
-							.getResolutionDate().substring(0, 10),
-							currentStoryPoints);
-
-				} else {
-					// System.out.println("minus " +
-					// allFields.get(zl).getStorypoints());
-					currentStoryPoints -= (int) allFields.get(zl)
-							.getStorypoints();
-					storyPointVelocity.put(allFields.get(zl)
-							.getResolutionDate().substring(0, 10),
-							currentStoryPoints);
-				}
-			}
-
-		}
+		
+//		for (int zl = 0; zl < allFields.size(); zl++) {
+//			if (storyPointVelocity.containsKey(allFields.get(zl).getCreatedDate().substring(0, 10))) {
+//				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
+//				// System.out.println("plus " +
+//				// allFields.get(zl).getStorypoints());
+//
+//				storyPointVelocity.put(allFields.get(zl).getCreatedDate().substring(0, 10), currentStoryPoints);
+//
+//			} else {
+//				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
+//				// System.out.println("plus " +
+//				// allFields.get(zl).getStorypoints());
+//				storyPointVelocity.put(allFields.get(zl).getCreatedDate().substring(0, 10), currentStoryPoints);
+//			}
+//		}
+//		
+//		for (int zl = 0; zl < allFields.size(); zl++) {
+//			if (!allFields.get(zl).getResolutionDate().equals("null")) {
+//
+//				if (storyPointVelocity.containsKey(allFields.get(zl).getResolutionDate().substring(0, 10))) {
+//					// System.out.println("minus " +
+//					// allFields.get(zl).getStorypoints());
+//					int currentPoints = storyPointVelocity.get(allFields.get(zl).getResolutionDate().substring(0, 10));
+//					currentPoints -= allFields.get(zl).getStorypoints();
+//					storyPointVelocity.put(allFields.get(zl).getResolutionDate().substring(0, 10), currentPoints);
+//
+//				} else {
+//					// System.out.println("min us " +
+//					// allFields.get(zl).getStorypoints());
+//					if(zl > 0){
+//					Set<String> alleTage = storyPointVelocity.keySet();
+//					int tmp = 	storyPointVelocity.get(allFields.get(zl-1).getResolutionDate().substring(0, 10));
+//					int currentPoints = tmp - (int) allFields.get(zl).getStorypoints();
+//					
+//					storyPointVelocity.put(allFields.get(zl).getResolutionDate().substring(0, 10),currentPoints);
+//					}
+//				}
+//			}
+//
+//		}
 
 		createAreaModel();
 	}

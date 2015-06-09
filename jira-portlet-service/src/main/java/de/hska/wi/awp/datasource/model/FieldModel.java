@@ -9,6 +9,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Field service. Represents a row in the &quot;jira_Field&quot; database table, with each column mapped to a property of this class.
  *
@@ -77,30 +79,28 @@ public interface FieldModel extends BaseModel<Field> {
      *
      * @return the created date of this field
      */
-    @AutoEscape
-    public String getCreatedDate();
+    public Date getCreatedDate();
 
     /**
      * Sets the created date of this field.
      *
      * @param createdDate the created date of this field
      */
-    public void setCreatedDate(String createdDate);
+    public void setCreatedDate(Date createdDate);
 
     /**
      * Returns the resolution date of this field.
      *
      * @return the resolution date of this field
      */
-    @AutoEscape
-    public String getResolutionDate();
+    public Date getResolutionDate();
 
     /**
      * Sets the resolution date of this field.
      *
      * @param resolutionDate the resolution date of this field
      */
-    public void setResolutionDate(String resolutionDate);
+    public void setResolutionDate(Date resolutionDate);
 
     /**
      * Returns the summary of this field.
@@ -122,15 +122,14 @@ public interface FieldModel extends BaseModel<Field> {
      *
      * @return the updated of this field
      */
-    @AutoEscape
-    public String getUpdated();
+    public Date getUpdated();
 
     /**
      * Sets the updated of this field.
      *
      * @param updated the updated of this field
      */
-    public void setUpdated(String updated);
+    public void setUpdated(Date updated);
 
     /**
      * Returns the timespent of this field.

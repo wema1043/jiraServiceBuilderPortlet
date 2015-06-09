@@ -5,7 +5,6 @@ import javax.portlet.Event;
 import javax.portlet.faces.BridgeEventHandler;
 import javax.portlet.faces.event.EventNavigationResult;
 
-import de.hska.wi.awp.datasource.bean.burndownchartstorypointbean.BurnDownViewBean;
 
 public class BurnDownChartStoryPointEventHandler  implements BridgeEventHandler{
 

@@ -11,10 +11,16 @@
 		<attributes>
 			<id name="fieldId" />
 			<basic name="issueId" />
-			<basic name="createdDate" />
-			<basic name="resolutionDate" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="resolutionDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="summary" />
-			<basic name="updated" />
+			<basic name="updated">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="timespent" />
 			<basic name="timeestimate" />
 			<basic name="timeoriginalestimate" />

@@ -4,12 +4,12 @@
 	<model name="de.hska.wi.awp.datasource.model.Field">
 		<field name="fieldId" type="long" />
 		<field name="issueId" type="String" />
-		<field name="createdDate" type="String" />
-		<field name="resolutionDate" type="String" />
+		<field name="createdDate" type="Date" />
+		<field name="resolutionDate" type="Date" />
 		<field name="summary" type="String">
 			<hint name="max-length">1000</hint>
 		</field>
-		<field name="updated" type="String" />
+		<field name="updated" type="Date" />
 		<field name="timespent" type="String" />
 		<field name="timeestimate" type="String" />
 		<field name="timeoriginalestimate" type="String" />
