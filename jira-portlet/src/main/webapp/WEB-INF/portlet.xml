@@ -10,6 +10,10 @@
 			<name>javax.portlet.faces.defaultViewId.view</name>
 			<value>/views/openclosedportlet/view.xhtml</value>
 		</init-param>
+		<init-param>
+			<name>javax.portlet.faces.bridgeEventHandler</name>
+			<value>de.hska.wi.awp.datasource.event.BurnDownChartStoryPointEventHandler</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
@@ -32,6 +36,12 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		<supported-processing-event>
+    		<qname xmlns:x="http://liferay.com/events">x:ipc.studentSelected</qname>
+		</supported-processing-event>
+		<supported-processing-event>
+    		<qname xmlns:x="http://liferay.com/events">x:ipc.projectSelected</qname>
+		</supported-processing-event>
 	</portlet>
 	
 	<portlet>
@@ -97,4 +107,12 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<event-definition>
+    	<qname xmlns:x="http://liferay.com/events">x:ipc.studentSelected</qname>
+    	<value-type>java.lang.String</value-type>
+    </event-definition>
+    <event-definition>
+    	<qname xmlns:x="http://liferay.com/events">x:ipc.projectSelected</qname>
+    	<value-type>java.lang.String</value-type>
+    </event-definition>
 </portlet-app>

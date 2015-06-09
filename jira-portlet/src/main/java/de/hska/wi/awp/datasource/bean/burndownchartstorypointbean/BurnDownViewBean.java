@@ -28,6 +28,7 @@ public class BurnDownViewBean {
 	private TreeMap<String, Integer> storyPointVelocity;
 	private int currentStoryPoints = 0;
 
+
 	@PostConstruct
 	public void init() {
 
@@ -41,34 +42,47 @@ public class BurnDownViewBean {
 				.getAllFieldsForIsses(allIssues);
 
 		storyPointVelocity = new TreeMap<String, Integer>();
-		
-		for (int zl = 0; zl < allFields.size(); zl++) {
-			if (storyPointVelocity.containsKey(allFields.get(zl).getCreatedDate().substring(0, 10))) {
-				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
-//				System.out.println("plus " + allFields.get(zl).getStorypoints());
 
-				storyPointVelocity.put(allFields.get(zl).getCreatedDate().substring(0, 10), currentStoryPoints);
+		for (int zl = 0; zl < allFields.size(); zl++) {
+			if (storyPointVelocity.containsKey(allFields.get(zl)
+					.getCreatedDate().substring(0, 10))) {
+				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
+				// System.out.println("plus " +
+				// allFields.get(zl).getStorypoints());
+
+				storyPointVelocity.put(allFields.get(zl).getCreatedDate()
+						.substring(0, 10), currentStoryPoints);
 
 			} else {
 				currentStoryPoints += (int) allFields.get(zl).getStorypoints();
-//				System.out.println("plus " + allFields.get(zl).getStorypoints());
-				storyPointVelocity.put(allFields.get(zl).getCreatedDate().substring(0, 10), currentStoryPoints);
+				// System.out.println("plus " +
+				// allFields.get(zl).getStorypoints());
+				storyPointVelocity.put(allFields.get(zl).getCreatedDate()
+						.substring(0, 10), currentStoryPoints);
 			}
 			if (!allFields.get(zl).getResolutionDate().equals("null")) {
 
-				if (storyPointVelocity.containsKey(allFields.get(zl).getResolutionDate().substring(0, 10))) {
-//					System.out.println("minus " + allFields.get(zl).getStorypoints());
-					currentStoryPoints -= (int) allFields.get(zl).getStorypoints();
-					storyPointVelocity.put(allFields.get(zl).getResolutionDate().substring(0, 10),currentStoryPoints);
+				if (storyPointVelocity.containsKey(allFields.get(zl)
+						.getResolutionDate().substring(0, 10))) {
+					// System.out.println("minus " +
+					// allFields.get(zl).getStorypoints());
+					currentStoryPoints -= (int) allFields.get(zl)
+							.getStorypoints();
+					storyPointVelocity.put(allFields.get(zl)
+							.getResolutionDate().substring(0, 10),
+							currentStoryPoints);
 
 				} else {
-//					System.out.println("minus " + allFields.get(zl).getStorypoints());
-					currentStoryPoints -= (int) allFields.get(zl).getStorypoints();
-					storyPointVelocity.put(allFields.get(zl).getResolutionDate().substring(0, 10),currentStoryPoints);
+					// System.out.println("minus " +
+					// allFields.get(zl).getStorypoints());
+					currentStoryPoints -= (int) allFields.get(zl)
+							.getStorypoints();
+					storyPointVelocity.put(allFields.get(zl)
+							.getResolutionDate().substring(0, 10),
+							currentStoryPoints);
 				}
 			}
-			
-			System.out.println(storyPointVelocity.get("2015-05-05"));
+
 		}
 
 		createAreaModel();

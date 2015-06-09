@@ -68,8 +68,8 @@ public class StudentBean {
 
 	public String getStudent() throws Exception {
 
-		String str2 = JiraUserLocalServiceUtil.getAllMembers("HWB");
-		JiraUserLocalServiceUtil.ParseJsonToMember(str2);
+//		String str2 = JiraUserLocalServiceUtil.getAllMembers("HWB");
+//		JiraUserLocalServiceUtil.ParseJsonToMember(str2);
 		//
 		// String str1 = IssueLocalServiceUtil.getAllIssues();
 		// IssueLocalServiceUtil.ParseJsonToIssue(str1);
