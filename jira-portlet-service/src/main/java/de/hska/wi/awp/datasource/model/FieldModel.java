@@ -58,6 +58,21 @@ public interface FieldModel extends BaseModel<Field> {
     public void setFieldId(long fieldId);
 
     /**
+     * Returns the issue ID of this field.
+     *
+     * @return the issue ID of this field
+     */
+    @AutoEscape
+    public String getIssueId();
+
+    /**
+     * Sets the issue ID of this field.
+     *
+     * @param issueId the issue ID of this field
+     */
+    public void setIssueId(String issueId);
+
+    /**
      * Returns the created date of this field.
      *
      * @return the created date of this field

@@ -37,9 +37,9 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("issueId", getIssueId());
+        attributes.put("projectId", getProjectId());
         attributes.put("key", getKey());
         attributes.put("self", getSelf());
-        attributes.put("fieldId", getFieldId());
 
         return attributes;
     }
@@ -52,6 +52,12 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
             setIssueId(issueId);
         }
 
+        String projectId = (String) attributes.get("projectId");
+
+        if (projectId != null) {
+            setProjectId(projectId);
+        }
+
         String key = (String) attributes.get("key");
 
         if (key != null) {
@@ -62,12 +68,6 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
 
         if (self != null) {
             setSelf(self);
-        }
-
-        Long fieldId = (Long) attributes.get("fieldId");
-
-        if (fieldId != null) {
-            setFieldId(fieldId);
         }
     }
 
@@ -112,6 +112,26 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
     }
 
     /**
+    * Returns the project ID of this issue.
+    *
+    * @return the project ID of this issue
+    */
+    @Override
+    public java.lang.String getProjectId() {
+        return _issue.getProjectId();
+    }
+
+    /**
+    * Sets the project ID of this issue.
+    *
+    * @param projectId the project ID of this issue
+    */
+    @Override
+    public void setProjectId(java.lang.String projectId) {
+        _issue.setProjectId(projectId);
+    }
+
+    /**
     * Returns the key of this issue.
     *
     * @return the key of this issue
@@ -149,26 +169,6 @@ public class IssueWrapper implements Issue, ModelWrapper<Issue> {
     @Override
     public void setSelf(java.lang.String self) {
         _issue.setSelf(self);
-    }
-
-    /**
-    * Returns the field ID of this issue.
-    *
-    * @return the field ID of this issue
-    */
-    @Override
-    public long getFieldId() {
-        return _issue.getFieldId();
-    }
-
-    /**
-    * Sets the field ID of this issue.
-    *
-    * @param fieldId the field ID of this issue
-    */
-    @Override
-    public void setFieldId(long fieldId) {
-        _issue.setFieldId(fieldId);
     }
 
     @Override

@@ -70,6 +70,18 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+    public static final FinderPath FINDER_PATH_FETCH_BY_FIELDFORISSUE = new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
+            FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
+            FINDER_CLASS_NAME_ENTITY, "fetchByFieldForIssue",
+            new String[] { String.class.getName() },
+            FieldModelImpl.ISSUEID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_FIELDFORISSUE = new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
+            FieldModelImpl.FINDER_CACHE_ENABLED, Long.class,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByFieldForIssue",
+            new String[] { String.class.getName() });
+    private static final String _FINDER_COLUMN_FIELDFORISSUE_ISSUEID_1 = "field.issueId IS NULL";
+    private static final String _FINDER_COLUMN_FIELDFORISSUE_ISSUEID_2 = "field.issueId = ?";
+    private static final String _FINDER_COLUMN_FIELDFORISSUE_ISSUEID_3 = "(field.issueId IS NULL OR field.issueId = '')";
     public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_FIELDSFORUSER =
         new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
@@ -93,6 +105,27 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     private static final String _FINDER_COLUMN_FIELDSFORUSER_ASSIGNEEID_1 = "field.assigneeId IS NULL";
     private static final String _FINDER_COLUMN_FIELDSFORUSER_ASSIGNEEID_2 = "field.assigneeId = ?";
     private static final String _FINDER_COLUMN_FIELDSFORUSER_ASSIGNEEID_3 = "(field.assigneeId IS NULL OR field.assigneeId = '')";
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_FIELDSFORSTATUS =
+        new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
+            FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByFieldsForStatus",
+            new String[] {
+                Long.class.getName(),
+                
+            Integer.class.getName(), Integer.class.getName(),
+                OrderByComparator.class.getName()
+            });
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS =
+        new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
+            FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFieldsForStatus",
+            new String[] { Long.class.getName() },
+            FieldModelImpl.STATUSID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_FIELDSFORSTATUS = new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
+            FieldModelImpl.FINDER_CACHE_ENABLED, Long.class,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "countByFieldsForStatus", new String[] { Long.class.getName() });
+    private static final String _FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2 = "field.statusId = ?";
     private static final String _SQL_SELECT_FIELD = "SELECT field FROM Field field";
     private static final String _SQL_SELECT_FIELD_WHERE = "SELECT field FROM Field field WHERE ";
     private static final String _SQL_COUNT_FIELD = "SELECT COUNT(field) FROM Field field";
@@ -124,6 +157,231 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
 
     public FieldPersistenceImpl() {
         setModelClass(Field.class);
+    }
+
+    /**
+     * Returns the field where issueId = &#63; or throws a {@link de.hska.wi.awp.datasource.NoSuchFieldException} if it could not be found.
+     *
+     * @param issueId the issue ID
+     * @return the matching field
+     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field findByFieldForIssue(String issueId)
+        throws NoSuchFieldException, SystemException {
+        Field field = fetchByFieldForIssue(issueId);
+
+        if (field == null) {
+            StringBundler msg = new StringBundler(4);
+
+            msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+            msg.append("issueId=");
+            msg.append(issueId);
+
+            msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+            if (_log.isWarnEnabled()) {
+                _log.warn(msg.toString());
+            }
+
+            throw new NoSuchFieldException(msg.toString());
+        }
+
+        return field;
+    }
+
+    /**
+     * Returns the field where issueId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     *
+     * @param issueId the issue ID
+     * @return the matching field, or <code>null</code> if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field fetchByFieldForIssue(String issueId) throws SystemException {
+        return fetchByFieldForIssue(issueId, true);
+    }
+
+    /**
+     * Returns the field where issueId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     *
+     * @param issueId the issue ID
+     * @param retrieveFromCache whether to use the finder cache
+     * @return the matching field, or <code>null</code> if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field fetchByFieldForIssue(String issueId, boolean retrieveFromCache)
+        throws SystemException {
+        Object[] finderArgs = new Object[] { issueId };
+
+        Object result = null;
+
+        if (retrieveFromCache) {
+            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+                    finderArgs, this);
+        }
+
+        if (result instanceof Field) {
+            Field field = (Field) result;
+
+            if (!Validator.equals(issueId, field.getIssueId())) {
+                result = null;
+            }
+        }
+
+        if (result == null) {
+            StringBundler query = new StringBundler(3);
+
+            query.append(_SQL_SELECT_FIELD_WHERE);
+
+            boolean bindIssueId = false;
+
+            if (issueId == null) {
+                query.append(_FINDER_COLUMN_FIELDFORISSUE_ISSUEID_1);
+            } else if (issueId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_FIELDFORISSUE_ISSUEID_3);
+            } else {
+                bindIssueId = true;
+
+                query.append(_FINDER_COLUMN_FIELDFORISSUE_ISSUEID_2);
+            }
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                if (bindIssueId) {
+                    qPos.add(issueId);
+                }
+
+                List<Field> list = q.list();
+
+                if (list.isEmpty()) {
+                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+                        finderArgs, list);
+                } else {
+                    if ((list.size() > 1) && _log.isWarnEnabled()) {
+                        _log.warn(
+                            "FieldPersistenceImpl.fetchByFieldForIssue(String, boolean) with parameters (" +
+                            StringUtil.merge(finderArgs) +
+                            ") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+                    }
+
+                    Field field = list.get(0);
+
+                    result = field;
+
+                    cacheResult(field);
+
+                    if ((field.getIssueId() == null) ||
+                            !field.getIssueId().equals(issueId)) {
+                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+                            finderArgs, field);
+                    }
+                }
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+                    finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        if (result instanceof List<?>) {
+            return null;
+        } else {
+            return (Field) result;
+        }
+    }
+
+    /**
+     * Removes the field where issueId = &#63; from the database.
+     *
+     * @param issueId the issue ID
+     * @return the field that was removed
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field removeByFieldForIssue(String issueId)
+        throws NoSuchFieldException, SystemException {
+        Field field = findByFieldForIssue(issueId);
+
+        return remove(field);
+    }
+
+    /**
+     * Returns the number of fields where issueId = &#63;.
+     *
+     * @param issueId the issue ID
+     * @return the number of matching fields
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int countByFieldForIssue(String issueId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_FIELDFORISSUE;
+
+        Object[] finderArgs = new Object[] { issueId };
+
+        Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
+                this);
+
+        if (count == null) {
+            StringBundler query = new StringBundler(2);
+
+            query.append(_SQL_COUNT_FIELD_WHERE);
+
+            boolean bindIssueId = false;
+
+            if (issueId == null) {
+                query.append(_FINDER_COLUMN_FIELDFORISSUE_ISSUEID_1);
+            } else if (issueId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_FIELDFORISSUE_ISSUEID_3);
+            } else {
+                bindIssueId = true;
+
+                query.append(_FINDER_COLUMN_FIELDFORISSUE_ISSUEID_2);
+            }
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                if (bindIssueId) {
+                    qPos.add(issueId);
+                }
+
+                count = (Long) q.uniqueResult();
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, count);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return count.intValue();
     }
 
     /**
@@ -614,6 +872,456 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
+     * Returns all the fields where statusId = &#63;.
+     *
+     * @param statusId the status ID
+     * @return the matching fields
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<Field> findByFieldsForStatus(long statusId)
+        throws SystemException {
+        return findByFieldsForStatus(statusId, QueryUtil.ALL_POS,
+            QueryUtil.ALL_POS, null);
+    }
+
+    /**
+     * Returns a range of all the fields where statusId = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param statusId the status ID
+     * @param start the lower bound of the range of fields
+     * @param end the upper bound of the range of fields (not inclusive)
+     * @return the range of matching fields
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<Field> findByFieldsForStatus(long statusId, int start, int end)
+        throws SystemException {
+        return findByFieldsForStatus(statusId, start, end, null);
+    }
+
+    /**
+     * Returns an ordered range of all the fields where statusId = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param statusId the status ID
+     * @param start the lower bound of the range of fields
+     * @param end the upper bound of the range of fields (not inclusive)
+     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+     * @return the ordered range of matching fields
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<Field> findByFieldsForStatus(long statusId, int start, int end,
+        OrderByComparator orderByComparator) throws SystemException {
+        boolean pagination = true;
+        FinderPath finderPath = null;
+        Object[] finderArgs = null;
+
+        if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+                (orderByComparator == null)) {
+            pagination = false;
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS;
+            finderArgs = new Object[] { statusId };
+        } else {
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FIELDSFORSTATUS;
+            finderArgs = new Object[] { statusId, start, end, orderByComparator };
+        }
+
+        List<Field> list = (List<Field>) FinderCacheUtil.getResult(finderPath,
+                finderArgs, this);
+
+        if ((list != null) && !list.isEmpty()) {
+            for (Field field : list) {
+                if ((statusId != field.getStatusId())) {
+                    list = null;
+
+                    break;
+                }
+            }
+        }
+
+        if (list == null) {
+            StringBundler query = null;
+
+            if (orderByComparator != null) {
+                query = new StringBundler(3 +
+                        (orderByComparator.getOrderByFields().length * 3));
+            } else {
+                query = new StringBundler(3);
+            }
+
+            query.append(_SQL_SELECT_FIELD_WHERE);
+
+            query.append(_FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2);
+
+            if (orderByComparator != null) {
+                appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+                    orderByComparator);
+            } else
+             if (pagination) {
+                query.append(FieldModelImpl.ORDER_BY_JPQL);
+            }
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                qPos.add(statusId);
+
+                if (!pagination) {
+                    list = (List<Field>) QueryUtil.list(q, getDialect(), start,
+                            end, false);
+
+                    Collections.sort(list);
+
+                    list = new UnmodifiableList<Field>(list);
+                } else {
+                    list = (List<Field>) QueryUtil.list(q, getDialect(), start,
+                            end);
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, list);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Returns the first field in the ordered set where statusId = &#63;.
+     *
+     * @param statusId the status ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the first matching field
+     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field findByFieldsForStatus_First(long statusId,
+        OrderByComparator orderByComparator)
+        throws NoSuchFieldException, SystemException {
+        Field field = fetchByFieldsForStatus_First(statusId, orderByComparator);
+
+        if (field != null) {
+            return field;
+        }
+
+        StringBundler msg = new StringBundler(4);
+
+        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+        msg.append("statusId=");
+        msg.append(statusId);
+
+        msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+        throw new NoSuchFieldException(msg.toString());
+    }
+
+    /**
+     * Returns the first field in the ordered set where statusId = &#63;.
+     *
+     * @param statusId the status ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the first matching field, or <code>null</code> if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field fetchByFieldsForStatus_First(long statusId,
+        OrderByComparator orderByComparator) throws SystemException {
+        List<Field> list = findByFieldsForStatus(statusId, 0, 1,
+                orderByComparator);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the last field in the ordered set where statusId = &#63;.
+     *
+     * @param statusId the status ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the last matching field
+     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field findByFieldsForStatus_Last(long statusId,
+        OrderByComparator orderByComparator)
+        throws NoSuchFieldException, SystemException {
+        Field field = fetchByFieldsForStatus_Last(statusId, orderByComparator);
+
+        if (field != null) {
+            return field;
+        }
+
+        StringBundler msg = new StringBundler(4);
+
+        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+        msg.append("statusId=");
+        msg.append(statusId);
+
+        msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+        throw new NoSuchFieldException(msg.toString());
+    }
+
+    /**
+     * Returns the last field in the ordered set where statusId = &#63;.
+     *
+     * @param statusId the status ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the last matching field, or <code>null</code> if a matching field could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field fetchByFieldsForStatus_Last(long statusId,
+        OrderByComparator orderByComparator) throws SystemException {
+        int count = countByFieldsForStatus(statusId);
+
+        if (count == 0) {
+            return null;
+        }
+
+        List<Field> list = findByFieldsForStatus(statusId, count - 1, count,
+                orderByComparator);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the fields before and after the current field in the ordered set where statusId = &#63;.
+     *
+     * @param fieldId the primary key of the current field
+     * @param statusId the status ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the previous, current, and next field
+     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a field with the primary key could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public Field[] findByFieldsForStatus_PrevAndNext(long fieldId,
+        long statusId, OrderByComparator orderByComparator)
+        throws NoSuchFieldException, SystemException {
+        Field field = findByPrimaryKey(fieldId);
+
+        Session session = null;
+
+        try {
+            session = openSession();
+
+            Field[] array = new FieldImpl[3];
+
+            array[0] = getByFieldsForStatus_PrevAndNext(session, field,
+                    statusId, orderByComparator, true);
+
+            array[1] = field;
+
+            array[2] = getByFieldsForStatus_PrevAndNext(session, field,
+                    statusId, orderByComparator, false);
+
+            return array;
+        } catch (Exception e) {
+            throw processException(e);
+        } finally {
+            closeSession(session);
+        }
+    }
+
+    protected Field getByFieldsForStatus_PrevAndNext(Session session,
+        Field field, long statusId, OrderByComparator orderByComparator,
+        boolean previous) {
+        StringBundler query = null;
+
+        if (orderByComparator != null) {
+            query = new StringBundler(6 +
+                    (orderByComparator.getOrderByFields().length * 6));
+        } else {
+            query = new StringBundler(3);
+        }
+
+        query.append(_SQL_SELECT_FIELD_WHERE);
+
+        query.append(_FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2);
+
+        if (orderByComparator != null) {
+            String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+            if (orderByConditionFields.length > 0) {
+                query.append(WHERE_AND);
+            }
+
+            for (int i = 0; i < orderByConditionFields.length; i++) {
+                query.append(_ORDER_BY_ENTITY_ALIAS);
+                query.append(orderByConditionFields[i]);
+
+                if ((i + 1) < orderByConditionFields.length) {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(WHERE_GREATER_THAN_HAS_NEXT);
+                    } else {
+                        query.append(WHERE_LESSER_THAN_HAS_NEXT);
+                    }
+                } else {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(WHERE_GREATER_THAN);
+                    } else {
+                        query.append(WHERE_LESSER_THAN);
+                    }
+                }
+            }
+
+            query.append(ORDER_BY_CLAUSE);
+
+            String[] orderByFields = orderByComparator.getOrderByFields();
+
+            for (int i = 0; i < orderByFields.length; i++) {
+                query.append(_ORDER_BY_ENTITY_ALIAS);
+                query.append(orderByFields[i]);
+
+                if ((i + 1) < orderByFields.length) {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(ORDER_BY_ASC_HAS_NEXT);
+                    } else {
+                        query.append(ORDER_BY_DESC_HAS_NEXT);
+                    }
+                } else {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(ORDER_BY_ASC);
+                    } else {
+                        query.append(ORDER_BY_DESC);
+                    }
+                }
+            }
+        } else {
+            query.append(FieldModelImpl.ORDER_BY_JPQL);
+        }
+
+        String sql = query.toString();
+
+        Query q = session.createQuery(sql);
+
+        q.setFirstResult(0);
+        q.setMaxResults(2);
+
+        QueryPos qPos = QueryPos.getInstance(q);
+
+        qPos.add(statusId);
+
+        if (orderByComparator != null) {
+            Object[] values = orderByComparator.getOrderByConditionValues(field);
+
+            for (Object value : values) {
+                qPos.add(value);
+            }
+        }
+
+        List<Field> list = q.list();
+
+        if (list.size() == 2) {
+            return list.get(1);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Removes all the fields where statusId = &#63; from the database.
+     *
+     * @param statusId the status ID
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeByFieldsForStatus(long statusId)
+        throws SystemException {
+        for (Field field : findByFieldsForStatus(statusId, QueryUtil.ALL_POS,
+                QueryUtil.ALL_POS, null)) {
+            remove(field);
+        }
+    }
+
+    /**
+     * Returns the number of fields where statusId = &#63;.
+     *
+     * @param statusId the status ID
+     * @return the number of matching fields
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int countByFieldsForStatus(long statusId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_FIELDSFORSTATUS;
+
+        Object[] finderArgs = new Object[] { statusId };
+
+        Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
+                this);
+
+        if (count == null) {
+            StringBundler query = new StringBundler(2);
+
+            query.append(_SQL_COUNT_FIELD_WHERE);
+
+            query.append(_FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2);
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                qPos.add(statusId);
+
+                count = (Long) q.uniqueResult();
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, count);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return count.intValue();
+    }
+
+    /**
      * Caches the field in the entity cache if it is enabled.
      *
      * @param field the field
@@ -622,6 +1330,9 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     public void cacheResult(Field field) {
         EntityCacheUtil.putResult(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldImpl.class, field.getPrimaryKey(), field);
+
+        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+            new Object[] { field.getIssueId() }, field);
 
         field.resetOriginalValues();
     }
@@ -677,6 +1388,8 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
 
         FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
         FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+        clearUniqueFindersCache(field);
     }
 
     @Override
@@ -687,6 +1400,50 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
         for (Field field : fields) {
             EntityCacheUtil.removeResult(FieldModelImpl.ENTITY_CACHE_ENABLED,
                 FieldImpl.class, field.getPrimaryKey());
+
+            clearUniqueFindersCache(field);
+        }
+    }
+
+    protected void cacheUniqueFindersCache(Field field) {
+        if (field.isNew()) {
+            Object[] args = new Object[] { field.getIssueId() };
+
+            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FIELDFORISSUE, args,
+                Long.valueOf(1));
+            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE, args,
+                field);
+        } else {
+            FieldModelImpl fieldModelImpl = (FieldModelImpl) field;
+
+            if ((fieldModelImpl.getColumnBitmask() &
+                    FINDER_PATH_FETCH_BY_FIELDFORISSUE.getColumnBitmask()) != 0) {
+                Object[] args = new Object[] { field.getIssueId() };
+
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FIELDFORISSUE,
+                    args, Long.valueOf(1));
+                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+                    args, field);
+            }
+        }
+    }
+
+    protected void clearUniqueFindersCache(Field field) {
+        FieldModelImpl fieldModelImpl = (FieldModelImpl) field;
+
+        Object[] args = new Object[] { field.getIssueId() };
+
+        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIELDFORISSUE, args);
+        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE, args);
+
+        if ((fieldModelImpl.getColumnBitmask() &
+                FINDER_PATH_FETCH_BY_FIELDFORISSUE.getColumnBitmask()) != 0) {
+            args = new Object[] { fieldModelImpl.getOriginalIssueId() };
+
+            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIELDFORISSUE,
+                args);
+            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FIELDFORISSUE,
+                args);
         }
     }
 
@@ -838,10 +1595,32 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
                 FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORUSER,
                     args);
             }
+
+            if ((fieldModelImpl.getColumnBitmask() &
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS.getColumnBitmask()) != 0) {
+                Object[] args = new Object[] {
+                        fieldModelImpl.getOriginalStatusId()
+                    };
+
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIELDSFORSTATUS,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS,
+                    args);
+
+                args = new Object[] { fieldModelImpl.getStatusId() };
+
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIELDSFORSTATUS,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS,
+                    args);
+            }
         }
 
         EntityCacheUtil.putResult(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldImpl.class, field.getPrimaryKey(), field);
+
+        clearUniqueFindersCache(field);
+        cacheUniqueFindersCache(field);
 
         return field;
     }
@@ -857,6 +1636,7 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
         fieldImpl.setPrimaryKey(field.getPrimaryKey());
 
         fieldImpl.setFieldId(field.getFieldId());
+        fieldImpl.setIssueId(field.getIssueId());
         fieldImpl.setCreatedDate(field.getCreatedDate());
         fieldImpl.setResolutionDate(field.getResolutionDate());
         fieldImpl.setSummary(field.getSummary());

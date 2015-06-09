@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class IssueSoap implements Serializable {
     private String _issueId;
+    private String _projectId;
     private String _key;
     private String _self;
-    private long _fieldId;
 
     public IssueSoap() {
     }
@@ -25,9 +25,9 @@ public class IssueSoap implements Serializable {
         IssueSoap soapModel = new IssueSoap();
 
         soapModel.setIssueId(model.getIssueId());
+        soapModel.setProjectId(model.getProjectId());
         soapModel.setKey(model.getKey());
         soapModel.setSelf(model.getSelf());
-        soapModel.setFieldId(model.getFieldId());
 
         return soapModel;
     }
@@ -84,6 +84,14 @@ public class IssueSoap implements Serializable {
         _issueId = issueId;
     }
 
+    public String getProjectId() {
+        return _projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        _projectId = projectId;
+    }
+
     public String getKey() {
         return _key;
     }
@@ -98,13 +106,5 @@ public class IssueSoap implements Serializable {
 
     public void setSelf(String self) {
         _self = self;
-    }
-
-    public long getFieldId() {
-        return _fieldId;
-    }
-
-    public void setFieldId(long fieldId) {
-        _fieldId = fieldId;
     }
 }

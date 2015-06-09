@@ -49,6 +49,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     public static final String TABLE_NAME = "jira_Field";
     public static final Object[][] TABLE_COLUMNS = {
             { "fieldId", Types.BIGINT },
+            { "issueId", Types.VARCHAR },
             { "createdDate", Types.VARCHAR },
             { "resolutionDate", Types.VARCHAR },
             { "summary", Types.VARCHAR },
@@ -65,7 +66,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             { "assigneeId", Types.VARCHAR },
             { "statusId", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,createdDate VARCHAR(75) null,resolutionDate VARCHAR(75) null,summary VARCHAR(75) null,updated VARCHAR(75) null,timespent VARCHAR(75) null,timeestimate VARCHAR(75) null,timeoriginalestimate VARCHAR(75) null,aggregatetimespent VARCHAR(75) null,aggregatetimeoriginalestimate VARCHAR(75) null,aggregatetimeestimate VARCHAR(75) null,description VARCHAR(75) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
+    public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,issueId VARCHAR(75) null,createdDate VARCHAR(75) null,resolutionDate VARCHAR(75) null,summary VARCHAR(1000) null,updated VARCHAR(75) null,timespent VARCHAR(75) null,timeestimate VARCHAR(75) null,timeoriginalestimate VARCHAR(75) null,aggregatetimespent VARCHAR(75) null,aggregatetimeoriginalestimate VARCHAR(75) null,aggregatetimeestimate VARCHAR(75) null,description VARCHAR(1000) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
     public static final String TABLE_SQL_DROP = "drop table jira_Field";
     public static final String ORDER_BY_JPQL = " ORDER BY field.fieldId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY jira_Field.fieldId ASC";
@@ -82,12 +83,16 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
                 "value.object.column.bitmask.enabled.de.hska.wi.awp.datasource.model.Field"),
             true);
     public static long ASSIGNEEID_COLUMN_BITMASK = 1L;
-    public static long FIELDID_COLUMN_BITMASK = 2L;
+    public static long ISSUEID_COLUMN_BITMASK = 2L;
+    public static long STATUSID_COLUMN_BITMASK = 4L;
+    public static long FIELDID_COLUMN_BITMASK = 8L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.Field"));
     private static ClassLoader _classLoader = Field.class.getClassLoader();
     private static Class<?>[] _escapedModelInterfaces = new Class[] { Field.class };
     private long _fieldId;
+    private String _issueId;
+    private String _originalIssueId;
     private String _createdDate;
     private String _resolutionDate;
     private String _summary;
@@ -104,6 +109,8 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     private String _assigneeId;
     private String _originalAssigneeId;
     private long _statusId;
+    private long _originalStatusId;
+    private boolean _setOriginalStatusId;
     private long _columnBitmask;
     private Field _escapedModel;
 
@@ -124,6 +131,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
         Field model = new FieldImpl();
 
         model.setFieldId(soapModel.getFieldId());
+        model.setIssueId(soapModel.getIssueId());
         model.setCreatedDate(soapModel.getCreatedDate());
         model.setResolutionDate(soapModel.getResolutionDate());
         model.setSummary(soapModel.getSummary());
@@ -198,6 +206,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("fieldId", getFieldId());
+        attributes.put("issueId", getIssueId());
         attributes.put("createdDate", getCreatedDate());
         attributes.put("resolutionDate", getResolutionDate());
         attributes.put("summary", getSummary());
@@ -224,6 +233,12 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
         if (fieldId != null) {
             setFieldId(fieldId);
+        }
+
+        String issueId = (String) attributes.get("issueId");
+
+        if (issueId != null) {
+            setIssueId(issueId);
         }
 
         String createdDate = (String) attributes.get("createdDate");
@@ -330,6 +345,31 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     @Override
     public void setFieldId(long fieldId) {
         _fieldId = fieldId;
+    }
+
+    @JSON
+    @Override
+    public String getIssueId() {
+        if (_issueId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _issueId;
+        }
+    }
+
+    @Override
+    public void setIssueId(String issueId) {
+        _columnBitmask |= ISSUEID_COLUMN_BITMASK;
+
+        if (_originalIssueId == null) {
+            _originalIssueId = _issueId;
+        }
+
+        _issueId = issueId;
+    }
+
+    public String getOriginalIssueId() {
+        return GetterUtil.getString(_originalIssueId);
     }
 
     @JSON
@@ -557,7 +597,19 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @Override
     public void setStatusId(long statusId) {
+        _columnBitmask |= STATUSID_COLUMN_BITMASK;
+
+        if (!_setOriginalStatusId) {
+            _setOriginalStatusId = true;
+
+            _originalStatusId = _statusId;
+        }
+
         _statusId = statusId;
+    }
+
+    public long getOriginalStatusId() {
+        return _originalStatusId;
     }
 
     public long getColumnBitmask() {
@@ -592,6 +644,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
         FieldImpl fieldImpl = new FieldImpl();
 
         fieldImpl.setFieldId(getFieldId());
+        fieldImpl.setIssueId(getIssueId());
         fieldImpl.setCreatedDate(getCreatedDate());
         fieldImpl.setResolutionDate(getResolutionDate());
         fieldImpl.setSummary(getSummary());
@@ -656,7 +709,13 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     public void resetOriginalValues() {
         FieldModelImpl fieldModelImpl = this;
 
+        fieldModelImpl._originalIssueId = fieldModelImpl._issueId;
+
         fieldModelImpl._originalAssigneeId = fieldModelImpl._assigneeId;
+
+        fieldModelImpl._originalStatusId = fieldModelImpl._statusId;
+
+        fieldModelImpl._setOriginalStatusId = false;
 
         fieldModelImpl._columnBitmask = 0;
     }
@@ -666,6 +725,14 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
         FieldCacheModel fieldCacheModel = new FieldCacheModel();
 
         fieldCacheModel.fieldId = getFieldId();
+
+        fieldCacheModel.issueId = getIssueId();
+
+        String issueId = fieldCacheModel.issueId;
+
+        if ((issueId != null) && (issueId.length() == 0)) {
+            fieldCacheModel.issueId = null;
+        }
 
         fieldCacheModel.createdDate = getCreatedDate();
 
@@ -783,10 +850,12 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(35);
 
         sb.append("{fieldId=");
         sb.append(getFieldId());
+        sb.append(", issueId=");
+        sb.append(getIssueId());
         sb.append(", createdDate=");
         sb.append(getCreatedDate());
         sb.append(", resolutionDate=");
@@ -824,7 +893,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(52);
+        StringBundler sb = new StringBundler(55);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.Field");
@@ -833,6 +902,10 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
         sb.append(
             "<column><column-name>fieldId</column-name><column-value><![CDATA[");
         sb.append(getFieldId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>issueId</column-name><column-value><![CDATA[");
+        sb.append(getIssueId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>createdDate</column-name><column-value><![CDATA[");

@@ -20,9 +20,9 @@ import java.io.ObjectOutput;
  */
 public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
     public String issueId;
+    public String projectId;
     public String key;
     public String self;
-    public long fieldId;
 
     @Override
     public String toString() {
@@ -30,12 +30,12 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
 
         sb.append("{issueId=");
         sb.append(issueId);
+        sb.append(", projectId=");
+        sb.append(projectId);
         sb.append(", key=");
         sb.append(key);
         sb.append(", self=");
         sb.append(self);
-        sb.append(", fieldId=");
-        sb.append(fieldId);
         sb.append("}");
 
         return sb.toString();
@@ -51,6 +51,12 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
             issueImpl.setIssueId(issueId);
         }
 
+        if (projectId == null) {
+            issueImpl.setProjectId(StringPool.BLANK);
+        } else {
+            issueImpl.setProjectId(projectId);
+        }
+
         if (key == null) {
             issueImpl.setKey(StringPool.BLANK);
         } else {
@@ -63,8 +69,6 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
             issueImpl.setSelf(self);
         }
 
-        issueImpl.setFieldId(fieldId);
-
         issueImpl.resetOriginalValues();
 
         return issueImpl;
@@ -73,9 +77,9 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         issueId = objectInput.readUTF();
+        projectId = objectInput.readUTF();
         key = objectInput.readUTF();
         self = objectInput.readUTF();
-        fieldId = objectInput.readLong();
     }
 
     @Override
@@ -85,6 +89,12 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(issueId);
+        }
+
+        if (projectId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(projectId);
         }
 
         if (key == null) {
@@ -98,7 +108,5 @@ public class IssueCacheModel implements CacheModel<Issue>, Externalizable {
         } else {
             objectOutput.writeUTF(self);
         }
-
-        objectOutput.writeLong(fieldId);
     }
 }

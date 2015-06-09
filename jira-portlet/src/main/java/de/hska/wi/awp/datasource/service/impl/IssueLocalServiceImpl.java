@@ -2,6 +2,7 @@ package de.hska.wi.awp.datasource.service.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.base.IssueLocalServiceBaseImpl;
+import de.hska.wi.awp.datasource.service.persistence.IssueUtil;
 import de.hska.wi.awp.datasource.utils.Constants;
 
 /**
@@ -50,6 +52,22 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 	 * de.hska.wi.awp.datasource.service.IssueLocalServiceUtil} to access the
 	 * issue local service.
 	 */
+	
+	public List<Issue> getAllIssuesForProjectId(String projectId){
+		System.out.println("INPUT: " + projectId);
+
+		List<Issue> allIssuesForProjectId = new ArrayList<Issue>();
+		try {
+			allIssuesForProjectId = IssueUtil.findByIssuesForProjectId(projectId);
+			System.out.println("SIZE allIssuesForProjectId: " + allIssuesForProjectId.size());
+
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return allIssuesForProjectId;
+	}
 
 	public String getAllIssues() {
 		System.out.println("BEGINN getAllIssues()");
@@ -115,12 +133,13 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 				Field myField = FieldLocalServiceUtil.createField(zl);
 
 				myIssue.setKey(tasks.getJSONObject(zl).getString("key"));
+				myIssue.setProjectId(tasks.getJSONObject(zl).getJSONObject("fields").getJSONObject("project").getString("id"));
 				
 				String self = Constants.JIRA_HOST_NAME + "/browse/" + tasks.getJSONObject(zl).getString("key");			
 				myIssue.setSelf(self);
 
-				myIssue.setFieldId(zl);
-
+				
+				myField.setIssueId(tasks.getJSONObject(zl).getString("id"));
 				myField.setSummary(tasks.getJSONObject(zl)
 						.getJSONObject("fields").getString("summary"));
 				myField.setCreatedDate(tasks.getJSONObject(zl)

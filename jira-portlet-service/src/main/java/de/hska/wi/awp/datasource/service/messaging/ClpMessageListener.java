@@ -14,6 +14,8 @@ import de.hska.wi.awp.datasource.service.IssueTypeLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueTypeServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserServiceUtil;
+import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.ProjectServiceUtil;
 import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.StatusServiceUtil;
 
@@ -45,6 +47,9 @@ public class ClpMessageListener extends BaseMessageListener {
             JiraUserLocalServiceUtil.clearService();
 
             JiraUserServiceUtil.clearService();
+            ProjectLocalServiceUtil.clearService();
+
+            ProjectServiceUtil.clearService();
             StatusLocalServiceUtil.clearService();
 
             StatusServiceUtil.clearService();

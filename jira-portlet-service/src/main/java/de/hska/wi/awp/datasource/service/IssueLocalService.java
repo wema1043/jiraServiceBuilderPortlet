@@ -242,6 +242,10 @@ public interface IssueLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<de.hska.wi.awp.datasource.model.Issue> getAllIssuesForProjectId(
+        java.lang.String projectId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.lang.String getAllIssues();
 
     public void ParseJsonToIssue(java.lang.String response);

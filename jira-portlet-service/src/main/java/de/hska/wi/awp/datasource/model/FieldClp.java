@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class FieldClp extends BaseModelImpl<Field> implements Field {
     private long _fieldId;
+    private String _issueId;
     private String _createdDate;
     private String _resolutionDate;
     private String _summary;
@@ -76,6 +77,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("fieldId", getFieldId());
+        attributes.put("issueId", getIssueId());
         attributes.put("createdDate", getCreatedDate());
         attributes.put("resolutionDate", getResolutionDate());
         attributes.put("summary", getSummary());
@@ -102,6 +104,12 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
 
         if (fieldId != null) {
             setFieldId(fieldId);
+        }
+
+        String issueId = (String) attributes.get("issueId");
+
+        if (issueId != null) {
+            setIssueId(issueId);
         }
 
         String createdDate = (String) attributes.get("createdDate");
@@ -215,6 +223,28 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
                 Method method = clazz.getMethod("setFieldId", long.class);
 
                 method.invoke(_fieldRemoteModel, fieldId);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getIssueId() {
+        return _issueId;
+    }
+
+    @Override
+    public void setIssueId(String issueId) {
+        _issueId = issueId;
+
+        if (_fieldRemoteModel != null) {
+            try {
+                Class<?> clazz = _fieldRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setIssueId", String.class);
+
+                method.invoke(_fieldRemoteModel, issueId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -625,6 +655,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         FieldClp clone = new FieldClp();
 
         clone.setFieldId(getFieldId());
+        clone.setIssueId(getIssueId());
         clone.setCreatedDate(getCreatedDate());
         clone.setResolutionDate(getResolutionDate());
         clone.setSummary(getSummary());
@@ -689,10 +720,12 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(35);
 
         sb.append("{fieldId=");
         sb.append(getFieldId());
+        sb.append(", issueId=");
+        sb.append(getIssueId());
         sb.append(", createdDate=");
         sb.append(getCreatedDate());
         sb.append(", resolutionDate=");
@@ -730,7 +763,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(52);
+        StringBundler sb = new StringBundler(55);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.Field");
@@ -739,6 +772,10 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
         sb.append(
             "<column><column-name>fieldId</column-name><column-value><![CDATA[");
         sb.append(getFieldId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>issueId</column-name><column-value><![CDATA[");
+        sb.append(getIssueId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>createdDate</column-name><column-value><![CDATA[");

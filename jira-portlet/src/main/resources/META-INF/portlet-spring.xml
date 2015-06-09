@@ -16,6 +16,9 @@
 	<bean id="de.hska.wi.awp.datasource.service.JiraUserLocalService" class="de.hska.wi.awp.datasource.service.impl.JiraUserLocalServiceImpl" />
 	<bean id="de.hska.wi.awp.datasource.service.JiraUserService" class="de.hska.wi.awp.datasource.service.impl.JiraUserServiceImpl" />
 	<bean id="de.hska.wi.awp.datasource.service.persistence.JiraUserPersistence" class="de.hska.wi.awp.datasource.service.persistence.JiraUserPersistenceImpl" parent="basePersistence" />
+	<bean id="de.hska.wi.awp.datasource.service.ProjectLocalService" class="de.hska.wi.awp.datasource.service.impl.ProjectLocalServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.ProjectService" class="de.hska.wi.awp.datasource.service.impl.ProjectServiceImpl" />
+	<bean id="de.hska.wi.awp.datasource.service.persistence.ProjectPersistence" class="de.hska.wi.awp.datasource.service.persistence.ProjectPersistenceImpl" parent="basePersistence" />
 	<bean id="de.hska.wi.awp.datasource.service.StatusLocalService" class="de.hska.wi.awp.datasource.service.impl.StatusLocalServiceImpl" />
 	<bean id="de.hska.wi.awp.datasource.service.StatusService" class="de.hska.wi.awp.datasource.service.impl.StatusServiceImpl" />
 	<bean id="de.hska.wi.awp.datasource.service.persistence.StatusPersistence" class="de.hska.wi.awp.datasource.service.persistence.StatusPersistenceImpl" parent="basePersistence" />

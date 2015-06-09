@@ -20,9 +20,9 @@ import java.util.Map;
 
 public class IssueClp extends BaseModelImpl<Issue> implements Issue {
     private String _issueId;
+    private String _projectId;
     private String _key;
     private String _self;
-    private long _fieldId;
     private BaseModel<?> _issueRemoteModel;
     private Class<?> _clpSerializerClass = de.hska.wi.awp.datasource.service.ClpSerializer.class;
 
@@ -64,9 +64,9 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("issueId", getIssueId());
+        attributes.put("projectId", getProjectId());
         attributes.put("key", getKey());
         attributes.put("self", getSelf());
-        attributes.put("fieldId", getFieldId());
 
         return attributes;
     }
@@ -79,6 +79,12 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
             setIssueId(issueId);
         }
 
+        String projectId = (String) attributes.get("projectId");
+
+        if (projectId != null) {
+            setProjectId(projectId);
+        }
+
         String key = (String) attributes.get("key");
 
         if (key != null) {
@@ -89,12 +95,6 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
         if (self != null) {
             setSelf(self);
-        }
-
-        Long fieldId = (Long) attributes.get("fieldId");
-
-        if (fieldId != null) {
-            setFieldId(fieldId);
         }
     }
 
@@ -114,6 +114,28 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
                 Method method = clazz.getMethod("setIssueId", String.class);
 
                 method.invoke(_issueRemoteModel, issueId);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getProjectId() {
+        return _projectId;
+    }
+
+    @Override
+    public void setProjectId(String projectId) {
+        _projectId = projectId;
+
+        if (_issueRemoteModel != null) {
+            try {
+                Class<?> clazz = _issueRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setProjectId", String.class);
+
+                method.invoke(_issueRemoteModel, projectId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -158,28 +180,6 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
                 Method method = clazz.getMethod("setSelf", String.class);
 
                 method.invoke(_issueRemoteModel, self);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public long getFieldId() {
-        return _fieldId;
-    }
-
-    @Override
-    public void setFieldId(long fieldId) {
-        _fieldId = fieldId;
-
-        if (_issueRemoteModel != null) {
-            try {
-                Class<?> clazz = _issueRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setFieldId", long.class);
-
-                method.invoke(_issueRemoteModel, fieldId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -254,9 +254,9 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
         IssueClp clone = new IssueClp();
 
         clone.setIssueId(getIssueId());
+        clone.setProjectId(getProjectId());
         clone.setKey(getKey());
         clone.setSelf(getSelf());
-        clone.setFieldId(getFieldId());
 
         return clone;
     }
@@ -304,12 +304,12 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
 
         sb.append("{issueId=");
         sb.append(getIssueId());
+        sb.append(", projectId=");
+        sb.append(getProjectId());
         sb.append(", key=");
         sb.append(getKey());
         sb.append(", self=");
         sb.append(getSelf());
-        sb.append(", fieldId=");
-        sb.append(getFieldId());
         sb.append("}");
 
         return sb.toString();
@@ -328,16 +328,16 @@ public class IssueClp extends BaseModelImpl<Issue> implements Issue {
         sb.append(getIssueId());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>projectId</column-name><column-value><![CDATA[");
+        sb.append(getProjectId());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>key</column-name><column-value><![CDATA[");
         sb.append(getKey());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>self</column-name><column-value><![CDATA[");
         sb.append(getSelf());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>fieldId</column-name><column-value><![CDATA[");
-        sb.append(getFieldId());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

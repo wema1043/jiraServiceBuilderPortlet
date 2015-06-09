@@ -1,8 +1,9 @@
 create table jira_Field (
 	fieldId LONG not null primary key,
+	issueId VARCHAR(75) null,
 	createdDate VARCHAR(75) null,
 	resolutionDate VARCHAR(75) null,
-	summary VARCHAR(75) null,
+	summary VARCHAR(1000) null,
 	updated VARCHAR(75) null,
 	timespent VARCHAR(75) null,
 	timeestimate VARCHAR(75) null,
@@ -10,7 +11,7 @@ create table jira_Field (
 	aggregatetimespent VARCHAR(75) null,
 	aggregatetimeoriginalestimate VARCHAR(75) null,
 	aggregatetimeestimate VARCHAR(75) null,
-	description VARCHAR(75) null,
+	description VARCHAR(1000) null,
 	storypoints LONG,
 	creatorId VARCHAR(75) null,
 	assigneeId VARCHAR(75) null,
@@ -19,9 +20,9 @@ create table jira_Field (
 
 create table jira_Issue (
 	issueId VARCHAR(75) not null primary key,
+	projectId VARCHAR(75) null,
 	key_ VARCHAR(75) null,
-	self VARCHAR(75) null,
-	fieldId LONG
+	self VARCHAR(75) null
 );
 
 create table jira_IssuePriority (
@@ -37,6 +38,12 @@ create table jira_IssueType (
 create table jira_JiraUser (
 	creatorId VARCHAR(75) not null primary key,
 	displayname VARCHAR(75) null
+);
+
+create table jira_Project (
+	projectId VARCHAR(75) not null primary key,
+	key_ VARCHAR(75) null,
+	name VARCHAR(75) null
 );
 
 create table jira_Status (

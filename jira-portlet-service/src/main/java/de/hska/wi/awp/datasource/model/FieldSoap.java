@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class FieldSoap implements Serializable {
     private long _fieldId;
+    private String _issueId;
     private String _createdDate;
     private String _resolutionDate;
     private String _summary;
@@ -37,6 +38,7 @@ public class FieldSoap implements Serializable {
         FieldSoap soapModel = new FieldSoap();
 
         soapModel.setFieldId(model.getFieldId());
+        soapModel.setIssueId(model.getIssueId());
         soapModel.setCreatedDate(model.getCreatedDate());
         soapModel.setResolutionDate(model.getResolutionDate());
         soapModel.setSummary(model.getSummary());
@@ -106,6 +108,14 @@ public class FieldSoap implements Serializable {
 
     public void setFieldId(long fieldId) {
         _fieldId = fieldId;
+    }
+
+    public String getIssueId() {
+        return _issueId;
+    }
+
+    public void setIssueId(String issueId) {
+        _issueId = issueId;
     }
 
     public String getCreatedDate() {

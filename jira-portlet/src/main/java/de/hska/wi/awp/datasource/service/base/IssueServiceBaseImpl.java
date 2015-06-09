@@ -15,6 +15,7 @@ import de.hska.wi.awp.datasource.service.persistence.IssuePersistence;
 import de.hska.wi.awp.datasource.service.persistence.IssuePriorityPersistence;
 import de.hska.wi.awp.datasource.service.persistence.IssueTypePersistence;
 import de.hska.wi.awp.datasource.service.persistence.JiraUserPersistence;
+import de.hska.wi.awp.datasource.service.persistence.ProjectPersistence;
 import de.hska.wi.awp.datasource.service.persistence.StatusPersistence;
 
 import javax.sql.DataSource;
@@ -63,6 +64,12 @@ public abstract class IssueServiceBaseImpl extends BaseServiceImpl
     protected de.hska.wi.awp.datasource.service.JiraUserService jiraUserService;
     @BeanReference(type = JiraUserPersistence.class)
     protected JiraUserPersistence jiraUserPersistence;
+    @BeanReference(type = de.hska.wi.awp.datasource.service.ProjectLocalService.class)
+    protected de.hska.wi.awp.datasource.service.ProjectLocalService projectLocalService;
+    @BeanReference(type = de.hska.wi.awp.datasource.service.ProjectService.class)
+    protected de.hska.wi.awp.datasource.service.ProjectService projectService;
+    @BeanReference(type = ProjectPersistence.class)
+    protected ProjectPersistence projectPersistence;
     @BeanReference(type = de.hska.wi.awp.datasource.service.StatusLocalService.class)
     protected de.hska.wi.awp.datasource.service.StatusLocalService statusLocalService;
     @BeanReference(type = de.hska.wi.awp.datasource.service.StatusService.class)
@@ -369,6 +376,62 @@ public abstract class IssueServiceBaseImpl extends BaseServiceImpl
      */
     public void setJiraUserPersistence(JiraUserPersistence jiraUserPersistence) {
         this.jiraUserPersistence = jiraUserPersistence;
+    }
+
+    /**
+     * Returns the project local service.
+     *
+     * @return the project local service
+     */
+    public de.hska.wi.awp.datasource.service.ProjectLocalService getProjectLocalService() {
+        return projectLocalService;
+    }
+
+    /**
+     * Sets the project local service.
+     *
+     * @param projectLocalService the project local service
+     */
+    public void setProjectLocalService(
+        de.hska.wi.awp.datasource.service.ProjectLocalService projectLocalService) {
+        this.projectLocalService = projectLocalService;
+    }
+
+    /**
+     * Returns the project remote service.
+     *
+     * @return the project remote service
+     */
+    public de.hska.wi.awp.datasource.service.ProjectService getProjectService() {
+        return projectService;
+    }
+
+    /**
+     * Sets the project remote service.
+     *
+     * @param projectService the project remote service
+     */
+    public void setProjectService(
+        de.hska.wi.awp.datasource.service.ProjectService projectService) {
+        this.projectService = projectService;
+    }
+
+    /**
+     * Returns the project persistence.
+     *
+     * @return the project persistence
+     */
+    public ProjectPersistence getProjectPersistence() {
+        return projectPersistence;
+    }
+
+    /**
+     * Sets the project persistence.
+     *
+     * @param projectPersistence the project persistence
+     */
+    public void setProjectPersistence(ProjectPersistence projectPersistence) {
+        this.projectPersistence = projectPersistence;
     }
 
     /**

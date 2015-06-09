@@ -238,6 +238,172 @@ public class IssueUtil {
     }
 
     /**
+    * Returns all the issues where projectId = &#63;.
+    *
+    * @param projectId the project ID
+    * @return the matching issues
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<de.hska.wi.awp.datasource.model.Issue> findByIssuesForProjectId(
+        java.lang.String projectId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByIssuesForProjectId(projectId);
+    }
+
+    /**
+    * Returns a range of all the issues where projectId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.IssueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param projectId the project ID
+    * @param start the lower bound of the range of issues
+    * @param end the upper bound of the range of issues (not inclusive)
+    * @return the range of matching issues
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<de.hska.wi.awp.datasource.model.Issue> findByIssuesForProjectId(
+        java.lang.String projectId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByIssuesForProjectId(projectId, start, end);
+    }
+
+    /**
+    * Returns an ordered range of all the issues where projectId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.IssueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param projectId the project ID
+    * @param start the lower bound of the range of issues
+    * @param end the upper bound of the range of issues (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching issues
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<de.hska.wi.awp.datasource.model.Issue> findByIssuesForProjectId(
+        java.lang.String projectId, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByIssuesForProjectId(projectId, start, end,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the first issue in the ordered set where projectId = &#63;.
+    *
+    * @param projectId the project ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching issue
+    * @throws de.hska.wi.awp.datasource.NoSuchIssueException if a matching issue could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Issue findByIssuesForProjectId_First(
+        java.lang.String projectId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            de.hska.wi.awp.datasource.NoSuchIssueException {
+        return getPersistence()
+                   .findByIssuesForProjectId_First(projectId, orderByComparator);
+    }
+
+    /**
+    * Returns the first issue in the ordered set where projectId = &#63;.
+    *
+    * @param projectId the project ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching issue, or <code>null</code> if a matching issue could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Issue fetchByIssuesForProjectId_First(
+        java.lang.String projectId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByIssuesForProjectId_First(projectId, orderByComparator);
+    }
+
+    /**
+    * Returns the last issue in the ordered set where projectId = &#63;.
+    *
+    * @param projectId the project ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching issue
+    * @throws de.hska.wi.awp.datasource.NoSuchIssueException if a matching issue could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Issue findByIssuesForProjectId_Last(
+        java.lang.String projectId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            de.hska.wi.awp.datasource.NoSuchIssueException {
+        return getPersistence()
+                   .findByIssuesForProjectId_Last(projectId, orderByComparator);
+    }
+
+    /**
+    * Returns the last issue in the ordered set where projectId = &#63;.
+    *
+    * @param projectId the project ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching issue, or <code>null</code> if a matching issue could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Issue fetchByIssuesForProjectId_Last(
+        java.lang.String projectId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByIssuesForProjectId_Last(projectId, orderByComparator);
+    }
+
+    /**
+    * Returns the issues before and after the current issue in the ordered set where projectId = &#63;.
+    *
+    * @param issueId the primary key of the current issue
+    * @param projectId the project ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the previous, current, and next issue
+    * @throws de.hska.wi.awp.datasource.NoSuchIssueException if a issue with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static de.hska.wi.awp.datasource.model.Issue[] findByIssuesForProjectId_PrevAndNext(
+        java.lang.String issueId, java.lang.String projectId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            de.hska.wi.awp.datasource.NoSuchIssueException {
+        return getPersistence()
+                   .findByIssuesForProjectId_PrevAndNext(issueId, projectId,
+            orderByComparator);
+    }
+
+    /**
+    * Removes all the issues where projectId = &#63; from the database.
+    *
+    * @param projectId the project ID
+    * @throws SystemException if a system exception occurred
+    */
+    public static void removeByIssuesForProjectId(java.lang.String projectId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getPersistence().removeByIssuesForProjectId(projectId);
+    }
+
+    /**
+    * Returns the number of issues where projectId = &#63;.
+    *
+    * @param projectId the project ID
+    * @return the number of matching issues
+    * @throws SystemException if a system exception occurred
+    */
+    public static int countByIssuesForProjectId(java.lang.String projectId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().countByIssuesForProjectId(projectId);
+    }
+
+    /**
     * Caches the issue in the entity cache if it is enabled.
     *
     * @param issue the issue

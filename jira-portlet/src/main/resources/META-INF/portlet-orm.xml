@@ -10,6 +10,7 @@
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.FieldModelImpl">
 		<attributes>
 			<id name="fieldId" />
+			<basic name="issueId" />
 			<basic name="createdDate" />
 			<basic name="resolutionDate" />
 			<basic name="summary" />
@@ -33,11 +34,11 @@
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.IssueModelImpl">
 		<attributes>
 			<id name="issueId" />
+			<basic name="projectId" />
 			<basic name="key">
 				<column name="KEY_" />
 			</basic>
 			<basic name="self" />
-			<basic name="fieldId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -70,6 +71,18 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.ProjectModelImpl">
+		<attributes>
+			<id name="projectId" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="name" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.StatusModelImpl">
 		<attributes>
 			<id name="statusId" />
@@ -97,6 +110,10 @@
 	</entity>
 	<entity class="de.hska.wi.awp.datasource.model.impl.JiraUserImpl" name="JiraUser">
 		<table name="jira_JiraUser" />
+		<attributes />
+	</entity>
+	<entity class="de.hska.wi.awp.datasource.model.impl.ProjectImpl" name="Project">
+		<table name="jira_Project" />
 		<attributes />
 	</entity>
 	<entity class="de.hska.wi.awp.datasource.model.impl.StatusImpl" name="Status">

@@ -20,6 +20,7 @@ import java.io.ObjectOutput;
  */
 public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public long fieldId;
+    public String issueId;
     public String createdDate;
     public String resolutionDate;
     public String summary;
@@ -38,10 +39,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(35);
 
         sb.append("{fieldId=");
         sb.append(fieldId);
+        sb.append(", issueId=");
+        sb.append(issueId);
         sb.append(", createdDate=");
         sb.append(createdDate);
         sb.append(", resolutionDate=");
@@ -82,6 +85,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
         FieldImpl fieldImpl = new FieldImpl();
 
         fieldImpl.setFieldId(fieldId);
+
+        if (issueId == null) {
+            fieldImpl.setIssueId(StringPool.BLANK);
+        } else {
+            fieldImpl.setIssueId(issueId);
+        }
 
         if (createdDate == null) {
             fieldImpl.setCreatedDate(StringPool.BLANK);
@@ -173,6 +182,7 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         fieldId = objectInput.readLong();
+        issueId = objectInput.readUTF();
         createdDate = objectInput.readUTF();
         resolutionDate = objectInput.readUTF();
         summary = objectInput.readUTF();
@@ -194,6 +204,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
         objectOutput.writeLong(fieldId);
+
+        if (issueId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(issueId);
+        }
 
         if (createdDate == null) {
             objectOutput.writeUTF(StringPool.BLANK);

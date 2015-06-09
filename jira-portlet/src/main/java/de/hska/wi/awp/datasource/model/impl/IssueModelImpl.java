@@ -45,11 +45,11 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
     public static final String TABLE_NAME = "jira_Issue";
     public static final Object[][] TABLE_COLUMNS = {
             { "issueId", Types.VARCHAR },
+            { "projectId", Types.VARCHAR },
             { "key_", Types.VARCHAR },
-            { "self", Types.VARCHAR },
-            { "fieldId", Types.BIGINT }
+            { "self", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_Issue (issueId VARCHAR(75) not null primary key,key_ VARCHAR(75) null,self VARCHAR(75) null,fieldId LONG)";
+    public static final String TABLE_SQL_CREATE = "create table jira_Issue (issueId VARCHAR(75) not null primary key,projectId VARCHAR(75) null,key_ VARCHAR(75) null,self VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table jira_Issue";
     public static final String ORDER_BY_JPQL = " ORDER BY issue.issueId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY jira_Issue.issueId ASC";
@@ -66,15 +66,17 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
                 "value.object.column.bitmask.enabled.de.hska.wi.awp.datasource.model.Issue"),
             true);
     public static long ISSUEID_COLUMN_BITMASK = 1L;
+    public static long PROJECTID_COLUMN_BITMASK = 2L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.Issue"));
     private static ClassLoader _classLoader = Issue.class.getClassLoader();
     private static Class<?>[] _escapedModelInterfaces = new Class[] { Issue.class };
     private String _issueId;
     private String _originalIssueId;
+    private String _projectId;
+    private String _originalProjectId;
     private String _key;
     private String _self;
-    private long _fieldId;
     private long _columnBitmask;
     private Issue _escapedModel;
 
@@ -95,9 +97,9 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         Issue model = new IssueImpl();
 
         model.setIssueId(soapModel.getIssueId());
+        model.setProjectId(soapModel.getProjectId());
         model.setKey(soapModel.getKey());
         model.setSelf(soapModel.getSelf());
-        model.setFieldId(soapModel.getFieldId());
 
         return model;
     }
@@ -157,9 +159,9 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("issueId", getIssueId());
+        attributes.put("projectId", getProjectId());
         attributes.put("key", getKey());
         attributes.put("self", getSelf());
-        attributes.put("fieldId", getFieldId());
 
         return attributes;
     }
@@ -172,6 +174,12 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
             setIssueId(issueId);
         }
 
+        String projectId = (String) attributes.get("projectId");
+
+        if (projectId != null) {
+            setProjectId(projectId);
+        }
+
         String key = (String) attributes.get("key");
 
         if (key != null) {
@@ -182,12 +190,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
         if (self != null) {
             setSelf(self);
-        }
-
-        Long fieldId = (Long) attributes.get("fieldId");
-
-        if (fieldId != null) {
-            setFieldId(fieldId);
         }
     }
 
@@ -214,6 +216,31 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
     public String getOriginalIssueId() {
         return GetterUtil.getString(_originalIssueId);
+    }
+
+    @JSON
+    @Override
+    public String getProjectId() {
+        if (_projectId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _projectId;
+        }
+    }
+
+    @Override
+    public void setProjectId(String projectId) {
+        _columnBitmask |= PROJECTID_COLUMN_BITMASK;
+
+        if (_originalProjectId == null) {
+            _originalProjectId = _projectId;
+        }
+
+        _projectId = projectId;
+    }
+
+    public String getOriginalProjectId() {
+        return GetterUtil.getString(_originalProjectId);
     }
 
     @JSON
@@ -246,17 +273,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         _self = self;
     }
 
-    @JSON
-    @Override
-    public long getFieldId() {
-        return _fieldId;
-    }
-
-    @Override
-    public void setFieldId(long fieldId) {
-        _fieldId = fieldId;
-    }
-
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -276,9 +292,9 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         IssueImpl issueImpl = new IssueImpl();
 
         issueImpl.setIssueId(getIssueId());
+        issueImpl.setProjectId(getProjectId());
         issueImpl.setKey(getKey());
         issueImpl.setSelf(getSelf());
-        issueImpl.setFieldId(getFieldId());
 
         issueImpl.resetOriginalValues();
 
@@ -324,6 +340,8 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
         issueModelImpl._originalIssueId = issueModelImpl._issueId;
 
+        issueModelImpl._originalProjectId = issueModelImpl._projectId;
+
         issueModelImpl._columnBitmask = 0;
     }
 
@@ -337,6 +355,14 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
         if ((issueId != null) && (issueId.length() == 0)) {
             issueCacheModel.issueId = null;
+        }
+
+        issueCacheModel.projectId = getProjectId();
+
+        String projectId = issueCacheModel.projectId;
+
+        if ((projectId != null) && (projectId.length() == 0)) {
+            issueCacheModel.projectId = null;
         }
 
         issueCacheModel.key = getKey();
@@ -355,8 +381,6 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
             issueCacheModel.self = null;
         }
 
-        issueCacheModel.fieldId = getFieldId();
-
         return issueCacheModel;
     }
 
@@ -366,12 +390,12 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
 
         sb.append("{issueId=");
         sb.append(getIssueId());
+        sb.append(", projectId=");
+        sb.append(getProjectId());
         sb.append(", key=");
         sb.append(getKey());
         sb.append(", self=");
         sb.append(getSelf());
-        sb.append(", fieldId=");
-        sb.append(getFieldId());
         sb.append("}");
 
         return sb.toString();
@@ -390,16 +414,16 @@ public class IssueModelImpl extends BaseModelImpl<Issue> implements IssueModel {
         sb.append(getIssueId());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>projectId</column-name><column-value><![CDATA[");
+        sb.append(getProjectId());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>key</column-name><column-value><![CDATA[");
         sb.append(getKey());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>self</column-name><column-value><![CDATA[");
         sb.append(getSelf());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>fieldId</column-name><column-value><![CDATA[");
-        sb.append(getFieldId());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

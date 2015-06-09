@@ -41,10 +41,10 @@ public class IssuePriorityLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName64;
-    private String[] _methodParameterTypes64;
-    private String _methodName65;
-    private String[] _methodParameterTypes65;
+    private String _methodName70;
+    private String[] _methodParameterTypes70;
+    private String _methodName71;
+    private String[] _methodParameterTypes71;
 
     public IssuePriorityLocalServiceClpInvoker() {
         _methodName0 = "addIssuePriority";
@@ -129,13 +129,13 @@ public class IssuePriorityLocalServiceClpInvoker {
                 "de.hska.wi.awp.datasource.model.IssuePriority"
             };
 
-        _methodName64 = "getBeanIdentifier";
+        _methodName70 = "getBeanIdentifier";
 
-        _methodParameterTypes64 = new String[] {  };
+        _methodParameterTypes70 = new String[] {  };
 
-        _methodName65 = "setBeanIdentifier";
+        _methodName71 = "setBeanIdentifier";
 
-        _methodParameterTypes65 = new String[] { "java.lang.String" };
+        _methodParameterTypes71 = new String[] { "java.lang.String" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,13 +227,13 @@ public class IssuePriorityLocalServiceClpInvoker {
             return IssuePriorityLocalServiceUtil.updateIssuePriority((de.hska.wi.awp.datasource.model.IssuePriority) arguments[0]);
         }
 
-        if (_methodName64.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+        if (_methodName70.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
             return IssuePriorityLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName65.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+        if (_methodName71.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
             IssuePriorityLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;

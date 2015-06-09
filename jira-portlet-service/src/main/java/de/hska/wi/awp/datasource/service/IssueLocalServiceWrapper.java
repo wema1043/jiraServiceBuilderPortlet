@@ -273,6 +273,12 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     }
 
     @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Issue> getAllIssuesForProjectId(
+        java.lang.String projectId) {
+        return _issueLocalService.getAllIssuesForProjectId(projectId);
+    }
+
+    @Override
     public java.lang.String getAllIssues() {
         return _issueLocalService.getAllIssues();
     }

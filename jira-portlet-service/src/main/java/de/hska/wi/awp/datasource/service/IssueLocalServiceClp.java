@@ -50,6 +50,8 @@ public class IssueLocalServiceClp implements IssueLocalService {
     private String[] _methodParameterTypes20;
     private String _methodName21;
     private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
 
     public IssueLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -144,17 +146,21 @@ public class IssueLocalServiceClp implements IssueLocalService {
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
 
-        _methodName19 = "getAllIssues";
+        _methodName19 = "getAllIssuesForProjectId";
 
-        _methodParameterTypes19 = new String[] {  };
+        _methodParameterTypes19 = new String[] { "java.lang.String" };
 
-        _methodName20 = "ParseJsonToIssue";
+        _methodName20 = "getAllIssues";
 
-        _methodParameterTypes20 = new String[] { "java.lang.String" };
+        _methodParameterTypes20 = new String[] {  };
 
-        _methodName21 = "deleteAllIssues";
+        _methodName21 = "ParseJsonToIssue";
 
-        _methodParameterTypes21 = new String[] {  };
+        _methodParameterTypes21 = new String[] { "java.lang.String" };
+
+        _methodName22 = "deleteAllIssues";
+
+        _methodParameterTypes22 = new String[] {  };
     }
 
     @Override
@@ -676,12 +682,35 @@ public class IssueLocalServiceClp implements IssueLocalService {
     }
 
     @Override
-    public java.lang.String getAllIssues() {
+    public java.util.List<de.hska.wi.awp.datasource.model.Issue> getAllIssuesForProjectId(
+        java.lang.String projectId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName19,
-                    _methodParameterTypes19, new Object[] {  });
+                    _methodParameterTypes19,
+                    new Object[] { ClpSerializer.translateInput(projectId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<de.hska.wi.awp.datasource.model.Issue>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.lang.String getAllIssues() {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName20,
+                    _methodParameterTypes20, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -699,8 +728,8 @@ public class IssueLocalServiceClp implements IssueLocalService {
     @Override
     public void ParseJsonToIssue(java.lang.String response) {
         try {
-            _invokableLocalService.invokeMethod(_methodName20,
-                _methodParameterTypes20,
+            _invokableLocalService.invokeMethod(_methodName21,
+                _methodParameterTypes21,
                 new Object[] { ClpSerializer.translateInput(response) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
@@ -717,8 +746,8 @@ public class IssueLocalServiceClp implements IssueLocalService {
     @Override
     public void deleteAllIssues() {
         try {
-            _invokableLocalService.invokeMethod(_methodName21,
-                _methodParameterTypes21, new Object[] {  });
+            _invokableLocalService.invokeMethod(_methodName22,
+                _methodParameterTypes22, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

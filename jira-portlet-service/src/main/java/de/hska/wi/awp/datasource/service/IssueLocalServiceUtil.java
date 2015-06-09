@@ -263,6 +263,11 @@ public class IssueLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.util.List<de.hska.wi.awp.datasource.model.Issue> getAllIssuesForProjectId(
+        java.lang.String projectId) {
+        return getService().getAllIssuesForProjectId(projectId);
+    }
+
     public static java.lang.String getAllIssues() {
         return getService().getAllIssues();
     }

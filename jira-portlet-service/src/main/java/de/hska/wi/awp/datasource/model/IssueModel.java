@@ -59,6 +59,21 @@ public interface IssueModel extends BaseModel<Issue> {
     public void setIssueId(String issueId);
 
     /**
+     * Returns the project ID of this issue.
+     *
+     * @return the project ID of this issue
+     */
+    @AutoEscape
+    public String getProjectId();
+
+    /**
+     * Sets the project ID of this issue.
+     *
+     * @param projectId the project ID of this issue
+     */
+    public void setProjectId(String projectId);
+
+    /**
      * Returns the key of this issue.
      *
      * @return the key of this issue
@@ -87,20 +102,6 @@ public interface IssueModel extends BaseModel<Issue> {
      * @param self the self of this issue
      */
     public void setSelf(String self);
-
-    /**
-     * Returns the field ID of this issue.
-     *
-     * @return the field ID of this issue
-     */
-    public long getFieldId();
-
-    /**
-     * Sets the field ID of this issue.
-     *
-     * @param fieldId the field ID of this issue
-     */
-    public void setFieldId(long fieldId);
 
     @Override
     public boolean isNew();

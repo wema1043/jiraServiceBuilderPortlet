@@ -37,6 +37,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("fieldId", getFieldId());
+        attributes.put("issueId", getIssueId());
         attributes.put("createdDate", getCreatedDate());
         attributes.put("resolutionDate", getResolutionDate());
         attributes.put("summary", getSummary());
@@ -63,6 +64,12 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
 
         if (fieldId != null) {
             setFieldId(fieldId);
+        }
+
+        String issueId = (String) attributes.get("issueId");
+
+        if (issueId != null) {
+            setIssueId(issueId);
         }
 
         String createdDate = (String) attributes.get("createdDate");
@@ -198,6 +205,26 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     @Override
     public void setFieldId(long fieldId) {
         _field.setFieldId(fieldId);
+    }
+
+    /**
+    * Returns the issue ID of this field.
+    *
+    * @return the issue ID of this field
+    */
+    @Override
+    public java.lang.String getIssueId() {
+        return _field.getIssueId();
+    }
+
+    /**
+    * Sets the issue ID of this field.
+    *
+    * @param issueId the issue ID of this field
+    */
+    @Override
+    public void setIssueId(java.lang.String issueId) {
+        _field.setIssueId(issueId);
     }
 
     /**

@@ -7,12 +7,14 @@
 	<import class="de.hska.wi.awp.datasource.model.IssuePriority" />
 	<import class="de.hska.wi.awp.datasource.model.IssueType" />
 	<import class="de.hska.wi.awp.datasource.model.JiraUser" />
+	<import class="de.hska.wi.awp.datasource.model.Project" />
 	<import class="de.hska.wi.awp.datasource.model.Status" />
 	<class name="de.hska.wi.awp.datasource.model.impl.FieldImpl" table="jira_Field">
 		<cache usage="read-write" />
 		<id name="fieldId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="issueId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createdDate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="resolutionDate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -34,9 +36,9 @@
 		<id name="issueId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
+		<property name="projectId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
 		<property name="self" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="fieldId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.IssuePriorityImpl" table="jira_IssuePriority">
 		<cache usage="read-write" />
@@ -58,6 +60,14 @@
 			<generator class="assigned" />
 		</id>
 		<property name="displayname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.hska.wi.awp.datasource.model.impl.ProjectImpl" table="jira_Project">
+		<cache usage="read-write" />
+		<id name="projectId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.StatusImpl" table="jira_Status">
 		<cache usage="read-write" />

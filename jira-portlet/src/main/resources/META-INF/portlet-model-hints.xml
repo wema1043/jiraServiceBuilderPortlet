@@ -3,9 +3,12 @@
 <model-hints>
 	<model name="de.hska.wi.awp.datasource.model.Field">
 		<field name="fieldId" type="long" />
+		<field name="issueId" type="String" />
 		<field name="createdDate" type="String" />
 		<field name="resolutionDate" type="String" />
-		<field name="summary" type="String" />
+		<field name="summary" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="updated" type="String" />
 		<field name="timespent" type="String" />
 		<field name="timeestimate" type="String" />
@@ -13,7 +16,9 @@
 		<field name="aggregatetimespent" type="String" />
 		<field name="aggregatetimeoriginalestimate" type="String" />
 		<field name="aggregatetimeestimate" type="String" />
-		<field name="description" type="String" />
+		<field name="description" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="storypoints" type="long" />
 		<field name="creatorId" type="String" />
 		<field name="assigneeId" type="String" />
@@ -21,9 +26,9 @@
 	</model>
 	<model name="de.hska.wi.awp.datasource.model.Issue">
 		<field name="issueId" type="String" />
+		<field name="projectId" type="String" />
 		<field name="key" type="String" />
 		<field name="self" type="String" />
-		<field name="fieldId" type="long" />
 	</model>
 	<model name="de.hska.wi.awp.datasource.model.IssuePriority">
 		<field name="priorityId" type="long" />
@@ -36,6 +41,11 @@
 	<model name="de.hska.wi.awp.datasource.model.JiraUser">
 		<field name="creatorId" type="String" />
 		<field name="displayname" type="String" />
+	</model>
+	<model name="de.hska.wi.awp.datasource.model.Project">
+		<field name="projectId" type="String" />
+		<field name="key" type="String" />
+		<field name="name" type="String" />
 	</model>
 	<model name="de.hska.wi.awp.datasource.model.Status">
 		<field name="statusId" type="String" />

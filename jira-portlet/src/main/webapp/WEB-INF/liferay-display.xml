@@ -4,5 +4,8 @@
 <display>
 	<category name="category.sample">
 		<portlet id="Student_portlet" />
+		<portlet id="BurnDownChartStoryPointsPortlet" />
+		<portlet id="OpenClosedPortlet" />
+		
 	</category>
 </display>

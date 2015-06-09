@@ -41,16 +41,18 @@ public class IssueLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName64;
-    private String[] _methodParameterTypes64;
-    private String _methodName65;
-    private String[] _methodParameterTypes65;
     private String _methodName70;
     private String[] _methodParameterTypes70;
     private String _methodName71;
     private String[] _methodParameterTypes71;
-    private String _methodName72;
-    private String[] _methodParameterTypes72;
+    private String _methodName76;
+    private String[] _methodParameterTypes76;
+    private String _methodName77;
+    private String[] _methodParameterTypes77;
+    private String _methodName78;
+    private String[] _methodParameterTypes78;
+    private String _methodName79;
+    private String[] _methodParameterTypes79;
 
     public IssueLocalServiceClpInvoker() {
         _methodName0 = "addIssue";
@@ -135,25 +137,29 @@ public class IssueLocalServiceClpInvoker {
                 "de.hska.wi.awp.datasource.model.Issue"
             };
 
-        _methodName64 = "getBeanIdentifier";
-
-        _methodParameterTypes64 = new String[] {  };
-
-        _methodName65 = "setBeanIdentifier";
-
-        _methodParameterTypes65 = new String[] { "java.lang.String" };
-
-        _methodName70 = "getAllIssues";
+        _methodName70 = "getBeanIdentifier";
 
         _methodParameterTypes70 = new String[] {  };
 
-        _methodName71 = "ParseJsonToIssue";
+        _methodName71 = "setBeanIdentifier";
 
         _methodParameterTypes71 = new String[] { "java.lang.String" };
 
-        _methodName72 = "deleteAllIssues";
+        _methodName76 = "getAllIssuesForProjectId";
 
-        _methodParameterTypes72 = new String[] {  };
+        _methodParameterTypes76 = new String[] { "java.lang.String" };
+
+        _methodName77 = "getAllIssues";
+
+        _methodParameterTypes77 = new String[] {  };
+
+        _methodName78 = "ParseJsonToIssue";
+
+        _methodParameterTypes78 = new String[] { "java.lang.String" };
+
+        _methodName79 = "deleteAllIssues";
+
+        _methodParameterTypes79 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -245,32 +251,37 @@ public class IssueLocalServiceClpInvoker {
             return IssueLocalServiceUtil.updateIssue((de.hska.wi.awp.datasource.model.Issue) arguments[0]);
         }
 
-        if (_methodName64.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+        if (_methodName70.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
             return IssueLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName65.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+        if (_methodName71.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
             IssueLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName70.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+        if (_methodName76.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+            return IssueLocalServiceUtil.getAllIssuesForProjectId((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName77.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
             return IssueLocalServiceUtil.getAllIssues();
         }
 
-        if (_methodName71.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+        if (_methodName78.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
             IssueLocalServiceUtil.ParseJsonToIssue((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName72.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+        if (_methodName79.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
             IssueLocalServiceUtil.deleteAllIssues();
 
             return null;

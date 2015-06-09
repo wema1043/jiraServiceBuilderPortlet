@@ -11,18 +11,33 @@
 		</finder>
 	</entity>
 
+	<entity name="Project" local-service="true" remote-service="true">
+		<column name="projectId" primary="true" type="String"></column>
+		<column name="key" type="String"></column>
+		<column name="name" type="String"></column>
+		<finder name="Key" return-type="Project">
+			<finder-column name="key"></finder-column>
+		</finder>
+
+	</entity>
+
 	<entity name="Issue" local-service="true" remote-service="true">
 		<column name="issueId" primary="true" type="String"></column>
+		<column name="projectId" type="String"></column>
 		<column name="key" type="String"></column>
 		<column name="self" type="String"></column>
-		<column name="fieldId" type="long"></column>
 		<finder name="IssueId" return-type="Collection">
 			<finder-column name="issueId"></finder-column>
+		</finder>
+		<!-- Get all Issues for the projectId -->
+		<finder name="IssuesForProjectId" return-type="Collection">
+			<finder-column name="projectId"></finder-column>
 		</finder>
 	</entity>
 
 	<entity name="Field" local-service="true" remote-service="true">
 		<column name="fieldId" primary="true" type="long"></column>
+		<column name="issueId" type="String"></column>
 		<column name="createdDate" type="String"></column>
 		<column name="resolutionDate" type="String"></column>
 		<column name="summary" type="String"></column>
@@ -38,9 +53,20 @@
 		<column name="creatorId" type="String"></column>
 		<column name="assigneeId" type="String"></column>
 		<column name="statusId" type="long"></column>
+
+		<!-- Get all Fields for the Issues -->
+		<finder name="FieldForIssue" return-type="Field">
+			<finder-column name="issueId"></finder-column>
+		</finder>
 		
+		<!-- Get all Fields for the user -->
 		<finder name="FieldsForUser" return-type="Collection">
 			<finder-column name="assigneeId"></finder-column>
+		</finder>
+
+		<!-- Get all Fields for the status -->
+		<finder name="FieldsForStatus" return-type="Collection">
+			<finder-column name="statusId"></finder-column>
 		</finder>
 	</entity>
 
@@ -59,7 +85,8 @@
 	</entity>
 
 
-	<entity name="IssuePriority" local-service="true" remote-service="true">
+	<entity name="IssuePriority" local-service="true"
+		remote-service="true">
 		<column name="priorityId" primary="true" type="long"></column>
 		<column name="priorityName" type="String"></column>
 	</entity>

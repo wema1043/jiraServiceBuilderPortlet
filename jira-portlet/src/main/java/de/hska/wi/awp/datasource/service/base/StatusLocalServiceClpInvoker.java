@@ -41,16 +41,16 @@ public class StatusLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName64;
-    private String[] _methodParameterTypes64;
-    private String _methodName65;
-    private String[] _methodParameterTypes65;
     private String _methodName70;
     private String[] _methodParameterTypes70;
     private String _methodName71;
     private String[] _methodParameterTypes71;
-    private String _methodName72;
-    private String[] _methodParameterTypes72;
+    private String _methodName76;
+    private String[] _methodParameterTypes76;
+    private String _methodName77;
+    private String[] _methodParameterTypes77;
+    private String _methodName78;
+    private String[] _methodParameterTypes78;
 
     public StatusLocalServiceClpInvoker() {
         _methodName0 = "addStatus";
@@ -135,25 +135,25 @@ public class StatusLocalServiceClpInvoker {
                 "de.hska.wi.awp.datasource.model.Status"
             };
 
-        _methodName64 = "getBeanIdentifier";
-
-        _methodParameterTypes64 = new String[] {  };
-
-        _methodName65 = "setBeanIdentifier";
-
-        _methodParameterTypes65 = new String[] { "java.lang.String" };
-
-        _methodName70 = "getAllStatus";
+        _methodName70 = "getBeanIdentifier";
 
         _methodParameterTypes70 = new String[] {  };
 
-        _methodName71 = "ParseJsonToStatus";
+        _methodName71 = "setBeanIdentifier";
 
         _methodParameterTypes71 = new String[] { "java.lang.String" };
 
-        _methodName72 = "deleteAllStatus";
+        _methodName76 = "getAllStatus";
 
-        _methodParameterTypes72 = new String[] {  };
+        _methodParameterTypes76 = new String[] {  };
+
+        _methodName77 = "ParseJsonToStatus";
+
+        _methodParameterTypes77 = new String[] { "java.lang.String" };
+
+        _methodName78 = "deleteAllStatus";
+
+        _methodParameterTypes78 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -245,32 +245,32 @@ public class StatusLocalServiceClpInvoker {
             return StatusLocalServiceUtil.updateStatus((de.hska.wi.awp.datasource.model.Status) arguments[0]);
         }
 
-        if (_methodName64.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+        if (_methodName70.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
             return StatusLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName65.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+        if (_methodName71.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
             StatusLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName70.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+        if (_methodName76.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
             return StatusLocalServiceUtil.getAllStatus();
         }
 
-        if (_methodName71.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+        if (_methodName77.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
             StatusLocalServiceUtil.ParseJsonToStatus((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName72.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+        if (_methodName78.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
             StatusLocalServiceUtil.deleteAllStatus();
 
             return null;
