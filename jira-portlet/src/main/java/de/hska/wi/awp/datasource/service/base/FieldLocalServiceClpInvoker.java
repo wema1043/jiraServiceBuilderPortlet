@@ -153,7 +153,9 @@ public class FieldLocalServiceClpInvoker {
 
         _methodName78 = "countAllFieldsForStatus";
 
-        _methodParameterTypes78 = new String[] { "java.lang.Integer" };
+        _methodParameterTypes78 = new String[] {
+                "java.lang.Integer", "java.util.List"
+            };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -269,7 +271,8 @@ public class FieldLocalServiceClpInvoker {
 
         if (_methodName78.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
-            return FieldLocalServiceUtil.countAllFieldsForStatus((java.lang.Integer) arguments[0]);
+            return FieldLocalServiceUtil.countAllFieldsForStatus((java.lang.Integer) arguments[0],
+                (java.util.List<de.hska.wi.awp.datasource.model.Field>) arguments[1]);
         }
 
         throw new UnsupportedOperationException();

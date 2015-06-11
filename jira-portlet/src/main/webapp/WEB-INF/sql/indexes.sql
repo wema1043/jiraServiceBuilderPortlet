@@ -1,6 +1,7 @@
 create index IX_6F1D4F4D on jira_Field (assigneeId);
 create index IX_52019455 on jira_Field (issueId);
 create index IX_A82A6830 on jira_Field (statusId);
+create index IX_90BD37D4 on jira_Field (statusId, issueId);
 
 create index IX_3DB73B16 on jira_Issue (issueId);
 create index IX_305C3956 on jira_Issue (projectId);

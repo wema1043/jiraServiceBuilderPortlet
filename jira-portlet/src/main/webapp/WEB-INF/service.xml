@@ -53,6 +53,9 @@
 		<column name="creatorId" type="String"></column>
 		<column name="assigneeId" type="String"></column>
 		<column name="statusId" type="long"></column>
+		<order by="asc">
+			<order-column name="issueId" />
+		</order>
 
 		<!-- Get all Fields for the Issues -->
 		<finder name="FieldForIssue" return-type="Field">
@@ -67,6 +70,7 @@
 		<!-- Get all Fields for the status -->
 		<finder name="FieldsForStatus" return-type="Collection">
 			<finder-column name="statusId"></finder-column>
+			<finder-column name="issueId"></finder-column>
 		</finder>
 	</entity>
 

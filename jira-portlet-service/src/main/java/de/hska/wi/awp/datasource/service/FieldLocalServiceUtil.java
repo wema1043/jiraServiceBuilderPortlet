@@ -272,8 +272,9 @@ public class FieldLocalServiceUtil {
     }
 
     public static java.lang.Integer countAllFieldsForStatus(
-        java.lang.Integer statusId) {
-        return getService().countAllFieldsForStatus(statusId);
+        java.lang.Integer statusId,
+        java.util.List<de.hska.wi.awp.datasource.model.Field> issues) {
+        return getService().countAllFieldsForStatus(statusId, issues);
     }
 
     public static void clearService() {

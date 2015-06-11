@@ -29,17 +29,17 @@ public class StudentBean {
 	}
 	
 	public void fillDatabase(){
-//		String str2 = JiraUserLocalServiceUtil.getAllMembers("HWB");
-//		JiraUserLocalServiceUtil.ParseJsonToMember(str2);
-//
-//		String str1 = IssueLocalServiceUtil.getAllIssues();
-//		IssueLocalServiceUtil.ParseJsonToIssue(str1);
-//
-//		String stati = StatusLocalServiceUtil.getAllStatus();
-//		StatusLocalServiceUtil.ParseJsonToStatus(stati);
-//
-//		String projectResponse = ProjectLocalServiceUtil.getAllProjects();
-//		ProjectLocalServiceUtil.ParseJsonToProjects(projectResponse);
+	 	String str2 = JiraUserLocalServiceUtil.getAllMembers("HWB");
+		JiraUserLocalServiceUtil.ParseJsonToMember(str2);
+
+		String str1 = IssueLocalServiceUtil.getAllIssues();
+		IssueLocalServiceUtil.ParseJsonToIssue(str1);
+
+		String stati = StatusLocalServiceUtil.getAllStatus();
+		StatusLocalServiceUtil.ParseJsonToStatus(stati);
+
+		String projectResponse = ProjectLocalServiceUtil.getAllProjects();
+		ProjectLocalServiceUtil.ParseJsonToProjects(projectResponse);
 		
 //		String thisProjectID = ProjectLocalServiceUtil.getProjectIdForProjectName("HWB");
 //		System.out.println("ID: " + thisProjectID);

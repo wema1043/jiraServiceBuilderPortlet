@@ -97,7 +97,8 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
             FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFieldsForUser",
             new String[] { String.class.getName() },
-            FieldModelImpl.ASSIGNEEID_COLUMN_BITMASK);
+            FieldModelImpl.ASSIGNEEID_COLUMN_BITMASK |
+            FieldModelImpl.ISSUEID_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_FIELDSFORUSER = new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByFieldsForUser",
@@ -110,7 +111,7 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
             FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
             FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByFieldsForStatus",
             new String[] {
-                Long.class.getName(),
+                Long.class.getName(), String.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
@@ -119,13 +120,18 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
         new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldModelImpl.FINDER_CACHE_ENABLED, FieldImpl.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFieldsForStatus",
-            new String[] { Long.class.getName() },
-            FieldModelImpl.STATUSID_COLUMN_BITMASK);
+            new String[] { Long.class.getName(), String.class.getName() },
+            FieldModelImpl.STATUSID_COLUMN_BITMASK |
+            FieldModelImpl.ISSUEID_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_FIELDSFORSTATUS = new FinderPath(FieldModelImpl.ENTITY_CACHE_ENABLED,
             FieldModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "countByFieldsForStatus", new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2 = "field.statusId = ?";
+            "countByFieldsForStatus",
+            new String[] { Long.class.getName(), String.class.getName() });
+    private static final String _FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2 = "field.statusId = ? AND ";
+    private static final String _FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_1 = "field.issueId IS NULL";
+    private static final String _FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_2 = "field.issueId = ?";
+    private static final String _FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_3 = "(field.issueId IS NULL OR field.issueId = '')";
     private static final String _SQL_SELECT_FIELD = "SELECT field FROM Field field";
     private static final String _SQL_SELECT_FIELD_WHERE = "SELECT field FROM Field field WHERE ";
     private static final String _SQL_COUNT_FIELD = "SELECT COUNT(field) FROM Field field";
@@ -872,46 +878,49 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Returns all the fields where statusId = &#63;.
+     * Returns all the fields where statusId = &#63; and issueId = &#63;.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @return the matching fields
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<Field> findByFieldsForStatus(long statusId)
+    public List<Field> findByFieldsForStatus(long statusId, String issueId)
         throws SystemException {
-        return findByFieldsForStatus(statusId, QueryUtil.ALL_POS,
+        return findByFieldsForStatus(statusId, issueId, QueryUtil.ALL_POS,
             QueryUtil.ALL_POS, null);
     }
 
     /**
-     * Returns a range of all the fields where statusId = &#63;.
+     * Returns a range of all the fields where statusId = &#63; and issueId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param start the lower bound of the range of fields
      * @param end the upper bound of the range of fields (not inclusive)
      * @return the range of matching fields
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<Field> findByFieldsForStatus(long statusId, int start, int end)
-        throws SystemException {
-        return findByFieldsForStatus(statusId, start, end, null);
+    public List<Field> findByFieldsForStatus(long statusId, String issueId,
+        int start, int end) throws SystemException {
+        return findByFieldsForStatus(statusId, issueId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the fields where statusId = &#63;.
+     * Returns an ordered range of all the fields where statusId = &#63; and issueId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param start the lower bound of the range of fields
      * @param end the upper bound of the range of fields (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -919,8 +928,9 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<Field> findByFieldsForStatus(long statusId, int start, int end,
-        OrderByComparator orderByComparator) throws SystemException {
+    public List<Field> findByFieldsForStatus(long statusId, String issueId,
+        int start, int end, OrderByComparator orderByComparator)
+        throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
         Object[] finderArgs = null;
@@ -929,10 +939,14 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
                 (orderByComparator == null)) {
             pagination = false;
             finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS;
-            finderArgs = new Object[] { statusId };
+            finderArgs = new Object[] { statusId, issueId };
         } else {
             finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FIELDSFORSTATUS;
-            finderArgs = new Object[] { statusId, start, end, orderByComparator };
+            finderArgs = new Object[] {
+                    statusId, issueId,
+                    
+                    start, end, orderByComparator
+                };
         }
 
         List<Field> list = (List<Field>) FinderCacheUtil.getResult(finderPath,
@@ -940,7 +954,8 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
 
         if ((list != null) && !list.isEmpty()) {
             for (Field field : list) {
-                if ((statusId != field.getStatusId())) {
+                if ((statusId != field.getStatusId()) ||
+                        !Validator.equals(issueId, field.getIssueId())) {
                     list = null;
 
                     break;
@@ -952,15 +967,27 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
             StringBundler query = null;
 
             if (orderByComparator != null) {
-                query = new StringBundler(3 +
+                query = new StringBundler(4 +
                         (orderByComparator.getOrderByFields().length * 3));
             } else {
-                query = new StringBundler(3);
+                query = new StringBundler(4);
             }
 
             query.append(_SQL_SELECT_FIELD_WHERE);
 
             query.append(_FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2);
+
+            boolean bindIssueId = false;
+
+            if (issueId == null) {
+                query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_1);
+            } else if (issueId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_3);
+            } else {
+                bindIssueId = true;
+
+                query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_2);
+            }
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -982,6 +1009,10 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
                 QueryPos qPos = QueryPos.getInstance(q);
 
                 qPos.add(statusId);
+
+                if (bindIssueId) {
+                    qPos.add(issueId);
+                }
 
                 if (!pagination) {
                     list = (List<Field>) QueryUtil.list(q, getDialect(), start,
@@ -1011,30 +1042,35 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Returns the first field in the ordered set where statusId = &#63;.
+     * Returns the first field in the ordered set where statusId = &#63; and issueId = &#63;.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching field
      * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Field findByFieldsForStatus_First(long statusId,
+    public Field findByFieldsForStatus_First(long statusId, String issueId,
         OrderByComparator orderByComparator)
         throws NoSuchFieldException, SystemException {
-        Field field = fetchByFieldsForStatus_First(statusId, orderByComparator);
+        Field field = fetchByFieldsForStatus_First(statusId, issueId,
+                orderByComparator);
 
         if (field != null) {
             return field;
         }
 
-        StringBundler msg = new StringBundler(4);
+        StringBundler msg = new StringBundler(6);
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
         msg.append("statusId=");
         msg.append(statusId);
+
+        msg.append(", issueId=");
+        msg.append(issueId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1042,17 +1078,18 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Returns the first field in the ordered set where statusId = &#63;.
+     * Returns the first field in the ordered set where statusId = &#63; and issueId = &#63;.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching field, or <code>null</code> if a matching field could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Field fetchByFieldsForStatus_First(long statusId,
+    public Field fetchByFieldsForStatus_First(long statusId, String issueId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<Field> list = findByFieldsForStatus(statusId, 0, 1,
+        List<Field> list = findByFieldsForStatus(statusId, issueId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -1063,30 +1100,35 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Returns the last field in the ordered set where statusId = &#63;.
+     * Returns the last field in the ordered set where statusId = &#63; and issueId = &#63;.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching field
      * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Field findByFieldsForStatus_Last(long statusId,
+    public Field findByFieldsForStatus_Last(long statusId, String issueId,
         OrderByComparator orderByComparator)
         throws NoSuchFieldException, SystemException {
-        Field field = fetchByFieldsForStatus_Last(statusId, orderByComparator);
+        Field field = fetchByFieldsForStatus_Last(statusId, issueId,
+                orderByComparator);
 
         if (field != null) {
             return field;
         }
 
-        StringBundler msg = new StringBundler(4);
+        StringBundler msg = new StringBundler(6);
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
         msg.append("statusId=");
         msg.append(statusId);
+
+        msg.append(", issueId=");
+        msg.append(issueId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1094,24 +1136,25 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Returns the last field in the ordered set where statusId = &#63;.
+     * Returns the last field in the ordered set where statusId = &#63; and issueId = &#63;.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching field, or <code>null</code> if a matching field could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public Field fetchByFieldsForStatus_Last(long statusId,
+    public Field fetchByFieldsForStatus_Last(long statusId, String issueId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByFieldsForStatus(statusId);
+        int count = countByFieldsForStatus(statusId, issueId);
 
         if (count == 0) {
             return null;
         }
 
-        List<Field> list = findByFieldsForStatus(statusId, count - 1, count,
-                orderByComparator);
+        List<Field> list = findByFieldsForStatus(statusId, issueId, count - 1,
+                count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -1121,10 +1164,11 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Returns the fields before and after the current field in the ordered set where statusId = &#63;.
+     * Returns the fields before and after the current field in the ordered set where statusId = &#63; and issueId = &#63;.
      *
      * @param fieldId the primary key of the current field
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next field
      * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a field with the primary key could not be found
@@ -1132,7 +1176,7 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
      */
     @Override
     public Field[] findByFieldsForStatus_PrevAndNext(long fieldId,
-        long statusId, OrderByComparator orderByComparator)
+        long statusId, String issueId, OrderByComparator orderByComparator)
         throws NoSuchFieldException, SystemException {
         Field field = findByPrimaryKey(fieldId);
 
@@ -1144,12 +1188,12 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
             Field[] array = new FieldImpl[3];
 
             array[0] = getByFieldsForStatus_PrevAndNext(session, field,
-                    statusId, orderByComparator, true);
+                    statusId, issueId, orderByComparator, true);
 
             array[1] = field;
 
             array[2] = getByFieldsForStatus_PrevAndNext(session, field,
-                    statusId, orderByComparator, false);
+                    statusId, issueId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -1160,8 +1204,8 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     protected Field getByFieldsForStatus_PrevAndNext(Session session,
-        Field field, long statusId, OrderByComparator orderByComparator,
-        boolean previous) {
+        Field field, long statusId, String issueId,
+        OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
         if (orderByComparator != null) {
@@ -1174,6 +1218,18 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
         query.append(_SQL_SELECT_FIELD_WHERE);
 
         query.append(_FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2);
+
+        boolean bindIssueId = false;
+
+        if (issueId == null) {
+            query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_1);
+        } else if (issueId.equals(StringPool.BLANK)) {
+            query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_3);
+        } else {
+            bindIssueId = true;
+
+            query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_2);
+        }
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1238,6 +1294,10 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
 
         qPos.add(statusId);
 
+        if (bindIssueId) {
+            qPos.add(issueId);
+        }
+
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(field);
 
@@ -1256,42 +1316,57 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
     }
 
     /**
-     * Removes all the fields where statusId = &#63; from the database.
+     * Removes all the fields where statusId = &#63; and issueId = &#63; from the database.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByFieldsForStatus(long statusId)
+    public void removeByFieldsForStatus(long statusId, String issueId)
         throws SystemException {
-        for (Field field : findByFieldsForStatus(statusId, QueryUtil.ALL_POS,
-                QueryUtil.ALL_POS, null)) {
+        for (Field field : findByFieldsForStatus(statusId, issueId,
+                QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(field);
         }
     }
 
     /**
-     * Returns the number of fields where statusId = &#63;.
+     * Returns the number of fields where statusId = &#63; and issueId = &#63;.
      *
      * @param statusId the status ID
+     * @param issueId the issue ID
      * @return the number of matching fields
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByFieldsForStatus(long statusId) throws SystemException {
+    public int countByFieldsForStatus(long statusId, String issueId)
+        throws SystemException {
         FinderPath finderPath = FINDER_PATH_COUNT_BY_FIELDSFORSTATUS;
 
-        Object[] finderArgs = new Object[] { statusId };
+        Object[] finderArgs = new Object[] { statusId, issueId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
 
         if (count == null) {
-            StringBundler query = new StringBundler(2);
+            StringBundler query = new StringBundler(3);
 
             query.append(_SQL_COUNT_FIELD_WHERE);
 
             query.append(_FINDER_COLUMN_FIELDSFORSTATUS_STATUSID_2);
+
+            boolean bindIssueId = false;
+
+            if (issueId == null) {
+                query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_1);
+            } else if (issueId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_3);
+            } else {
+                bindIssueId = true;
+
+                query.append(_FINDER_COLUMN_FIELDSFORSTATUS_ISSUEID_2);
+            }
 
             String sql = query.toString();
 
@@ -1305,6 +1380,10 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
                 QueryPos qPos = QueryPos.getInstance(q);
 
                 qPos.add(statusId);
+
+                if (bindIssueId) {
+                    qPos.add(issueId);
+                }
 
                 count = (Long) q.uniqueResult();
 
@@ -1599,7 +1678,8 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
             if ((fieldModelImpl.getColumnBitmask() &
                     FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        fieldModelImpl.getOriginalStatusId()
+                        fieldModelImpl.getOriginalStatusId(),
+                        fieldModelImpl.getOriginalIssueId()
                     };
 
                 FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIELDSFORSTATUS,
@@ -1607,7 +1687,10 @@ public class FieldPersistenceImpl extends BasePersistenceImpl<Field>
                 FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIELDSFORSTATUS,
                     args);
 
-                args = new Object[] { fieldModelImpl.getStatusId() };
+                args = new Object[] {
+                        fieldModelImpl.getStatusId(),
+                        fieldModelImpl.getIssueId()
+                    };
 
                 FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIELDSFORSTATUS,
                     args);

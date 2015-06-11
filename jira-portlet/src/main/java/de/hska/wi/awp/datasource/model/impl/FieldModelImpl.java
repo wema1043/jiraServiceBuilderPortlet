@@ -69,8 +69,8 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
         };
     public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,issueId VARCHAR(75) null,createdDate DATE null,resolutionDate DATE null,summary VARCHAR(1000) null,updated DATE null,timespent VARCHAR(75) null,timeestimate VARCHAR(75) null,timeoriginalestimate VARCHAR(75) null,aggregatetimespent VARCHAR(75) null,aggregatetimeoriginalestimate VARCHAR(75) null,aggregatetimeestimate VARCHAR(75) null,description VARCHAR(1000) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
     public static final String TABLE_SQL_DROP = "drop table jira_Field";
-    public static final String ORDER_BY_JPQL = " ORDER BY field.fieldId ASC";
-    public static final String ORDER_BY_SQL = " ORDER BY jira_Field.fieldId ASC";
+    public static final String ORDER_BY_JPQL = " ORDER BY field.issueId ASC";
+    public static final String ORDER_BY_SQL = " ORDER BY jira_Field.issueId ASC";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
@@ -86,7 +86,6 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     public static long ASSIGNEEID_COLUMN_BITMASK = 1L;
     public static long ISSUEID_COLUMN_BITMASK = 2L;
     public static long STATUSID_COLUMN_BITMASK = 4L;
-    public static long FIELDID_COLUMN_BITMASK = 8L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.Field"));
     private static ClassLoader _classLoader = Field.class.getClassLoader();
@@ -360,7 +359,7 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @Override
     public void setIssueId(String issueId) {
-        _columnBitmask |= ISSUEID_COLUMN_BITMASK;
+        _columnBitmask = -1L;
 
         if (_originalIssueId == null) {
             _originalIssueId = _issueId;
@@ -657,15 +656,15 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @Override
     public int compareTo(Field field) {
-        long primaryKey = field.getPrimaryKey();
+        int value = 0;
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
+        value = getIssueId().compareTo(field.getIssueId());
+
+        if (value != 0) {
+            return value;
         }
+
+        return 0;
     }
 
     @Override

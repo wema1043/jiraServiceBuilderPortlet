@@ -154,7 +154,9 @@ public class FieldLocalServiceClp implements FieldLocalService {
 
         _methodName21 = "countAllFieldsForStatus";
 
-        _methodParameterTypes21 = new String[] { "java.lang.Integer" };
+        _methodParameterTypes21 = new String[] {
+                "java.lang.Integer", "java.util.List"
+            };
     }
 
     @Override
@@ -714,13 +716,19 @@ public class FieldLocalServiceClp implements FieldLocalService {
     }
 
     @Override
-    public java.lang.Integer countAllFieldsForStatus(java.lang.Integer statusId) {
+    public java.lang.Integer countAllFieldsForStatus(
+        java.lang.Integer statusId,
+        java.util.List<de.hska.wi.awp.datasource.model.Field> issues) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName21,
                     _methodParameterTypes21,
-                    new Object[] { ClpSerializer.translateInput(statusId) });
+                    new Object[] {
+                        ClpSerializer.translateInput(statusId),
+                        
+                    ClpSerializer.translateInput(issues)
+                    });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

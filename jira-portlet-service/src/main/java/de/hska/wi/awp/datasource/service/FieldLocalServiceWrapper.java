@@ -281,8 +281,10 @@ public class FieldLocalServiceWrapper implements FieldLocalService,
     }
 
     @Override
-    public java.lang.Integer countAllFieldsForStatus(java.lang.Integer statusId) {
-        return _fieldLocalService.countAllFieldsForStatus(statusId);
+    public java.lang.Integer countAllFieldsForStatus(
+        java.lang.Integer statusId,
+        java.util.List<de.hska.wi.awp.datasource.model.Field> issues) {
+        return _fieldLocalService.countAllFieldsForStatus(statusId, issues);
     }
 
     /**

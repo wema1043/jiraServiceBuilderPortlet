@@ -677,15 +677,15 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
 
     @Override
     public int compareTo(Field field) {
-        long primaryKey = field.getPrimaryKey();
+        int value = 0;
 
-        if (getPrimaryKey() < primaryKey) {
-            return -1;
-        } else if (getPrimaryKey() > primaryKey) {
-            return 1;
-        } else {
-            return 0;
+        value = getIssueId().compareTo(field.getIssueId());
+
+        if (value != 0) {
+            return value;
         }
+
+        return 0;
     }
 
     @Override

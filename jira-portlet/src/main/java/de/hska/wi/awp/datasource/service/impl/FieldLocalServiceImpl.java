@@ -68,11 +68,16 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 
 	}
 
-	public Integer countAllFieldsForStatus(Integer statusId) {
+	public Integer countAllFieldsForStatus(Integer statusId, List<Field> issues) {
 
 		List<Field> allFieldsForStatus = new ArrayList<Field>();
 		try {
-			allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId);
+//			 allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId);
+			for (int i = 0; i < issues.size(); i++){
+				System.out.println("IssueID:" + issues.get(i).getStatusId());
+				allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId, Long.toString(issues.get(i).getStatusId()));
+			}
+
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

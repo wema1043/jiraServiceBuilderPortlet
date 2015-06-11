@@ -331,45 +331,49 @@ public class FieldUtil {
     }
 
     /**
-    * Returns all the fields where statusId = &#63;.
+    * Returns all the fields where statusId = &#63; and issueId = &#63;.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @return the matching fields
     * @throws SystemException if a system exception occurred
     */
     public static java.util.List<de.hska.wi.awp.datasource.model.Field> findByFieldsForStatus(
-        long statusId)
+        long statusId, java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByFieldsForStatus(statusId);
+        return getPersistence().findByFieldsForStatus(statusId, issueId);
     }
 
     /**
-    * Returns a range of all the fields where statusId = &#63;.
+    * Returns a range of all the fields where statusId = &#63; and issueId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param start the lower bound of the range of fields
     * @param end the upper bound of the range of fields (not inclusive)
     * @return the range of matching fields
     * @throws SystemException if a system exception occurred
     */
     public static java.util.List<de.hska.wi.awp.datasource.model.Field> findByFieldsForStatus(
-        long statusId, int start, int end)
+        long statusId, java.lang.String issueId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByFieldsForStatus(statusId, start, end);
+        return getPersistence()
+                   .findByFieldsForStatus(statusId, issueId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the fields where statusId = &#63;.
+    * Returns an ordered range of all the fields where statusId = &#63; and issueId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.hska.wi.awp.datasource.model.impl.FieldModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param start the lower bound of the range of fields
     * @param end the upper bound of the range of fields (not inclusive)
     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -377,123 +381,136 @@ public class FieldUtil {
     * @throws SystemException if a system exception occurred
     */
     public static java.util.List<de.hska.wi.awp.datasource.model.Field> findByFieldsForStatus(
-        long statusId, int start, int end,
+        long statusId, java.lang.String issueId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByFieldsForStatus(statusId, start, end,
+                   .findByFieldsForStatus(statusId, issueId, start, end,
             orderByComparator);
     }
 
     /**
-    * Returns the first field in the ordered set where statusId = &#63;.
+    * Returns the first field in the ordered set where statusId = &#63; and issueId = &#63;.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching field
     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Field findByFieldsForStatus_First(
-        long statusId,
+        long statusId, java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchFieldException {
         return getPersistence()
-                   .findByFieldsForStatus_First(statusId, orderByComparator);
+                   .findByFieldsForStatus_First(statusId, issueId,
+            orderByComparator);
     }
 
     /**
-    * Returns the first field in the ordered set where statusId = &#63;.
+    * Returns the first field in the ordered set where statusId = &#63; and issueId = &#63;.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching field, or <code>null</code> if a matching field could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Field fetchByFieldsForStatus_First(
-        long statusId,
+        long statusId, java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchByFieldsForStatus_First(statusId, orderByComparator);
+                   .fetchByFieldsForStatus_First(statusId, issueId,
+            orderByComparator);
     }
 
     /**
-    * Returns the last field in the ordered set where statusId = &#63;.
+    * Returns the last field in the ordered set where statusId = &#63; and issueId = &#63;.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching field
     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a matching field could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Field findByFieldsForStatus_Last(
-        long statusId,
+        long statusId, java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchFieldException {
         return getPersistence()
-                   .findByFieldsForStatus_Last(statusId, orderByComparator);
+                   .findByFieldsForStatus_Last(statusId, issueId,
+            orderByComparator);
     }
 
     /**
-    * Returns the last field in the ordered set where statusId = &#63;.
+    * Returns the last field in the ordered set where statusId = &#63; and issueId = &#63;.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching field, or <code>null</code> if a matching field could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Field fetchByFieldsForStatus_Last(
-        long statusId,
+        long statusId, java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchByFieldsForStatus_Last(statusId, orderByComparator);
+                   .fetchByFieldsForStatus_Last(statusId, issueId,
+            orderByComparator);
     }
 
     /**
-    * Returns the fields before and after the current field in the ordered set where statusId = &#63;.
+    * Returns the fields before and after the current field in the ordered set where statusId = &#63; and issueId = &#63;.
     *
     * @param fieldId the primary key of the current field
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next field
     * @throws de.hska.wi.awp.datasource.NoSuchFieldException if a field with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.Field[] findByFieldsForStatus_PrevAndNext(
-        long fieldId, long statusId,
+        long fieldId, long statusId, java.lang.String issueId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchFieldException {
         return getPersistence()
                    .findByFieldsForStatus_PrevAndNext(fieldId, statusId,
-            orderByComparator);
+            issueId, orderByComparator);
     }
 
     /**
-    * Removes all the fields where statusId = &#63; from the database.
+    * Removes all the fields where statusId = &#63; and issueId = &#63; from the database.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByFieldsForStatus(long statusId)
+    public static void removeByFieldsForStatus(long statusId,
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeByFieldsForStatus(statusId);
+        getPersistence().removeByFieldsForStatus(statusId, issueId);
     }
 
     /**
-    * Returns the number of fields where statusId = &#63;.
+    * Returns the number of fields where statusId = &#63; and issueId = &#63;.
     *
     * @param statusId the status ID
+    * @param issueId the issue ID
     * @return the number of matching fields
     * @throws SystemException if a system exception occurred
     */
-    public static int countByFieldsForStatus(long statusId)
+    public static int countByFieldsForStatus(long statusId,
+        java.lang.String issueId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByFieldsForStatus(statusId);
+        return getPersistence().countByFieldsForStatus(statusId, issueId);
     }
 
     /**
