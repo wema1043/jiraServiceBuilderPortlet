@@ -12,7 +12,7 @@
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.bridgeEventHandler</name>
-			<value>de.hska.wi.awp.datasource.event.BurnDownChartStoryPointEventHandler</value>
+			<value>de.hska.wi.awp.datasource.event.OpenClosedEventHandler</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -117,6 +117,49 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>assignedissues</portlet-name>
+		<display-name>Assignedissues</display-name>
+		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/assignedissues/view.xhtml</value>
+		</init-param>
+		<init-param>
+			<name>javax.portlet.faces.bridgeEventHandler</name>
+			<value>de.hska.wi.awp.datasource.event.AssignedIssuesEventHandler</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Assignedissues</title>
+			<short-title>Assignedissues</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<supported-processing-event>
+    		<qname xmlns:x="http://liferay.com/events">x:ipc.studentSelected</qname>
+		</supported-processing-event>
+		<supported-processing-event>
+    		<qname xmlns:x="http://liferay.com/events">x:ipc.projectSelected</qname>
+		</supported-processing-event>
+	</portlet>
+	
 	<event-definition>
     	<qname xmlns:x="http://liferay.com/events">x:ipc.studentSelected</qname>
     	<value-type>java.lang.String</value-type>

@@ -6,5 +6,7 @@
 		<portlet id="Student_portlet" />
 		<portlet id="BurnDownChartStoryPointsPortlet" />
 		<portlet id="OpenClosedPortlet" />
+		<portlet id="assignedissues"></portlet>
+		
 	</category>
 </display>

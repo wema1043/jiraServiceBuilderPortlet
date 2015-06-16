@@ -41,8 +41,8 @@ public class BurnDownViewBean implements Serializable{
 	
 	
 	private LineChartModel areaModel;
-//	private TreeMap<String, Integer> storyPointVelocity;
 	private int currentStoryPoints = 0;
+	private int highestStoryPoints = 0;
 	private String studenthskaId;
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	Date todayDate = new Date();
@@ -71,19 +71,6 @@ public class BurnDownViewBean implements Serializable{
 
 	}
 	
-	
-//	private List<Field> getAllFieldsForProjekt(){
-//		String thisProjectID = ProjectLocalServiceUtil
-//				.getProjectIdForProjectName(projektId);
-//
-//		List<Issue> allIssues = IssueLocalServiceUtil
-//				.getAllIssuesForProjectId(thisProjectID);
-//
-//		List<Field> allFields = FieldLocalServiceUtil
-//				.getAllFieldsForIsses(allIssues);
-//		
-//		return allFields;
-//	}
 
 	
 	public LineChartModel getAreaModel() {
@@ -103,7 +90,7 @@ public class BurnDownViewBean implements Serializable{
 		areaModel.setTitle("Story Point Velocity");
 		areaModel.setLegendPosition("w");
 		areaModel.setStacked(true); 
-		areaModel.setShowPointLabels(true);
+		areaModel.setShowPointLabels(false);
 		
 		LineChartSeries created = new LineChartSeries();
 		created.setFill(true);
@@ -125,11 +112,23 @@ public class BurnDownViewBean implements Serializable{
 		Axis yAxis = areaModel.getAxis(AxisType.Y);
 		yAxis.setLabel("StoryPoints");
 		yAxis.setMin(0);
-		yAxis.setMax(700);
+		if(projektId != null){
+			yAxis.setMax(highestStoryPoints + 50);
+			yAxis.setTickInterval("100");
+
+		} else {
+			yAxis.setMax(highestStoryPoints + 20);
+			yAxis.setTickInterval("50");
+
+
+		}
 	}
 	
 	public TreeMap<String, Integer> getTreeMapForAreaModel(){
 		currentStoryPoints = 0;
+		highestStoryPoints = 0;
+		
+		
 
 		TreeMap<String, Integer> resultMap = new TreeMap<String, Integer>();
 		
@@ -160,6 +159,9 @@ public class BurnDownViewBean implements Serializable{
 		}
 
 		for (String key : resultMap.keySet()) {
+			if(highestStoryPoints < currentStoryPoints){
+				highestStoryPoints = currentStoryPoints;
+			}
 
 			for (int zl = 0; zl < allFields.size(); zl++) {
 				Date createdDate = allFields.get(zl).getCreatedDate();

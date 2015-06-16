@@ -261,6 +261,10 @@ public class FieldLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.lang.String getAssigneeForIssue(java.lang.String issueId) {
+        return getService().getAssigneeForIssue(issueId);
+    }
+
     public static java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsForIsses(
         java.util.List<de.hska.wi.awp.datasource.model.Issue> issues) {
         return getService().getAllFieldsForIsses(issues);

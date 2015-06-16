@@ -87,7 +87,7 @@ public class OpenClosedViewBean implements Serializable {
 		
 		List<Field> allFields = null;
 		if(projektId != null){
-			allFields = getAllFieldsForProjekt();
+			allFields = FieldLocalServiceUtil.getAllFieldsforProject(projektId);
 		} else {
 			allFields = FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId);
 
@@ -98,8 +98,8 @@ public class OpenClosedViewBean implements Serializable {
 
 		pieModel.setLegendPosition("w");
 		pieModel.setTitle("Issues from Team");
-		pieModel.setDataFormat("Value");
-//		pieModel.setShowDataLabels(true);
+		pieModel.setDataFormat("value");
+		pieModel.setShowDataLabels(true);
 
 		int open = 0;
 		int progress = 0;

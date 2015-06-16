@@ -55,6 +55,8 @@ public class FieldLocalServiceClpInvoker {
     private String[] _methodParameterTypes79;
     private String _methodName80;
     private String[] _methodParameterTypes80;
+    private String _methodName81;
+    private String[] _methodParameterTypes81;
 
     public FieldLocalServiceClpInvoker() {
         _methodName0 = "addField";
@@ -147,25 +149,29 @@ public class FieldLocalServiceClpInvoker {
 
         _methodParameterTypes71 = new String[] { "java.lang.String" };
 
-        _methodName76 = "getAllFieldsForIsses";
+        _methodName76 = "getAssigneeForIssue";
 
-        _methodParameterTypes76 = new String[] { "java.util.List" };
+        _methodParameterTypes76 = new String[] { "java.lang.String" };
 
-        _methodName77 = "countAllFieldsForAssignee";
+        _methodName77 = "getAllFieldsForIsses";
 
-        _methodParameterTypes77 = new String[] { "java.lang.String" };
+        _methodParameterTypes77 = new String[] { "java.util.List" };
 
-        _methodName78 = "getAllFieldsForAssignee";
+        _methodName78 = "countAllFieldsForAssignee";
 
         _methodParameterTypes78 = new String[] { "java.lang.String" };
 
-        _methodName79 = "getAllFieldsforProject";
+        _methodName79 = "getAllFieldsForAssignee";
 
         _methodParameterTypes79 = new String[] { "java.lang.String" };
 
-        _methodName80 = "countAllFieldsForStatus";
+        _methodName80 = "getAllFieldsforProject";
 
-        _methodParameterTypes80 = new String[] {
+        _methodParameterTypes80 = new String[] { "java.lang.String" };
+
+        _methodName81 = "countAllFieldsForStatus";
+
+        _methodParameterTypes81 = new String[] {
                 "java.lang.Integer", "java.util.List"
             };
     }
@@ -273,26 +279,31 @@ public class FieldLocalServiceClpInvoker {
 
         if (_methodName76.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-            return FieldLocalServiceUtil.getAllFieldsForIsses((java.util.List<de.hska.wi.awp.datasource.model.Issue>) arguments[0]);
+            return FieldLocalServiceUtil.getAssigneeForIssue((java.lang.String) arguments[0]);
         }
 
         if (_methodName77.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-            return FieldLocalServiceUtil.countAllFieldsForAssignee((java.lang.String) arguments[0]);
+            return FieldLocalServiceUtil.getAllFieldsForIsses((java.util.List<de.hska.wi.awp.datasource.model.Issue>) arguments[0]);
         }
 
         if (_methodName78.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
-            return FieldLocalServiceUtil.getAllFieldsForAssignee((java.lang.String) arguments[0]);
+            return FieldLocalServiceUtil.countAllFieldsForAssignee((java.lang.String) arguments[0]);
         }
 
         if (_methodName79.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
-            return FieldLocalServiceUtil.getAllFieldsforProject((java.lang.String) arguments[0]);
+            return FieldLocalServiceUtil.getAllFieldsForAssignee((java.lang.String) arguments[0]);
         }
 
         if (_methodName80.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+            return FieldLocalServiceUtil.getAllFieldsforProject((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName81.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
             return FieldLocalServiceUtil.countAllFieldsForStatus((java.lang.Integer) arguments[0],
                 (java.util.List<de.hska.wi.awp.datasource.model.Field>) arguments[1]);
         }

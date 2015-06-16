@@ -238,6 +238,9 @@ public interface FieldLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getAssigneeForIssue(java.lang.String issueId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsForIsses(
         java.util.List<de.hska.wi.awp.datasource.model.Issue> issues);
 

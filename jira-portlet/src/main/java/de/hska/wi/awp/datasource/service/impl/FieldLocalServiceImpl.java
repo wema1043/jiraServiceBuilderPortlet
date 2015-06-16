@@ -41,6 +41,22 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 	 * field local service.
 	 */
 
+	public String getAssigneeForIssue(String issueId){
+		String assigneeId = "";
+		
+		try {
+			assigneeId = FieldUtil.findByFieldForIssue(issueId).getAssigneeId();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return assigneeId;
+	}
+	
 	public List<Field> getAllFieldsForIsses(List<Issue> issues) {
 		List<Field> allFields = new ArrayList<Field>();
 		for (int zl = 0; zl < issues.size(); zl++) {
