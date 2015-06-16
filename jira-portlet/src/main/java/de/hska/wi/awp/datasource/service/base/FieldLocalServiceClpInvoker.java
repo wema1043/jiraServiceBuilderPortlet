@@ -51,6 +51,10 @@ public class FieldLocalServiceClpInvoker {
     private String[] _methodParameterTypes77;
     private String _methodName78;
     private String[] _methodParameterTypes78;
+    private String _methodName79;
+    private String[] _methodParameterTypes79;
+    private String _methodName80;
+    private String[] _methodParameterTypes80;
 
     public FieldLocalServiceClpInvoker() {
         _methodName0 = "addField";
@@ -151,9 +155,17 @@ public class FieldLocalServiceClpInvoker {
 
         _methodParameterTypes77 = new String[] { "java.lang.String" };
 
-        _methodName78 = "countAllFieldsForStatus";
+        _methodName78 = "getAllFieldsForAssignee";
 
-        _methodParameterTypes78 = new String[] {
+        _methodParameterTypes78 = new String[] { "java.lang.String" };
+
+        _methodName79 = "getAllFieldsforProject";
+
+        _methodParameterTypes79 = new String[] { "java.lang.String" };
+
+        _methodName80 = "countAllFieldsForStatus";
+
+        _methodParameterTypes80 = new String[] {
                 "java.lang.Integer", "java.util.List"
             };
     }
@@ -271,6 +283,16 @@ public class FieldLocalServiceClpInvoker {
 
         if (_methodName78.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+            return FieldLocalServiceUtil.getAllFieldsForAssignee((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName79.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+            return FieldLocalServiceUtil.getAllFieldsforProject((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName80.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
             return FieldLocalServiceUtil.countAllFieldsForStatus((java.lang.Integer) arguments[0],
                 (java.util.List<de.hska.wi.awp.datasource.model.Field>) arguments[1]);
         }

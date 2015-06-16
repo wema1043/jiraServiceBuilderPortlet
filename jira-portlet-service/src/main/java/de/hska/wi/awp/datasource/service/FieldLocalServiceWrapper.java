@@ -281,6 +281,18 @@ public class FieldLocalServiceWrapper implements FieldLocalService,
     }
 
     @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsForAssignee(
+        java.lang.String assigneeId) {
+        return _fieldLocalService.getAllFieldsForAssignee(assigneeId);
+    }
+
+    @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsforProject(
+        java.lang.String projektId) {
+        return _fieldLocalService.getAllFieldsforProject(projektId);
+    }
+
+    @Override
     public java.lang.Integer countAllFieldsForStatus(
         java.lang.Integer statusId,
         java.util.List<de.hska.wi.awp.datasource.model.Field> issues) {

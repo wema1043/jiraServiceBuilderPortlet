@@ -10,13 +10,16 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.portlet.faces.GenericFacesPortlet;
 
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
@@ -26,7 +29,7 @@ import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
 
-@RequestScoped
+@SessionScoped
 @ManagedBean
 public class BurnDownViewBean implements Serializable{
 
@@ -38,13 +41,13 @@ public class BurnDownViewBean implements Serializable{
 	
 	
 	private LineChartModel areaModel;
-	private TreeMap<String, Integer> storyPointVelocity;
+//	private TreeMap<String, Integer> storyPointVelocity;
 	private int currentStoryPoints = 0;
 	private String studenthskaId;
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	Date todayDate = new Date();
 
-	
-	
+
 	public void setAreaModel(LineChartModel areaModel) {
 		this.areaModel = areaModel;
 	}
@@ -54,7 +57,6 @@ public class BurnDownViewBean implements Serializable{
 	}
 
 	public void setStudenthskaId(String studenthskaId) {
-		System.out.println("setter" + studenthskaId);
 		this.studenthskaId = studenthskaId;
 	}
 	
@@ -69,34 +71,78 @@ public class BurnDownViewBean implements Serializable{
 
 	}
 	
-	private List<Field> getAllFieldsForProjekt(){
-		String thisProjectID = ProjectLocalServiceUtil
-				.getProjectIdForProjectName(projektId);
-
-		List<Issue> allIssues = IssueLocalServiceUtil
-				.getAllIssuesForProjectId(thisProjectID);
-
-		List<Field> allFields = FieldLocalServiceUtil
-				.getAllFieldsForIsses(allIssues);
-		
-		return allFields;
-	}
-
+	
+//	private List<Field> getAllFieldsForProjekt(){
+//		String thisProjectID = ProjectLocalServiceUtil
+//				.getProjectIdForProjectName(projektId);
+//
+//		List<Issue> allIssues = IssueLocalServiceUtil
+//				.getAllIssuesForProjectId(thisProjectID);
+//
+//		List<Field> allFields = FieldLocalServiceUtil
+//				.getAllFieldsForIsses(allIssues);
+//		
+//		return allFields;
+//	}
 
 	
 	public LineChartModel getAreaModel() {
 		createAreaModel();
 		return areaModel;
 	}
+	
+
 
 	private void createAreaModel() {
 		
-		List<Field> allFields = getAllFieldsForProjekt();
 
-		storyPointVelocity = new TreeMap<String, Integer>();
 
+		TreeMap<String, Integer> areaMap = getTreeMapForAreaModel();
+		
+		areaModel = new LineChartModel();
+		areaModel.setTitle("Story Point Velocity");
+		areaModel.setLegendPosition("w");
+		areaModel.setStacked(true); 
+		areaModel.setShowPointLabels(true);
+		
+		LineChartSeries created = new LineChartSeries();
+		created.setFill(true);
+		created.setLabel("created");
+
+		for (Entry<String, Integer> entry : areaMap.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			created.set(key, (Number) value);
+		}
+		areaModel.addSeries(created);
+
+		
+		Axis xAxis2 = new DateAxis("Zeit");
+		xAxis2.setTickAngle(-50);
+		xAxis2.setTickFormat("%b %#d, %y");
+
+		areaModel.getAxes().put(AxisType.X, xAxis2);
+		Axis yAxis = areaModel.getAxis(AxisType.Y);
+		yAxis.setLabel("StoryPoints");
+		yAxis.setMin(0);
+		yAxis.setMax(700);
+	}
+	
+	public TreeMap<String, Integer> getTreeMapForAreaModel(){
+		currentStoryPoints = 0;
+
+		TreeMap<String, Integer> resultMap = new TreeMap<String, Integer>();
+		
+
+		List<Field> allFields = null;
+		if(projektId != null){
+			allFields = FieldLocalServiceUtil.getAllFieldsforProject(projektId);
+		} else {
+			allFields = FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId);
+
+		}	
+		
 		Date firstDate = allFields.get(1).getCreatedDate();
-		Date todayDate = new Date();
 
 		Calendar start = Calendar.getInstance();
 		start.setTime(firstDate);
@@ -109,11 +155,11 @@ public class BurnDownViewBean implements Serializable{
 			Date targetDay = start.getTime();
 			// Do Your Work Here
 			String reportDate = df.format(targetDay);
-			storyPointVelocity.put(reportDate, 0);
+			resultMap.put(reportDate, 0);
 			start.add(Calendar.DATE, 1);
 		}
 
-		for (String key : storyPointVelocity.keySet()) {
+		for (String key : resultMap.keySet()) {
 
 			for (int zl = 0; zl < allFields.size(); zl++) {
 				Date createdDate = allFields.get(zl).getCreatedDate();
@@ -126,47 +172,24 @@ public class BurnDownViewBean implements Serializable{
 
 				if (key.equals(createdDateString)) {
 					 currentStoryPoints += allFields.get(zl).getStorypoints();
-					 storyPointVelocity.put(key, currentStoryPoints);
+					 resultMap.put(key, currentStoryPoints);
 
 				} else if (resolutionDateString != null) {
 					if (key.equals(resolutionDateString)) {
 						 currentStoryPoints -= allFields.get(zl).getStorypoints();
-						 storyPointVelocity.put(key, currentStoryPoints);
+						 resultMap.put(key, currentStoryPoints);
 					}
 				} else {
-					 storyPointVelocity.put(key, currentStoryPoints);
+					resultMap.put(key, currentStoryPoints);
 				}
 
 			}
 
 		}
 		
-		areaModel = new LineChartModel();
-		LineChartSeries created = new LineChartSeries();
-		created.setFill(true);
-		created.setLabel("created");
-
-		for (Entry<String, Integer> entry : storyPointVelocity.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			created.set(key, (Number) value);
-		}
-
-		areaModel.addSeries(created);
-
-		areaModel.setTitle("Story Point Velocity");
-		areaModel.setLegendPosition("w");
-		areaModel.setStacked(true); 
-		areaModel.setShowPointLabels(true);
-
-		Axis xAxis = new CategoryAxis("Zeit");
-		xAxis.setTickAngle(-50);
-
-		areaModel.getAxes().put(AxisType.X, xAxis);
-		Axis yAxis = areaModel.getAxis(AxisType.Y);
-		yAxis.setLabel("StoryPoints");
-		yAxis.setMin(0);
-		yAxis.setMax(700);
+		
+		return resultMap;
+		
 	}
 
 }

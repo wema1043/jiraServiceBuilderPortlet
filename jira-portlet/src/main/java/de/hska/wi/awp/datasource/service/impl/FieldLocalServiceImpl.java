@@ -8,6 +8,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import de.hska.wi.awp.datasource.NoSuchFieldException;
 import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
+import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.base.FieldLocalServiceBaseImpl;
 import de.hska.wi.awp.datasource.service.persistence.FieldUtil;
 
@@ -66,6 +69,34 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 		}
 		return allFieldsForAssignee.size();
 
+	}
+	
+	public List<Field> getAllFieldsForAssignee(String assigneeId) {
+
+		List<Field> allFieldsForAssignee = new ArrayList<Field>();
+		try {
+			allFieldsForAssignee = FieldUtil.findByFieldsForUser(assigneeId);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Anzahl" + allFieldsForAssignee.size());
+		return allFieldsForAssignee;
+
+	}
+	
+	public List<Field> getAllFieldsforProject(String projektId){
+		String thisProjectID = ProjectLocalServiceUtil
+				.getProjectIdForProjectName(projektId);
+
+		List<Issue> allIssues = IssueLocalServiceUtil
+				.getAllIssuesForProjectId(thisProjectID);
+
+		List<Field> allFields = FieldLocalServiceUtil
+				.getAllFieldsForIsses(allIssues);
+		
+		return allFields;
 	}
 
 	public Integer countAllFieldsForStatus(Integer statusId, List<Field> issues) {

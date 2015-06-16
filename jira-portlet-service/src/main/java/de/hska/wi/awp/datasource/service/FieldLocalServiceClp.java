@@ -50,6 +50,10 @@ public class FieldLocalServiceClp implements FieldLocalService {
     private String[] _methodParameterTypes20;
     private String _methodName21;
     private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
+    private String _methodName23;
+    private String[] _methodParameterTypes23;
 
     public FieldLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -152,9 +156,17 @@ public class FieldLocalServiceClp implements FieldLocalService {
 
         _methodParameterTypes20 = new String[] { "java.lang.String" };
 
-        _methodName21 = "countAllFieldsForStatus";
+        _methodName21 = "getAllFieldsForAssignee";
 
-        _methodParameterTypes21 = new String[] {
+        _methodParameterTypes21 = new String[] { "java.lang.String" };
+
+        _methodName22 = "getAllFieldsforProject";
+
+        _methodParameterTypes22 = new String[] { "java.lang.String" };
+
+        _methodName23 = "countAllFieldsForStatus";
+
+        _methodParameterTypes23 = new String[] {
                 "java.lang.Integer", "java.util.List"
             };
     }
@@ -716,14 +728,60 @@ public class FieldLocalServiceClp implements FieldLocalService {
     }
 
     @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsForAssignee(
+        java.lang.String assigneeId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName21,
+                    _methodParameterTypes21,
+                    new Object[] { ClpSerializer.translateInput(assigneeId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<de.hska.wi.awp.datasource.model.Field>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsforProject(
+        java.lang.String projektId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName22,
+                    _methodParameterTypes22,
+                    new Object[] { ClpSerializer.translateInput(projektId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<de.hska.wi.awp.datasource.model.Field>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
     public java.lang.Integer countAllFieldsForStatus(
         java.lang.Integer statusId,
         java.util.List<de.hska.wi.awp.datasource.model.Field> issues) {
         Object returnObj = null;
 
         try {
-            returnObj = _invokableLocalService.invokeMethod(_methodName21,
-                    _methodParameterTypes21,
+            returnObj = _invokableLocalService.invokeMethod(_methodName23,
+                    _methodParameterTypes23,
                     new Object[] {
                         ClpSerializer.translateInput(statusId),
                         

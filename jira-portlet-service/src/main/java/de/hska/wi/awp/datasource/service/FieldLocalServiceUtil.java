@@ -271,6 +271,16 @@ public class FieldLocalServiceUtil {
         return getService().countAllFieldsForAssignee(assigneeId);
     }
 
+    public static java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsForAssignee(
+        java.lang.String assigneeId) {
+        return getService().getAllFieldsForAssignee(assigneeId);
+    }
+
+    public static java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsforProject(
+        java.lang.String projektId) {
+        return getService().getAllFieldsforProject(projektId);
+    }
+
     public static java.lang.Integer countAllFieldsForStatus(
         java.lang.Integer statusId,
         java.util.List<de.hska.wi.awp.datasource.model.Field> issues) {

@@ -55,6 +55,13 @@ public class BurnDownChartStoryPointEventHandler  implements BridgeEventHandler{
  			String hskaId = (String) value;
  			BurnDownViewBean burnDownViewBean = getBurnDownViewBean(facesContext);
  			burnDownViewBean.setStudenthskaId(hskaId);
+ 			burnDownViewBean.setProjektId(null);
+
+ 			OpenClosedViewBean openClosedViewBean = getOpenClosedViewBean(facesContext);
+  			openClosedViewBean.setStudenthskaId(hskaId);
+  			openClosedViewBean.setProjektId(null);
+
+
 
  			String fromAction = null;
  			String outcome = "ipc.customerSelected";
@@ -75,10 +82,14 @@ public class BurnDownChartStoryPointEventHandler  implements BridgeEventHandler{
   			String projektId = (String) value;
   			BurnDownViewBean burnDownViewBean = getBurnDownViewBean(facesContext);
   			burnDownViewBean.setProjektId(projektId);
-//  			burnDownViewBean.setAreaModel(bitte(projektId));
+  			burnDownViewBean.setStudenthskaId(null);
   			
   			OpenClosedViewBean openClosedViewBean = getOpenClosedViewBean(facesContext);
-  			openClosedViewBean.setPieModel(createPieModel(projektId));
+  			openClosedViewBean.setProjektId(projektId);
+  			openClosedViewBean.setStudenthskaId(null);
+
+
+//  			openClosedViewBean.setPieModel(createPieModel(projektId));
   			
   			String fromAction = null;
   			String outcome = "ipc.customerSelected";
@@ -109,63 +120,63 @@ public class BurnDownChartStoryPointEventHandler  implements BridgeEventHandler{
 	
 	
 	
-	private PieChartModel createPieModel(String hskaId) {
-		
-		
-		String thisProjectID = ProjectLocalServiceUtil
-				.getProjectIdForProjectName(hskaId);
-		
-		List<Issue> allIssues = IssueLocalServiceUtil
-				.getAllIssuesForProjectId(thisProjectID);
-
-		List<Field> allFields = FieldLocalServiceUtil
-				.getAllFieldsForIsses(allIssues);
-
-		PieChartModel pieModel = new PieChartModel();
-
-		pieModel.setLegendPosition("w");
-		pieModel.setTitle("Issues from " + hskaId + " Team");
-		pieModel.setShowDataLabels(true);
-		
-		int open = 0;
-		int progress = 0;
-		int reopend = 0;
-		int resolved = 0;
-		int closed = 0;
-
-		
-		for (int i = 0; i < allFields.size(); i++){
-			if(allFields.get(i).getStatusId() == 1){
-				open += 1;
-			} else if(allFields.get(i).getStatusId() == 3){
-				progress += 1;
-			}	else if(allFields.get(i).getStatusId() == 4){
-				reopend += 1;
-			}	else if(allFields.get(i).getStatusId() == 5){
-				resolved += 1;
-			}	else if(allFields.get(i).getStatusId() == 6){
-				closed += 1;
-			}
-			
-		
-		}
-
-		pieModel.set("Open", open);
-		System.out.println("OPEN " + open);
-		
-		pieModel.set("In Progress", progress);
-		System.out.println("Progress " + progress);
-
-		pieModel.set("Reopend", reopend);
-		System.out.println("Reopend " + reopend);
-
-		pieModel.set("Resolved", resolved);
-		System.out.println("Resolved " + resolved);
-
-		pieModel.set("Closed", closed);
-		System.out.println("Closed " + closed);
-		return pieModel;
-	}
+//	private PieChartModel createPieModel(String hskaId) {
+//		
+//		
+//		String thisProjectID = ProjectLocalServiceUtil
+//				.getProjectIdForProjectName(hskaId);
+//		
+//		List<Issue> allIssues = IssueLocalServiceUtil
+//				.getAllIssuesForProjectId(thisProjectID);
+//
+//		List<Field> allFields = FieldLocalServiceUtil
+//				.getAllFieldsForIsses(allIssues);
+//
+//		PieChartModel pieModel = new PieChartModel();
+//
+//		pieModel.setLegendPosition("w");
+//		pieModel.setTitle("Issues from " + hskaId + " Team");
+//		pieModel.setShowDataLabels(true);
+//		
+//		int open = 0;
+//		int progress = 0;
+//		int reopend = 0;
+//		int resolved = 0;
+//		int closed = 0;
+//
+//		
+//		for (int i = 0; i < allFields.size(); i++){
+//			if(allFields.get(i).getStatusId() == 1){
+//				open += 1;
+//			} else if(allFields.get(i).getStatusId() == 3){
+//				progress += 1;
+//			}	else if(allFields.get(i).getStatusId() == 4){
+//				reopend += 1;
+//			}	else if(allFields.get(i).getStatusId() == 5){
+//				resolved += 1;
+//			}	else if(allFields.get(i).getStatusId() == 6){
+//				closed += 1;
+//			}
+//			
+//		
+//		}
+//
+//		pieModel.set("Open", open);
+//		System.out.println("OPEN " + open);
+//		
+//		pieModel.set("In Progress", progress);
+//		System.out.println("Progress " + progress);
+//
+//		pieModel.set("Reopend", reopend);
+//		System.out.println("Reopend " + reopend);
+//
+//		pieModel.set("Resolved", resolved);
+//		System.out.println("Resolved " + resolved);
+//
+//		pieModel.set("Closed", closed);
+//		System.out.println("Closed " + closed);
+//		return pieModel;
+//	}
 	
 	
 	

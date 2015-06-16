@@ -244,6 +244,14 @@ public interface FieldLocalService extends BaseLocalService,
     public java.lang.Integer countAllFieldsForAssignee(
         java.lang.String assigneeId);
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsForAssignee(
+        java.lang.String assigneeId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<de.hska.wi.awp.datasource.model.Field> getAllFieldsforProject(
+        java.lang.String projektId);
+
     public java.lang.Integer countAllFieldsForStatus(
         java.lang.Integer statusId,
         java.util.List<de.hska.wi.awp.datasource.model.Field> issues);
