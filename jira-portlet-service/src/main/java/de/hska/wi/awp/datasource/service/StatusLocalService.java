@@ -244,6 +244,12 @@ public interface StatusLocalService extends BaseLocalService,
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.lang.String getAllStatus();
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<de.hska.wi.awp.datasource.model.Status> getAllJiraStati();
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getStatusNameForStatusId(java.lang.String statusId);
+
     public void ParseJsonToStatus(java.lang.String response);
 
     public void deleteAllStatus();

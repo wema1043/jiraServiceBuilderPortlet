@@ -51,6 +51,10 @@ public class StatusLocalServiceClpInvoker {
     private String[] _methodParameterTypes77;
     private String _methodName78;
     private String[] _methodParameterTypes78;
+    private String _methodName79;
+    private String[] _methodParameterTypes79;
+    private String _methodName80;
+    private String[] _methodParameterTypes80;
 
     public StatusLocalServiceClpInvoker() {
         _methodName0 = "addStatus";
@@ -147,13 +151,21 @@ public class StatusLocalServiceClpInvoker {
 
         _methodParameterTypes76 = new String[] {  };
 
-        _methodName77 = "ParseJsonToStatus";
+        _methodName77 = "getAllJiraStati";
 
-        _methodParameterTypes77 = new String[] { "java.lang.String" };
+        _methodParameterTypes77 = new String[] {  };
 
-        _methodName78 = "deleteAllStatus";
+        _methodName78 = "getStatusNameForStatusId";
 
-        _methodParameterTypes78 = new String[] {  };
+        _methodParameterTypes78 = new String[] { "java.lang.String" };
+
+        _methodName79 = "ParseJsonToStatus";
+
+        _methodParameterTypes79 = new String[] { "java.lang.String" };
+
+        _methodName80 = "deleteAllStatus";
+
+        _methodParameterTypes80 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -264,13 +276,23 @@ public class StatusLocalServiceClpInvoker {
 
         if (_methodName77.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+            return StatusLocalServiceUtil.getAllJiraStati();
+        }
+
+        if (_methodName78.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+            return StatusLocalServiceUtil.getStatusNameForStatusId((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName79.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
             StatusLocalServiceUtil.ParseJsonToStatus((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName78.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+        if (_methodName80.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
             StatusLocalServiceUtil.deleteAllStatus();
 
             return null;

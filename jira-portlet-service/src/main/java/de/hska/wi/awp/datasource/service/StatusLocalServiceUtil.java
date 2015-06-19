@@ -267,6 +267,15 @@ public class StatusLocalServiceUtil {
         return getService().getAllStatus();
     }
 
+    public static java.util.List<de.hska.wi.awp.datasource.model.Status> getAllJiraStati() {
+        return getService().getAllJiraStati();
+    }
+
+    public static java.lang.String getStatusNameForStatusId(
+        java.lang.String statusId) {
+        return getService().getStatusNameForStatusId(statusId);
+    }
+
     public static void ParseJsonToStatus(java.lang.String response) {
         getService().ParseJsonToStatus(response);
     }

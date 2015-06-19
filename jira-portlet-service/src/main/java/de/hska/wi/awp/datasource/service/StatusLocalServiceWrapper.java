@@ -278,6 +278,16 @@ public class StatusLocalServiceWrapper implements StatusLocalService,
     }
 
     @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Status> getAllJiraStati() {
+        return _statusLocalService.getAllJiraStati();
+    }
+
+    @Override
+    public java.lang.String getStatusNameForStatusId(java.lang.String statusId) {
+        return _statusLocalService.getStatusNameForStatusId(statusId);
+    }
+
+    @Override
     public void ParseJsonToStatus(java.lang.String response) {
         _statusLocalService.ParseJsonToStatus(response);
     }

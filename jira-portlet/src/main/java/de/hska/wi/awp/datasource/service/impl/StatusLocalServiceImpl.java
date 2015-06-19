@@ -2,6 +2,7 @@ package de.hska.wi.awp.datasource.service.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.Base64;
 
+import de.hska.wi.awp.datasource.NoSuchStatusException;
 import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
 import de.hska.wi.awp.datasource.model.Status;
@@ -22,16 +24,21 @@ import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.base.StatusLocalServiceBaseImpl;
+import de.hska.wi.awp.datasource.service.persistence.StatusUtil;
 import de.hska.wi.awp.datasource.utils.Constants;
 
 /**
  * The implementation of the status local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link de.hska.wi.awp.datasource.service.StatusLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link de.hska.wi.awp.datasource.service.StatusLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -39,17 +46,20 @@ import de.hska.wi.awp.datasource.utils.Constants;
  * @see de.hska.wi.awp.datasource.service.StatusLocalServiceUtil
  */
 public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never reference this interface directly. Always use {@link de.hska.wi.awp.datasource.service.StatusLocalServiceUtil} to access the status local service.
-     */
-	
-	public String getAllStatus(){
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 * 
+	 * Never reference this interface directly. Always use {@link
+	 * de.hska.wi.awp.datasource.service.StatusLocalServiceUtil} to access the
+	 * status local service.
+	 */
+
+	public String getAllStatus() {
 		System.out.println("BEGINN getAllStatus()");
 
 		String url = Constants.JIRA_HOST_NAME + "/rest/api/2/status";
-		String auth = new String(Base64.encode(Constants.JIRA_USERNAME + ":" + Constants.JIRA_PASSWORD));
+		String auth = new String(Base64.encode(Constants.JIRA_USERNAME + ":"
+				+ Constants.JIRA_PASSWORD));
 
 		// get Date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
@@ -66,16 +76,41 @@ public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
 				.get(ClientResponse.class);
 
 		String responseBody = response.getEntity(String.class);
-		
+
 		System.out.println("END getAllStatus()");
 
 		return responseBody;
 	}
+
+	public List<Status> getAllJiraStati() {
+
+		List<Status> allStati = new ArrayList<Status>();
+		try {
+			allStati = StatusUtil.findAll();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allStati;
+	}
 	
-	
-	public void ParseJsonToStatus(String response){
+	public String getStatusNameForStatusId(String statusId){
+		String name = "";
+		try {
+			name = StatusUtil.findByPrimaryKey(statusId).getName();
+		} catch (NoSuchStatusException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
+	}
+
+	public void ParseJsonToStatus(String response) {
 		System.out.println("BEGINN ParseJsonToStatus()");
-		
+
 		this.deleteAllStatus();
 		JSONArray issues = null;
 		try {
@@ -88,9 +123,9 @@ public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
 		for (int zl = 0; zl < issues.length(); zl++) {
 			Integer counter = zl;
 
-			Status myStatus = StatusLocalServiceUtil.createStatus(counter.toString());
+			Status myStatus = StatusLocalServiceUtil.createStatus(counter
+					.toString());
 
-			
 			try {
 				myStatus.setStatusId(issues.getJSONObject(zl).getString("id"));
 				myStatus.setName(issues.getJSONObject(zl).getString("name"));
@@ -99,7 +134,7 @@ public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			try {
 				StatusLocalServiceUtil.addStatus(myStatus);
 			} catch (SystemException e) {
@@ -107,16 +142,15 @@ public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
 				e.printStackTrace();
 			}
 
-
-			
 		}
 		System.out.println("END ParseJsonToStatus()");
 	}
-	
-	public void deleteAllStatus(){
+
+	public void deleteAllStatus() {
 		List<Status> allStatus = null;
 		try {
-			allStatus = StatusLocalServiceUtil.getStatuses(0, StatusLocalServiceUtil.getStatusesCount());
+			allStatus = StatusLocalServiceUtil.getStatuses(0,
+					StatusLocalServiceUtil.getStatusesCount());
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

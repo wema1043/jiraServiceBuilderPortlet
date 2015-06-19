@@ -50,6 +50,10 @@ public class StatusLocalServiceClp implements StatusLocalService {
     private String[] _methodParameterTypes20;
     private String _methodName21;
     private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
+    private String _methodName23;
+    private String[] _methodParameterTypes23;
 
     public StatusLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -148,13 +152,21 @@ public class StatusLocalServiceClp implements StatusLocalService {
 
         _methodParameterTypes19 = new String[] {  };
 
-        _methodName20 = "ParseJsonToStatus";
+        _methodName20 = "getAllJiraStati";
 
-        _methodParameterTypes20 = new String[] { "java.lang.String" };
+        _methodParameterTypes20 = new String[] {  };
 
-        _methodName21 = "deleteAllStatus";
+        _methodName21 = "getStatusNameForStatusId";
 
-        _methodParameterTypes21 = new String[] {  };
+        _methodParameterTypes21 = new String[] { "java.lang.String" };
+
+        _methodName22 = "ParseJsonToStatus";
+
+        _methodParameterTypes22 = new String[] { "java.lang.String" };
+
+        _methodName23 = "deleteAllStatus";
+
+        _methodParameterTypes23 = new String[] {  };
     }
 
     @Override
@@ -697,10 +709,53 @@ public class StatusLocalServiceClp implements StatusLocalService {
     }
 
     @Override
+    public java.util.List<de.hska.wi.awp.datasource.model.Status> getAllJiraStati() {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName20,
+                    _methodParameterTypes20, new Object[] {  });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<de.hska.wi.awp.datasource.model.Status>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.lang.String getStatusNameForStatusId(java.lang.String statusId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName21,
+                    _methodParameterTypes21,
+                    new Object[] { ClpSerializer.translateInput(statusId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.String) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
     public void ParseJsonToStatus(java.lang.String response) {
         try {
-            _invokableLocalService.invokeMethod(_methodName20,
-                _methodParameterTypes20,
+            _invokableLocalService.invokeMethod(_methodName22,
+                _methodParameterTypes22,
                 new Object[] { ClpSerializer.translateInput(response) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
@@ -717,8 +772,8 @@ public class StatusLocalServiceClp implements StatusLocalService {
     @Override
     public void deleteAllStatus() {
         try {
-            _invokableLocalService.invokeMethod(_methodName21,
-                _methodParameterTypes21, new Object[] {  });
+            _invokableLocalService.invokeMethod(_methodName23,
+                _methodParameterTypes23, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

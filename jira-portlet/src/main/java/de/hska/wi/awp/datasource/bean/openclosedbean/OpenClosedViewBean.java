@@ -15,12 +15,17 @@ import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.chart.PieChartModel;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
+import de.hska.wi.awp.datasource.model.Status;
 import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.persistence.StatusUtil;
 
 @SessionScoped
 @ManagedBean
@@ -30,7 +35,7 @@ public class OpenClosedViewBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6393291273408020985L;
-			
+
 	private PieChartModel pieModel;
 
 	private String projektId;
@@ -43,10 +48,9 @@ public class OpenClosedViewBean implements Serializable {
 		this.projektId = projektId;
 
 	}
-	
+
 	private String studenthskaId;
 
-	
 	public String getStudenthskaId() {
 		return studenthskaId;
 	}
@@ -55,9 +59,9 @@ public class OpenClosedViewBean implements Serializable {
 		System.out.println("setter" + studenthskaId);
 		this.studenthskaId = studenthskaId;
 	}
-	
+
 	public PieChartModel getPieModel() {
-		if(createPieModel() == null){
+		if (createPieModel() == null) {
 			System.out.println("Pie Chart ist null");
 		} else {
 			System.out.println("Pie Chart ist nicht null");
@@ -71,9 +75,8 @@ public class OpenClosedViewBean implements Serializable {
 		this.pieModel = pieModel;
 	}
 
-	
-
 	private PieChartModel createPieModel() {
+
 		System.out.println("create PieModel");
 		System.out.println("studentId: " + studenthskaId);
 		PieChartModel pieModel = new PieChartModel();
@@ -82,49 +85,59 @@ public class OpenClosedViewBean implements Serializable {
 		pieModel.setDataFormat("value");
 		pieModel.setShowDataLabels(true);
 
-
 		List<Field> allFields = new ArrayList<Field>();
-		if(projektId != null){
+
+		if (projektId != null) {
 			System.out.println("alle Fields für das Projekt");
 			allFields = FieldLocalServiceUtil.getAllFieldsforProject(projektId);
 			pieModel.setTitle("Issue Verteilung des ausgewählten Teams");
 		} else {
 			System.out.println("alle Fields für den Assignee");
-			allFields = FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId);
+			allFields = FieldLocalServiceUtil
+					.getAllFieldsForAssignee(studenthskaId);
 			pieModel.setTitle("Issues Verteilung des ausgewählten Teammitglieds");
 
-
 		}
-			
 
-		int open = 0;
-		int progress = 0;
-		int reopend = 0;
-		int resolved = 0;
-		int closed = 0;
+		List<Status> allStati = StatusLocalServiceUtil.getAllJiraStati();
+		TreeMap<String, Integer> statusMap = new TreeMap<String, Integer>();
+
+		for (int i = 0; i < allStati.size(); i++) {
+			statusMap.put(allStati.get(i).getStatusId(), 0);
+		}
+
+		System.out.println(statusMap);
 
 		for (int i = 0; i < allFields.size(); i++) {
-			if (allFields.get(i).getStatusId() == 1) {
-				open += 1;
-			} else if (allFields.get(i).getStatusId() == 3) {
-				progress += 1;
-			} else if (allFields.get(i).getStatusId() == 4) {
-				reopend += 1;
-			} else if (allFields.get(i).getStatusId() == 5) {
-				resolved += 1;
-			} else if (allFields.get(i).getStatusId() == 6) {
-				closed += 1;
-			}
 
+			for (Entry<String, Integer> entry : statusMap.entrySet()) {
+				if (String.valueOf(allFields.get(i).getStatusId()).equals(
+						entry.getKey())) {
+					statusMap.put(entry.getKey(),
+							statusMap.get(entry.getKey()) + 1);
+
+				}
+
+			}
 		}
 
-		pieModel.set("Open ", open);
-		pieModel.set("In Progress ", progress);
-		pieModel.set("Reopend ", reopend);
-		pieModel.set("Resolved ", resolved);
-		pieModel.set("Closed ", closed);
-		
+		System.out.println("!!!!!!" + statusMap);
+
+		for (Entry<String, Integer> entry : statusMap.entrySet()) {
+			System.out.println("Entry" + entry.getKey());
+			if (entry.getValue() != 0) {
+				System.out.println("Entry!!!!!"
+						+ StatusLocalServiceUtil.getStatusNameForStatusId(entry
+								.getKey().toString()));
+
+				pieModel.set(StatusLocalServiceUtil
+						.getStatusNameForStatusId(entry.getKey().toString()),
+						entry.getValue());
+			}
+		}
+
+		System.out.println("LLLLLLL" + pieModel.getData());
+
 		return pieModel;
 	}
-
 }
