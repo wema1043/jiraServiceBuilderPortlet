@@ -151,7 +151,7 @@ public class IssueLocalServiceClpInvoker {
 
         _methodName77 = "getAllIssues";
 
-        _methodParameterTypes77 = new String[] {  };
+        _methodParameterTypes77 = new String[] { "java.lang.String" };
 
         _methodName78 = "ParseJsonToIssue";
 
@@ -270,7 +270,7 @@ public class IssueLocalServiceClpInvoker {
 
         if (_methodName77.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-            return IssueLocalServiceUtil.getAllIssues();
+            return IssueLocalServiceUtil.getAllIssues((java.lang.String) arguments[0]);
         }
 
         if (_methodName78.equals(name) &&

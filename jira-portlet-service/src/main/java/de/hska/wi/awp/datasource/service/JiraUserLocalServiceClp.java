@@ -50,6 +50,8 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
     private String[] _methodParameterTypes20;
     private String _methodName21;
     private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
 
     public JiraUserLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -152,9 +154,13 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
         _methodParameterTypes20 = new String[] { "java.lang.String" };
 
-        _methodName21 = "deleteAllJiraUser";
+        _methodName21 = "getDisplayNameForUserId";
 
-        _methodParameterTypes21 = new String[] {  };
+        _methodParameterTypes21 = new String[] { "java.lang.String" };
+
+        _methodName22 = "deleteAllJiraUser";
+
+        _methodParameterTypes22 = new String[] {  };
     }
 
     @Override
@@ -716,10 +722,32 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
     }
 
     @Override
+    public java.lang.String getDisplayNameForUserId(java.lang.String userId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName21,
+                    _methodParameterTypes21,
+                    new Object[] { ClpSerializer.translateInput(userId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.String) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
     public void deleteAllJiraUser() {
         try {
-            _invokableLocalService.invokeMethod(_methodName21,
-                _methodParameterTypes21, new Object[] {  });
+            _invokableLocalService.invokeMethod(_methodName22,
+                _methodParameterTypes22, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

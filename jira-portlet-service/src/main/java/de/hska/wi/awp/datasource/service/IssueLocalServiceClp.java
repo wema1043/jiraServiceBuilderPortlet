@@ -152,7 +152,7 @@ public class IssueLocalServiceClp implements IssueLocalService {
 
         _methodName20 = "getAllIssues";
 
-        _methodParameterTypes20 = new String[] {  };
+        _methodParameterTypes20 = new String[] { "java.lang.String" };
 
         _methodName21 = "ParseJsonToIssue";
 
@@ -705,12 +705,13 @@ public class IssueLocalServiceClp implements IssueLocalService {
     }
 
     @Override
-    public java.lang.String getAllIssues() {
+    public java.lang.String getAllIssues(java.lang.String key) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName20,
-                    _methodParameterTypes20, new Object[] {  });
+                    _methodParameterTypes20,
+                    new Object[] { ClpSerializer.translateInput(key) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

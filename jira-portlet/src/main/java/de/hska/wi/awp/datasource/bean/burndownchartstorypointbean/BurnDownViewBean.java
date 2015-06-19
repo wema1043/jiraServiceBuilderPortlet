@@ -74,19 +74,20 @@ public class BurnDownViewBean implements Serializable{
 
 	
 	public LineChartModel getAreaModel() {
-		createAreaModel();
-		return areaModel;
+		return createAreaModel();
+
 	}
 	
 
 
-	private void createAreaModel() {
+	private LineChartModel createAreaModel() {
+		System.out.println("Create Area Model");
 		
 
 
 		TreeMap<String, Integer> areaMap = getTreeMapForAreaModel();
 		
-		areaModel = new LineChartModel();
+		LineChartModel areaModel = new LineChartModel();
 		areaModel.setTitle("Story Point Velocity");
 		areaModel.setLegendPosition("w");
 		areaModel.setStacked(true); 
@@ -113,15 +114,16 @@ public class BurnDownViewBean implements Serializable{
 		yAxis.setLabel("StoryPoints");
 		yAxis.setMin(0);
 		if(projektId != null){
-			yAxis.setMax(highestStoryPoints + 50);
-			yAxis.setTickInterval("100");
+			areaModel.setTitle("Story Point Velocity des gesamten Teams");
+
 
 		} else {
-			yAxis.setMax(highestStoryPoints + 20);
-			yAxis.setTickInterval("50");
+			areaModel.setTitle("Story Point Velocity des Teammitgliedes");
+
 
 
 		}
+		return areaModel;
 	}
 	
 	public TreeMap<String, Integer> getTreeMapForAreaModel(){

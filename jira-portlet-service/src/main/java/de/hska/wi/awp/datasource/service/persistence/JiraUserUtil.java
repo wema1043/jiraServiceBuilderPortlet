@@ -98,71 +98,71 @@ public class JiraUserUtil {
     }
 
     /**
-    * Returns the jira user where displayname = &#63; or throws a {@link de.hska.wi.awp.datasource.NoSuchJiraUserException} if it could not be found.
+    * Returns the jira user where creatorId = &#63; or throws a {@link de.hska.wi.awp.datasource.NoSuchJiraUserException} if it could not be found.
     *
-    * @param displayname the displayname
+    * @param creatorId the creator ID
     * @return the matching jira user
     * @throws de.hska.wi.awp.datasource.NoSuchJiraUserException if a matching jira user could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.JiraUser findBybyName(
-        java.lang.String displayname)
+        java.lang.String creatorId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchJiraUserException {
-        return getPersistence().findBybyName(displayname);
+        return getPersistence().findBybyName(creatorId);
     }
 
     /**
-    * Returns the jira user where displayname = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+    * Returns the jira user where creatorId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
     *
-    * @param displayname the displayname
+    * @param creatorId the creator ID
     * @return the matching jira user, or <code>null</code> if a matching jira user could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.JiraUser fetchBybyName(
-        java.lang.String displayname)
+        java.lang.String creatorId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchBybyName(displayname);
+        return getPersistence().fetchBybyName(creatorId);
     }
 
     /**
-    * Returns the jira user where displayname = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+    * Returns the jira user where creatorId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
     *
-    * @param displayname the displayname
+    * @param creatorId the creator ID
     * @param retrieveFromCache whether to use the finder cache
     * @return the matching jira user, or <code>null</code> if a matching jira user could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.JiraUser fetchBybyName(
-        java.lang.String displayname, boolean retrieveFromCache)
+        java.lang.String creatorId, boolean retrieveFromCache)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchBybyName(displayname, retrieveFromCache);
+        return getPersistence().fetchBybyName(creatorId, retrieveFromCache);
     }
 
     /**
-    * Removes the jira user where displayname = &#63; from the database.
+    * Removes the jira user where creatorId = &#63; from the database.
     *
-    * @param displayname the displayname
+    * @param creatorId the creator ID
     * @return the jira user that was removed
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.JiraUser removeBybyName(
-        java.lang.String displayname)
+        java.lang.String creatorId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchJiraUserException {
-        return getPersistence().removeBybyName(displayname);
+        return getPersistence().removeBybyName(creatorId);
     }
 
     /**
-    * Returns the number of jira users where displayname = &#63;.
+    * Returns the number of jira users where creatorId = &#63;.
     *
-    * @param displayname the displayname
+    * @param creatorId the creator ID
     * @return the number of matching jira users
     * @throws SystemException if a system exception occurred
     */
-    public static int countBybyName(java.lang.String displayname)
+    public static int countBybyName(java.lang.String creatorId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countBybyName(displayname);
+        return getPersistence().countBybyName(creatorId);
     }
 
     /**

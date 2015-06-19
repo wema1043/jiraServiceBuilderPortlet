@@ -1,5 +1,6 @@
 package de.hska.wi.awp.datasource.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,17 +40,40 @@ public class StudentBean{
 
 	public void fillDatabase(){
         addMessage("Datenbank wird neu geladen");
-	 	String str2 = JiraUserLocalServiceUtil.getAllMembers("HWB");
-		JiraUserLocalServiceUtil.ParseJsonToMember(str2);
+        
+        String projectResponse = ProjectLocalServiceUtil.getAllProjects();
+		ProjectLocalServiceUtil.ParseJsonToProjects(projectResponse);
+		
+		List<Project> allProjects = new ArrayList<Project>();
+		try {
+			allProjects = ProjectLocalServiceUtil.getProjects(0, ProjectLocalServiceUtil.getProjectsCount());
+		} catch (SystemException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		JiraUserLocalServiceUtil.deleteAllJiraUser();
+		try {
+			IssueLocalServiceUtil.deleteAllIssues();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		String str1 = IssueLocalServiceUtil.getAllIssues();
-		IssueLocalServiceUtil.ParseJsonToIssue(str1);
+		for (Project temp : allProjects) {
+			String str2 = JiraUserLocalServiceUtil.getAllMembers(temp.getKey());
+			JiraUserLocalServiceUtil.ParseJsonToMember(str2);
+			
+			String str1 = IssueLocalServiceUtil.getAllIssues(temp.getKey());
+			IssueLocalServiceUtil.ParseJsonToIssue(str1);
+			}
+
+		
 
 		String stati = StatusLocalServiceUtil.getAllStatus();
 		StatusLocalServiceUtil.ParseJsonToStatus(stati);
 
-		String projectResponse = ProjectLocalServiceUtil.getAllProjects();
-		ProjectLocalServiceUtil.ParseJsonToProjects(projectResponse);
+		
 		
 		Project project = ProjectLocalServiceUtil.createProject("10007");
 		project.setKey("MobCo");
@@ -63,12 +87,12 @@ public class StudentBean{
 		issue2.setKey("MobCo");
 		
 		
-		Field field = FieldLocalServiceUtil.createField(500);
+		Field field = FieldLocalServiceUtil.createField(50000);
 		field.setIssueId("50000");
 		field.setCreatedDate(new Date());
 		field.setStatusId(3);
 		field.setStorypoints(15);
-		Field field2 = FieldLocalServiceUtil.createField(501);
+		Field field2 = FieldLocalServiceUtil.createField(50001);
 		field2.setIssueId("50001");
 		field2.setCreatedDate(new Date());
 		field2.setStatusId(5);

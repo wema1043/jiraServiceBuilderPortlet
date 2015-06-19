@@ -64,8 +64,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.de.hska.wi.awp.datasource.model.JiraUser"),
             true);
-    public static long DISPLAYNAME_COLUMN_BITMASK = 1L;
-    public static long CREATORID_COLUMN_BITMASK = 2L;
+    public static long CREATORID_COLUMN_BITMASK = 1L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.JiraUser"));
     private static ClassLoader _classLoader = JiraUser.class.getClassLoader();
@@ -73,8 +72,8 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
             JiraUser.class
         };
     private String _creatorId;
+    private String _originalCreatorId;
     private String _displayname;
-    private String _originalDisplayname;
     private long _columnBitmask;
     private JiraUser _escapedModel;
 
@@ -187,7 +186,17 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
     @Override
     public void setCreatorId(String creatorId) {
+        _columnBitmask |= CREATORID_COLUMN_BITMASK;
+
+        if (_originalCreatorId == null) {
+            _originalCreatorId = _creatorId;
+        }
+
         _creatorId = creatorId;
+    }
+
+    public String getOriginalCreatorId() {
+        return GetterUtil.getString(_originalCreatorId);
     }
 
     @JSON
@@ -202,17 +211,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
     @Override
     public void setDisplayname(String displayname) {
-        _columnBitmask |= DISPLAYNAME_COLUMN_BITMASK;
-
-        if (_originalDisplayname == null) {
-            _originalDisplayname = _displayname;
-        }
-
         _displayname = displayname;
-    }
-
-    public String getOriginalDisplayname() {
-        return GetterUtil.getString(_originalDisplayname);
     }
 
     public long getColumnBitmask() {
@@ -278,7 +277,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
     public void resetOriginalValues() {
         JiraUserModelImpl jiraUserModelImpl = this;
 
-        jiraUserModelImpl._originalDisplayname = jiraUserModelImpl._displayname;
+        jiraUserModelImpl._originalCreatorId = jiraUserModelImpl._creatorId;
 
         jiraUserModelImpl._columnBitmask = 0;
     }

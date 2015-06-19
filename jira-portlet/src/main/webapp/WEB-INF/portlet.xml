@@ -20,7 +20,7 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Open Closed Portlet</title>
+			<title>Jira - Issue Status Verteilung (SP)</title>
 			<short-title>OpenClosedPortlet</short-title>
 			<keywords>Open Closed Portlet</keywords>
 		</portlet-info>
@@ -62,7 +62,7 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Burn Down Chart Storypoints</title>
+			<title>Jira - Story Point Velocity (SP)</title>
 			<short-title>BurnDownStoryPoints</short-title>
 			<keywords>Burndown Storypoints</keywords>
 		</portlet-info>
@@ -100,7 +100,7 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Daten neu laden</title>
+			<title>Jira - Daten neu laden</title>
 			<short-title>Daten neu laden</short-title>
 			<keywords>Daten neu laden</keywords>
 		</portlet-info>
@@ -136,7 +136,7 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Assignedissues</title>
+			<title>Jira - Assigneed Issues for User (SP)</title>
 			<short-title>Assignedissues</short-title>
 			<keywords></keywords>
 		</portlet-info>

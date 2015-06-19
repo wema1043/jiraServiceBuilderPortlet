@@ -51,6 +51,8 @@ public class JiraUserLocalServiceClpInvoker {
     private String[] _methodParameterTypes77;
     private String _methodName78;
     private String[] _methodParameterTypes78;
+    private String _methodName79;
+    private String[] _methodParameterTypes79;
 
     public JiraUserLocalServiceClpInvoker() {
         _methodName0 = "addJiraUser";
@@ -151,9 +153,13 @@ public class JiraUserLocalServiceClpInvoker {
 
         _methodParameterTypes77 = new String[] { "java.lang.String" };
 
-        _methodName78 = "deleteAllJiraUser";
+        _methodName78 = "getDisplayNameForUserId";
 
-        _methodParameterTypes78 = new String[] {  };
+        _methodParameterTypes78 = new String[] { "java.lang.String" };
+
+        _methodName79 = "deleteAllJiraUser";
+
+        _methodParameterTypes79 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -271,6 +277,11 @@ public class JiraUserLocalServiceClpInvoker {
 
         if (_methodName78.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+            return JiraUserLocalServiceUtil.getDisplayNameForUserId((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName79.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
             JiraUserLocalServiceUtil.deleteAllJiraUser();
 
             return null;

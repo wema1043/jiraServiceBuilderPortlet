@@ -268,8 +268,8 @@ public class IssueLocalServiceUtil {
         return getService().getAllIssuesForProjectId(projectId);
     }
 
-    public static java.lang.String getAllIssues() {
-        return getService().getAllIssues();
+    public static java.lang.String getAllIssues(java.lang.String key) {
+        return getService().getAllIssues(key);
     }
 
     public static void ParseJsonToIssue(java.lang.String response) {

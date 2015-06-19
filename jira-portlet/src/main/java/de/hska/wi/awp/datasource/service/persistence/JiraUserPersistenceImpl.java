@@ -74,14 +74,14 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
             JiraUserModelImpl.FINDER_CACHE_ENABLED, JiraUserImpl.class,
             FINDER_CLASS_NAME_ENTITY, "fetchBybyName",
             new String[] { String.class.getName() },
-            JiraUserModelImpl.DISPLAYNAME_COLUMN_BITMASK);
+            JiraUserModelImpl.CREATORID_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_BYNAME = new FinderPath(JiraUserModelImpl.ENTITY_CACHE_ENABLED,
             JiraUserModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBybyName",
             new String[] { String.class.getName() });
-    private static final String _FINDER_COLUMN_BYNAME_DISPLAYNAME_1 = "jiraUser.displayname IS NULL";
-    private static final String _FINDER_COLUMN_BYNAME_DISPLAYNAME_2 = "jiraUser.displayname = ?";
-    private static final String _FINDER_COLUMN_BYNAME_DISPLAYNAME_3 = "(jiraUser.displayname IS NULL OR jiraUser.displayname = '')";
+    private static final String _FINDER_COLUMN_BYNAME_CREATORID_1 = "jiraUser.creatorId IS NULL";
+    private static final String _FINDER_COLUMN_BYNAME_CREATORID_2 = "jiraUser.creatorId = ?";
+    private static final String _FINDER_COLUMN_BYNAME_CREATORID_3 = "(jiraUser.creatorId IS NULL OR jiraUser.creatorId = '')";
     private static final String _SQL_SELECT_JIRAUSER = "SELECT jiraUser FROM JiraUser jiraUser";
     private static final String _SQL_SELECT_JIRAUSER_WHERE = "SELECT jiraUser FROM JiraUser jiraUser WHERE ";
     private static final String _SQL_COUNT_JIRAUSER = "SELECT COUNT(jiraUser) FROM JiraUser jiraUser";
@@ -116,25 +116,25 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     }
 
     /**
-     * Returns the jira user where displayname = &#63; or throws a {@link de.hska.wi.awp.datasource.NoSuchJiraUserException} if it could not be found.
+     * Returns the jira user where creatorId = &#63; or throws a {@link de.hska.wi.awp.datasource.NoSuchJiraUserException} if it could not be found.
      *
-     * @param displayname the displayname
+     * @param creatorId the creator ID
      * @return the matching jira user
      * @throws de.hska.wi.awp.datasource.NoSuchJiraUserException if a matching jira user could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser findBybyName(String displayname)
+    public JiraUser findBybyName(String creatorId)
         throws NoSuchJiraUserException, SystemException {
-        JiraUser jiraUser = fetchBybyName(displayname);
+        JiraUser jiraUser = fetchBybyName(creatorId);
 
         if (jiraUser == null) {
             StringBundler msg = new StringBundler(4);
 
             msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("displayname=");
-            msg.append(displayname);
+            msg.append("creatorId=");
+            msg.append(creatorId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -149,29 +149,29 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     }
 
     /**
-     * Returns the jira user where displayname = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     * Returns the jira user where creatorId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
      *
-     * @param displayname the displayname
+     * @param creatorId the creator ID
      * @return the matching jira user, or <code>null</code> if a matching jira user could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser fetchBybyName(String displayname) throws SystemException {
-        return fetchBybyName(displayname, true);
+    public JiraUser fetchBybyName(String creatorId) throws SystemException {
+        return fetchBybyName(creatorId, true);
     }
 
     /**
-     * Returns the jira user where displayname = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     * Returns the jira user where creatorId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
      *
-     * @param displayname the displayname
+     * @param creatorId the creator ID
      * @param retrieveFromCache whether to use the finder cache
      * @return the matching jira user, or <code>null</code> if a matching jira user could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser fetchBybyName(String displayname, boolean retrieveFromCache)
+    public JiraUser fetchBybyName(String creatorId, boolean retrieveFromCache)
         throws SystemException {
-        Object[] finderArgs = new Object[] { displayname };
+        Object[] finderArgs = new Object[] { creatorId };
 
         Object result = null;
 
@@ -183,7 +183,7 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
         if (result instanceof JiraUser) {
             JiraUser jiraUser = (JiraUser) result;
 
-            if (!Validator.equals(displayname, jiraUser.getDisplayname())) {
+            if (!Validator.equals(creatorId, jiraUser.getCreatorId())) {
                 result = null;
             }
         }
@@ -193,16 +193,16 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
             query.append(_SQL_SELECT_JIRAUSER_WHERE);
 
-            boolean bindDisplayname = false;
+            boolean bindCreatorId = false;
 
-            if (displayname == null) {
-                query.append(_FINDER_COLUMN_BYNAME_DISPLAYNAME_1);
-            } else if (displayname.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_BYNAME_DISPLAYNAME_3);
+            if (creatorId == null) {
+                query.append(_FINDER_COLUMN_BYNAME_CREATORID_1);
+            } else if (creatorId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_BYNAME_CREATORID_3);
             } else {
-                bindDisplayname = true;
+                bindCreatorId = true;
 
-                query.append(_FINDER_COLUMN_BYNAME_DISPLAYNAME_2);
+                query.append(_FINDER_COLUMN_BYNAME_CREATORID_2);
             }
 
             String sql = query.toString();
@@ -216,8 +216,8 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                if (bindDisplayname) {
-                    qPos.add(displayname);
+                if (bindCreatorId) {
+                    qPos.add(creatorId);
                 }
 
                 List<JiraUser> list = q.list();
@@ -239,8 +239,8 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
                     cacheResult(jiraUser);
 
-                    if ((jiraUser.getDisplayname() == null) ||
-                            !jiraUser.getDisplayname().equals(displayname)) {
+                    if ((jiraUser.getCreatorId() == null) ||
+                            !jiraUser.getCreatorId().equals(creatorId)) {
                         FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BYNAME,
                             finderArgs, jiraUser);
                     }
@@ -263,32 +263,32 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     }
 
     /**
-     * Removes the jira user where displayname = &#63; from the database.
+     * Removes the jira user where creatorId = &#63; from the database.
      *
-     * @param displayname the displayname
+     * @param creatorId the creator ID
      * @return the jira user that was removed
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser removeBybyName(String displayname)
+    public JiraUser removeBybyName(String creatorId)
         throws NoSuchJiraUserException, SystemException {
-        JiraUser jiraUser = findBybyName(displayname);
+        JiraUser jiraUser = findBybyName(creatorId);
 
         return remove(jiraUser);
     }
 
     /**
-     * Returns the number of jira users where displayname = &#63;.
+     * Returns the number of jira users where creatorId = &#63;.
      *
-     * @param displayname the displayname
+     * @param creatorId the creator ID
      * @return the number of matching jira users
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countBybyName(String displayname) throws SystemException {
+    public int countBybyName(String creatorId) throws SystemException {
         FinderPath finderPath = FINDER_PATH_COUNT_BY_BYNAME;
 
-        Object[] finderArgs = new Object[] { displayname };
+        Object[] finderArgs = new Object[] { creatorId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -298,16 +298,16 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
             query.append(_SQL_COUNT_JIRAUSER_WHERE);
 
-            boolean bindDisplayname = false;
+            boolean bindCreatorId = false;
 
-            if (displayname == null) {
-                query.append(_FINDER_COLUMN_BYNAME_DISPLAYNAME_1);
-            } else if (displayname.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_BYNAME_DISPLAYNAME_3);
+            if (creatorId == null) {
+                query.append(_FINDER_COLUMN_BYNAME_CREATORID_1);
+            } else if (creatorId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_BYNAME_CREATORID_3);
             } else {
-                bindDisplayname = true;
+                bindCreatorId = true;
 
-                query.append(_FINDER_COLUMN_BYNAME_DISPLAYNAME_2);
+                query.append(_FINDER_COLUMN_BYNAME_CREATORID_2);
             }
 
             String sql = query.toString();
@@ -321,8 +321,8 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                if (bindDisplayname) {
-                    qPos.add(displayname);
+                if (bindCreatorId) {
+                    qPos.add(creatorId);
                 }
 
                 count = (Long) q.uniqueResult();
@@ -351,7 +351,7 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
             JiraUserImpl.class, jiraUser.getPrimaryKey(), jiraUser);
 
         FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BYNAME,
-            new Object[] { jiraUser.getDisplayname() }, jiraUser);
+            new Object[] { jiraUser.getCreatorId() }, jiraUser);
 
         jiraUser.resetOriginalValues();
     }
@@ -427,7 +427,7 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
     protected void cacheUniqueFindersCache(JiraUser jiraUser) {
         if (jiraUser.isNew()) {
-            Object[] args = new Object[] { jiraUser.getDisplayname() };
+            Object[] args = new Object[] { jiraUser.getCreatorId() };
 
             FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BYNAME, args,
                 Long.valueOf(1));
@@ -438,7 +438,7 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
             if ((jiraUserModelImpl.getColumnBitmask() &
                     FINDER_PATH_FETCH_BY_BYNAME.getColumnBitmask()) != 0) {
-                Object[] args = new Object[] { jiraUser.getDisplayname() };
+                Object[] args = new Object[] { jiraUser.getCreatorId() };
 
                 FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BYNAME, args,
                     Long.valueOf(1));
@@ -451,14 +451,14 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     protected void clearUniqueFindersCache(JiraUser jiraUser) {
         JiraUserModelImpl jiraUserModelImpl = (JiraUserModelImpl) jiraUser;
 
-        Object[] args = new Object[] { jiraUser.getDisplayname() };
+        Object[] args = new Object[] { jiraUser.getCreatorId() };
 
         FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BYNAME, args);
         FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BYNAME, args);
 
         if ((jiraUserModelImpl.getColumnBitmask() &
                 FINDER_PATH_FETCH_BY_BYNAME.getColumnBitmask()) != 0) {
-            args = new Object[] { jiraUserModelImpl.getOriginalDisplayname() };
+            args = new Object[] { jiraUserModelImpl.getOriginalCreatorId() };
 
             FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BYNAME, args);
             FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BYNAME, args);

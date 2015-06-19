@@ -246,5 +246,8 @@ public interface JiraUserLocalService extends BaseLocalService,
 
     public void ParseJsonToMember(java.lang.String response);
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getDisplayNameForUserId(java.lang.String userId);
+
     public void deleteAllJiraUser();
 }

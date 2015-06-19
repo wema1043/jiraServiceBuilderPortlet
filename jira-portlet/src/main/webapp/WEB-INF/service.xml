@@ -78,7 +78,7 @@
 		<column name="creatorId" primary="true" type="String"></column>
 		<column name="displayname" type="String"></column>
 		<finder name="byName" return-type="JiraUser">
-			<finder-column name="displayname"></finder-column>
+			<finder-column name="creatorId"></finder-column>
 		</finder>
 	</entity>
 

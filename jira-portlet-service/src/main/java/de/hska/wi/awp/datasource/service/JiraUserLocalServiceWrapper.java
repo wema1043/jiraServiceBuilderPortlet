@@ -285,6 +285,11 @@ public class JiraUserLocalServiceWrapper implements JiraUserLocalService,
     }
 
     @Override
+    public java.lang.String getDisplayNameForUserId(java.lang.String userId) {
+        return _jiraUserLocalService.getDisplayNameForUserId(userId);
+    }
+
+    @Override
     public void deleteAllJiraUser() {
         _jiraUserLocalService.deleteAllJiraUser();
     }

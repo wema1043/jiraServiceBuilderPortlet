@@ -15,11 +15,13 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.Base64;
 
+import de.hska.wi.awp.datasource.NoSuchJiraUserException;
 import de.hska.wi.awp.datasource.model.Issue;
 import de.hska.wi.awp.datasource.model.JiraUser;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.base.JiraUserLocalServiceBaseImpl;
+import de.hska.wi.awp.datasource.service.persistence.JiraUserUtil;
 import de.hska.wi.awp.datasource.utils.Constants;
 
 /**
@@ -76,9 +78,16 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 		System.out.println("BEGINN ParseJsonToMember()");
 
 		try {
-			JiraUserLocalServiceUtil.deleteAllJiraUser();
 			JSONArray jsonresponse = new JSONArray(response);
-			
+			if(JiraUserUtil.countBybyName("admin") != 0){
+				JiraUserUtil.removeBybyName("admin");
+			}
+			if(JiraUserUtil.countBybyName("professorlogin") != 0){
+				JiraUserUtil.removeBybyName("professorlogin");
+			}
+			if(JiraUserUtil.countBybyName("stda1024") != 0){
+				JiraUserUtil.removeBybyName("stda1024");
+			}
 			for (int zl = 0; zl < jsonresponse.length(); zl++) {
 				JiraUser jiraUser = JiraUserLocalServiceUtil
 						.createJiraUser(jsonresponse.getJSONObject(zl).getString(
@@ -96,6 +105,20 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 		
 		
 		System.out.println("END ParseJsonToMember()");
+	}
+	
+	public String getDisplayNameForUserId(String userId){
+		String response = "";
+		try {
+			response = JiraUserUtil.findBybyName(userId).getDisplayname();
+		} catch (NoSuchJiraUserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block 
+			e.printStackTrace();
+		}
+		return response;
 	}
 	
 	public void deleteAllJiraUser(){

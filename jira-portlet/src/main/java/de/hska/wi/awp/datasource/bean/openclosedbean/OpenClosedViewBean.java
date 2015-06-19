@@ -1,10 +1,13 @@
 package de.hska.wi.awp.datasource.bean.openclosedbean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +19,7 @@ import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
 import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
 
 @SessionScoped
@@ -26,7 +30,7 @@ public class OpenClosedViewBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6393291273408020985L;
-
+			
 	private PieChartModel pieModel;
 
 	private String projektId;
@@ -53,8 +57,14 @@ public class OpenClosedViewBean implements Serializable {
 	}
 	
 	public PieChartModel getPieModel() {
-		createPieModel();
-		return pieModel;
+		if(createPieModel() == null){
+			System.out.println("Pie Chart ist null");
+		} else {
+			System.out.println("Pie Chart ist nicht null");
+
+		}
+		return createPieModel();
+
 	}
 
 	public void setPieModel(PieChartModel pieModel) {
@@ -63,43 +73,29 @@ public class OpenClosedViewBean implements Serializable {
 
 	
 
-	private List<Field> getAllFieldsForProjekt() {
-		System.out.println("get  all fields");
-
-		String thisProjectID = ProjectLocalServiceUtil
-				.getProjectIdForProjectName(projektId);
-
-		List<Issue> allIssues = IssueLocalServiceUtil
-				.getAllIssuesForProjectId(thisProjectID);
-
-		List<Field> allFields = FieldLocalServiceUtil
-				.getAllFieldsForIsses(allIssues);
-		
-		System.out.println("recived all fields");
-
-		return allFields;
-	}
-
-	private void createPieModel() {
+	private PieChartModel createPieModel() {
 		System.out.println("create PieModel");
 		System.out.println("studentId: " + studenthskaId);
-
-		
-		List<Field> allFields = null;
-		if(projektId != null){
-			allFields = FieldLocalServiceUtil.getAllFieldsforProject(projektId);
-		} else {
-			allFields = FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId);
-
-		}
-		
-
-		pieModel = new PieChartModel();
-
+		PieChartModel pieModel = new PieChartModel();
 		pieModel.setLegendPosition("w");
 		pieModel.setTitle("Issues from Team");
 		pieModel.setDataFormat("value");
 		pieModel.setShowDataLabels(true);
+
+
+		List<Field> allFields = new ArrayList<Field>();
+		if(projektId != null){
+			System.out.println("alle Fields für das Projekt");
+			allFields = FieldLocalServiceUtil.getAllFieldsforProject(projektId);
+			pieModel.setTitle("Issue Verteilung des ausgewählten Teams");
+		} else {
+			System.out.println("alle Fields für den Assignee");
+			allFields = FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId);
+			pieModel.setTitle("Issues Verteilung des ausgewählten Teammitglieds");
+
+
+		}
+			
 
 		int open = 0;
 		int progress = 0;
@@ -122,20 +118,13 @@ public class OpenClosedViewBean implements Serializable {
 
 		}
 
-		pieModel.set("Open: " + open, open);
-		System.out.println("OPEN " + open);
-
-		pieModel.set("In Progress " + progress, progress);
-		System.out.println("Progress " + progress);
-
-		pieModel.set("Reopend " + reopend, reopend);
-		System.out.println("Reopend " + reopend);
-
-		pieModel.set("Resolved " + resolved, resolved);
-		System.out.println("Resolved " + resolved);
-
-		pieModel.set("Closed " + closed, closed);
-		System.out.println("Closed " + closed);
+		pieModel.set("Open ", open);
+		pieModel.set("In Progress ", progress);
+		pieModel.set("Reopend ", reopend);
+		pieModel.set("Resolved ", resolved);
+		pieModel.set("Closed ", closed);
+		
+		return pieModel;
 	}
 
 }

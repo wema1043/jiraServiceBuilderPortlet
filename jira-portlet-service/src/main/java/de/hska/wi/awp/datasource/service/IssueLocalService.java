@@ -246,7 +246,7 @@ public interface IssueLocalService extends BaseLocalService,
         java.lang.String projectId);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.lang.String getAllIssues();
+    public java.lang.String getAllIssues(java.lang.String key);
 
     public void ParseJsonToIssue(java.lang.String response);
 

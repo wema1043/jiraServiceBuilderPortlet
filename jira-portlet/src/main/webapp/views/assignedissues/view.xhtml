@@ -10,7 +10,6 @@
 	<h:body>
 		<!-- <h:outputText value="#{assignedIssues.init()}" /> -->
 		<h:form rendered="#{assignedIssues.issuesCount != 0}">
-			<h:outputText value="#{assignedIssues.issuesCount} Issues total " />
 			<p:chart type="pie" model="#{assignedIssues.assignedIssuesPieModel}" responsive="true" />
 		</h:form>
 		<h:form rendered="#{assignedissues.fieldsCount == 0}">

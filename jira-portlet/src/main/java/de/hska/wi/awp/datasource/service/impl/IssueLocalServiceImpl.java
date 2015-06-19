@@ -71,11 +71,11 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 		return allIssuesForProjectId;
 	}
 
-	public String getAllIssues() {
+	public String getAllIssues(String key) {
 		System.out.println("BEGINN getAllIssues()");
 
 		String url = Constants.JIRA_HOST_NAME
-				+ "/rest/api/2/search?jql=project=HWB&maxResults=-1";
+				+ "/rest/api/2/search?jql=project=" + key + "&maxResults=-1";
 		String auth = new String(Base64.encode(Constants.JIRA_USERNAME + ":"
 				+ Constants.JIRA_PASSWORD));
 
@@ -102,12 +102,7 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 	public void ParseJsonToIssue(String response) {
 		System.out.println("BEGINN ParseJsonToIssue()");
 
-		try {
-			IssueLocalServiceUtil.deleteAllIssues();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		JSONObject jsonObject = null;
 		try {
@@ -136,7 +131,7 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 				myIssue = IssueLocalServiceUtil.createIssue(tasks
 						.getJSONObject(zl).getString("id"));
 
-				Field myField = FieldLocalServiceUtil.createField(zl);
+				Field myField = FieldLocalServiceUtil.createField(FieldLocalServiceUtil.getFieldsCount()+1);
 
 				myIssue.setKey(tasks.getJSONObject(zl).getString("key"));
 				myIssue.setProjectId(tasks.getJSONObject(zl).getJSONObject("fields").getJSONObject("project").getString("id"));

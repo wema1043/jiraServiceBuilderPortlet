@@ -271,6 +271,11 @@ public class JiraUserLocalServiceUtil {
         getService().ParseJsonToMember(response);
     }
 
+    public static java.lang.String getDisplayNameForUserId(
+        java.lang.String userId) {
+        return getService().getDisplayNameForUserId(userId);
+    }
+
     public static void deleteAllJiraUser() {
         getService().deleteAllJiraUser();
     }

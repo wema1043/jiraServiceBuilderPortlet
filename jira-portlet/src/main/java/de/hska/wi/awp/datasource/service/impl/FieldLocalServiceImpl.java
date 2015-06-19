@@ -41,9 +41,10 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 	 * field local service.
 	 */
 
-	public String getAssigneeForIssue(String issueId){
+	public String getAssigneeForIssue(String issueId) {
+		System.out.println("BEGINN getAssigneeForIssue");
 		String assigneeId = "";
-		
+
 		try {
 			assigneeId = FieldUtil.findByFieldForIssue(issueId).getAssigneeId();
 		} catch (NoSuchFieldException e) {
@@ -54,14 +55,18 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 			e.printStackTrace();
 		}
 		
+		System.out.println("END getAssigneeForIssue");
 		return assigneeId;
 	}
-	
+
 	public List<Field> getAllFieldsForIsses(List<Issue> issues) {
+		System.out.println("BEGINN getAllFieldsForIsses");
+
 		List<Field> allFields = new ArrayList<Field>();
 		for (int zl = 0; zl < issues.size(); zl++) {
 			try {
-				allFields.add(FieldUtil.findByFieldForIssue(issues.get(zl).getIssueId()));
+				allFields.add(FieldUtil.findByFieldForIssue(issues.get(zl)
+						.getIssueId()));
 			} catch (NoSuchFieldException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,11 +75,13 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 				e.printStackTrace();
 			}
 		}
-
+		
+		System.out.println("END getAllFieldsForIsses");
 		return allFields;
 	}
 
 	public Integer countAllFieldsForAssignee(String assigneeId) {
+		System.out.println("BEGINN countAllFieldsForAssignee");
 
 		List<Field> allFieldsForAssignee = new ArrayList<Field>();
 		try {
@@ -83,11 +90,13 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("END countAllFieldsForAssignee");
 		return allFieldsForAssignee.size();
 
 	}
-	
+
 	public List<Field> getAllFieldsForAssignee(String assigneeId) {
+		System.out.println("BEGINN getAllFieldsForAssignee");
 
 		List<Field> allFieldsForAssignee = new ArrayList<Field>();
 		try {
@@ -96,39 +105,54 @@ public class FieldLocalServiceImpl extends FieldLocalServiceBaseImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Anzahl" + allFieldsForAssignee.size());
+		System.out.println("END getAllFieldsForAssignee");
+
 		return allFieldsForAssignee;
-
 	}
-	
-	public List<Field> getAllFieldsforProject(String projektId){
-		String thisProjectID = ProjectLocalServiceUtil
-				.getProjectIdForProjectName(projektId);
 
-		List<Issue> allIssues = IssueLocalServiceUtil
-				.getAllIssuesForProjectId(thisProjectID);
+	public List<Field> getAllFieldsforProject(String projektId) {
+		System.out.println("BEGINN getAllFieldsforProject");
 
-		List<Field> allFields = FieldLocalServiceUtil
-				.getAllFieldsForIsses(allIssues);
-		
+		System.out.println("getAllFieldsforProject" + projektId);
+		List<Field> allFields = new ArrayList<Field>();
+		if (projektId != null) {
+			System.out.println("projektId ist nicht null");
+
+			String thisProjectID = ProjectLocalServiceUtil
+					.getProjectIdForProjectName(projektId);
+
+			List<Issue> allIssues = IssueLocalServiceUtil
+					.getAllIssuesForProjectId(thisProjectID);
+
+			allFields = FieldLocalServiceUtil
+					.getAllFieldsForIsses(allIssues);
+		} else {
+			System.out.println("projektId ist null");
+
+		}
+		System.out.println("END getAllFieldsforProject");
 		return allFields;
 	}
 
 	public Integer countAllFieldsForStatus(Integer statusId, List<Field> issues) {
+		System.out.println("BEGINN countAllFieldsForStatus");
 
 		List<Field> allFieldsForStatus = new ArrayList<Field>();
 		try {
-//			 allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId);
-			for (int i = 0; i < issues.size(); i++){
+			// allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId);
+			for (int i = 0; i < issues.size(); i++) {
 				System.out.println("IssueID:" + issues.get(i).getStatusId());
-				allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId, Long.toString(issues.get(i).getStatusId()));
+				allFieldsForStatus = FieldUtil.findByFieldsForStatus(statusId,
+						Long.toString(issues.get(i).getStatusId()));
 			}
 
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("END countAllFieldsForStatus");
 		return allFieldsForStatus.size();
 
 	}

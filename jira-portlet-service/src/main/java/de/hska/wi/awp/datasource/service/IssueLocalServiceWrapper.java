@@ -279,8 +279,8 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
     }
 
     @Override
-    public java.lang.String getAllIssues() {
-        return _issueLocalService.getAllIssues();
+    public java.lang.String getAllIssues(java.lang.String key) {
+        return _issueLocalService.getAllIssues(key);
     }
 
     @Override
