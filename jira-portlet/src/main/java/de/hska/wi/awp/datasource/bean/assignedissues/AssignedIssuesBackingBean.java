@@ -33,18 +33,21 @@ public class AssignedIssuesBackingBean {
 
 	private String studentHskaId;
 	private String projectHskaId;
-	private List<Field> allAssignedFields;
-	private List<Issue> allIssues;
+	private List<Field> allAssignedFields = new ArrayList<Field>();
+	private List<Issue> allIssues = new ArrayList<Issue>();
 	private List<Field> allFields;
 
 	public void init() {
 
+		if(studentHskaId != null){
 		setAllAssignedFields(FieldLocalServiceUtil
 				.getAllFieldsForAssignee(studentHskaId));
+		}
+		if(projectHskaId != null){
 		setAllIssues(IssueLocalServiceUtil
 				.getAllIssuesForProjectId(ProjectLocalServiceUtil
 						.getProjectIdForProjectName(projectHskaId)));
-
+		}
 		// System.out.println(getStudentHskaId());
 		// System.out.println(studentHskaId);
 		// System.out.println(FieldLocalServiceUtil.getAllFieldsForAssignee(getStudentHskaId()).size());
@@ -130,13 +133,15 @@ public class AssignedIssuesBackingBean {
 	}
 
 	public PieChartModel getAssignedIssuesPieModel() {
+		System.out.println("getAssignedIssuesPieModel: ");
 
 		HashMap<String, Integer> myMap = new HashMap<String, Integer>();
 
 		for (Issue singleIssue : getAllIssues()) {
 			String assignee = FieldLocalServiceUtil
 					.getAssigneeForIssue(singleIssue.getIssueId());
-			if (assignee != null) {
+
+			if (assignee != null && !assignee.equals("")) {
 				String displayName = JiraUserLocalServiceUtil
 						.getDisplayNameForUserId(assignee);
 				if (displayName.isEmpty()) {

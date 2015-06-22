@@ -10,6 +10,36 @@
 		
 	</h:head>
 	<h:body>
-		<p:chart type="line" model="#{burnDownViewBean.areaModel}" responsive="true" />
+	
+	<h:form rendered="#{not empty burnDownViewBean.studenthskaId and burnDownViewBean.countFieldsForUser != 0}">
+						<p:chart type="line" model="#{burnDownViewBean.areaModel}" responsive="true" />
+
+		</h:form>
+		
+		<h:form rendered="#{not empty burnDownViewBean.projektId and burnDownViewBean.countFieldsForProjekt != 0}">
+						<p:chart type="line" model="#{burnDownViewBean.areaModel}" responsive="true" />
+
+		</h:form>
+		
+		
+		<h:form rendered="#{empty burnDownViewBean.projektId and empty burnDownViewBean.studenthskaId}">
+			<h:outputText value="Bitte wählen sie einen Studenten oder eine Gruppe" />
+
+		</h:form>
+		
+		<h:form rendered="#{not empty burnDownViewBean.studenthskaId and burnDownViewBean.countFieldsForUser == 0}">
+			<h:outputText value="Dieser Student hat keine zugewiesenen Issues" />
+
+		</h:form>
+		
+		<h:form rendered="#{not empty burnDownViewBean.projektId and burnDownViewBean.countFieldsForProjekt == 0}">
+			<h:outputText value="Für dieses Projekt wurden noch keine Issues angelegt" />
+
+		</h:form>
+	
+	
+	
+	
+	
 	</h:body>
 </f:view>

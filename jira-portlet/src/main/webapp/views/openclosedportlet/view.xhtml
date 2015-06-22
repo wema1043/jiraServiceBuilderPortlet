@@ -9,14 +9,32 @@
 	<h:head />
 	<h:body>
 
-			<p:chart type="pie" model="#{openClosedViewBean.pieModel}"
-				responsive="true" />
-				
+		
+		<h:form rendered="#{not empty openClosedViewBean.studenthskaId and openClosedViewBean.countFieldsForUser != 0}">
+				<p:chart type="pie" model="#{openClosedViewBean.pieModel}"
+							responsive="true" />
+		</h:form>
+		
+		<h:form rendered="#{not empty openClosedViewBean.projektId and openClosedViewBean.countFieldsForProjekt != 0}">
+				<p:chart type="pie" model="#{openClosedViewBean.pieModel}"
+						responsive="true" />
+		</h:form>
 		
 		
+		<h:form rendered="#{empty openClosedViewBean.projektId and empty openClosedViewBean.studenthskaId}">
+			<h:outputText value="Bitte wählen sie einen Studenten oder eine Gruppe" />
 
-				
-
+		</h:form>
 		
+		<h:form rendered="#{not empty openClosedViewBean.studenthskaId and openClosedViewBean.countFieldsForUser == 0}">
+			<h:outputText value="Dieser Student hat keine zugewiesenen Issues" />
+
+		</h:form>
+		
+		<h:form rendered="#{not empty openClosedViewBean.projektId and openClosedViewBean.countFieldsForProjekt == 0}">
+			<h:outputText value="Für dieses Projekt wurden noch keine Issues angelegt" />
+
+		</h:form>
+
 	</h:body>
 </f:view>

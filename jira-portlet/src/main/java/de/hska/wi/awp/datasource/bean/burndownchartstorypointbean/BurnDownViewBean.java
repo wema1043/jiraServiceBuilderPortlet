@@ -23,6 +23,10 @@ import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import de.hska.wi.awp.datasource.bean.openclosedbean.OpenClosedViewBean;
 import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
 import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
@@ -39,6 +43,8 @@ public class BurnDownViewBean implements Serializable{
 	 */
 	private static final long serialVersionUID = -94301266401513498L;
 	
+	private static Log log = LogFactoryUtil.getLog(BurnDownViewBean.class);
+
 	
 	private LineChartModel areaModel;
 	private int currentStoryPoints = 0;
@@ -78,10 +84,20 @@ public class BurnDownViewBean implements Serializable{
 
 	}
 	
+	public Integer countFieldsForProjekt;
+	public Integer getCountFieldsForProjekt(){
+		return 	FieldLocalServiceUtil.getAllFieldsforProject(projektId).size();
+	}
+	
+	public Integer countFieldsForUser;
+	public Integer getCountFieldsForUser(){
+		return 	FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId).size();
+	}
+	
 
 
 	private LineChartModel createAreaModel() {
-		System.out.println("Create Area Model");
+		log.info("creating LineChartModel");
 		
 
 
@@ -115,32 +131,27 @@ public class BurnDownViewBean implements Serializable{
 		yAxis.setMin(0);
 		if(projektId != null){
 			areaModel.setTitle("Story Point Velocity des gesamten Teams");
-
-
 		} else {
 			areaModel.setTitle("Story Point Velocity des Teammitgliedes");
-
-
-
 		}
+		
 		return areaModel;
 	}
 	
+	
 	public TreeMap<String, Integer> getTreeMapForAreaModel(){
+		log.info("creating TreeMap for StorypointVelocity");
 		currentStoryPoints = 0;
 		highestStoryPoints = 0;
 		
-		
-
 		TreeMap<String, Integer> resultMap = new TreeMap<String, Integer>();
 		
-
 		List<Field> allFields = null;
 		if(projektId != null){
 			allFields = FieldLocalServiceUtil.getAllFieldsforProject(projektId);
+
 		} else {
 			allFields = FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId);
-
 		}	
 		
 		Date firstDate = allFields.get(1).getCreatedDate();
@@ -150,7 +161,9 @@ public class BurnDownViewBean implements Serializable{
 
 		Calendar end = Calendar.getInstance();
 		end.setTime(todayDate);
+		end.add(Calendar.DATE, 1);
 
+		
 
 		while (!start.after(end)) {
 			Date targetDay = start.getTime();
@@ -188,6 +201,7 @@ public class BurnDownViewBean implements Serializable{
 				}
 
 			}
+
 
 		}
 		

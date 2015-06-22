@@ -9,6 +9,8 @@ import java.util.List;
 import org.primefaces.json.JSONArray;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -42,27 +44,32 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
      * Never reference this interface directly. Always use {@link de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil} to access the project local service.
      */
 	
+	private static Log log = LogFactoryUtil.getLog(ProjectLocalServiceImpl.class);
+
+	
 	public String getProjectIdForProjectName(String projectName){
+		log.debug("BEGIN: getProjectIdForProjectName");
 		String result = null;
 		
 		try {
 			result = ProjectUtil.findByKey(projectName).getProjectId();
 		} catch (NoSuchProjectException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("es wurden keine Projekte für den Projektnamen " + projectName + "gefunden!");
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
+		log.debug("END: getProjectIdForProjectName");
+
 		return result;
 	}
 	
 	
 	
 	public String getAllProjects(){
-		System.out.println("BEGINN getAllProjects()");
+		log.debug("BEGIN: getAllProjects");
 
 		String url = Constants.JIRA_HOST_NAME + Constants.JIRA_API_ALL_PROJECTS;
 		String auth = new String(Base64.encode(Constants.JIRA_USERNAME + ":" + Constants.JIRA_PASSWORD));
@@ -84,13 +91,13 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 
 			String responseBody = response.getEntity(String.class);
 
-			System.out.println("END getAllProjects()");
+			log.debug("END: getAllProjects");
 			return responseBody;
 		}
 	}
 
 	public void ParseJsonToProjects(String response){
-		System.out.println("BEGINN ParseJsonToProjects()");
+		log.debug("BEGIN: ParseJsonToProjects");
 
 		try {
 			this.deleteAllProjects();
@@ -111,10 +118,12 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 		}
 		
 		
-		System.out.println("END ParseJsonToProjects()");
+		log.debug("END: ParseJsonToProjects");
 	}
 	
 	public void deleteAllProjects(){
+		log.debug("BEGIN: deleteAllProjects");
+
 		List<Project> allProjects = new ArrayList<Project>();
 		try {
 			allProjects = ProjectLocalServiceUtil.getProjects(0, ProjectLocalServiceUtil.getProjectsCount());
@@ -130,5 +139,6 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 				e.printStackTrace();
 			}
 		}
+		log.debug("END: deleteAllProjects");
 	}
 }
