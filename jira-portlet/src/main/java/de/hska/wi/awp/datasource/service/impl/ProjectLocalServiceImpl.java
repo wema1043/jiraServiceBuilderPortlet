@@ -33,7 +33,7 @@ import de.hska.wi.awp.datasource.utils.Constants;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Marc Weisenburger
  * @see de.hska.wi.awp.datasource.service.base.ProjectLocalServiceBaseImpl
  * @see de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil
  */

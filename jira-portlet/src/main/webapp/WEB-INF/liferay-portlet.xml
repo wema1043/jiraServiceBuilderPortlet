@@ -7,15 +7,18 @@
 		<icon>/icon.png</icon>
 		<scheduler-entry>
 			<scheduler-description>
-				This scheduler is used to fill the Jira Database every 3 hours
+				This scheduler is used to fill the Jira
+				Database every 3 hours
 			</scheduler-description>
 			<scheduler-event-listener-class>de.hska.wi.awp.datasource.bean.loadjiradata.JiraScheduler</scheduler-event-listener-class>
 			<trigger>
-				<simple>
-					<simple-trigger-value>1</simple-trigger-value>
-					<time-unit>hour</time-unit>
-				</simple>
+				<cron>
+					<cron-trigger-value>0 0 12 * * ?</cron-trigger-value>
+				</cron>
 			</trigger>
+
+			<!-- <trigger> <simple> <simple-trigger-value>2</simple-trigger-value> 
+				<time-unit>minute</time-unit> </simple> </trigger> -->
 		</scheduler-entry>
 		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/main.css</header-portlet-css>

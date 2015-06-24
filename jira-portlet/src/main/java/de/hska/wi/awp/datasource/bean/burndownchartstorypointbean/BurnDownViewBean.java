@@ -1,3 +1,10 @@
+/**
+ * The ViewBean to display the BurnDownChart for the StoryPoint Velocity
+ * of the selected team or student
+ *
+ * @author Marc Weisenburger
+ */
+
 package de.hska.wi.awp.datasource.bean.burndownchartstorypointbean;
 
 import java.io.Serializable;
@@ -39,68 +46,87 @@ public class BurnDownViewBean implements Serializable{
 
 	 
 	/**
-	 * 
+	 * Serializable
 	 */
 	private static final long serialVersionUID = -94301266401513498L;
 	
+	/**
+     * Logger Util
+     */
 	private static Log log = LogFactoryUtil.getLog(BurnDownViewBean.class);
 
 	
+	/**
+     * The LineChartModel to display
+     */
 	private LineChartModel areaModel;
+	
+	/**
+     * currentStoryPoints for the team or user
+     */
 	private int currentStoryPoints = 0;
+	
+	/**
+     * highest Storypoints for the team or user
+     */
 	private int highestStoryPoints = 0;
+	
+	/**
+     * studenthskaId
+     * recieved from the navigationportlet
+     */
 	private String studenthskaId;
+	
+	/**
+     * projektId
+     * recieved from the navigationportlet
+     */
+	private String projektId;
+
+	/**
+     * current date to set x-Axis
+     */
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	Date todayDate = new Date();
 
 
-	public void setAreaModel(LineChartModel areaModel) {
-		this.areaModel = areaModel;
-	}
-	
-	public String getStudenthskaId() {
-		return studenthskaId;
-	}
 
-	public void setStudenthskaId(String studenthskaId) {
-		this.studenthskaId = studenthskaId;
-	}
-	
-	private String projektId;
-	
-	public String getProjektId() {
-		return projektId;
-	}
-
-	public void setProjektId(String projektId) {
-		this.projektId = projektId;
-
-	}
-	
-
-	
-	public LineChartModel getAreaModel() {
-		return createAreaModel();
-
-	}
-	
+	/**
+     * counts all Fields for the selected project
+     */
 	public Integer countFieldsForProjekt;
+	
+	/**
+     * method to check if the project has fields
+     * @return Integer with the amount of Fields for the selected project
+     */
 	public Integer getCountFieldsForProjekt(){
 		return 	FieldLocalServiceUtil.getAllFieldsforProject(projektId).size();
 	}
 	
+	/**
+     * counts all Fields for the selected user
+     */
 	public Integer countFieldsForUser;
+	
+	/**
+     * method to check if the user has fields
+     * @return Integer with the amount of Fields for the selected user
+     */
 	public Integer getCountFieldsForUser(){
 		return 	FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId).size();
 	}
 	
 
-
+	/**
+     * 
+     * creates the LineChartModel for the selected team user
+     * 
+     * @return current LineChartModel for team or user
+     */
 	private LineChartModel createAreaModel() {
 		log.info("creating LineChartModel");
 		
-
-
 		TreeMap<String, Integer> areaMap = getTreeMapForAreaModel();
 		
 		LineChartModel areaModel = new LineChartModel();
@@ -138,7 +164,14 @@ public class BurnDownViewBean implements Serializable{
 		return areaModel;
 	}
 	
-	
+	/**
+     * 
+     * creates the TreeMap with datas for the team or user
+     * the method decides automatically if team or user is selected
+     * 
+     * 
+     * @return TreeMap with Datas for the LineChartModel
+     */
 	public TreeMap<String, Integer> getTreeMapForAreaModel(){
 		log.info("creating TreeMap for StorypointVelocity");
 		currentStoryPoints = 0;
@@ -209,5 +242,37 @@ public class BurnDownViewBean implements Serializable{
 		return resultMap;
 		
 	}
+	
+	/**
+     * create the AreaModel
+     */
+	public LineChartModel getAreaModel() {
+		return createAreaModel();
+
+	}
+	
+	public void setAreaModel(LineChartModel areaModel) {
+		this.areaModel = areaModel;
+	}
+	
+	public String getStudenthskaId() {
+		return studenthskaId;
+	}
+
+	public void setStudenthskaId(String studenthskaId) {
+		this.studenthskaId = studenthskaId;
+	}
+	
+	
+	public String getProjektId() {
+		return projektId;
+	}
+
+	public void setProjektId(String projektId) {
+		this.projektId = projektId;
+
+	}
+	
+	
 
 }

@@ -40,7 +40,7 @@ import de.hska.wi.awp.datasource.utils.Constants;
  * checks based on the propagated JAAS credentials because this service can only
  * be accessed from within the same VM. </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Marc Weisenburger
  * @see de.hska.wi.awp.datasource.service.base.IssueLocalServiceBaseImpl
  * @see de.hska.wi.awp.datasource.service.IssueLocalServiceUtil
  */

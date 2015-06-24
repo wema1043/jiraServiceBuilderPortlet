@@ -1,4 +1,8 @@
-
+/**
+ * Scheduler to download all Jira datas
+ *
+ * @author Marc Weisenburger
+ */
 package de.hska.wi.awp.datasource.bean.loadjiradata;
 
 import java.util.ArrayList;
@@ -23,6 +27,11 @@ import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 
 public class JiraScheduler implements MessageListener {
 
+	/**
+	 * Method with recieves an Message every time the scheduler is called
+	 *
+	 * @param Message
+	 */
 	public void receive(Message arg0)
 		throws MessageListenerException {
 
@@ -32,6 +41,11 @@ public class JiraScheduler implements MessageListener {
 
 	}
 
+	
+	/**
+	 * updates the database with new jira datas
+	 *
+	 */
 	public void fillDatabase() {
 
 		String projectResponse = ProjectLocalServiceUtil.getAllProjects();
@@ -68,6 +82,7 @@ public class JiraScheduler implements MessageListener {
 		String stati = StatusLocalServiceUtil.getAllStatus();
 		StatusLocalServiceUtil.ParseJsonToStatus(stati);
 
+		//mockdata
 		Project project = ProjectLocalServiceUtil.createProject("20007");
 		project.setKey("MobCo");
 		project.setName("Kollaborationsplattform");

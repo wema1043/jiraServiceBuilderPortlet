@@ -1,3 +1,8 @@
+/**
+ * class to download the current Jira Datas manually
+ *
+ * @author Marc Weisenburger
+ */
 
 package de.hska.wi.awp.datasource.bean.loadjiradata;
 
@@ -32,13 +37,27 @@ import de.hska.wi.awp.datasource.service.impl.StatusLocalServiceImpl;
 @RequestScoped
 public class LoadJiraDataModelBean {
 
+	/**
+	 * Logger Util
+	 */
 	private static Log log = LogFactoryUtil.getLog(LoadJiraDataModelBean.class);
 
+	/**
+	 * recieves the ActionEvent from the Button
+	 * 
+	 * @param ActionEvent
+	 */
 	public void buttonAction(ActionEvent actionEvent) {
 
 		fillDatabase();
 	}
 
+	/**
+	 * displays a Message to show the user the current status
+	 * 
+	 * @param String
+	 *            , MessageText to display
+	 */
 	public void addMessage(String summary) {
 
 		FacesMessage message =
@@ -46,8 +65,12 @@ public class LoadJiraDataModelBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
+	/**
+	 * updates the database with new jira datas
+	 */
 	public void fillDatabase() {
 
+		log.info("Database will be reloaded manually");
 		addMessage("Datenbank wird neu geladen");
 
 		String projectResponse = ProjectLocalServiceUtil.getAllProjects();

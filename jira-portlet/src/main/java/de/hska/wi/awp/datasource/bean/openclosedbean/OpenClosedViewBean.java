@@ -31,17 +31,40 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class OpenClosedViewBean implements Serializable {
 
 	/**
-	 * 
+	 * Serializable
 	 */
 	private static final long serialVersionUID = -6393291273408020985L;
 
+	/**
+     * Logger Util
+     */
 	private static Log log = LogFactoryUtil.getLog(OpenClosedViewBean.class);
 
-
+	/**
+     * projektId
+     * recieved from the navigationportlet
+     */
 	private String projektId;
+	
+	/**
+     * studenthskaId
+     * recieved from the navigationportlet
+     */
 	private String studenthskaId;
+	
+	/**
+     * counts all Fields for the selected project
+     */
 	public Integer countFieldsForProjekt;
+	
+	/**
+     * counts all Fields for the selected user
+     */
 	public Integer countFieldsForUser;
+	
+	/**
+     * The PieChartModel to display
+     */
 	public PieChartModel pieModel;
 
 	
@@ -124,10 +147,18 @@ public class OpenClosedViewBean implements Serializable {
 		this.pieModel = pieModel;
 	}
 	
+	/**
+     * method to check if the project has fields
+     * @return Integer with the amount of Fields for the selected project
+     */
 	public Integer getCountFieldsForProjekt(){
 		return 	FieldLocalServiceUtil.getAllFieldsforProject(projektId).size();
 	}
 	
+	/**
+     * method to check if the user has fields
+     * @return Integer with the amount of Fields for the selected user
+     */
 	public Integer getCountFieldsForUser(){
 		return 	FieldLocalServiceUtil.getAllFieldsForAssignee(studenthskaId).size();
 	}

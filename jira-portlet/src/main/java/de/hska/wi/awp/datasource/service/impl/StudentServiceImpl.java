@@ -12,7 +12,7 @@ import de.hska.wi.awp.datasource.service.base.StudentServiceBaseImpl;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Marc Weisenburger
  * @see de.hska.wi.awp.datasource.service.base.StudentServiceBaseImpl
  * @see de.hska.wi.awp.datasource.service.StudentServiceUtil
  */

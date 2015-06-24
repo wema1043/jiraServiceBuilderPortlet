@@ -27,7 +27,7 @@ import de.hska.wi.awp.datasource.service.persistence.FieldUtil;
  * checks based on the propagated JAAS credentials because this service can only
  * be accessed from within the same VM. </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Marc Weisenburger
  * @see de.hska.wi.awp.datasource.service.base.FieldLocalServiceBaseImpl
  * @see de.hska.wi.awp.datasource.service.FieldLocalServiceUtil
  */
