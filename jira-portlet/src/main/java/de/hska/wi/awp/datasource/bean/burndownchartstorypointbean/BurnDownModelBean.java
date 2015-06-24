@@ -42,7 +42,7 @@ import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
 
 @SessionScoped
 @ManagedBean
-public class BurnDownViewBean implements Serializable{
+public class BurnDownModelBean implements Serializable{
 
 	 
 	/**
@@ -53,7 +53,7 @@ public class BurnDownViewBean implements Serializable{
 	/**
      * Logger Util
      */
-	private static Log log = LogFactoryUtil.getLog(BurnDownViewBean.class);
+	private static Log log = LogFactoryUtil.getLog(BurnDownModelBean.class);
 
 	
 	/**

@@ -1,11 +1,14 @@
 
 package de.hska.wi.awp.datasource.service.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
@@ -58,9 +61,9 @@ public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
 		log.debug("BEGIN: getAllStatus");
 
 		String url = Constants.JIRA_HOST_NAME + "/rest/api/2/status";
-		String auth =
-			new String(Base64.encode(Constants.JIRA_USERNAME + ":" +
-				Constants.JIRA_PASSWORD));
+		Properties configFile = this.loadConfigFile();
+		configFile.getProperty("username");
+		String auth = new String(Base64.encode(configFile.getProperty("username") + ":" + configFile.getProperty("password")));
 
 		// get Date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
@@ -188,4 +191,35 @@ public class StatusLocalServiceImpl extends StatusLocalServiceBaseImpl {
 		log.debug("END: deleteAllStatus");
 
 	}
+	
+	public Properties loadConfigFile(){
+		Properties prop = new Properties();
+    	InputStream input = null;
+    	
+    	try {
+    		 
+    		String filename = "jira.properties";
+    		input = getClass().getClassLoader().getResourceAsStream(filename);
+    		if (input == null) {
+    			System.out.println("Sorry, unable to find " + filename);
+    			return null;
+    		}
+     
+    		prop.load(input);
+    		
+    	} catch (IOException ex) {
+    		ex.printStackTrace();
+        } finally{
+        	if(input!=null){
+        		try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        	}
+        }
+    	
+    	return prop;
+	}
+	
 }
