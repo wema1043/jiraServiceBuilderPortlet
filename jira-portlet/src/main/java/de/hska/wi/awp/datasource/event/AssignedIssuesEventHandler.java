@@ -42,6 +42,7 @@ public class AssignedIssuesEventHandler implements BridgeEventHandler{
   			String hskaId = (String) value;
   			AssignedIssuesBackingBean assignedIssues = getAssignedIssues(facesContext);
   			assignedIssues.setStudentHskaId(hskaId);
+  			assignedIssues.setProjectHskaId(null);
 
   			String fromAction = null;
   			String outcome = "ipc.studentSelected";
@@ -60,6 +61,8 @@ public class AssignedIssuesEventHandler implements BridgeEventHandler{
   			String projectId = (String) value;
   			AssignedIssuesBackingBean assignedIssues = getAssignedIssues(facesContext);
   			assignedIssues.setProjectHskaId(projectId);
+  			assignedIssues.setStudentHskaId(null);
+
 
   			String fromAction = null;
   			String outcome = "ipc.projectSelected";
