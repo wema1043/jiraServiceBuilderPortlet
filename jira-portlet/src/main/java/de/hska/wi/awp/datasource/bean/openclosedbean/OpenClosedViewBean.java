@@ -1,3 +1,9 @@
+/**
+ * Bean for the OpenClosed Portlet
+ * @author 	Marc Weisenburger
+ * @date	03.06.15
+*/
+
 package de.hska.wi.awp.datasource.bean.openclosedbean;
 
 import java.io.Serializable;
@@ -20,12 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 
-
-/**
- * Bean for the OpenClosed Portlet
- * @author 	Marc Weisenburger
- * @date	03.06.15
-*/
 @SessionScoped
 @ManagedBean
 public class OpenClosedViewBean implements Serializable {
