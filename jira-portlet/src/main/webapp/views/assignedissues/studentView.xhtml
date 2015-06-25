@@ -10,10 +10,10 @@
 	<h:body>
 		<h:form >
 			<p:scrollPanel mode="native" style="height:300px">
-			
 				<p:accordionPanel value="#{assignedIssues.assignedIssues}" var="Issue" multiple="true">
 					<p:tab title="#{Issue.issueName} - #{Issue.status}" titleStyle="font-size:16px;height:20px;margin:0px;top-padding:0px;line-height:24px">
-					<p:panelGrid>
+					<p:panelGrid style="width:100%">
+						<!-- Summary -->
 	    				<f:facet name="header">
 	    					<p:row>
 	    						<p:column colspan="5">Summary</p:column>
@@ -22,21 +22,32 @@
 	    				<p:row>
 	    					<p:column colspan="5" >#{Issue.summary}</p:column>
 	    				</p:row>
+	    				<!-- Story Points -->
 	    				<p:row rendered="#{not empty Issue.storyPoints}">
 	    					<p:column colspan="3">Story Points</p:column>
 	    					<p:column colspan="2">#{Issue.storyPoints}</p:column>
 	    				</p:row>
+	    				<!-- Description, Warning if the Description is null  -->
 	    				<p:row>
     						<p:column styleClass="ui-widget-header" colspan="5" style="text-align:center">Description</p:column>
     					</p:row>
-    				
-    					<p:row>
+    					<p:row rendered="#{Issue.description ne 'null'}">
     						<p:column colspan="5" >#{Issue.description}</p:column>
     					</p:row>
+    					<p:row rendered="#{Issue.description eq 'null'}">
+    						<p:column colspan="5" >The description Field is empty.</p:column>
+    					</p:row>
+    					<!-- Created -->
     					<p:row >
     						<p:column colspan="3">Created</p:column>
     						<p:column colspan="2"><h:outputText value="#{Issue.createdDate}"><f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm"/></h:outputText></p:column>
     					</p:row>
+    					<!-- Resolution Date, just rendered if not empty -->
+    					<p:row rendered="#{not empty Issue.resolutionDate}">
+    						<p:column colspan="3">Closed</p:column>
+    						<p:column colspan="2"><h:outputText value="#{Issue.resolutionDate}"><f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm"/></h:outputText></p:column>
+    					</p:row>
+    					<!-- Time fields -->
     					<p:row rendered="#{Issue.timespent != -1}">
     						<p:column colspan="3">Time spent</p:column>
     						<p:column colspan="2">#{Issue.timespent} Hours</p:column>

@@ -18,11 +18,15 @@ import de.hska.wi.awp.datasource.bean.assignedissues.AssignedIssuesBackingBean;
 
 
 /**
+ * Eventhandler for the assigned issues portlet
  * @author Chris Ramroth
  * 
  */
 public class AssignedIssuesEventHandler implements BridgeEventHandler{
 	
+	/* (non-Javadoc)
+	 * @see javax.portlet.faces.BridgeEventHandler#handleEvent(javax.faces.context.FacesContext, javax.portlet.Event)
+	 */
 	@Override
 	public EventNavigationResult handleEvent(FacesContext facesContext, Event event) {
 		 EventNavigationResult eventNavigationResult = null;
@@ -62,7 +66,10 @@ public class AssignedIssuesEventHandler implements BridgeEventHandler{
   			AssignedIssuesBackingBean assignedIssues = getAssignedIssues(facesContext);
   			assignedIssues.setProjectHskaId(projectId);
   			assignedIssues.setStudentHskaId(null);
+<<<<<<< HEAD
 
+=======
+>>>>>>> chris
 
   			String fromAction = null;
   			String outcome = "ipc.projectSelected";

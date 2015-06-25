@@ -31,6 +31,11 @@ import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
  * Portlet implementation class AssignedIssuesBackingBean
  * 
  * @author Chris Ramroth
+ * @date 11.06.2015
+ */
+/**
+ * @author Chris Ramroth
+ *
  */
 @ManagedBean(name = "assignedIssues")
 @SessionScoped
@@ -46,23 +51,25 @@ public class AssignedIssuesBackingBean implements Serializable {
 	private List<Issue> allIssues = new ArrayList<Issue>();
 	private List<Field> allFields;
 
-	private static Log log = LogFactoryUtil.getLog(AssignedIssuesBackingBean.class);
+	private static Log log = LogFactoryUtil
+			.getLog(AssignedIssuesBackingBean.class);
 
-
-
+	
+	/**
+	 * This Method finds a list of assigned Issues for the selected student
+	 * @return List<AssignedIssuesModelBean>
+	 * @throws PortalException
+	 * @throws SystemException
+	 * @author Chris Ramroth
+	 */
 	public List<AssignedIssuesModelBean> getAssignedIssues()
 			throws PortalException, SystemException {
-		
-		if(studentHskaId != null){
+
+		if (studentHskaId != null) {
 			setAllAssignedFields(FieldLocalServiceUtil
 					.getAllFieldsForAssignee(studentHskaId));
-			}
-			if(projectHskaId != null){
-			setAllIssues(IssueLocalServiceUtil
-					.getAllIssuesForProjectId(ProjectLocalServiceUtil
-							.getProjectIdForProjectName(projectHskaId)));
-			}
-			
+		}
+
 		List<AssignedIssuesModelBean> assignedIssuesList = new ArrayList<AssignedIssuesModelBean>();
 		List<Field> modifyableList = new ArrayList<Field>(
 				getAllAssignedFields());
@@ -138,19 +145,25 @@ public class AssignedIssuesBackingBean implements Serializable {
 
 		return assignedIssuesList;
 	}
-
+	
+	
+	/**
+	 * This method returns a PieChartModel of all the projects issues and their assignees
+	 * @return PieChartModel
+	 * @author Chris Ramroth
+	 */
 	public PieChartModel getAssignedIssuesPieModel() {
 		System.out.println("getAssignedIssuesPieModel: ");
-		
-		if(studentHskaId != null){
+
+		if (studentHskaId != null) {
 			setAllAssignedFields(FieldLocalServiceUtil
 					.getAllFieldsForAssignee(studentHskaId));
-			}
-			if(projectHskaId != null){
+		}
+		if (projectHskaId != null) {
 			setAllIssues(IssueLocalServiceUtil
 					.getAllIssuesForProjectId(ProjectLocalServiceUtil
 							.getProjectIdForProjectName(projectHskaId)));
-			}
+		}
 
 		HashMap<String, Integer> myMap = new HashMap<String, Integer>();
 
@@ -184,12 +197,33 @@ public class AssignedIssuesBackingBean implements Serializable {
 		return pieModel;
 	}
 
+	/**
+	 * This method returns the amount of issues in this project
+	 * @return int
+	 * @author Chris Ramroth
+	 */
 	public int getIssuesCount() {
-		return getAllIssues().size();
+		if (projectHskaId != null) {
+			return IssueLocalServiceUtil.getAllIssuesForProjectId(
+					ProjectLocalServiceUtil
+							.getProjectIdForProjectName(projectHskaId)).size();
+		} else {
+			return 0;
+		}
 	}
 
+	/**
+	 * this method returns the amount of assigned issues for the selected student
+	 * @return int 
+	 * @author Chris Ramroth
+	 */
 	public int getFieldsCount() {
-		return getAllAssignedFields().size();
+		if (studentHskaId != null) {
+			return FieldLocalServiceUtil.getAllFieldsForAssignee(studentHskaId)
+					.size();
+		} else {
+			return 0;
+		}
 	}
 
 	public String getStudentHskaId() {

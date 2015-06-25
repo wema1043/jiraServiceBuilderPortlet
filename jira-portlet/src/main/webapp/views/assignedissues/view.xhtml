@@ -9,12 +9,29 @@
 >
 	<h:head />
 	<h:body>
+		<!-- Cases of the data input -->
 		<h:panelGroup id="wrapperPanel">
-    		<h:panelGroup id="student" rendered="#{not empty assignedIssues.studentHskaId}">
+			<!-- Student View, loaded when a student is selected and has assigned issues -->
+    		<h:panelGroup id="student" rendered="#{not empty assignedIssues.studentHskaId and assignedIssues.fieldsCount != 0}">
        			<ui:include src="studentView.xhtml" />
    			</h:panelGroup>
-   			<h:panelGroup id="project" rendered="#{not empty assignedIssues.projectHskaId}">
+   			<!-- Showed, if the student has no issues -->
+   			<h:panelGroup id="studentwithoutissues" 
+   				rendered="#{not empty assignedIssues.studentHskaId and assignedIssues.fieldsCount == 0}">
+   					<h:outputText value="This student has no assigned Issues." />
+   			</h:panelGroup>
+   			<!-- Project View, loaded when a project is selected and has issues -->
+   			<h:panelGroup id="project" rendered="#{not empty assignedIssues.projectHskaId and assignedIssues.issuesCount != 0}">
        			<ui:include src="projectView.xhtml" />
+   			</h:panelGroup>
+   			<!-- Showed, if the project has no issues -->
+   			<h:panelGroup id="projectwithoutissues"
+   				rendered="#{not empty assignedIssues.projectHskaId and assignedIssues.issuesCount == 0}">
+   					<h:outputText value="This Project has no issues." />
+   			</h:panelGroup>
+   			<!-- Showed, if nothing was selected -->
+   			<h:panelGroup id="nothing" rendered="#{empty assignedIssues.projectHskaId and empty assignedIssues.studentHskaId}">
+   				<h:outputText value="Es wurde nichts angewählt."></h:outputText>
    			</h:panelGroup>
 		</h:panelGroup>
 	</h:body>
