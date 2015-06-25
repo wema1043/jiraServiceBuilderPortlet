@@ -10,6 +10,7 @@
 	<h:body>
 		<h:form >
 			<p:scrollPanel mode="native" style="height:300px">
+			
 				<p:accordionPanel value="#{assignedIssues.assignedIssues}" var="Issue" multiple="true">
 					<p:tab title="#{Issue.issueName} - #{Issue.status}" titleStyle="font-size:16px;height:20px;margin:0px;top-padding:0px;line-height:24px">
 					<p:panelGrid>

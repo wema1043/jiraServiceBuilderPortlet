@@ -1,5 +1,6 @@
 package de.hska.wi.awp.datasource.bean.assignedissues;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,12 +9,16 @@ import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.chart.PieChartModel;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import de.hska.wi.awp.datasource.bean.openclosedbean.OpenClosedViewBean;
 import de.hska.wi.awp.datasource.model.Field;
 import de.hska.wi.awp.datasource.model.Issue;
 import de.hska.wi.awp.datasource.service.FieldLocalServiceUtil;
@@ -28,34 +33,36 @@ import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
  * @author Chris Ramroth
  */
 @ManagedBean(name = "assignedIssues")
-@RequestScoped
-public class AssignedIssuesBackingBean {
+@SessionScoped
+public class AssignedIssuesBackingBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7550897281266754431L;
 	private String studentHskaId;
 	private String projectHskaId;
 	private List<Field> allAssignedFields = new ArrayList<Field>();
 	private List<Issue> allIssues = new ArrayList<Issue>();
 	private List<Field> allFields;
 
-	public void init() {
+	private static Log log = LogFactoryUtil.getLog(AssignedIssuesBackingBean.class);
 
-		if(studentHskaId != null){
-		setAllAssignedFields(FieldLocalServiceUtil
-				.getAllFieldsForAssignee(studentHskaId));
-		}
-		if(projectHskaId != null){
-		setAllIssues(IssueLocalServiceUtil
-				.getAllIssuesForProjectId(ProjectLocalServiceUtil
-						.getProjectIdForProjectName(projectHskaId)));
-		}
-		// System.out.println(getStudentHskaId());
-		// System.out.println(studentHskaId);
-		// System.out.println(FieldLocalServiceUtil.getAllFieldsForAssignee(getStudentHskaId()).size());
 
-	}
 
 	public List<AssignedIssuesModelBean> getAssignedIssues()
 			throws PortalException, SystemException {
+		
+		if(studentHskaId != null){
+			setAllAssignedFields(FieldLocalServiceUtil
+					.getAllFieldsForAssignee(studentHskaId));
+			}
+			if(projectHskaId != null){
+			setAllIssues(IssueLocalServiceUtil
+					.getAllIssuesForProjectId(ProjectLocalServiceUtil
+							.getProjectIdForProjectName(projectHskaId)));
+			}
+			
 		List<AssignedIssuesModelBean> assignedIssuesList = new ArrayList<AssignedIssuesModelBean>();
 		List<Field> modifyableList = new ArrayList<Field>(
 				getAllAssignedFields());
@@ -134,6 +141,16 @@ public class AssignedIssuesBackingBean {
 
 	public PieChartModel getAssignedIssuesPieModel() {
 		System.out.println("getAssignedIssuesPieModel: ");
+		
+		if(studentHskaId != null){
+			setAllAssignedFields(FieldLocalServiceUtil
+					.getAllFieldsForAssignee(studentHskaId));
+			}
+			if(projectHskaId != null){
+			setAllIssues(IssueLocalServiceUtil
+					.getAllIssuesForProjectId(ProjectLocalServiceUtil
+							.getProjectIdForProjectName(projectHskaId)));
+			}
 
 		HashMap<String, Integer> myMap = new HashMap<String, Integer>();
 
