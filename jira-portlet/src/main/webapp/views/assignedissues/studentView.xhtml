@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<h:form >
+			<p:scrollPanel mode="native" style="height:300px">
+				<p:accordionPanel value="#{assignedIssues.assignedIssues}" var="Issue" multiple="true">
+					<p:tab title="#{Issue.issueName} - #{Issue.status}" titleStyle="font-size:16px;height:20px;margin:0px;top-padding:0px;line-height:24px">
+					<p:panelGrid>
+	    				<f:facet name="header">
+	    					<p:row>
+	    						<p:column colspan="5">Summary</p:column>
+	    					</p:row>
+	    				</f:facet> 
+	    				<p:row>
+	    					<p:column colspan="5" >#{Issue.summary}</p:column>
+	    				</p:row>
+	    				<p:row rendered="#{not empty Issue.storyPoints}">
+	    					<p:column colspan="3">Story Points</p:column>
+	    					<p:column colspan="2">#{Issue.storyPoints}</p:column>
+	    				</p:row>
+	    				<p:row>
+    						<p:column styleClass="ui-widget-header" colspan="5" style="text-align:center">Description</p:column>
+    					</p:row>
+    				
+    					<p:row>
+    						<p:column colspan="5" >#{Issue.description}</p:column>
+    					</p:row>
+    					<p:row >
+    						<p:column colspan="3">Created</p:column>
+    						<p:column colspan="2"><h:outputText value="#{Issue.createdDate}"><f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm"/></h:outputText></p:column>
+    					</p:row>
+    					<p:row rendered="#{Issue.timespent != -1}">
+    						<p:column colspan="3">Time spent</p:column>
+    						<p:column colspan="2">#{Issue.timespent} Hours</p:column>
+    					</p:row>
+    					<p:row rendered="#{Issue.timeestimate != -1}">
+    						<p:column colspan="3">Time estimate</p:column>
+    						<p:column colspan="2">#{Issue.timeestimate} Hours</p:column>
+    					</p:row>
+    					<p:row rendered="#{Issue.timeoriginalestimate != -1}">
+    						<p:column colspan="3">Time original estimate</p:column>
+    						<p:column colspan="2">#{Issue.timeoriginalestimate} Hours</p:column>
+    					</p:row>
+    					<p:row rendered="#{Issue.aggregatetimespent != -1}">
+    						<p:column colspan="3">Aggregate time spent</p:column>
+    						<p:column colspan="2">#{Issue.aggregatetimespent} Hours</p:column>
+    					</p:row>
+    					<p:row rendered="#{Issue.aggregatetimeoriginalestimate != -1}">
+    						<p:column colspan="3">Aggregate time original estimate</p:column>
+    						<p:column colspan="2">#{Issue.aggregatetimeoriginalestimate} Hours</p:column>
+    					</p:row>
+    					<p:row rendered="#{Issue.aggregatetimeestimate != -1}">
+    						<p:column colspan="3">Aggregate time estimate</p:column>
+    						<p:column colspan="2">#{Issue.aggregatetimeestimate} Hours</p:column>
+    					</p:row>
+	    			</p:panelGrid>
+	    			</p:tab>
+	    			
+				</p:accordionPanel>
+			</p:scrollPanel>
+		</h:form>
+	</h:body> 
+</f:view>
