@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
@@ -28,7 +26,7 @@ import de.hska.wi.awp.datasource.service.StatusLocalServiceUtil;
 public class JiraScheduler implements MessageListener {
 
 	/**
-	 * Method with recieves an Message every time the scheduler is called
+	 * receives an Message every time the scheduler is called
 	 *
 	 * @param Message
 	 */

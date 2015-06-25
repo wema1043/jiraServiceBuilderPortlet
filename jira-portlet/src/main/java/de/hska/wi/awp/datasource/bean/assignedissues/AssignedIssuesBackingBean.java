@@ -74,7 +74,7 @@ public class AssignedIssuesBackingBean implements Serializable {
 		List<Field> modifyableList = new ArrayList<Field>(
 				getAllAssignedFields());
 		Collections.sort(modifyableList,
-				new AssignedIsssuesComparatorByStatus());
+				new AssignedIssuesComparatorByStatus());
 		for (Field singleField : modifyableList) {
 			AssignedIssuesModelBean assignedIssue = new AssignedIssuesModelBean();
 			// Setting the values, which are already in Field

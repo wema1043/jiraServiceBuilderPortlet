@@ -66,10 +66,6 @@ public class AssignedIssuesEventHandler implements BridgeEventHandler{
   			AssignedIssuesBackingBean assignedIssues = getAssignedIssues(facesContext);
   			assignedIssues.setProjectHskaId(projectId);
   			assignedIssues.setStudentHskaId(null);
-<<<<<<< HEAD
-
-=======
->>>>>>> chris
 
   			String fromAction = null;
   			String outcome = "ipc.projectSelected";
