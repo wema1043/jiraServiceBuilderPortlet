@@ -19,12 +19,12 @@
 		<property name="resolutionDate" type="org.hibernate.type.TimestampType" />
 		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="updated" type="org.hibernate.type.TimestampType" />
-		<property name="timespent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="timeestimate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="timeoriginalestimate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="aggregatetimespent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="aggregatetimeoriginalestimate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="aggregatetimeestimate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="timespent" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="timeestimate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="timeoriginalestimate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="aggregatetimespent" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="aggregatetimeoriginalestimate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="aggregatetimeestimate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="storypoints" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="creatorId" type="com.liferay.portal.dao.orm.hibernate.StringType" />

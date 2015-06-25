@@ -10,12 +10,12 @@
 			<hint name="max-length">1000</hint>
 		</field>
 		<field name="updated" type="Date" />
-		<field name="timespent" type="String" />
-		<field name="timeestimate" type="String" />
-		<field name="timeoriginalestimate" type="String" />
-		<field name="aggregatetimespent" type="String" />
-		<field name="aggregatetimeoriginalestimate" type="String" />
-		<field name="aggregatetimeestimate" type="String" />
+		<field name="timespent" type="long" />
+		<field name="timeestimate" type="long" />
+		<field name="timeoriginalestimate" type="long" />
+		<field name="aggregatetimespent" type="long" />
+		<field name="aggregatetimeoriginalestimate" type="long" />
+		<field name="aggregatetimeestimate" type="long" />
 		<field name="description" type="String">
 			<hint name="max-length">1000</hint>
 		</field>

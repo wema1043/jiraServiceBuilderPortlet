@@ -20,12 +20,12 @@ public class FieldSoap implements Serializable {
     private Date _resolutionDate;
     private String _summary;
     private Date _updated;
-    private String _timespent;
-    private String _timeestimate;
-    private String _timeoriginalestimate;
-    private String _aggregatetimespent;
-    private String _aggregatetimeoriginalestimate;
-    private String _aggregatetimeestimate;
+    private long _timespent;
+    private long _timeestimate;
+    private long _timeoriginalestimate;
+    private long _aggregatetimespent;
+    private long _aggregatetimeoriginalestimate;
+    private long _aggregatetimeestimate;
     private String _description;
     private long _storypoints;
     private String _creatorId;
@@ -151,52 +151,52 @@ public class FieldSoap implements Serializable {
         _updated = updated;
     }
 
-    public String getTimespent() {
+    public long getTimespent() {
         return _timespent;
     }
 
-    public void setTimespent(String timespent) {
+    public void setTimespent(long timespent) {
         _timespent = timespent;
     }
 
-    public String getTimeestimate() {
+    public long getTimeestimate() {
         return _timeestimate;
     }
 
-    public void setTimeestimate(String timeestimate) {
+    public void setTimeestimate(long timeestimate) {
         _timeestimate = timeestimate;
     }
 
-    public String getTimeoriginalestimate() {
+    public long getTimeoriginalestimate() {
         return _timeoriginalestimate;
     }
 
-    public void setTimeoriginalestimate(String timeoriginalestimate) {
+    public void setTimeoriginalestimate(long timeoriginalestimate) {
         _timeoriginalestimate = timeoriginalestimate;
     }
 
-    public String getAggregatetimespent() {
+    public long getAggregatetimespent() {
         return _aggregatetimespent;
     }
 
-    public void setAggregatetimespent(String aggregatetimespent) {
+    public void setAggregatetimespent(long aggregatetimespent) {
         _aggregatetimespent = aggregatetimespent;
     }
 
-    public String getAggregatetimeoriginalestimate() {
+    public long getAggregatetimeoriginalestimate() {
         return _aggregatetimeoriginalestimate;
     }
 
     public void setAggregatetimeoriginalestimate(
-        String aggregatetimeoriginalestimate) {
+        long aggregatetimeoriginalestimate) {
         _aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
     }
 
-    public String getAggregatetimeestimate() {
+    public long getAggregatetimeestimate() {
         return _aggregatetimeestimate;
     }
 
-    public void setAggregatetimeestimate(String aggregatetimeestimate) {
+    public void setAggregatetimeestimate(long aggregatetimeestimate) {
         _aggregatetimeestimate = aggregatetimeestimate;
     }
 

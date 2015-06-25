@@ -284,6 +284,10 @@ public class StatusLocalServiceUtil {
         getService().deleteAllStatus();
     }
 
+    public static java.util.Properties loadConfigFile() {
+        return getService().loadConfigFile();
+    }
+
     public static void clearService() {
         _service = null;
     }

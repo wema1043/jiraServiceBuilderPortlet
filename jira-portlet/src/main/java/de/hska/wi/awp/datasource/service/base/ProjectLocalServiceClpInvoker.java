@@ -53,6 +53,8 @@ public class ProjectLocalServiceClpInvoker {
     private String[] _methodParameterTypes78;
     private String _methodName79;
     private String[] _methodParameterTypes79;
+    private String _methodName80;
+    private String[] _methodParameterTypes80;
 
     public ProjectLocalServiceClpInvoker() {
         _methodName0 = "addProject";
@@ -160,6 +162,10 @@ public class ProjectLocalServiceClpInvoker {
         _methodName79 = "deleteAllProjects";
 
         _methodParameterTypes79 = new String[] {  };
+
+        _methodName80 = "loadConfigFile";
+
+        _methodParameterTypes80 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -285,6 +291,11 @@ public class ProjectLocalServiceClpInvoker {
             ProjectLocalServiceUtil.deleteAllProjects();
 
             return null;
+        }
+
+        if (_methodName80.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+            return ProjectLocalServiceUtil.loadConfigFile();
         }
 
         throw new UnsupportedOperationException();

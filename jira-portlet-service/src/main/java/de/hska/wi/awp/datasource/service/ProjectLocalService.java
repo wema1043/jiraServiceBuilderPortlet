@@ -251,4 +251,7 @@ public interface ProjectLocalService extends BaseLocalService,
     public void ParseJsonToProjects(java.lang.String response);
 
     public void deleteAllProjects();
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.Properties loadConfigFile();
 }

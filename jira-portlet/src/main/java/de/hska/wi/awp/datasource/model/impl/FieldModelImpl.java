@@ -55,19 +55,19 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             { "resolutionDate", Types.TIMESTAMP },
             { "summary", Types.VARCHAR },
             { "updated", Types.TIMESTAMP },
-            { "timespent", Types.VARCHAR },
-            { "timeestimate", Types.VARCHAR },
-            { "timeoriginalestimate", Types.VARCHAR },
-            { "aggregatetimespent", Types.VARCHAR },
-            { "aggregatetimeoriginalestimate", Types.VARCHAR },
-            { "aggregatetimeestimate", Types.VARCHAR },
+            { "timespent", Types.BIGINT },
+            { "timeestimate", Types.BIGINT },
+            { "timeoriginalestimate", Types.BIGINT },
+            { "aggregatetimespent", Types.BIGINT },
+            { "aggregatetimeoriginalestimate", Types.BIGINT },
+            { "aggregatetimeestimate", Types.BIGINT },
             { "description", Types.VARCHAR },
             { "storypoints", Types.BIGINT },
             { "creatorId", Types.VARCHAR },
             { "assigneeId", Types.VARCHAR },
             { "statusId", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,issueId VARCHAR(75) null,createdDate DATE null,resolutionDate DATE null,summary VARCHAR(1000) null,updated DATE null,timespent VARCHAR(75) null,timeestimate VARCHAR(75) null,timeoriginalestimate VARCHAR(75) null,aggregatetimespent VARCHAR(75) null,aggregatetimeoriginalestimate VARCHAR(75) null,aggregatetimeestimate VARCHAR(75) null,description VARCHAR(1000) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
+    public static final String TABLE_SQL_CREATE = "create table jira_Field (fieldId LONG not null primary key,issueId VARCHAR(75) null,createdDate DATE null,resolutionDate DATE null,summary VARCHAR(1000) null,updated DATE null,timespent LONG,timeestimate LONG,timeoriginalestimate LONG,aggregatetimespent LONG,aggregatetimeoriginalestimate LONG,aggregatetimeestimate LONG,description VARCHAR(1000) null,storypoints LONG,creatorId VARCHAR(75) null,assigneeId VARCHAR(75) null,statusId LONG)";
     public static final String TABLE_SQL_DROP = "drop table jira_Field";
     public static final String ORDER_BY_JPQL = " ORDER BY field.issueId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY jira_Field.issueId ASC";
@@ -97,12 +97,12 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
     private Date _resolutionDate;
     private String _summary;
     private Date _updated;
-    private String _timespent;
-    private String _timeestimate;
-    private String _timeoriginalestimate;
-    private String _aggregatetimespent;
-    private String _aggregatetimeoriginalestimate;
-    private String _aggregatetimeestimate;
+    private long _timespent;
+    private long _timeestimate;
+    private long _timeoriginalestimate;
+    private long _aggregatetimespent;
+    private long _aggregatetimeoriginalestimate;
+    private long _aggregatetimeestimate;
     private String _description;
     private long _storypoints;
     private String _creatorId;
@@ -265,40 +265,39 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
             setUpdated(updated);
         }
 
-        String timespent = (String) attributes.get("timespent");
+        Long timespent = (Long) attributes.get("timespent");
 
         if (timespent != null) {
             setTimespent(timespent);
         }
 
-        String timeestimate = (String) attributes.get("timeestimate");
+        Long timeestimate = (Long) attributes.get("timeestimate");
 
         if (timeestimate != null) {
             setTimeestimate(timeestimate);
         }
 
-        String timeoriginalestimate = (String) attributes.get(
+        Long timeoriginalestimate = (Long) attributes.get(
                 "timeoriginalestimate");
 
         if (timeoriginalestimate != null) {
             setTimeoriginalestimate(timeoriginalestimate);
         }
 
-        String aggregatetimespent = (String) attributes.get(
-                "aggregatetimespent");
+        Long aggregatetimespent = (Long) attributes.get("aggregatetimespent");
 
         if (aggregatetimespent != null) {
             setAggregatetimespent(aggregatetimespent);
         }
 
-        String aggregatetimeoriginalestimate = (String) attributes.get(
+        Long aggregatetimeoriginalestimate = (Long) attributes.get(
                 "aggregatetimeoriginalestimate");
 
         if (aggregatetimeoriginalestimate != null) {
             setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
         }
 
-        String aggregatetimeestimate = (String) attributes.get(
+        Long aggregatetimeestimate = (Long) attributes.get(
                 "aggregatetimeestimate");
 
         if (aggregatetimeestimate != null) {
@@ -422,92 +421,68 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
     @JSON
     @Override
-    public String getTimespent() {
-        if (_timespent == null) {
-            return StringPool.BLANK;
-        } else {
-            return _timespent;
-        }
+    public long getTimespent() {
+        return _timespent;
     }
 
     @Override
-    public void setTimespent(String timespent) {
+    public void setTimespent(long timespent) {
         _timespent = timespent;
     }
 
     @JSON
     @Override
-    public String getTimeestimate() {
-        if (_timeestimate == null) {
-            return StringPool.BLANK;
-        } else {
-            return _timeestimate;
-        }
+    public long getTimeestimate() {
+        return _timeestimate;
     }
 
     @Override
-    public void setTimeestimate(String timeestimate) {
+    public void setTimeestimate(long timeestimate) {
         _timeestimate = timeestimate;
     }
 
     @JSON
     @Override
-    public String getTimeoriginalestimate() {
-        if (_timeoriginalestimate == null) {
-            return StringPool.BLANK;
-        } else {
-            return _timeoriginalestimate;
-        }
+    public long getTimeoriginalestimate() {
+        return _timeoriginalestimate;
     }
 
     @Override
-    public void setTimeoriginalestimate(String timeoriginalestimate) {
+    public void setTimeoriginalestimate(long timeoriginalestimate) {
         _timeoriginalestimate = timeoriginalestimate;
     }
 
     @JSON
     @Override
-    public String getAggregatetimespent() {
-        if (_aggregatetimespent == null) {
-            return StringPool.BLANK;
-        } else {
-            return _aggregatetimespent;
-        }
+    public long getAggregatetimespent() {
+        return _aggregatetimespent;
     }
 
     @Override
-    public void setAggregatetimespent(String aggregatetimespent) {
+    public void setAggregatetimespent(long aggregatetimespent) {
         _aggregatetimespent = aggregatetimespent;
     }
 
     @JSON
     @Override
-    public String getAggregatetimeoriginalestimate() {
-        if (_aggregatetimeoriginalestimate == null) {
-            return StringPool.BLANK;
-        } else {
-            return _aggregatetimeoriginalestimate;
-        }
+    public long getAggregatetimeoriginalestimate() {
+        return _aggregatetimeoriginalestimate;
     }
 
     @Override
     public void setAggregatetimeoriginalestimate(
-        String aggregatetimeoriginalestimate) {
+        long aggregatetimeoriginalestimate) {
         _aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
     }
 
     @JSON
     @Override
-    public String getAggregatetimeestimate() {
-        if (_aggregatetimeestimate == null) {
-            return StringPool.BLANK;
-        } else {
-            return _aggregatetimeestimate;
-        }
+    public long getAggregatetimeestimate() {
+        return _aggregatetimeestimate;
     }
 
     @Override
-    public void setAggregatetimeestimate(String aggregatetimeestimate) {
+    public void setAggregatetimeestimate(long aggregatetimeestimate) {
         _aggregatetimeestimate = aggregatetimeestimate;
     }
 
@@ -756,54 +731,15 @@ public class FieldModelImpl extends BaseModelImpl<Field> implements FieldModel {
 
         fieldCacheModel.timespent = getTimespent();
 
-        String timespent = fieldCacheModel.timespent;
-
-        if ((timespent != null) && (timespent.length() == 0)) {
-            fieldCacheModel.timespent = null;
-        }
-
         fieldCacheModel.timeestimate = getTimeestimate();
-
-        String timeestimate = fieldCacheModel.timeestimate;
-
-        if ((timeestimate != null) && (timeestimate.length() == 0)) {
-            fieldCacheModel.timeestimate = null;
-        }
 
         fieldCacheModel.timeoriginalestimate = getTimeoriginalestimate();
 
-        String timeoriginalestimate = fieldCacheModel.timeoriginalestimate;
-
-        if ((timeoriginalestimate != null) &&
-                (timeoriginalestimate.length() == 0)) {
-            fieldCacheModel.timeoriginalestimate = null;
-        }
-
         fieldCacheModel.aggregatetimespent = getAggregatetimespent();
-
-        String aggregatetimespent = fieldCacheModel.aggregatetimespent;
-
-        if ((aggregatetimespent != null) && (aggregatetimespent.length() == 0)) {
-            fieldCacheModel.aggregatetimespent = null;
-        }
 
         fieldCacheModel.aggregatetimeoriginalestimate = getAggregatetimeoriginalestimate();
 
-        String aggregatetimeoriginalestimate = fieldCacheModel.aggregatetimeoriginalestimate;
-
-        if ((aggregatetimeoriginalestimate != null) &&
-                (aggregatetimeoriginalestimate.length() == 0)) {
-            fieldCacheModel.aggregatetimeoriginalestimate = null;
-        }
-
         fieldCacheModel.aggregatetimeestimate = getAggregatetimeestimate();
-
-        String aggregatetimeestimate = fieldCacheModel.aggregatetimeestimate;
-
-        if ((aggregatetimeestimate != null) &&
-                (aggregatetimeestimate.length() == 0)) {
-            fieldCacheModel.aggregatetimeestimate = null;
-        }
 
         fieldCacheModel.description = getDescription();
 

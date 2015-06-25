@@ -97,40 +97,39 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
             setUpdated(updated);
         }
 
-        String timespent = (String) attributes.get("timespent");
+        Long timespent = (Long) attributes.get("timespent");
 
         if (timespent != null) {
             setTimespent(timespent);
         }
 
-        String timeestimate = (String) attributes.get("timeestimate");
+        Long timeestimate = (Long) attributes.get("timeestimate");
 
         if (timeestimate != null) {
             setTimeestimate(timeestimate);
         }
 
-        String timeoriginalestimate = (String) attributes.get(
+        Long timeoriginalestimate = (Long) attributes.get(
                 "timeoriginalestimate");
 
         if (timeoriginalestimate != null) {
             setTimeoriginalestimate(timeoriginalestimate);
         }
 
-        String aggregatetimespent = (String) attributes.get(
-                "aggregatetimespent");
+        Long aggregatetimespent = (Long) attributes.get("aggregatetimespent");
 
         if (aggregatetimespent != null) {
             setAggregatetimespent(aggregatetimespent);
         }
 
-        String aggregatetimeoriginalestimate = (String) attributes.get(
+        Long aggregatetimeoriginalestimate = (Long) attributes.get(
                 "aggregatetimeoriginalestimate");
 
         if (aggregatetimeoriginalestimate != null) {
             setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
         }
 
-        String aggregatetimeestimate = (String) attributes.get(
+        Long aggregatetimeestimate = (Long) attributes.get(
                 "aggregatetimeestimate");
 
         if (aggregatetimeestimate != null) {
@@ -314,7 +313,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the timespent of this field
     */
     @Override
-    public java.lang.String getTimespent() {
+    public long getTimespent() {
         return _field.getTimespent();
     }
 
@@ -324,7 +323,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param timespent the timespent of this field
     */
     @Override
-    public void setTimespent(java.lang.String timespent) {
+    public void setTimespent(long timespent) {
         _field.setTimespent(timespent);
     }
 
@@ -334,7 +333,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the timeestimate of this field
     */
     @Override
-    public java.lang.String getTimeestimate() {
+    public long getTimeestimate() {
         return _field.getTimeestimate();
     }
 
@@ -344,7 +343,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param timeestimate the timeestimate of this field
     */
     @Override
-    public void setTimeestimate(java.lang.String timeestimate) {
+    public void setTimeestimate(long timeestimate) {
         _field.setTimeestimate(timeestimate);
     }
 
@@ -354,7 +353,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the timeoriginalestimate of this field
     */
     @Override
-    public java.lang.String getTimeoriginalestimate() {
+    public long getTimeoriginalestimate() {
         return _field.getTimeoriginalestimate();
     }
 
@@ -364,7 +363,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param timeoriginalestimate the timeoriginalestimate of this field
     */
     @Override
-    public void setTimeoriginalestimate(java.lang.String timeoriginalestimate) {
+    public void setTimeoriginalestimate(long timeoriginalestimate) {
         _field.setTimeoriginalestimate(timeoriginalestimate);
     }
 
@@ -374,7 +373,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the aggregatetimespent of this field
     */
     @Override
-    public java.lang.String getAggregatetimespent() {
+    public long getAggregatetimespent() {
         return _field.getAggregatetimespent();
     }
 
@@ -384,7 +383,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param aggregatetimespent the aggregatetimespent of this field
     */
     @Override
-    public void setAggregatetimespent(java.lang.String aggregatetimespent) {
+    public void setAggregatetimespent(long aggregatetimespent) {
         _field.setAggregatetimespent(aggregatetimespent);
     }
 
@@ -394,7 +393,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the aggregatetimeoriginalestimate of this field
     */
     @Override
-    public java.lang.String getAggregatetimeoriginalestimate() {
+    public long getAggregatetimeoriginalestimate() {
         return _field.getAggregatetimeoriginalestimate();
     }
 
@@ -405,7 +404,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     */
     @Override
     public void setAggregatetimeoriginalestimate(
-        java.lang.String aggregatetimeoriginalestimate) {
+        long aggregatetimeoriginalestimate) {
         _field.setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
     }
 
@@ -415,7 +414,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @return the aggregatetimeestimate of this field
     */
     @Override
-    public java.lang.String getAggregatetimeestimate() {
+    public long getAggregatetimeestimate() {
         return _field.getAggregatetimeestimate();
     }
 
@@ -425,7 +424,7 @@ public class FieldWrapper implements Field, ModelWrapper<Field> {
     * @param aggregatetimeestimate the aggregatetimeestimate of this field
     */
     @Override
-    public void setAggregatetimeestimate(java.lang.String aggregatetimeestimate) {
+    public void setAggregatetimeestimate(long aggregatetimeestimate) {
         _field.setAggregatetimeestimate(aggregatetimeestimate);
     }
 

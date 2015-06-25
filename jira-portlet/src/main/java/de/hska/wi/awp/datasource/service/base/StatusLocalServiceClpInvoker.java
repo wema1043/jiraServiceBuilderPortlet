@@ -55,6 +55,8 @@ public class StatusLocalServiceClpInvoker {
     private String[] _methodParameterTypes79;
     private String _methodName80;
     private String[] _methodParameterTypes80;
+    private String _methodName81;
+    private String[] _methodParameterTypes81;
 
     public StatusLocalServiceClpInvoker() {
         _methodName0 = "addStatus";
@@ -166,6 +168,10 @@ public class StatusLocalServiceClpInvoker {
         _methodName80 = "deleteAllStatus";
 
         _methodParameterTypes80 = new String[] {  };
+
+        _methodName81 = "loadConfigFile";
+
+        _methodParameterTypes81 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -296,6 +302,11 @@ public class StatusLocalServiceClpInvoker {
             StatusLocalServiceUtil.deleteAllStatus();
 
             return null;
+        }
+
+        if (_methodName81.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+            return StatusLocalServiceUtil.loadConfigFile();
         }
 
         throw new UnsupportedOperationException();

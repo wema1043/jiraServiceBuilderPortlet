@@ -250,4 +250,7 @@ public interface JiraUserLocalService extends BaseLocalService,
     public java.lang.String getDisplayNameForUserId(java.lang.String userId);
 
     public void deleteAllJiraUser();
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.Properties loadConfigFile();
 }

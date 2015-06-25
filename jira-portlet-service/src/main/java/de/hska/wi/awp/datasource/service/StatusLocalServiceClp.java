@@ -54,6 +54,8 @@ public class StatusLocalServiceClp implements StatusLocalService {
     private String[] _methodParameterTypes22;
     private String _methodName23;
     private String[] _methodParameterTypes23;
+    private String _methodName24;
+    private String[] _methodParameterTypes24;
 
     public StatusLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -167,6 +169,10 @@ public class StatusLocalServiceClp implements StatusLocalService {
         _methodName23 = "deleteAllStatus";
 
         _methodParameterTypes23 = new String[] {  };
+
+        _methodName24 = "loadConfigFile";
+
+        _methodParameterTypes24 = new String[] {  };
     }
 
     @Override
@@ -784,5 +790,26 @@ public class StatusLocalServiceClp implements StatusLocalService {
                     " is not a valid exception");
             }
         }
+    }
+
+    @Override
+    public java.util.Properties loadConfigFile() {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName24,
+                    _methodParameterTypes24, new Object[] {  });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.Properties) ClpSerializer.translateOutput(returnObj);
     }
 }

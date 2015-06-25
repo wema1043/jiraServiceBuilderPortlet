@@ -294,6 +294,11 @@ public class JiraUserLocalServiceWrapper implements JiraUserLocalService,
         _jiraUserLocalService.deleteAllJiraUser();
     }
 
+    @Override
+    public java.util.Properties loadConfigFile() {
+        return _jiraUserLocalService.loadConfigFile();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

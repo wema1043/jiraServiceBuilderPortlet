@@ -251,4 +251,7 @@ public interface IssueLocalService extends BaseLocalService,
     public void ParseJsonToIssue(java.lang.String response);
 
     public void deleteAllIssues();
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.Properties loadConfigFile();
 }

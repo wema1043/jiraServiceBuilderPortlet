@@ -88,8 +88,9 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 				"&maxResults=-1";
 		Properties configFile = this.loadConfigFile();
 		configFile.getProperty("username");
-		String auth = new String(Base64.encode(configFile.getProperty("username") + ":" + configFile.getProperty("password")));
-
+		String auth =
+			new String(Base64.encode(configFile.getProperty("username") + ":" +
+				configFile.getProperty("password")));
 
 		// jersey lib
 		Client client = Client.create();
@@ -190,22 +191,34 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 					Date updatedDate = format.parse(updatedDateString);
 					myField.setUpdated(updatedDate);
 				}
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("timespent")) {
+					myField.setTimespent(tasks.getJSONObject(zl).getJSONObject(
+						"fields").getLong("timespent"));
+				}
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("timeestimate")) {
 
-				myField.setTimespent(tasks.getJSONObject(zl).getJSONObject(
-					"fields").getString("timespent"));
 				myField.setTimeestimate(tasks.getJSONObject(zl).getJSONObject(
-					"fields").getString("timeestimate"));
+					"fields").getLong("timeestimate"));
+				}
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("timeoriginalestimate")) {
 				myField.setTimeoriginalestimate(tasks.getJSONObject(zl).getJSONObject(
-					"fields").getString("timeoriginalestimate"));
+					"fields").getLong("timeoriginalestimate"));
+				}
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("aggregatetimespent")) {
 				myField.setAggregatetimespent(tasks.getJSONObject(zl).getJSONObject(
-					"fields").getString("aggregatetimespent"));
+					"fields").getLong("aggregatetimespent"));
+				}
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("aggregatetimeoriginalestimate")) {
 				myField.setAggregatetimeoriginalestimate(tasks.getJSONObject(zl).getJSONObject(
-					"fields").getString("aggregatetimeoriginalestimate"));
+					"fields").getLong("aggregatetimeoriginalestimate"));
+				}
+				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull("aggregatetimeestimate")) {
 				myField.setAggregatetimeestimate(tasks.getJSONObject(zl).getJSONObject(
-					"fields").getString("aggregatetimeestimate"));
+					"fields").getLong("aggregatetimeestimate"));
+				}
 				myField.setDescription(tasks.getJSONObject(zl).getJSONObject(
 					"fields").getString("description"));
-
+				
 				if (!tasks.getJSONObject(zl).getJSONObject("fields").isNull(
 					"customfield_10002")) {
 					myField.setStorypoints(tasks.getJSONObject(zl).getJSONObject(
@@ -223,8 +236,8 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 				myField.setStatusId(tasks.getJSONObject(zl).getJSONObject(
 					"fields").getJSONObject("status").getLong("id"));
 
-				FieldLocalServiceUtil.addField(myField);
-				IssueLocalServiceUtil.addIssue(myIssue);
+				 FieldLocalServiceUtil.addField(myField);
+				 IssueLocalServiceUtil.addIssue(myIssue);
 
 			}
 			catch (Exception e) {
@@ -282,34 +295,38 @@ public class IssueLocalServiceImpl extends IssueLocalServiceBaseImpl {
 		}
 		log.debug("End: deleteAllIssues");
 	}
-	
-	public Properties loadConfigFile(){
+
+	public Properties loadConfigFile() {
+
 		Properties prop = new Properties();
-    	InputStream input = null;
-    	
-    	try {
-    		 
-    		String filename = "jira.properties";
-    		input = getClass().getClassLoader().getResourceAsStream(filename);
-    		if (input == null) {
-    			System.out.println("Sorry, unable to find " + filename);
-    			return null;
-    		}
-     
-    		prop.load(input);
-    		
-    	} catch (IOException ex) {
-    		ex.printStackTrace();
-        } finally{
-        	if(input!=null){
-        		try {
-				input.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		InputStream input = null;
+
+		try {
+
+			String filename = "jira.properties";
+			input = getClass().getClassLoader().getResourceAsStream(filename);
+			if (input == null) {
+				System.out.println("Sorry, unable to find " + filename);
+				return null;
 			}
-        	}
-        }
-    	
-    	return prop;
+
+			prop.load(input);
+
+		}
+		catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (input != null) {
+				try {
+					input.close();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return prop;
 	}
 }

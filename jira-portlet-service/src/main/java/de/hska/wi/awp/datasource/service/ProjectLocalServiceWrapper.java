@@ -293,6 +293,11 @@ public class ProjectLocalServiceWrapper implements ProjectLocalService,
         _projectLocalService.deleteAllProjects();
     }
 
+    @Override
+    public java.util.Properties loadConfigFile() {
+        return _projectLocalService.loadConfigFile();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

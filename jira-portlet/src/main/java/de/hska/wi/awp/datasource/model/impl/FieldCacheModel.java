@@ -27,12 +27,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
     public long resolutionDate;
     public String summary;
     public long updated;
-    public String timespent;
-    public String timeestimate;
-    public String timeoriginalestimate;
-    public String aggregatetimespent;
-    public String aggregatetimeoriginalestimate;
-    public String aggregatetimeestimate;
+    public long timespent;
+    public long timeestimate;
+    public long timeoriginalestimate;
+    public long aggregatetimespent;
+    public long aggregatetimeoriginalestimate;
+    public long aggregatetimeestimate;
     public String description;
     public long storypoints;
     public String creatorId;
@@ -118,41 +118,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
             fieldImpl.setUpdated(new Date(updated));
         }
 
-        if (timespent == null) {
-            fieldImpl.setTimespent(StringPool.BLANK);
-        } else {
-            fieldImpl.setTimespent(timespent);
-        }
-
-        if (timeestimate == null) {
-            fieldImpl.setTimeestimate(StringPool.BLANK);
-        } else {
-            fieldImpl.setTimeestimate(timeestimate);
-        }
-
-        if (timeoriginalestimate == null) {
-            fieldImpl.setTimeoriginalestimate(StringPool.BLANK);
-        } else {
-            fieldImpl.setTimeoriginalestimate(timeoriginalestimate);
-        }
-
-        if (aggregatetimespent == null) {
-            fieldImpl.setAggregatetimespent(StringPool.BLANK);
-        } else {
-            fieldImpl.setAggregatetimespent(aggregatetimespent);
-        }
-
-        if (aggregatetimeoriginalestimate == null) {
-            fieldImpl.setAggregatetimeoriginalestimate(StringPool.BLANK);
-        } else {
-            fieldImpl.setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
-        }
-
-        if (aggregatetimeestimate == null) {
-            fieldImpl.setAggregatetimeestimate(StringPool.BLANK);
-        } else {
-            fieldImpl.setAggregatetimeestimate(aggregatetimeestimate);
-        }
+        fieldImpl.setTimespent(timespent);
+        fieldImpl.setTimeestimate(timeestimate);
+        fieldImpl.setTimeoriginalestimate(timeoriginalestimate);
+        fieldImpl.setAggregatetimespent(aggregatetimespent);
+        fieldImpl.setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
+        fieldImpl.setAggregatetimeestimate(aggregatetimeestimate);
 
         if (description == null) {
             fieldImpl.setDescription(StringPool.BLANK);
@@ -189,12 +160,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
         resolutionDate = objectInput.readLong();
         summary = objectInput.readUTF();
         updated = objectInput.readLong();
-        timespent = objectInput.readUTF();
-        timeestimate = objectInput.readUTF();
-        timeoriginalestimate = objectInput.readUTF();
-        aggregatetimespent = objectInput.readUTF();
-        aggregatetimeoriginalestimate = objectInput.readUTF();
-        aggregatetimeestimate = objectInput.readUTF();
+        timespent = objectInput.readLong();
+        timeestimate = objectInput.readLong();
+        timeoriginalestimate = objectInput.readLong();
+        aggregatetimespent = objectInput.readLong();
+        aggregatetimeoriginalestimate = objectInput.readLong();
+        aggregatetimeestimate = objectInput.readLong();
         description = objectInput.readUTF();
         storypoints = objectInput.readLong();
         creatorId = objectInput.readUTF();
@@ -223,42 +194,12 @@ public class FieldCacheModel implements CacheModel<Field>, Externalizable {
         }
 
         objectOutput.writeLong(updated);
-
-        if (timespent == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(timespent);
-        }
-
-        if (timeestimate == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(timeestimate);
-        }
-
-        if (timeoriginalestimate == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(timeoriginalestimate);
-        }
-
-        if (aggregatetimespent == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(aggregatetimespent);
-        }
-
-        if (aggregatetimeoriginalestimate == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(aggregatetimeoriginalestimate);
-        }
-
-        if (aggregatetimeestimate == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(aggregatetimeestimate);
-        }
+        objectOutput.writeLong(timespent);
+        objectOutput.writeLong(timeestimate);
+        objectOutput.writeLong(timeoriginalestimate);
+        objectOutput.writeLong(aggregatetimespent);
+        objectOutput.writeLong(aggregatetimeoriginalestimate);
+        objectOutput.writeLong(aggregatetimeestimate);
 
         if (description == null) {
             objectOutput.writeUTF(StringPool.BLANK);

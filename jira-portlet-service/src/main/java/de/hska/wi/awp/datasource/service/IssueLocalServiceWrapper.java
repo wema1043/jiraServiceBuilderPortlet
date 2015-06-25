@@ -293,6 +293,11 @@ public class IssueLocalServiceWrapper implements IssueLocalService,
         _issueLocalService.deleteAllIssues();
     }
 
+    @Override
+    public java.util.Properties loadConfigFile() {
+        return _issueLocalService.loadConfigFile();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

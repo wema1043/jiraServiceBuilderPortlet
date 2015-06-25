@@ -253,4 +253,7 @@ public interface StatusLocalService extends BaseLocalService,
     public void ParseJsonToStatus(java.lang.String response);
 
     public void deleteAllStatus();
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.Properties loadConfigFile();
 }

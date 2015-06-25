@@ -280,6 +280,10 @@ public class ProjectLocalServiceUtil {
         getService().deleteAllProjects();
     }
 
+    public static java.util.Properties loadConfigFile() {
+        return getService().loadConfigFile();
+    }
+
     public static void clearService() {
         _service = null;
     }

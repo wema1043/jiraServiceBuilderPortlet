@@ -81,44 +81,42 @@ public class AssignedIssuesBackingBean implements Serializable {
 			assignedIssue.setCreatedDate(singleField.getCreatedDate());
 			assignedIssue.setResolutionDate(singleField.getResolutionDate());
 			assignedIssue.setSummary(singleField.getSummary());
-			if (!singleField.getTimespent().equals("null")) {
-				assignedIssue.setTimespent(Double.parseDouble(singleField
-						.getTimespent()) / 3600);
+			if (singleField.getTimespent() != 0) {
+				assignedIssue.setTimespent(singleField
+						.getTimespent() / 3600);
 			} else {
 				assignedIssue.setTimespent(-1);
 			}
-			if (!singleField.getTimeestimate().equals("null")) {
-				assignedIssue.setTimeestimate(Double.parseDouble(singleField
-						.getTimeestimate()) / 3600);
+			if (singleField.getTimeestimate() != 0) {
+				assignedIssue.setTimeestimate(singleField
+						.getTimeestimate() / 3600);
 			} else {
 				assignedIssue.setTimeestimate(-1);
 			}
-			if (!singleField.getTimeoriginalestimate().equals("null")) {
+			if (singleField.getTimeoriginalestimate() != 0) {
 				assignedIssue
-						.setTimeoriginalestimate(Double.parseDouble(singleField
-								.getTimeoriginalestimate()) / 3600);
+						.setTimeoriginalestimate(singleField
+								.getTimeoriginalestimate() / 3600);
 			} else {
 				assignedIssue.setTimeoriginalestimate(-1);
 			}
-			if (!singleField.getAggregatetimespent().equals("null")) {
+			if (singleField.getAggregatetimespent() != 0) {
 				assignedIssue
-						.setAggregatetimespent(Double.parseDouble(singleField
-								.getAggregatetimespent()) / 3600);
+						.setAggregatetimespent(singleField
+								.getAggregatetimespent() / 3600);
 			} else {
 				assignedIssue.setAggregatetimespent(-1);
 			}
-			if (!singleField.getAggregatetimeestimate().equals("null")) {
+			if (singleField.getAggregatetimeestimate() != 0) {
 				assignedIssue
-						.setAggregatetimeestimate(Double
-								.parseDouble(singleField
-										.getAggregatetimeestimate()) / 3600);
+						.setAggregatetimeestimate(singleField
+										.getAggregatetimeestimate() / 3600);
 			} else {
 				assignedIssue.setAggregatetimeestimate(-1);
 			}
-			if (!singleField.getAggregatetimeoriginalestimate().equals("null")) {
-				assignedIssue.setAggregatetimeoriginalestimate(Double
-						.parseDouble(singleField
-								.getAggregatetimeoriginalestimate()) / 3600);
+			if (singleField.getAggregatetimeoriginalestimate() != 0) {
+				assignedIssue.setAggregatetimeoriginalestimate(singleField
+								.getAggregatetimeoriginalestimate() / 3600);
 			} else {
 				assignedIssue.setAggregatetimeoriginalestimate(-1);
 			}

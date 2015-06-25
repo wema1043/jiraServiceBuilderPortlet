@@ -136,68 +136,63 @@ public interface FieldModel extends BaseModel<Field> {
      *
      * @return the timespent of this field
      */
-    @AutoEscape
-    public String getTimespent();
+    public long getTimespent();
 
     /**
      * Sets the timespent of this field.
      *
      * @param timespent the timespent of this field
      */
-    public void setTimespent(String timespent);
+    public void setTimespent(long timespent);
 
     /**
      * Returns the timeestimate of this field.
      *
      * @return the timeestimate of this field
      */
-    @AutoEscape
-    public String getTimeestimate();
+    public long getTimeestimate();
 
     /**
      * Sets the timeestimate of this field.
      *
      * @param timeestimate the timeestimate of this field
      */
-    public void setTimeestimate(String timeestimate);
+    public void setTimeestimate(long timeestimate);
 
     /**
      * Returns the timeoriginalestimate of this field.
      *
      * @return the timeoriginalestimate of this field
      */
-    @AutoEscape
-    public String getTimeoriginalestimate();
+    public long getTimeoriginalestimate();
 
     /**
      * Sets the timeoriginalestimate of this field.
      *
      * @param timeoriginalestimate the timeoriginalestimate of this field
      */
-    public void setTimeoriginalestimate(String timeoriginalestimate);
+    public void setTimeoriginalestimate(long timeoriginalestimate);
 
     /**
      * Returns the aggregatetimespent of this field.
      *
      * @return the aggregatetimespent of this field
      */
-    @AutoEscape
-    public String getAggregatetimespent();
+    public long getAggregatetimespent();
 
     /**
      * Sets the aggregatetimespent of this field.
      *
      * @param aggregatetimespent the aggregatetimespent of this field
      */
-    public void setAggregatetimespent(String aggregatetimespent);
+    public void setAggregatetimespent(long aggregatetimespent);
 
     /**
      * Returns the aggregatetimeoriginalestimate of this field.
      *
      * @return the aggregatetimeoriginalestimate of this field
      */
-    @AutoEscape
-    public String getAggregatetimeoriginalestimate();
+    public long getAggregatetimeoriginalestimate();
 
     /**
      * Sets the aggregatetimeoriginalestimate of this field.
@@ -205,22 +200,21 @@ public interface FieldModel extends BaseModel<Field> {
      * @param aggregatetimeoriginalestimate the aggregatetimeoriginalestimate of this field
      */
     public void setAggregatetimeoriginalestimate(
-        String aggregatetimeoriginalestimate);
+        long aggregatetimeoriginalestimate);
 
     /**
      * Returns the aggregatetimeestimate of this field.
      *
      * @return the aggregatetimeestimate of this field
      */
-    @AutoEscape
-    public String getAggregatetimeestimate();
+    public long getAggregatetimeestimate();
 
     /**
      * Sets the aggregatetimeestimate of this field.
      *
      * @param aggregatetimeestimate the aggregatetimeestimate of this field
      */
-    public void setAggregatetimeestimate(String aggregatetimeestimate);
+    public void setAggregatetimeestimate(long aggregatetimeestimate);
 
     /**
      * Returns the description of this field.

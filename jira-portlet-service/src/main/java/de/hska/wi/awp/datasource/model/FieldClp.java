@@ -26,12 +26,12 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     private Date _resolutionDate;
     private String _summary;
     private Date _updated;
-    private String _timespent;
-    private String _timeestimate;
-    private String _timeoriginalestimate;
-    private String _aggregatetimespent;
-    private String _aggregatetimeoriginalestimate;
-    private String _aggregatetimeestimate;
+    private long _timespent;
+    private long _timeestimate;
+    private long _timeoriginalestimate;
+    private long _aggregatetimespent;
+    private long _aggregatetimeoriginalestimate;
+    private long _aggregatetimeestimate;
     private String _description;
     private long _storypoints;
     private String _creatorId;
@@ -137,40 +137,39 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
             setUpdated(updated);
         }
 
-        String timespent = (String) attributes.get("timespent");
+        Long timespent = (Long) attributes.get("timespent");
 
         if (timespent != null) {
             setTimespent(timespent);
         }
 
-        String timeestimate = (String) attributes.get("timeestimate");
+        Long timeestimate = (Long) attributes.get("timeestimate");
 
         if (timeestimate != null) {
             setTimeestimate(timeestimate);
         }
 
-        String timeoriginalestimate = (String) attributes.get(
+        Long timeoriginalestimate = (Long) attributes.get(
                 "timeoriginalestimate");
 
         if (timeoriginalestimate != null) {
             setTimeoriginalestimate(timeoriginalestimate);
         }
 
-        String aggregatetimespent = (String) attributes.get(
-                "aggregatetimespent");
+        Long aggregatetimespent = (Long) attributes.get("aggregatetimespent");
 
         if (aggregatetimespent != null) {
             setAggregatetimespent(aggregatetimespent);
         }
 
-        String aggregatetimeoriginalestimate = (String) attributes.get(
+        Long aggregatetimeoriginalestimate = (Long) attributes.get(
                 "aggregatetimeoriginalestimate");
 
         if (aggregatetimeoriginalestimate != null) {
             setAggregatetimeoriginalestimate(aggregatetimeoriginalestimate);
         }
 
-        String aggregatetimeestimate = (String) attributes.get(
+        Long aggregatetimeestimate = (Long) attributes.get(
                 "aggregatetimeestimate");
 
         if (aggregatetimeestimate != null) {
@@ -341,19 +340,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getTimespent() {
+    public long getTimespent() {
         return _timespent;
     }
 
     @Override
-    public void setTimespent(String timespent) {
+    public void setTimespent(long timespent) {
         _timespent = timespent;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setTimespent", String.class);
+                Method method = clazz.getMethod("setTimespent", long.class);
 
                 method.invoke(_fieldRemoteModel, timespent);
             } catch (Exception e) {
@@ -363,19 +362,19 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getTimeestimate() {
+    public long getTimeestimate() {
         return _timeestimate;
     }
 
     @Override
-    public void setTimeestimate(String timeestimate) {
+    public void setTimeestimate(long timeestimate) {
         _timeestimate = timeestimate;
 
         if (_fieldRemoteModel != null) {
             try {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setTimeestimate", String.class);
+                Method method = clazz.getMethod("setTimeestimate", long.class);
 
                 method.invoke(_fieldRemoteModel, timeestimate);
             } catch (Exception e) {
@@ -385,12 +384,12 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getTimeoriginalestimate() {
+    public long getTimeoriginalestimate() {
         return _timeoriginalestimate;
     }
 
     @Override
-    public void setTimeoriginalestimate(String timeoriginalestimate) {
+    public void setTimeoriginalestimate(long timeoriginalestimate) {
         _timeoriginalestimate = timeoriginalestimate;
 
         if (_fieldRemoteModel != null) {
@@ -398,7 +397,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
                 Method method = clazz.getMethod("setTimeoriginalestimate",
-                        String.class);
+                        long.class);
 
                 method.invoke(_fieldRemoteModel, timeoriginalestimate);
             } catch (Exception e) {
@@ -408,12 +407,12 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getAggregatetimespent() {
+    public long getAggregatetimespent() {
         return _aggregatetimespent;
     }
 
     @Override
-    public void setAggregatetimespent(String aggregatetimespent) {
+    public void setAggregatetimespent(long aggregatetimespent) {
         _aggregatetimespent = aggregatetimespent;
 
         if (_fieldRemoteModel != null) {
@@ -421,7 +420,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
                 Method method = clazz.getMethod("setAggregatetimespent",
-                        String.class);
+                        long.class);
 
                 method.invoke(_fieldRemoteModel, aggregatetimespent);
             } catch (Exception e) {
@@ -431,13 +430,13 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getAggregatetimeoriginalestimate() {
+    public long getAggregatetimeoriginalestimate() {
         return _aggregatetimeoriginalestimate;
     }
 
     @Override
     public void setAggregatetimeoriginalestimate(
-        String aggregatetimeoriginalestimate) {
+        long aggregatetimeoriginalestimate) {
         _aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
 
         if (_fieldRemoteModel != null) {
@@ -445,7 +444,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
                 Method method = clazz.getMethod("setAggregatetimeoriginalestimate",
-                        String.class);
+                        long.class);
 
                 method.invoke(_fieldRemoteModel, aggregatetimeoriginalestimate);
             } catch (Exception e) {
@@ -455,12 +454,12 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
     }
 
     @Override
-    public String getAggregatetimeestimate() {
+    public long getAggregatetimeestimate() {
         return _aggregatetimeestimate;
     }
 
     @Override
-    public void setAggregatetimeestimate(String aggregatetimeestimate) {
+    public void setAggregatetimeestimate(long aggregatetimeestimate) {
         _aggregatetimeestimate = aggregatetimeestimate;
 
         if (_fieldRemoteModel != null) {
@@ -468,7 +467,7 @@ public class FieldClp extends BaseModelImpl<Field> implements Field {
                 Class<?> clazz = _fieldRemoteModel.getClass();
 
                 Method method = clazz.getMethod("setAggregatetimeestimate",
-                        String.class);
+                        long.class);
 
                 method.invoke(_fieldRemoteModel, aggregatetimeestimate);
             } catch (Exception e) {

@@ -42,12 +42,12 @@
 		<column name="resolutionDate" type="Date"></column>
 		<column name="summary" type="String"></column>
 		<column name="updated" type="Date"></column>
-		<column name="timespent" type="String"></column>
-		<column name="timeestimate" type="String"></column>
-		<column name="timeoriginalestimate" type="String"></column>
-		<column name="aggregatetimespent" type="String"></column>
-		<column name="aggregatetimeoriginalestimate" type="String"></column>
-		<column name="aggregatetimeestimate" type="String"></column>
+		<column name="timespent" type="long"></column>
+		<column name="timeestimate" type="long"></column>
+		<column name="timeoriginalestimate" type="long"></column>
+		<column name="aggregatetimespent" type="long"></column>
+		<column name="aggregatetimeoriginalestimate" type="long"></column>
+		<column name="aggregatetimeestimate" type="long"></column>
 		<column name="description" type="String"></column>
 		<column name="storypoints" type="long"></column>
 		<column name="creatorId" type="String"></column>
