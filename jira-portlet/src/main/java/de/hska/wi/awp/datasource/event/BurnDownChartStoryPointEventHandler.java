@@ -69,7 +69,7 @@ public class BurnDownChartStoryPointEventHandler  implements BridgeEventHandler{
 	
 	
 	protected BurnDownModelBean getBurnDownViewBean(FacesContext facesContext) {
-		String elExpression = "#{burnDownViewBean}";
+		String elExpression = "#{burnDownModelBean}";
 		ELContext elContext = facesContext.getELContext();
 		ValueExpression valueExpression = facesContext.getApplication().getExpressionFactory().createValueExpression(
 				elContext, elExpression, BurnDownModelBean.class);

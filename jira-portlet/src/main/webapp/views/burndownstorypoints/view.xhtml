@@ -11,28 +11,28 @@
 	</h:head>
 	<h:body>
 	
-	<h:form rendered="#{not empty burnDownViewBean.studenthskaId and burnDownViewBean.countFieldsForUser != 0}">
-						<p:chart type="line" model="#{burnDownViewBean.areaModel}" responsive="true" />
+	<h:form rendered="#{not empty burnDownModelBean.studenthskaId and burnDownModelBean.countFieldsForUser != 0}">
+						<p:chart type="line" model="#{burnDownModelBean.areaModel}" responsive="true" />
 
 		</h:form>
 		
-		<h:form rendered="#{not empty burnDownViewBean.projektId and burnDownViewBean.countFieldsForProjekt != 0}">
-						<p:chart type="line" model="#{burnDownViewBean.areaModel}" responsive="true" />
+		<h:form rendered="#{not empty burnDownModelBean.projektId and burnDownModelBean.countFieldsForProjekt != 0}">
+						<p:chart type="line" model="#{burnDownModelBean.areaModel}" responsive="true" />
 
 		</h:form>
 		
 		
-		<h:form rendered="#{empty burnDownViewBean.projektId and empty burnDownViewBean.studenthskaId}">
+		<h:form rendered="#{empty burnDownModelBean.projektId and empty burnDownModelBean.studenthskaId}">
 			<h:outputText value="Bitte wählen sie einen Studenten oder eine Gruppe" />
 
 		</h:form>
 		
-		<h:form rendered="#{not empty burnDownViewBean.studenthskaId and burnDownViewBean.countFieldsForUser == 0}">
+		<h:form rendered="#{not empty burnDownModelBean.studenthskaId and burnDownModelBean.countFieldsForUser == 0}">
 			<h:outputText value="Dieser Student hat keine zugewiesenen Issues" />
 
 		</h:form>
 		
-		<h:form rendered="#{not empty burnDownViewBean.projektId and burnDownViewBean.countFieldsForProjekt == 0}">
+		<h:form rendered="#{not empty burnDownModelBean.projektId and burnDownModelBean.countFieldsForProjekt == 0}">
 			<h:outputText value="Für dieses Projekt wurden noch keine Issues angelegt" />
 
 		</h:form>
