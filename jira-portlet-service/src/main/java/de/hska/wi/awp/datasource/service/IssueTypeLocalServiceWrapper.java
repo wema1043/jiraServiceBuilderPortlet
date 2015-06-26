@@ -35,29 +35,29 @@ public class IssueTypeLocalServiceWrapper implements IssueTypeLocalService,
     /**
     * Creates a new issue type with the primary key. Does not add the issue type to the database.
     *
-    * @param issueId the primary key for the new issue type
+    * @param issueTypeId the primary key for the new issue type
     * @return the new issue type
     */
     @Override
     public de.hska.wi.awp.datasource.model.IssueType createIssueType(
-        java.lang.String issueId) {
-        return _issueTypeLocalService.createIssueType(issueId);
+        long issueTypeId) {
+        return _issueTypeLocalService.createIssueType(issueTypeId);
     }
 
     /**
     * Deletes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type that was removed
     * @throws PortalException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Override
     public de.hska.wi.awp.datasource.model.IssueType deleteIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _issueTypeLocalService.deleteIssueType(issueId);
+        return _issueTypeLocalService.deleteIssueType(issueTypeId);
     }
 
     /**
@@ -172,25 +172,25 @@ public class IssueTypeLocalServiceWrapper implements IssueTypeLocalService,
 
     @Override
     public de.hska.wi.awp.datasource.model.IssueType fetchIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _issueTypeLocalService.fetchIssueType(issueId);
+        return _issueTypeLocalService.fetchIssueType(issueTypeId);
     }
 
     /**
     * Returns the issue type with the primary key.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type
     * @throws PortalException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Override
     public de.hska.wi.awp.datasource.model.IssueType getIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _issueTypeLocalService.getIssueType(issueId);
+        return _issueTypeLocalService.getIssueType(issueTypeId);
     }
 
     @Override

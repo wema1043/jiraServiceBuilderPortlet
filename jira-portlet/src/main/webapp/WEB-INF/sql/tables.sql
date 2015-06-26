@@ -31,8 +31,8 @@ create table jira_IssuePriority (
 );
 
 create table jira_IssueType (
-	issueId VARCHAR(75) not null primary key,
-	issueName VARCHAR(75) null
+	issueTypeId LONG not null primary key,
+	typeName VARCHAR(75) null
 );
 
 create table jira_JiraUser (

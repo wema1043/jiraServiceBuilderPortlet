@@ -178,15 +178,15 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
     /**
      * Creates a new issue type with the primary key. Does not add the issue type to the database.
      *
-     * @param issueId the primary key for the new issue type
+     * @param issueTypeId the primary key for the new issue type
      * @return the new issue type
      */
     @Override
-    public IssueType create(String issueId) {
+    public IssueType create(long issueTypeId) {
         IssueType issueType = new IssueTypeImpl();
 
         issueType.setNew(true);
-        issueType.setPrimaryKey(issueId);
+        issueType.setPrimaryKey(issueTypeId);
 
         return issueType;
     }
@@ -194,15 +194,15 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
     /**
      * Removes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param issueId the primary key of the issue type
+     * @param issueTypeId the primary key of the issue type
      * @return the issue type that was removed
      * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType remove(String issueId)
+    public IssueType remove(long issueTypeId)
         throws NoSuchIssueTypeException, SystemException {
-        return remove((Serializable) issueId);
+        return remove((Serializable) issueTypeId);
     }
 
     /**
@@ -322,8 +322,8 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
         issueTypeImpl.setNew(issueType.isNew());
         issueTypeImpl.setPrimaryKey(issueType.getPrimaryKey());
 
-        issueTypeImpl.setIssueId(issueType.getIssueId());
-        issueTypeImpl.setIssueName(issueType.getIssueName());
+        issueTypeImpl.setIssueTypeId(issueType.getIssueTypeId());
+        issueTypeImpl.setTypeName(issueType.getTypeName());
 
         return issueTypeImpl;
     }
@@ -356,15 +356,15 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
     /**
      * Returns the issue type with the primary key or throws a {@link de.hska.wi.awp.datasource.NoSuchIssueTypeException} if it could not be found.
      *
-     * @param issueId the primary key of the issue type
+     * @param issueTypeId the primary key of the issue type
      * @return the issue type
      * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType findByPrimaryKey(String issueId)
+    public IssueType findByPrimaryKey(long issueTypeId)
         throws NoSuchIssueTypeException, SystemException {
-        return findByPrimaryKey((Serializable) issueId);
+        return findByPrimaryKey((Serializable) issueTypeId);
     }
 
     /**
@@ -415,14 +415,14 @@ public class IssueTypePersistenceImpl extends BasePersistenceImpl<IssueType>
     /**
      * Returns the issue type with the primary key or returns <code>null</code> if it could not be found.
      *
-     * @param issueId the primary key of the issue type
+     * @param issueTypeId the primary key of the issue type
      * @return the issue type, or <code>null</code> if a issue type with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType fetchByPrimaryKey(String issueId)
+    public IssueType fetchByPrimaryKey(long issueTypeId)
         throws SystemException {
-        return fetchByPrimaryKey((Serializable) issueId);
+        return fetchByPrimaryKey((Serializable) issueTypeId);
     }
 
     /**

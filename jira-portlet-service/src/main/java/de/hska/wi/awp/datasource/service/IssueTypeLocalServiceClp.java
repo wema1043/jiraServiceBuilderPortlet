@@ -56,11 +56,11 @@ public class IssueTypeLocalServiceClp implements IssueTypeLocalService {
 
         _methodName1 = "createIssueType";
 
-        _methodParameterTypes1 = new String[] { "java.lang.String" };
+        _methodParameterTypes1 = new String[] { "long" };
 
         _methodName2 = "deleteIssueType";
 
-        _methodParameterTypes2 = new String[] { "java.lang.String" };
+        _methodParameterTypes2 = new String[] { "long" };
 
         _methodName3 = "deleteIssueType";
 
@@ -106,11 +106,11 @@ public class IssueTypeLocalServiceClp implements IssueTypeLocalService {
 
         _methodName10 = "fetchIssueType";
 
-        _methodParameterTypes10 = new String[] { "java.lang.String" };
+        _methodParameterTypes10 = new String[] { "long" };
 
         _methodName11 = "getIssueType";
 
-        _methodParameterTypes11 = new String[] { "java.lang.String" };
+        _methodParameterTypes11 = new String[] { "long" };
 
         _methodName12 = "getPersistedModel";
 
@@ -169,13 +169,12 @@ public class IssueTypeLocalServiceClp implements IssueTypeLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.IssueType createIssueType(
-        java.lang.String issueId) {
+        long issueTypeId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName1,
-                    _methodParameterTypes1,
-                    new Object[] { ClpSerializer.translateInput(issueId) });
+                    _methodParameterTypes1, new Object[] { issueTypeId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -192,15 +191,14 @@ public class IssueTypeLocalServiceClp implements IssueTypeLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.IssueType deleteIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName2,
-                    _methodParameterTypes2,
-                    new Object[] { ClpSerializer.translateInput(issueId) });
+                    _methodParameterTypes2, new Object[] { issueTypeId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -438,14 +436,13 @@ public class IssueTypeLocalServiceClp implements IssueTypeLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.IssueType fetchIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName10,
-                    _methodParameterTypes10,
-                    new Object[] { ClpSerializer.translateInput(issueId) });
+                    _methodParameterTypes10, new Object[] { issueTypeId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -466,15 +463,14 @@ public class IssueTypeLocalServiceClp implements IssueTypeLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.IssueType getIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName11,
-                    _methodParameterTypes11,
-                    new Object[] { ClpSerializer.translateInput(issueId) });
+                    _methodParameterTypes11, new Object[] { issueTypeId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

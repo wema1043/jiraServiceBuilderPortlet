@@ -20,17 +20,17 @@ import java.io.ObjectOutput;
  */
 public class IssueTypeCacheModel implements CacheModel<IssueType>,
     Externalizable {
-    public String issueId;
-    public String issueName;
+    public long issueTypeId;
+    public String typeName;
 
     @Override
     public String toString() {
         StringBundler sb = new StringBundler(5);
 
-        sb.append("{issueId=");
-        sb.append(issueId);
-        sb.append(", issueName=");
-        sb.append(issueName);
+        sb.append("{issueTypeId=");
+        sb.append(issueTypeId);
+        sb.append(", typeName=");
+        sb.append(typeName);
         sb.append("}");
 
         return sb.toString();
@@ -40,16 +40,12 @@ public class IssueTypeCacheModel implements CacheModel<IssueType>,
     public IssueType toEntityModel() {
         IssueTypeImpl issueTypeImpl = new IssueTypeImpl();
 
-        if (issueId == null) {
-            issueTypeImpl.setIssueId(StringPool.BLANK);
-        } else {
-            issueTypeImpl.setIssueId(issueId);
-        }
+        issueTypeImpl.setIssueTypeId(issueTypeId);
 
-        if (issueName == null) {
-            issueTypeImpl.setIssueName(StringPool.BLANK);
+        if (typeName == null) {
+            issueTypeImpl.setTypeName(StringPool.BLANK);
         } else {
-            issueTypeImpl.setIssueName(issueName);
+            issueTypeImpl.setTypeName(typeName);
         }
 
         issueTypeImpl.resetOriginalValues();
@@ -59,23 +55,19 @@ public class IssueTypeCacheModel implements CacheModel<IssueType>,
 
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
-        issueId = objectInput.readUTF();
-        issueName = objectInput.readUTF();
+        issueTypeId = objectInput.readLong();
+        typeName = objectInput.readUTF();
     }
 
     @Override
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
-        if (issueId == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(issueId);
-        }
+        objectOutput.writeLong(issueTypeId);
 
-        if (issueName == null) {
+        if (typeName == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(issueName);
+            objectOutput.writeUTF(typeName);
         }
     }
 }

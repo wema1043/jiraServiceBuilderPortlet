@@ -84,8 +84,8 @@
 
 
 	<entity name="IssueType" local-service="true" remote-service="true">
-		<column name="issueId" primary="true" type="String"></column>
-		<column name="issueName" type="String"></column>
+		<column name="issueTypeId" primary="true" type="long"></column>
+		<column name="typeName" type="String"></column>
 	</entity>
 
 

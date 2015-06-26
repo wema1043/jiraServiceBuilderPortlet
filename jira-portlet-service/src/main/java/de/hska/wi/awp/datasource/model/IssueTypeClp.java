@@ -19,8 +19,8 @@ import java.util.Map;
 
 
 public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType {
-    private String _issueId;
-    private String _issueName;
+    private long _issueTypeId;
+    private String _typeName;
     private BaseModel<?> _issueTypeRemoteModel;
     private Class<?> _clpSerializerClass = de.hska.wi.awp.datasource.service.ClpSerializer.class;
 
@@ -38,66 +38,66 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
     }
 
     @Override
-    public String getPrimaryKey() {
-        return _issueId;
+    public long getPrimaryKey() {
+        return _issueTypeId;
     }
 
     @Override
-    public void setPrimaryKey(String primaryKey) {
-        setIssueId(primaryKey);
+    public void setPrimaryKey(long primaryKey) {
+        setIssueTypeId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _issueId;
+        return _issueTypeId;
     }
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey((String) primaryKeyObj);
+        setPrimaryKey(((Long) primaryKeyObj).longValue());
     }
 
     @Override
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("issueId", getIssueId());
-        attributes.put("issueName", getIssueName());
+        attributes.put("issueTypeId", getIssueTypeId());
+        attributes.put("typeName", getTypeName());
 
         return attributes;
     }
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        String issueId = (String) attributes.get("issueId");
+        Long issueTypeId = (Long) attributes.get("issueTypeId");
 
-        if (issueId != null) {
-            setIssueId(issueId);
+        if (issueTypeId != null) {
+            setIssueTypeId(issueTypeId);
         }
 
-        String issueName = (String) attributes.get("issueName");
+        String typeName = (String) attributes.get("typeName");
 
-        if (issueName != null) {
-            setIssueName(issueName);
+        if (typeName != null) {
+            setTypeName(typeName);
         }
     }
 
     @Override
-    public String getIssueId() {
-        return _issueId;
+    public long getIssueTypeId() {
+        return _issueTypeId;
     }
 
     @Override
-    public void setIssueId(String issueId) {
-        _issueId = issueId;
+    public void setIssueTypeId(long issueTypeId) {
+        _issueTypeId = issueTypeId;
 
         if (_issueTypeRemoteModel != null) {
             try {
                 Class<?> clazz = _issueTypeRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setIssueId", String.class);
+                Method method = clazz.getMethod("setIssueTypeId", long.class);
 
-                method.invoke(_issueTypeRemoteModel, issueId);
+                method.invoke(_issueTypeRemoteModel, issueTypeId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -105,21 +105,21 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
     }
 
     @Override
-    public String getIssueName() {
-        return _issueName;
+    public String getTypeName() {
+        return _typeName;
     }
 
     @Override
-    public void setIssueName(String issueName) {
-        _issueName = issueName;
+    public void setTypeName(String typeName) {
+        _typeName = typeName;
 
         if (_issueTypeRemoteModel != null) {
             try {
                 Class<?> clazz = _issueTypeRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setIssueName", String.class);
+                Method method = clazz.getMethod("setTypeName", String.class);
 
-                method.invoke(_issueTypeRemoteModel, issueName);
+                method.invoke(_issueTypeRemoteModel, typeName);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -193,17 +193,23 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
     public Object clone() {
         IssueTypeClp clone = new IssueTypeClp();
 
-        clone.setIssueId(getIssueId());
-        clone.setIssueName(getIssueName());
+        clone.setIssueTypeId(getIssueTypeId());
+        clone.setTypeName(getTypeName());
 
         return clone;
     }
 
     @Override
     public int compareTo(IssueType issueType) {
-        String primaryKey = issueType.getPrimaryKey();
+        long primaryKey = issueType.getPrimaryKey();
 
-        return getPrimaryKey().compareTo(primaryKey);
+        if (getPrimaryKey() < primaryKey) {
+            return -1;
+        } else if (getPrimaryKey() > primaryKey) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -218,9 +224,9 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
         IssueTypeClp issueType = (IssueTypeClp) obj;
 
-        String primaryKey = issueType.getPrimaryKey();
+        long primaryKey = issueType.getPrimaryKey();
 
-        if (getPrimaryKey().equals(primaryKey)) {
+        if (getPrimaryKey() == primaryKey) {
             return true;
         } else {
             return false;
@@ -233,17 +239,17 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
 
     @Override
     public int hashCode() {
-        return getPrimaryKey().hashCode();
+        return (int) getPrimaryKey();
     }
 
     @Override
     public String toString() {
         StringBundler sb = new StringBundler(5);
 
-        sb.append("{issueId=");
-        sb.append(getIssueId());
-        sb.append(", issueName=");
-        sb.append(getIssueName());
+        sb.append("{issueTypeId=");
+        sb.append(getIssueTypeId());
+        sb.append(", typeName=");
+        sb.append(getTypeName());
         sb.append("}");
 
         return sb.toString();
@@ -258,12 +264,12 @@ public class IssueTypeClp extends BaseModelImpl<IssueType> implements IssueType 
         sb.append("</model-name>");
 
         sb.append(
-            "<column><column-name>issueId</column-name><column-value><![CDATA[");
-        sb.append(getIssueId());
+            "<column><column-name>issueTypeId</column-name><column-value><![CDATA[");
+        sb.append(getIssueTypeId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>issueName</column-name><column-value><![CDATA[");
-        sb.append(getIssueName());
+            "<column><column-name>typeName</column-name><column-value><![CDATA[");
+        sb.append(getTypeName());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

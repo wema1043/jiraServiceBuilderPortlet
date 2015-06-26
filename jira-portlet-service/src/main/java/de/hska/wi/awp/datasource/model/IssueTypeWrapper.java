@@ -36,24 +36,24 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("issueId", getIssueId());
-        attributes.put("issueName", getIssueName());
+        attributes.put("issueTypeId", getIssueTypeId());
+        attributes.put("typeName", getTypeName());
 
         return attributes;
     }
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        String issueId = (String) attributes.get("issueId");
+        Long issueTypeId = (Long) attributes.get("issueTypeId");
 
-        if (issueId != null) {
-            setIssueId(issueId);
+        if (issueTypeId != null) {
+            setIssueTypeId(issueTypeId);
         }
 
-        String issueName = (String) attributes.get("issueName");
+        String typeName = (String) attributes.get("typeName");
 
-        if (issueName != null) {
-            setIssueName(issueName);
+        if (typeName != null) {
+            setTypeName(typeName);
         }
     }
 
@@ -63,7 +63,7 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     * @return the primary key of this issue type
     */
     @Override
-    public java.lang.String getPrimaryKey() {
+    public long getPrimaryKey() {
         return _issueType.getPrimaryKey();
     }
 
@@ -73,48 +73,48 @@ public class IssueTypeWrapper implements IssueType, ModelWrapper<IssueType> {
     * @param primaryKey the primary key of this issue type
     */
     @Override
-    public void setPrimaryKey(java.lang.String primaryKey) {
+    public void setPrimaryKey(long primaryKey) {
         _issueType.setPrimaryKey(primaryKey);
     }
 
     /**
-    * Returns the issue ID of this issue type.
+    * Returns the issue type ID of this issue type.
     *
-    * @return the issue ID of this issue type
+    * @return the issue type ID of this issue type
     */
     @Override
-    public java.lang.String getIssueId() {
-        return _issueType.getIssueId();
+    public long getIssueTypeId() {
+        return _issueType.getIssueTypeId();
     }
 
     /**
-    * Sets the issue ID of this issue type.
+    * Sets the issue type ID of this issue type.
     *
-    * @param issueId the issue ID of this issue type
+    * @param issueTypeId the issue type ID of this issue type
     */
     @Override
-    public void setIssueId(java.lang.String issueId) {
-        _issueType.setIssueId(issueId);
+    public void setIssueTypeId(long issueTypeId) {
+        _issueType.setIssueTypeId(issueTypeId);
     }
 
     /**
-    * Returns the issue name of this issue type.
+    * Returns the type name of this issue type.
     *
-    * @return the issue name of this issue type
+    * @return the type name of this issue type
     */
     @Override
-    public java.lang.String getIssueName() {
-        return _issueType.getIssueName();
+    public java.lang.String getTypeName() {
+        return _issueType.getTypeName();
     }
 
     /**
-    * Sets the issue name of this issue type.
+    * Sets the type name of this issue type.
     *
-    * @param issueName the issue name of this issue type
+    * @param typeName the type name of this issue type
     */
     @Override
-    public void setIssueName(java.lang.String issueName) {
-        _issueType.setIssueName(issueName);
+    public void setTypeName(java.lang.String typeName) {
+        _issueType.setTypeName(typeName);
     }
 
     @Override

@@ -128,27 +128,27 @@ public abstract class IssueTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
     /**
      * Creates a new issue type with the primary key. Does not add the issue type to the database.
      *
-     * @param issueId the primary key for the new issue type
+     * @param issueTypeId the primary key for the new issue type
      * @return the new issue type
      */
     @Override
-    public IssueType createIssueType(String issueId) {
-        return issueTypePersistence.create(issueId);
+    public IssueType createIssueType(long issueTypeId) {
+        return issueTypePersistence.create(issueTypeId);
     }
 
     /**
      * Deletes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param issueId the primary key of the issue type
+     * @param issueTypeId the primary key of the issue type
      * @return the issue type that was removed
      * @throws PortalException if a issue type with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Indexable(type = IndexableType.DELETE)
     @Override
-    public IssueType deleteIssueType(String issueId)
+    public IssueType deleteIssueType(long issueTypeId)
         throws PortalException, SystemException {
-        return issueTypePersistence.remove(issueId);
+        return issueTypePersistence.remove(issueTypeId);
     }
 
     /**
@@ -259,22 +259,22 @@ public abstract class IssueTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
     }
 
     @Override
-    public IssueType fetchIssueType(String issueId) throws SystemException {
-        return issueTypePersistence.fetchByPrimaryKey(issueId);
+    public IssueType fetchIssueType(long issueTypeId) throws SystemException {
+        return issueTypePersistence.fetchByPrimaryKey(issueTypeId);
     }
 
     /**
      * Returns the issue type with the primary key.
      *
-     * @param issueId the primary key of the issue type
+     * @param issueTypeId the primary key of the issue type
      * @return the issue type
      * @throws PortalException if a issue type with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public IssueType getIssueType(String issueId)
+    public IssueType getIssueType(long issueTypeId)
         throws PortalException, SystemException {
-        return issueTypePersistence.findByPrimaryKey(issueId);
+        return issueTypePersistence.findByPrimaryKey(issueTypeId);
     }
 
     @Override

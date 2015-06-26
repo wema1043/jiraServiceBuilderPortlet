@@ -13,8 +13,8 @@ import java.util.List;
  * @generated
  */
 public class IssueTypeSoap implements Serializable {
-    private String _issueId;
-    private String _issueName;
+    private long _issueTypeId;
+    private String _typeName;
 
     public IssueTypeSoap() {
     }
@@ -22,8 +22,8 @@ public class IssueTypeSoap implements Serializable {
     public static IssueTypeSoap toSoapModel(IssueType model) {
         IssueTypeSoap soapModel = new IssueTypeSoap();
 
-        soapModel.setIssueId(model.getIssueId());
-        soapModel.setIssueName(model.getIssueName());
+        soapModel.setIssueTypeId(model.getIssueTypeId());
+        soapModel.setTypeName(model.getTypeName());
 
         return soapModel;
     }
@@ -64,27 +64,27 @@ public class IssueTypeSoap implements Serializable {
         return soapModels.toArray(new IssueTypeSoap[soapModels.size()]);
     }
 
-    public String getPrimaryKey() {
-        return _issueId;
+    public long getPrimaryKey() {
+        return _issueTypeId;
     }
 
-    public void setPrimaryKey(String pk) {
-        setIssueId(pk);
+    public void setPrimaryKey(long pk) {
+        setIssueTypeId(pk);
     }
 
-    public String getIssueId() {
-        return _issueId;
+    public long getIssueTypeId() {
+        return _issueTypeId;
     }
 
-    public void setIssueId(String issueId) {
-        _issueId = issueId;
+    public void setIssueTypeId(long issueTypeId) {
+        _issueTypeId = issueTypeId;
     }
 
-    public String getIssueName() {
-        return _issueName;
+    public String getTypeName() {
+        return _typeName;
     }
 
-    public void setIssueName(String issueName) {
-        _issueName = issueName;
+    public void setTypeName(String typeName) {
+        _typeName = typeName;
     }
 }

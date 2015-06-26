@@ -18,6 +18,6 @@ public abstract class IssueTypeActionableDynamicQuery
 
         setClassLoader(de.hska.wi.awp.datasource.service.ClpSerializer.class.getClassLoader());
 
-        setPrimaryKeyPropertyName("issueId");
+        setPrimaryKeyPropertyName("issueTypeId");
     }
 }

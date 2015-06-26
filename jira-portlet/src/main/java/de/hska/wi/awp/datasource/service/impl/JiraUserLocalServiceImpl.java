@@ -89,6 +89,9 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 	public void ParseJsonToMember(String response) {
 
 		log.debug("BEGIN: ParseJsonToMember");
+		
+		Properties configFile = this.loadConfigFile();
+		configFile.getProperty("username");
 
 		try {
 			JSONArray jsonresponse = new JSONArray(response);
@@ -98,8 +101,8 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 			if (JiraUserUtil.countBybyName("professorlogin") != 0) {
 				JiraUserUtil.removeBybyName("professorlogin");
 			}
-			if (JiraUserUtil.countBybyName("stda1024") != 0) {
-				JiraUserUtil.removeBybyName("stda1024");
+			if (JiraUserUtil.countBybyName(configFile.getProperty("username")) != 0) {
+				JiraUserUtil.removeBybyName(configFile.getProperty("username"));
 			}
 			for (int zl = 0; zl < jsonresponse.length(); zl++) {
 				JiraUser jiraUser =

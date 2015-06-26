@@ -49,10 +49,10 @@
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.IssueTypeImpl" table="jira_IssueType">
 		<cache usage="read-write" />
-		<id name="issueId" type="java.lang.String">
+		<id name="issueTypeId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="issueName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="typeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.JiraUserImpl" table="jira_JiraUser">
 		<cache usage="read-write" />

@@ -41,22 +41,20 @@ public interface IssueTypePersistence extends BasePersistence<IssueType> {
     /**
     * Creates a new issue type with the primary key. Does not add the issue type to the database.
     *
-    * @param issueId the primary key for the new issue type
+    * @param issueTypeId the primary key for the new issue type
     * @return the new issue type
     */
-    public de.hska.wi.awp.datasource.model.IssueType create(
-        java.lang.String issueId);
+    public de.hska.wi.awp.datasource.model.IssueType create(long issueTypeId);
 
     /**
     * Removes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type that was removed
     * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public de.hska.wi.awp.datasource.model.IssueType remove(
-        java.lang.String issueId)
+    public de.hska.wi.awp.datasource.model.IssueType remove(long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueTypeException;
 
@@ -67,25 +65,25 @@ public interface IssueTypePersistence extends BasePersistence<IssueType> {
     /**
     * Returns the issue type with the primary key or throws a {@link de.hska.wi.awp.datasource.NoSuchIssueTypeException} if it could not be found.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type
     * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.IssueType findByPrimaryKey(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueTypeException;
 
     /**
     * Returns the issue type with the primary key or returns <code>null</code> if it could not be found.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type, or <code>null</code> if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.IssueType fetchByPrimaryKey(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**

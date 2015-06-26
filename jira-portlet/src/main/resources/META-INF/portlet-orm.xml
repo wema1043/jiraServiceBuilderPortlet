@@ -61,8 +61,8 @@
 	</mapped-superclass>
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.IssueTypeModelImpl">
 		<attributes>
-			<id name="issueId" />
-			<basic name="issueName" />
+			<id name="issueTypeId" />
+			<basic name="typeName" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

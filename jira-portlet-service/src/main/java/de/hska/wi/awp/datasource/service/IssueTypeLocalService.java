@@ -48,23 +48,23 @@ public interface IssueTypeLocalService extends BaseLocalService,
     /**
     * Creates a new issue type with the primary key. Does not add the issue type to the database.
     *
-    * @param issueId the primary key for the new issue type
+    * @param issueTypeId the primary key for the new issue type
     * @return the new issue type
     */
     public de.hska.wi.awp.datasource.model.IssueType createIssueType(
-        java.lang.String issueId);
+        long issueTypeId);
 
     /**
     * Deletes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type that was removed
     * @throws PortalException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
     public de.hska.wi.awp.datasource.model.IssueType deleteIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -159,20 +159,20 @@ public interface IssueTypeLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public de.hska.wi.awp.datasource.model.IssueType fetchIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Returns the issue type with the primary key.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type
     * @throws PortalException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public de.hska.wi.awp.datasource.model.IssueType getIssueType(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

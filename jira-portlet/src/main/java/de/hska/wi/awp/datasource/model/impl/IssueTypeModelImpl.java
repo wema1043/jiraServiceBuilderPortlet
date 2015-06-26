@@ -8,6 +8,10 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import de.hska.wi.awp.datasource.model.IssueType;
 import de.hska.wi.awp.datasource.model.IssueTypeModel;
@@ -45,13 +49,13 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
      */
     public static final String TABLE_NAME = "jira_IssueType";
     public static final Object[][] TABLE_COLUMNS = {
-            { "issueId", Types.VARCHAR },
-            { "issueName", Types.VARCHAR }
+            { "issueTypeId", Types.BIGINT },
+            { "typeName", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_IssueType (issueId VARCHAR(75) not null primary key,issueName VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table jira_IssueType (issueTypeId LONG not null primary key,typeName VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table jira_IssueType";
-    public static final String ORDER_BY_JPQL = " ORDER BY issueType.issueId ASC";
-    public static final String ORDER_BY_SQL = " ORDER BY jira_IssueType.issueId ASC";
+    public static final String ORDER_BY_JPQL = " ORDER BY issueType.issueTypeId ASC";
+    public static final String ORDER_BY_SQL = " ORDER BY jira_IssueType.issueTypeId ASC";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
@@ -68,8 +72,8 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
     private static Class<?>[] _escapedModelInterfaces = new Class[] {
             IssueType.class
         };
-    private String _issueId;
-    private String _issueName;
+    private long _issueTypeId;
+    private String _typeName;
     private IssueType _escapedModel;
 
     public IssueTypeModelImpl() {
@@ -88,8 +92,8 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
 
         IssueType model = new IssueTypeImpl();
 
-        model.setIssueId(soapModel.getIssueId());
-        model.setIssueName(soapModel.getIssueName());
+        model.setIssueTypeId(soapModel.getIssueTypeId());
+        model.setTypeName(soapModel.getTypeName());
 
         return model;
     }
@@ -115,23 +119,23 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
     }
 
     @Override
-    public String getPrimaryKey() {
-        return _issueId;
+    public long getPrimaryKey() {
+        return _issueTypeId;
     }
 
     @Override
-    public void setPrimaryKey(String primaryKey) {
-        setIssueId(primaryKey);
+    public void setPrimaryKey(long primaryKey) {
+        setIssueTypeId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _issueId;
+        return _issueTypeId;
     }
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey((String) primaryKeyObj);
+        setPrimaryKey(((Long) primaryKeyObj).longValue());
     }
 
     @Override
@@ -148,55 +152,64 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("issueId", getIssueId());
-        attributes.put("issueName", getIssueName());
+        attributes.put("issueTypeId", getIssueTypeId());
+        attributes.put("typeName", getTypeName());
 
         return attributes;
     }
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        String issueId = (String) attributes.get("issueId");
+        Long issueTypeId = (Long) attributes.get("issueTypeId");
 
-        if (issueId != null) {
-            setIssueId(issueId);
+        if (issueTypeId != null) {
+            setIssueTypeId(issueTypeId);
         }
 
-        String issueName = (String) attributes.get("issueName");
+        String typeName = (String) attributes.get("typeName");
 
-        if (issueName != null) {
-            setIssueName(issueName);
+        if (typeName != null) {
+            setTypeName(typeName);
         }
     }
 
     @JSON
     @Override
-    public String getIssueId() {
-        if (_issueId == null) {
-            return StringPool.BLANK;
-        } else {
-            return _issueId;
-        }
+    public long getIssueTypeId() {
+        return _issueTypeId;
     }
 
     @Override
-    public void setIssueId(String issueId) {
-        _issueId = issueId;
+    public void setIssueTypeId(long issueTypeId) {
+        _issueTypeId = issueTypeId;
     }
 
     @JSON
     @Override
-    public String getIssueName() {
-        if (_issueName == null) {
+    public String getTypeName() {
+        if (_typeName == null) {
             return StringPool.BLANK;
         } else {
-            return _issueName;
+            return _typeName;
         }
     }
 
     @Override
-    public void setIssueName(String issueName) {
-        _issueName = issueName;
+    public void setTypeName(String typeName) {
+        _typeName = typeName;
+    }
+
+    @Override
+    public ExpandoBridge getExpandoBridge() {
+        return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+            IssueType.class.getName(), getPrimaryKey());
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+        ExpandoBridge expandoBridge = getExpandoBridge();
+
+        expandoBridge.setAttributes(serviceContext);
     }
 
     @Override
@@ -213,8 +226,8 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
     public Object clone() {
         IssueTypeImpl issueTypeImpl = new IssueTypeImpl();
 
-        issueTypeImpl.setIssueId(getIssueId());
-        issueTypeImpl.setIssueName(getIssueName());
+        issueTypeImpl.setIssueTypeId(getIssueTypeId());
+        issueTypeImpl.setTypeName(getTypeName());
 
         issueTypeImpl.resetOriginalValues();
 
@@ -223,9 +236,15 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
 
     @Override
     public int compareTo(IssueType issueType) {
-        String primaryKey = issueType.getPrimaryKey();
+        long primaryKey = issueType.getPrimaryKey();
 
-        return getPrimaryKey().compareTo(primaryKey);
+        if (getPrimaryKey() < primaryKey) {
+            return -1;
+        } else if (getPrimaryKey() > primaryKey) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -240,9 +259,9 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
 
         IssueType issueType = (IssueType) obj;
 
-        String primaryKey = issueType.getPrimaryKey();
+        long primaryKey = issueType.getPrimaryKey();
 
-        if (getPrimaryKey().equals(primaryKey)) {
+        if (getPrimaryKey() == primaryKey) {
             return true;
         } else {
             return false;
@@ -251,7 +270,7 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
 
     @Override
     public int hashCode() {
-        return getPrimaryKey().hashCode();
+        return (int) getPrimaryKey();
     }
 
     @Override
@@ -262,20 +281,14 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
     public CacheModel<IssueType> toCacheModel() {
         IssueTypeCacheModel issueTypeCacheModel = new IssueTypeCacheModel();
 
-        issueTypeCacheModel.issueId = getIssueId();
+        issueTypeCacheModel.issueTypeId = getIssueTypeId();
 
-        String issueId = issueTypeCacheModel.issueId;
+        issueTypeCacheModel.typeName = getTypeName();
 
-        if ((issueId != null) && (issueId.length() == 0)) {
-            issueTypeCacheModel.issueId = null;
-        }
+        String typeName = issueTypeCacheModel.typeName;
 
-        issueTypeCacheModel.issueName = getIssueName();
-
-        String issueName = issueTypeCacheModel.issueName;
-
-        if ((issueName != null) && (issueName.length() == 0)) {
-            issueTypeCacheModel.issueName = null;
+        if ((typeName != null) && (typeName.length() == 0)) {
+            issueTypeCacheModel.typeName = null;
         }
 
         return issueTypeCacheModel;
@@ -285,10 +298,10 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
     public String toString() {
         StringBundler sb = new StringBundler(5);
 
-        sb.append("{issueId=");
-        sb.append(getIssueId());
-        sb.append(", issueName=");
-        sb.append(getIssueName());
+        sb.append("{issueTypeId=");
+        sb.append(getIssueTypeId());
+        sb.append(", typeName=");
+        sb.append(getTypeName());
         sb.append("}");
 
         return sb.toString();
@@ -303,12 +316,12 @@ public class IssueTypeModelImpl extends BaseModelImpl<IssueType>
         sb.append("</model-name>");
 
         sb.append(
-            "<column><column-name>issueId</column-name><column-value><![CDATA[");
-        sb.append(getIssueId());
+            "<column><column-name>issueTypeId</column-name><column-value><![CDATA[");
+        sb.append(getIssueTypeId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>issueName</column-name><column-value><![CDATA[");
-        sb.append(getIssueName());
+            "<column><column-name>typeName</column-name><column-value><![CDATA[");
+        sb.append(getTypeName());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

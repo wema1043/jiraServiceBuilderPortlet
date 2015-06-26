@@ -35,8 +35,8 @@
 		<field name="priorityName" type="String" />
 	</model>
 	<model name="de.hska.wi.awp.datasource.model.IssueType">
-		<field name="issueId" type="String" />
-		<field name="issueName" type="String" />
+		<field name="issueTypeId" type="long" />
+		<field name="typeName" type="String" />
 	</model>
 	<model name="de.hska.wi.awp.datasource.model.JiraUser">
 		<field name="creatorId" type="String" />

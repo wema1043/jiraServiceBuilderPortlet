@@ -121,27 +121,27 @@ public class IssueTypeUtil {
     /**
     * Creates a new issue type with the primary key. Does not add the issue type to the database.
     *
-    * @param issueId the primary key for the new issue type
+    * @param issueTypeId the primary key for the new issue type
     * @return the new issue type
     */
     public static de.hska.wi.awp.datasource.model.IssueType create(
-        java.lang.String issueId) {
-        return getPersistence().create(issueId);
+        long issueTypeId) {
+        return getPersistence().create(issueTypeId);
     }
 
     /**
     * Removes the issue type with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type that was removed
     * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.IssueType remove(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueTypeException {
-        return getPersistence().remove(issueId);
+        return getPersistence().remove(issueTypeId);
     }
 
     public static de.hska.wi.awp.datasource.model.IssueType updateImpl(
@@ -153,29 +153,29 @@ public class IssueTypeUtil {
     /**
     * Returns the issue type with the primary key or throws a {@link de.hska.wi.awp.datasource.NoSuchIssueTypeException} if it could not be found.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type
     * @throws de.hska.wi.awp.datasource.NoSuchIssueTypeException if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.IssueType findByPrimaryKey(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchIssueTypeException {
-        return getPersistence().findByPrimaryKey(issueId);
+        return getPersistence().findByPrimaryKey(issueTypeId);
     }
 
     /**
     * Returns the issue type with the primary key or returns <code>null</code> if it could not be found.
     *
-    * @param issueId the primary key of the issue type
+    * @param issueTypeId the primary key of the issue type
     * @return the issue type, or <code>null</code> if a issue type with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.IssueType fetchByPrimaryKey(
-        java.lang.String issueId)
+        long issueTypeId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByPrimaryKey(issueId);
+        return getPersistence().fetchByPrimaryKey(issueTypeId);
     }
 
     /**
