@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head />
+	<h:body>	
+		<h:panelGrid id="gridSPStudent" columns="3" cellpadding="5" >
+			<h:outputText value="Backlog Story Points:" />
+			<h:outputText value="#{processedStoryPointsStudentModelBean.summeBacklogStoryPointsGruppe}" />
+			<h:outputText value="" />
+			
+			<h:outputText value="Processed Story Points Group:" />
+			<h:outputText value="#{processedStoryPointsStudentModelBean.summeProcessedStoryPointsGruppe}" />
+			<h:outputText value="#{processedStoryPointsStudentModelBean.percentProcessedStoryPointsGruppe}%" />
+			
+			<h:outputText value="Processed Story Points Student:" />
+			<h:outputText value="#{processedStoryPointsStudentModelBean.summeStoryPointsStudent}" />
+			<h:outputText value="#{processedStoryPointsStudentModelBean.percentProcessedStoryPointsStudent}%" />
+		</h:panelGrid>		
+
+	</h:body>
+</f:view>

@@ -119,7 +119,6 @@
 	</portlet>
 	
 	<portlet>
-	
 		<portlet-name>assignedissues</portlet-name>
 		<display-name>Assignedissues</display-name>
 		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
@@ -161,7 +160,48 @@
 		</supported-processing-event>
 	</portlet>
 	
-	
+	<portlet>
+		<portlet-name>processedStoryPoints</portlet-name>
+		<display-name>ProcessedStoryPoints</display-name>
+		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/processedStoryPoints/processedStoryPointsViewMode.xhtml</value>
+		</init-param>
+		<init-param>
+			<name>javax.portlet.faces.bridgeEventHandler</name>
+			<value>de.hska.wi.awp.datasource.event.ProcessedStoryPointsEventHandler</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Jira - Processed Story Points (SP)</title>
+			<short-title>ProcessedStoryPoints</short-title>
+			<keywords>Processed Story Points</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<supported-processing-event>
+    		<qname xmlns:x="http://liferay.com/events">x:ipc.studentSelected</qname>
+		</supported-processing-event>
+		<supported-processing-event>
+    		<qname xmlns:x="http://liferay.com/events">x:ipc.projectSelected</qname>
+		</supported-processing-event>
+	</portlet>
+		
 	
 	<event-definition>
     	<qname xmlns:x="http://liferay.com/events">x:ipc.studentSelected</qname>

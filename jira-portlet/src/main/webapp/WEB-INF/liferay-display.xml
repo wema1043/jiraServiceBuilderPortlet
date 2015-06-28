@@ -6,6 +6,7 @@
 		<portlet id="BurnDownChartStoryPointsPortlet" />
 		<portlet id="OpenClosedPortlet" />
 		<portlet id="assignedissues"></portlet>
+		<portlet id="processedStoryPoints"></portlet>
 		<portlet id="Jira-load-Data" />
 
 	</category>
