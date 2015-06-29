@@ -55,6 +55,8 @@ public class JiraUserLocalServiceClpInvoker {
     private String[] _methodParameterTypes79;
     private String _methodName80;
     private String[] _methodParameterTypes80;
+    private String _methodName81;
+    private String[] _methodParameterTypes81;
 
     public JiraUserLocalServiceClpInvoker() {
         _methodName0 = "addJiraUser";
@@ -65,11 +67,15 @@ public class JiraUserLocalServiceClpInvoker {
 
         _methodName1 = "createJiraUser";
 
-        _methodParameterTypes1 = new String[] { "java.lang.String" };
+        _methodParameterTypes1 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName2 = "deleteJiraUser";
 
-        _methodParameterTypes2 = new String[] { "java.lang.String" };
+        _methodParameterTypes2 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName3 = "deleteJiraUser";
 
@@ -115,11 +121,15 @@ public class JiraUserLocalServiceClpInvoker {
 
         _methodName10 = "fetchJiraUser";
 
-        _methodParameterTypes10 = new String[] { "java.lang.String" };
+        _methodParameterTypes10 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName11 = "getJiraUser";
 
-        _methodParameterTypes11 = new String[] { "java.lang.String" };
+        _methodParameterTypes11 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName12 = "getPersistedModel";
 
@@ -159,13 +169,17 @@ public class JiraUserLocalServiceClpInvoker {
 
         _methodParameterTypes78 = new String[] { "java.lang.String" };
 
-        _methodName79 = "deleteAllJiraUser";
+        _methodName79 = "getProjectNameForUserId";
 
-        _methodParameterTypes79 = new String[] {  };
+        _methodParameterTypes79 = new String[] { "java.lang.String" };
 
-        _methodName80 = "loadConfigFile";
+        _methodName80 = "deleteAllJiraUser";
 
         _methodParameterTypes80 = new String[] {  };
+
+        _methodName81 = "loadConfigFile";
+
+        _methodParameterTypes81 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -177,12 +191,12 @@ public class JiraUserLocalServiceClpInvoker {
 
         if (_methodName1.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-            return JiraUserLocalServiceUtil.createJiraUser((java.lang.String) arguments[0]);
+            return JiraUserLocalServiceUtil.createJiraUser((de.hska.wi.awp.datasource.service.persistence.JiraUserPK) arguments[0]);
         }
 
         if (_methodName2.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-            return JiraUserLocalServiceUtil.deleteJiraUser((java.lang.String) arguments[0]);
+            return JiraUserLocalServiceUtil.deleteJiraUser((de.hska.wi.awp.datasource.service.persistence.JiraUserPK) arguments[0]);
         }
 
         if (_methodName3.equals(name) &&
@@ -228,12 +242,12 @@ public class JiraUserLocalServiceClpInvoker {
 
         if (_methodName10.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-            return JiraUserLocalServiceUtil.fetchJiraUser((java.lang.String) arguments[0]);
+            return JiraUserLocalServiceUtil.fetchJiraUser((de.hska.wi.awp.datasource.service.persistence.JiraUserPK) arguments[0]);
         }
 
         if (_methodName11.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-            return JiraUserLocalServiceUtil.getJiraUser((java.lang.String) arguments[0]);
+            return JiraUserLocalServiceUtil.getJiraUser((de.hska.wi.awp.datasource.service.persistence.JiraUserPK) arguments[0]);
         }
 
         if (_methodName12.equals(name) &&
@@ -288,13 +302,18 @@ public class JiraUserLocalServiceClpInvoker {
 
         if (_methodName79.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+            return JiraUserLocalServiceUtil.getProjectNameForUserId((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName80.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
             JiraUserLocalServiceUtil.deleteAllJiraUser();
 
             return null;
         }
 
-        if (_methodName80.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+        if (_methodName81.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
             return JiraUserLocalServiceUtil.loadConfigFile();
         }
 

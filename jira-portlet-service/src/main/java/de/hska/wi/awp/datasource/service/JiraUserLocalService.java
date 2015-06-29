@@ -48,23 +48,23 @@ public interface JiraUserLocalService extends BaseLocalService,
     /**
     * Creates a new jira user with the primary key. Does not add the jira user to the database.
     *
-    * @param creatorId the primary key for the new jira user
+    * @param jiraUserPK the primary key for the new jira user
     * @return the new jira user
     */
     public de.hska.wi.awp.datasource.model.JiraUser createJiraUser(
-        java.lang.String creatorId);
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK);
 
     /**
     * Deletes the jira user with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user that was removed
     * @throws PortalException if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
     public de.hska.wi.awp.datasource.model.JiraUser deleteJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -159,20 +159,20 @@ public interface JiraUserLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public de.hska.wi.awp.datasource.model.JiraUser fetchJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Returns the jira user with the primary key.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user
     * @throws PortalException if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public de.hska.wi.awp.datasource.model.JiraUser getJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -248,6 +248,9 @@ public interface JiraUserLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.lang.String getDisplayNameForUserId(java.lang.String userId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getProjectNameForUserId(java.lang.String userId);
 
     public void deleteAllJiraUser();
 

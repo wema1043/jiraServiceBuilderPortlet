@@ -36,8 +36,10 @@ create table jira_IssueType (
 );
 
 create table jira_JiraUser (
-	creatorId VARCHAR(75) not null primary key,
-	displayname VARCHAR(75) null
+	creatorId VARCHAR(75) not null,
+	displayname VARCHAR(75) null,
+	groupId VARCHAR(75) not null,
+	primary key (creatorId, groupId)
 );
 
 create table jira_Project (

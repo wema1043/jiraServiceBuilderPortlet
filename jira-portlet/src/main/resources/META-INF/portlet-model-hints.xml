@@ -41,6 +41,7 @@
 	<model name="de.hska.wi.awp.datasource.model.JiraUser">
 		<field name="creatorId" type="String" />
 		<field name="displayname" type="String" />
+		<field name="groupId" type="String" />
 	</model>
 	<model name="de.hska.wi.awp.datasource.model.Project">
 		<field name="projectId" type="String" />

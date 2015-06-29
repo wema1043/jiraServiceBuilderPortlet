@@ -1,5 +1,7 @@
 package de.hska.wi.awp.datasource.model;
 
+import de.hska.wi.awp.datasource.service.persistence.JiraUserPK;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.List;
 public class JiraUserSoap implements Serializable {
     private String _creatorId;
     private String _displayname;
+    private String _groupId;
 
     public JiraUserSoap() {
     }
@@ -24,6 +27,7 @@ public class JiraUserSoap implements Serializable {
 
         soapModel.setCreatorId(model.getCreatorId());
         soapModel.setDisplayname(model.getDisplayname());
+        soapModel.setGroupId(model.getGroupId());
 
         return soapModel;
     }
@@ -64,12 +68,13 @@ public class JiraUserSoap implements Serializable {
         return soapModels.toArray(new JiraUserSoap[soapModels.size()]);
     }
 
-    public String getPrimaryKey() {
-        return _creatorId;
+    public JiraUserPK getPrimaryKey() {
+        return new JiraUserPK(_creatorId, _groupId);
     }
 
-    public void setPrimaryKey(String pk) {
-        setCreatorId(pk);
+    public void setPrimaryKey(JiraUserPK pk) {
+        setCreatorId(pk.creatorId);
+        setGroupId(pk.groupId);
     }
 
     public String getCreatorId() {
@@ -86,5 +91,13 @@ public class JiraUserSoap implements Serializable {
 
     public void setDisplayname(String displayname) {
         _displayname = displayname;
+    }
+
+    public String getGroupId() {
+        return _groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        _groupId = groupId;
     }
 }

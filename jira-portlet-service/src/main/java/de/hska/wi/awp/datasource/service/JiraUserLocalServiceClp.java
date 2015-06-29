@@ -54,6 +54,8 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
     private String[] _methodParameterTypes22;
     private String _methodName23;
     private String[] _methodParameterTypes23;
+    private String _methodName24;
+    private String[] _methodParameterTypes24;
 
     public JiraUserLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -66,11 +68,15 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
         _methodName1 = "createJiraUser";
 
-        _methodParameterTypes1 = new String[] { "java.lang.String" };
+        _methodParameterTypes1 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName2 = "deleteJiraUser";
 
-        _methodParameterTypes2 = new String[] { "java.lang.String" };
+        _methodParameterTypes2 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName3 = "deleteJiraUser";
 
@@ -116,11 +122,15 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
         _methodName10 = "fetchJiraUser";
 
-        _methodParameterTypes10 = new String[] { "java.lang.String" };
+        _methodParameterTypes10 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName11 = "getJiraUser";
 
-        _methodParameterTypes11 = new String[] { "java.lang.String" };
+        _methodParameterTypes11 = new String[] {
+                "de.hska.wi.awp.datasource.service.persistence.JiraUserPK"
+            };
 
         _methodName12 = "getPersistedModel";
 
@@ -160,13 +170,17 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
         _methodParameterTypes21 = new String[] { "java.lang.String" };
 
-        _methodName22 = "deleteAllJiraUser";
+        _methodName22 = "getProjectNameForUserId";
 
-        _methodParameterTypes22 = new String[] {  };
+        _methodParameterTypes22 = new String[] { "java.lang.String" };
 
-        _methodName23 = "loadConfigFile";
+        _methodName23 = "deleteAllJiraUser";
 
         _methodParameterTypes23 = new String[] {  };
+
+        _methodName24 = "loadConfigFile";
+
+        _methodParameterTypes24 = new String[] {  };
     }
 
     @Override
@@ -199,13 +213,13 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.JiraUser createJiraUser(
-        java.lang.String creatorId) {
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName1,
                     _methodParameterTypes1,
-                    new Object[] { ClpSerializer.translateInput(creatorId) });
+                    new Object[] { ClpSerializer.translateInput(jiraUserPK) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -222,7 +236,7 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.JiraUser deleteJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
@@ -230,7 +244,7 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName2,
                     _methodParameterTypes2,
-                    new Object[] { ClpSerializer.translateInput(creatorId) });
+                    new Object[] { ClpSerializer.translateInput(jiraUserPK) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -468,14 +482,14 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.JiraUser fetchJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName10,
                     _methodParameterTypes10,
-                    new Object[] { ClpSerializer.translateInput(creatorId) });
+                    new Object[] { ClpSerializer.translateInput(jiraUserPK) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -496,7 +510,7 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
 
     @Override
     public de.hska.wi.awp.datasource.model.JiraUser getJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
@@ -504,7 +518,7 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName11,
                     _methodParameterTypes11,
-                    new Object[] { ClpSerializer.translateInput(creatorId) });
+                    new Object[] { ClpSerializer.translateInput(jiraUserPK) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -750,10 +764,32 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
     }
 
     @Override
+    public java.lang.String getProjectNameForUserId(java.lang.String userId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName22,
+                    _methodParameterTypes22,
+                    new Object[] { ClpSerializer.translateInput(userId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.String) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
     public void deleteAllJiraUser() {
         try {
-            _invokableLocalService.invokeMethod(_methodName22,
-                _methodParameterTypes22, new Object[] {  });
+            _invokableLocalService.invokeMethod(_methodName23,
+                _methodParameterTypes23, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -771,8 +807,8 @@ public class JiraUserLocalServiceClp implements JiraUserLocalService {
         Object returnObj = null;
 
         try {
-            returnObj = _invokableLocalService.invokeMethod(_methodName23,
-                    _methodParameterTypes23, new Object[] {  });
+            returnObj = _invokableLocalService.invokeMethod(_methodName24,
+                    _methodParameterTypes24, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

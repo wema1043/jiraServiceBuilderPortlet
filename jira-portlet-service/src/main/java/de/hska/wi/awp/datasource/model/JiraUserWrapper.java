@@ -38,6 +38,7 @@ public class JiraUserWrapper implements JiraUser, ModelWrapper<JiraUser> {
 
         attributes.put("creatorId", getCreatorId());
         attributes.put("displayname", getDisplayname());
+        attributes.put("groupId", getGroupId());
 
         return attributes;
     }
@@ -55,6 +56,12 @@ public class JiraUserWrapper implements JiraUser, ModelWrapper<JiraUser> {
         if (displayname != null) {
             setDisplayname(displayname);
         }
+
+        String groupId = (String) attributes.get("groupId");
+
+        if (groupId != null) {
+            setGroupId(groupId);
+        }
     }
 
     /**
@@ -63,7 +70,7 @@ public class JiraUserWrapper implements JiraUser, ModelWrapper<JiraUser> {
     * @return the primary key of this jira user
     */
     @Override
-    public java.lang.String getPrimaryKey() {
+    public de.hska.wi.awp.datasource.service.persistence.JiraUserPK getPrimaryKey() {
         return _jiraUser.getPrimaryKey();
     }
 
@@ -73,7 +80,8 @@ public class JiraUserWrapper implements JiraUser, ModelWrapper<JiraUser> {
     * @param primaryKey the primary key of this jira user
     */
     @Override
-    public void setPrimaryKey(java.lang.String primaryKey) {
+    public void setPrimaryKey(
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK primaryKey) {
         _jiraUser.setPrimaryKey(primaryKey);
     }
 
@@ -115,6 +123,26 @@ public class JiraUserWrapper implements JiraUser, ModelWrapper<JiraUser> {
     @Override
     public void setDisplayname(java.lang.String displayname) {
         _jiraUser.setDisplayname(displayname);
+    }
+
+    /**
+    * Returns the group ID of this jira user.
+    *
+    * @return the group ID of this jira user
+    */
+    @Override
+    public java.lang.String getGroupId() {
+        return _jiraUser.getGroupId();
+    }
+
+    /**
+    * Sets the group ID of this jira user.
+    *
+    * @param groupId the group ID of this jira user
+    */
+    @Override
+    public void setGroupId(java.lang.String groupId) {
+        _jiraUser.setGroupId(groupId);
     }
 
     @Override

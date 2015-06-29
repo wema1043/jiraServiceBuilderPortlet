@@ -21,15 +21,18 @@ import java.io.ObjectOutput;
 public class JiraUserCacheModel implements CacheModel<JiraUser>, Externalizable {
     public String creatorId;
     public String displayname;
+    public String groupId;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(5);
+        StringBundler sb = new StringBundler(7);
 
         sb.append("{creatorId=");
         sb.append(creatorId);
         sb.append(", displayname=");
         sb.append(displayname);
+        sb.append(", groupId=");
+        sb.append(groupId);
         sb.append("}");
 
         return sb.toString();
@@ -51,6 +54,12 @@ public class JiraUserCacheModel implements CacheModel<JiraUser>, Externalizable 
             jiraUserImpl.setDisplayname(displayname);
         }
 
+        if (groupId == null) {
+            jiraUserImpl.setGroupId(StringPool.BLANK);
+        } else {
+            jiraUserImpl.setGroupId(groupId);
+        }
+
         jiraUserImpl.resetOriginalValues();
 
         return jiraUserImpl;
@@ -60,6 +69,7 @@ public class JiraUserCacheModel implements CacheModel<JiraUser>, Externalizable 
     public void readExternal(ObjectInput objectInput) throws IOException {
         creatorId = objectInput.readUTF();
         displayname = objectInput.readUTF();
+        groupId = objectInput.readUTF();
     }
 
     @Override
@@ -75,6 +85,12 @@ public class JiraUserCacheModel implements CacheModel<JiraUser>, Externalizable 
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(displayname);
+        }
+
+        if (groupId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(groupId);
         }
     }
 }

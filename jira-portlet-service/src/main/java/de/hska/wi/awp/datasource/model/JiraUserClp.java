@@ -9,6 +9,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import de.hska.wi.awp.datasource.service.ClpSerializer;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.persistence.JiraUserPK;
 
 import java.io.Serializable;
 
@@ -21,6 +22,7 @@ import java.util.Map;
 public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
     private String _creatorId;
     private String _displayname;
+    private String _groupId;
     private BaseModel<?> _jiraUserRemoteModel;
     private Class<?> _clpSerializerClass = de.hska.wi.awp.datasource.service.ClpSerializer.class;
 
@@ -38,23 +40,24 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
     }
 
     @Override
-    public String getPrimaryKey() {
-        return _creatorId;
+    public JiraUserPK getPrimaryKey() {
+        return new JiraUserPK(_creatorId, _groupId);
     }
 
     @Override
-    public void setPrimaryKey(String primaryKey) {
-        setCreatorId(primaryKey);
+    public void setPrimaryKey(JiraUserPK primaryKey) {
+        setCreatorId(primaryKey.creatorId);
+        setGroupId(primaryKey.groupId);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _creatorId;
+        return new JiraUserPK(_creatorId, _groupId);
     }
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey((String) primaryKeyObj);
+        setPrimaryKey((JiraUserPK) primaryKeyObj);
     }
 
     @Override
@@ -63,6 +66,7 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
 
         attributes.put("creatorId", getCreatorId());
         attributes.put("displayname", getDisplayname());
+        attributes.put("groupId", getGroupId());
 
         return attributes;
     }
@@ -79,6 +83,12 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
 
         if (displayname != null) {
             setDisplayname(displayname);
+        }
+
+        String groupId = (String) attributes.get("groupId");
+
+        if (groupId != null) {
+            setGroupId(groupId);
         }
     }
 
@@ -120,6 +130,28 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
                 Method method = clazz.getMethod("setDisplayname", String.class);
 
                 method.invoke(_jiraUserRemoteModel, displayname);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getGroupId() {
+        return _groupId;
+    }
+
+    @Override
+    public void setGroupId(String groupId) {
+        _groupId = groupId;
+
+        if (_jiraUserRemoteModel != null) {
+            try {
+                Class<?> clazz = _jiraUserRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setGroupId", String.class);
+
+                method.invoke(_jiraUserRemoteModel, groupId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -195,13 +227,14 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
 
         clone.setCreatorId(getCreatorId());
         clone.setDisplayname(getDisplayname());
+        clone.setGroupId(getGroupId());
 
         return clone;
     }
 
     @Override
     public int compareTo(JiraUser jiraUser) {
-        String primaryKey = jiraUser.getPrimaryKey();
+        JiraUserPK primaryKey = jiraUser.getPrimaryKey();
 
         return getPrimaryKey().compareTo(primaryKey);
     }
@@ -218,7 +251,7 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
 
         JiraUserClp jiraUser = (JiraUserClp) obj;
 
-        String primaryKey = jiraUser.getPrimaryKey();
+        JiraUserPK primaryKey = jiraUser.getPrimaryKey();
 
         if (getPrimaryKey().equals(primaryKey)) {
             return true;
@@ -238,12 +271,14 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(5);
+        StringBundler sb = new StringBundler(7);
 
         sb.append("{creatorId=");
         sb.append(getCreatorId());
         sb.append(", displayname=");
         sb.append(getDisplayname());
+        sb.append(", groupId=");
+        sb.append(getGroupId());
         sb.append("}");
 
         return sb.toString();
@@ -251,7 +286,7 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(10);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.JiraUser");
@@ -264,6 +299,10 @@ public class JiraUserClp extends BaseModelImpl<JiraUser> implements JiraUser {
         sb.append(
             "<column><column-name>displayname</column-name><column-value><![CDATA[");
         sb.append(getDisplayname());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>groupId</column-name><column-value><![CDATA[");
+        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

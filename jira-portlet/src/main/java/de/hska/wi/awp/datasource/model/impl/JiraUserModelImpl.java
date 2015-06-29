@@ -12,6 +12,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import de.hska.wi.awp.datasource.model.JiraUser;
 import de.hska.wi.awp.datasource.model.JiraUserModel;
 import de.hska.wi.awp.datasource.model.JiraUserSoap;
+import de.hska.wi.awp.datasource.service.persistence.JiraUserPK;
 
 import java.io.Serializable;
 
@@ -46,12 +47,13 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
     public static final String TABLE_NAME = "jira_JiraUser";
     public static final Object[][] TABLE_COLUMNS = {
             { "creatorId", Types.VARCHAR },
-            { "displayname", Types.VARCHAR }
+            { "displayname", Types.VARCHAR },
+            { "groupId", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table jira_JiraUser (creatorId VARCHAR(75) not null primary key,displayname VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table jira_JiraUser (creatorId VARCHAR(75) not null,displayname VARCHAR(75) null,groupId VARCHAR(75) not null,primary key (creatorId, groupId))";
     public static final String TABLE_SQL_DROP = "drop table jira_JiraUser";
-    public static final String ORDER_BY_JPQL = " ORDER BY jiraUser.creatorId ASC";
-    public static final String ORDER_BY_SQL = " ORDER BY jira_JiraUser.creatorId ASC";
+    public static final String ORDER_BY_JPQL = " ORDER BY jiraUser.id.creatorId ASC, jiraUser.id.groupId ASC";
+    public static final String ORDER_BY_SQL = " ORDER BY jira_JiraUser.creatorId ASC, jira_JiraUser.groupId ASC";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
@@ -65,6 +67,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
                 "value.object.column.bitmask.enabled.de.hska.wi.awp.datasource.model.JiraUser"),
             true);
     public static long CREATORID_COLUMN_BITMASK = 1L;
+    public static long GROUPID_COLUMN_BITMASK = 2L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.de.hska.wi.awp.datasource.model.JiraUser"));
     private static ClassLoader _classLoader = JiraUser.class.getClassLoader();
@@ -74,6 +77,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
     private String _creatorId;
     private String _originalCreatorId;
     private String _displayname;
+    private String _groupId;
     private long _columnBitmask;
     private JiraUser _escapedModel;
 
@@ -95,6 +99,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
         model.setCreatorId(soapModel.getCreatorId());
         model.setDisplayname(soapModel.getDisplayname());
+        model.setGroupId(soapModel.getGroupId());
 
         return model;
     }
@@ -120,23 +125,24 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
     }
 
     @Override
-    public String getPrimaryKey() {
-        return _creatorId;
+    public JiraUserPK getPrimaryKey() {
+        return new JiraUserPK(_creatorId, _groupId);
     }
 
     @Override
-    public void setPrimaryKey(String primaryKey) {
-        setCreatorId(primaryKey);
+    public void setPrimaryKey(JiraUserPK primaryKey) {
+        setCreatorId(primaryKey.creatorId);
+        setGroupId(primaryKey.groupId);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _creatorId;
+        return new JiraUserPK(_creatorId, _groupId);
     }
 
     @Override
     public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey((String) primaryKeyObj);
+        setPrimaryKey((JiraUserPK) primaryKeyObj);
     }
 
     @Override
@@ -155,6 +161,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
         attributes.put("creatorId", getCreatorId());
         attributes.put("displayname", getDisplayname());
+        attributes.put("groupId", getGroupId());
 
         return attributes;
     }
@@ -171,6 +178,12 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
         if (displayname != null) {
             setDisplayname(displayname);
+        }
+
+        String groupId = (String) attributes.get("groupId");
+
+        if (groupId != null) {
+            setGroupId(groupId);
         }
     }
 
@@ -214,6 +227,21 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
         _displayname = displayname;
     }
 
+    @JSON
+    @Override
+    public String getGroupId() {
+        if (_groupId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _groupId;
+        }
+    }
+
+    @Override
+    public void setGroupId(String groupId) {
+        _groupId = groupId;
+    }
+
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -234,6 +262,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
         jiraUserImpl.setCreatorId(getCreatorId());
         jiraUserImpl.setDisplayname(getDisplayname());
+        jiraUserImpl.setGroupId(getGroupId());
 
         jiraUserImpl.resetOriginalValues();
 
@@ -242,7 +271,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
     @Override
     public int compareTo(JiraUser jiraUser) {
-        String primaryKey = jiraUser.getPrimaryKey();
+        JiraUserPK primaryKey = jiraUser.getPrimaryKey();
 
         return getPrimaryKey().compareTo(primaryKey);
     }
@@ -259,7 +288,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
         JiraUser jiraUser = (JiraUser) obj;
 
-        String primaryKey = jiraUser.getPrimaryKey();
+        JiraUserPK primaryKey = jiraUser.getPrimaryKey();
 
         if (getPrimaryKey().equals(primaryKey)) {
             return true;
@@ -302,17 +331,27 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
             jiraUserCacheModel.displayname = null;
         }
 
+        jiraUserCacheModel.groupId = getGroupId();
+
+        String groupId = jiraUserCacheModel.groupId;
+
+        if ((groupId != null) && (groupId.length() == 0)) {
+            jiraUserCacheModel.groupId = null;
+        }
+
         return jiraUserCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(5);
+        StringBundler sb = new StringBundler(7);
 
         sb.append("{creatorId=");
         sb.append(getCreatorId());
         sb.append(", displayname=");
         sb.append(getDisplayname());
+        sb.append(", groupId=");
+        sb.append(getGroupId());
         sb.append("}");
 
         return sb.toString();
@@ -320,7 +359,7 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(10);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("<model><model-name>");
         sb.append("de.hska.wi.awp.datasource.model.JiraUser");
@@ -333,6 +372,10 @@ public class JiraUserModelImpl extends BaseModelImpl<JiraUser>
         sb.append(
             "<column><column-name>displayname</column-name><column-value><![CDATA[");
         sb.append(getDisplayname());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>groupId</column-name><column-value><![CDATA[");
+        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

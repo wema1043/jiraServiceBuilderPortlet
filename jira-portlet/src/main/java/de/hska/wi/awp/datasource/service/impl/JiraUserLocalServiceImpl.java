@@ -27,6 +27,7 @@ import de.hska.wi.awp.datasource.model.JiraUser;
 import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
 import de.hska.wi.awp.datasource.service.base.JiraUserLocalServiceBaseImpl;
+import de.hska.wi.awp.datasource.service.persistence.JiraUserPK;
 import de.hska.wi.awp.datasource.service.persistence.JiraUserUtil;
 import de.hska.wi.awp.datasource.utils.Constants;
 
@@ -52,11 +53,14 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 	 */
 	private static Log log =
 		LogFactoryUtil.getLog(JiraUserLocalServiceImpl.class);
+	
+	private String currentProjectId;
 
 	public String getAllMembers(String projectId) {
 
 		log.debug("BEGIN: getAllMembers");
 
+		currentProjectId = projectId;
 		String url =
 			Constants.JIRA_HOST_NAME +
 				Constants.JIRA_API_ALL_MEMBERS_FOR_PROJECT + projectId;
@@ -95,23 +99,30 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 
 		try {
 			JSONArray jsonresponse = new JSONArray(response);
-			if (JiraUserUtil.countBybyName("admin") != 0) {
-				JiraUserUtil.removeBybyName("admin");
-			}
-			if (JiraUserUtil.countBybyName("professorlogin") != 0) {
-				JiraUserUtil.removeBybyName("professorlogin");
-			}
-			if (JiraUserUtil.countBybyName(configFile.getProperty("username")) != 0) {
-				JiraUserUtil.removeBybyName(configFile.getProperty("username"));
-			}
+//			if ((JiraUserUtil.countBybyName("admin") != 0) || (JiraUserUtil.countBybyName("professorlogin") != 0)) {
+//				JiraUserUtil.removeBybyName("admin");
+//			}
+//			if (JiraUserUtil.countBybyName("professorlogin") != 0) {
+//				JiraUserUtil.removeBybyName("professorlogin");
+//			}
+//			if (JiraUserUtil.countBybyName(configFile.getProperty("username")) != 0) {
+//				JiraUserUtil.removeBybyName(configFile.getProperty("username"));
+//			}
 			for (int zl = 0; zl < jsonresponse.length(); zl++) {
-				JiraUser jiraUser =
-					JiraUserLocalServiceUtil.createJiraUser(jsonresponse.getJSONObject(
-						zl).getString("key"));
+				
+				if((!jsonresponse.getJSONObject(zl).getString("key").equals("admin")) &&(!jsonresponse.getJSONObject(zl).getString("key").equals("professorlogin"))){
+				JiraUserPK userPK = new JiraUserPK(jsonresponse.getJSONObject(
+					zl).getString("key"), currentProjectId);
+					JiraUser jiraUser =
+					JiraUserLocalServiceUtil.createJiraUser(userPK);
 				jiraUser.setDisplayname(jsonresponse.getJSONObject(zl).getString(
 					"displayName"));
+				jiraUser.setGroupId(currentProjectId);
+				
+				
 
 				JiraUserLocalServiceUtil.addJiraUser(jiraUser);
+				}
 			}
 
 		}
@@ -130,6 +141,27 @@ public class JiraUserLocalServiceImpl extends JiraUserLocalServiceBaseImpl {
 		String response = "";
 		try {
 			response = JiraUserUtil.findBybyName(userId).getDisplayname();
+		}
+		catch (NoSuchJiraUserException e) {
+			// TODO Auto-generated catch block
+			log.error("No User exists with the userId = " + userId);
+		}
+		catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.debug("END: getDisplayNameForUserId");
+
+		return response;
+	}
+	
+	public String getProjectNameForUserId(String userId) {
+		log.debug("BEGIN: getDisplayNameForUserId");
+
+
+		String response = "";
+		try {
+			response = JiraUserUtil.findBybyName(userId).getGroupId();
 		}
 		catch (NoSuchJiraUserException e) {
 			// TODO Auto-generated catch block

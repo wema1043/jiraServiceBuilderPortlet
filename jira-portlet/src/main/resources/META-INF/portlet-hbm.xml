@@ -56,9 +56,10 @@
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.JiraUserImpl" table="jira_JiraUser">
 		<cache usage="read-write" />
-		<id name="creatorId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
+		<composite-id name="primaryKey" class="de.hska.wi.awp.datasource.service.persistence.JiraUserPK">
+			<key-property name="creatorId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+			<key-property name="groupId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		</composite-id>
 		<property name="displayname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="de.hska.wi.awp.datasource.model.impl.ProjectImpl" table="jira_Project">

@@ -99,22 +99,22 @@ public interface JiraUserPersistence extends BasePersistence<JiraUser> {
     /**
     * Creates a new jira user with the primary key. Does not add the jira user to the database.
     *
-    * @param creatorId the primary key for the new jira user
+    * @param jiraUserPK the primary key for the new jira user
     * @return the new jira user
     */
     public de.hska.wi.awp.datasource.model.JiraUser create(
-        java.lang.String creatorId);
+        JiraUserPK jiraUserPK);
 
     /**
     * Removes the jira user with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user that was removed
     * @throws de.hska.wi.awp.datasource.NoSuchJiraUserException if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.JiraUser remove(
-        java.lang.String creatorId)
+        JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchJiraUserException;
 
@@ -125,25 +125,25 @@ public interface JiraUserPersistence extends BasePersistence<JiraUser> {
     /**
     * Returns the jira user with the primary key or throws a {@link de.hska.wi.awp.datasource.NoSuchJiraUserException} if it could not be found.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user
     * @throws de.hska.wi.awp.datasource.NoSuchJiraUserException if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.JiraUser findByPrimaryKey(
-        java.lang.String creatorId)
+        JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.SystemException,
             de.hska.wi.awp.datasource.NoSuchJiraUserException;
 
     /**
     * Returns the jira user with the primary key or returns <code>null</code> if it could not be found.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user, or <code>null</code> if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public de.hska.wi.awp.datasource.model.JiraUser fetchByPrimaryKey(
-        java.lang.String creatorId)
+        JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**

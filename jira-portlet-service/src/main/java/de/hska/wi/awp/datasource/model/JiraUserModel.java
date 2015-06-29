@@ -7,6 +7,8 @@ import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
+import de.hska.wi.awp.datasource.service.persistence.JiraUserPK;
+
 import java.io.Serializable;
 
 /**
@@ -34,14 +36,14 @@ public interface JiraUserModel extends BaseModel<JiraUser> {
      *
      * @return the primary key of this jira user
      */
-    public String getPrimaryKey();
+    public JiraUserPK getPrimaryKey();
 
     /**
      * Sets the primary key of this jira user.
      *
      * @param primaryKey the primary key of this jira user
      */
-    public void setPrimaryKey(String primaryKey);
+    public void setPrimaryKey(JiraUserPK primaryKey);
 
     /**
      * Returns the creator ID of this jira user.
@@ -72,6 +74,21 @@ public interface JiraUserModel extends BaseModel<JiraUser> {
      * @param displayname the displayname of this jira user
      */
     public void setDisplayname(String displayname);
+
+    /**
+     * Returns the group ID of this jira user.
+     *
+     * @return the group ID of this jira user
+     */
+    @AutoEscape
+    public String getGroupId();
+
+    /**
+     * Sets the group ID of this jira user.
+     *
+     * @param groupId the group ID of this jira user
+     */
+    public void setGroupId(String groupId);
 
     @Override
     public boolean isNew();

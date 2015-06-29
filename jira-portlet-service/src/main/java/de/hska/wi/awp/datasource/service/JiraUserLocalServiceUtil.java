@@ -43,27 +43,27 @@ public class JiraUserLocalServiceUtil {
     /**
     * Creates a new jira user with the primary key. Does not add the jira user to the database.
     *
-    * @param creatorId the primary key for the new jira user
+    * @param jiraUserPK the primary key for the new jira user
     * @return the new jira user
     */
     public static de.hska.wi.awp.datasource.model.JiraUser createJiraUser(
-        java.lang.String creatorId) {
-        return getService().createJiraUser(creatorId);
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK) {
+        return getService().createJiraUser(jiraUserPK);
     }
 
     /**
     * Deletes the jira user with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user that was removed
     * @throws PortalException if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.JiraUser deleteJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getService().deleteJiraUser(creatorId);
+        return getService().deleteJiraUser(jiraUserPK);
     }
 
     /**
@@ -170,24 +170,24 @@ public class JiraUserLocalServiceUtil {
     }
 
     public static de.hska.wi.awp.datasource.model.JiraUser fetchJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().fetchJiraUser(creatorId);
+        return getService().fetchJiraUser(jiraUserPK);
     }
 
     /**
     * Returns the jira user with the primary key.
     *
-    * @param creatorId the primary key of the jira user
+    * @param jiraUserPK the primary key of the jira user
     * @return the jira user
     * @throws PortalException if a jira user with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static de.hska.wi.awp.datasource.model.JiraUser getJiraUser(
-        java.lang.String creatorId)
+        de.hska.wi.awp.datasource.service.persistence.JiraUserPK jiraUserPK)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getService().getJiraUser(creatorId);
+        return getService().getJiraUser(jiraUserPK);
     }
 
     public static com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -274,6 +274,11 @@ public class JiraUserLocalServiceUtil {
     public static java.lang.String getDisplayNameForUserId(
         java.lang.String userId) {
         return getService().getDisplayNameForUserId(userId);
+    }
+
+    public static java.lang.String getProjectNameForUserId(
+        java.lang.String userId) {
+        return getService().getProjectNameForUserId(userId);
     }
 
     public static void deleteAllJiraUser() {

@@ -69,8 +69,10 @@
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="de.hska.wi.awp.datasource.model.impl.JiraUserModelImpl">
+		<id-class class="de.hska.wi.awp.datasource.service.persistence.JiraUserPK" />
 		<attributes>
 			<id name="creatorId" />
+			<id name="groupId" />
 			<basic name="displayname" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

@@ -23,6 +23,7 @@ import de.hska.wi.awp.datasource.service.persistence.FieldPersistence;
 import de.hska.wi.awp.datasource.service.persistence.IssuePersistence;
 import de.hska.wi.awp.datasource.service.persistence.IssuePriorityPersistence;
 import de.hska.wi.awp.datasource.service.persistence.IssueTypePersistence;
+import de.hska.wi.awp.datasource.service.persistence.JiraUserPK;
 import de.hska.wi.awp.datasource.service.persistence.JiraUserPersistence;
 import de.hska.wi.awp.datasource.service.persistence.ProjectPersistence;
 import de.hska.wi.awp.datasource.service.persistence.StatusPersistence;
@@ -127,27 +128,27 @@ public abstract class JiraUserLocalServiceBaseImpl extends BaseLocalServiceImpl
     /**
      * Creates a new jira user with the primary key. Does not add the jira user to the database.
      *
-     * @param creatorId the primary key for the new jira user
+     * @param jiraUserPK the primary key for the new jira user
      * @return the new jira user
      */
     @Override
-    public JiraUser createJiraUser(String creatorId) {
-        return jiraUserPersistence.create(creatorId);
+    public JiraUser createJiraUser(JiraUserPK jiraUserPK) {
+        return jiraUserPersistence.create(jiraUserPK);
     }
 
     /**
      * Deletes the jira user with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param creatorId the primary key of the jira user
+     * @param jiraUserPK the primary key of the jira user
      * @return the jira user that was removed
      * @throws PortalException if a jira user with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Indexable(type = IndexableType.DELETE)
     @Override
-    public JiraUser deleteJiraUser(String creatorId)
+    public JiraUser deleteJiraUser(JiraUserPK jiraUserPK)
         throws PortalException, SystemException {
-        return jiraUserPersistence.remove(creatorId);
+        return jiraUserPersistence.remove(jiraUserPK);
     }
 
     /**
@@ -256,22 +257,23 @@ public abstract class JiraUserLocalServiceBaseImpl extends BaseLocalServiceImpl
     }
 
     @Override
-    public JiraUser fetchJiraUser(String creatorId) throws SystemException {
-        return jiraUserPersistence.fetchByPrimaryKey(creatorId);
+    public JiraUser fetchJiraUser(JiraUserPK jiraUserPK)
+        throws SystemException {
+        return jiraUserPersistence.fetchByPrimaryKey(jiraUserPK);
     }
 
     /**
      * Returns the jira user with the primary key.
      *
-     * @param creatorId the primary key of the jira user
+     * @param jiraUserPK the primary key of the jira user
      * @return the jira user
      * @throws PortalException if a jira user with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser getJiraUser(String creatorId)
+    public JiraUser getJiraUser(JiraUserPK jiraUserPK)
         throws PortalException, SystemException {
-        return jiraUserPersistence.findByPrimaryKey(creatorId);
+        return jiraUserPersistence.findByPrimaryKey(jiraUserPK);
     }
 
     @Override

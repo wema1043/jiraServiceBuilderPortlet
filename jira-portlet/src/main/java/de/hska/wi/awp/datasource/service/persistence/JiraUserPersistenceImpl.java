@@ -79,9 +79,9 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
             JiraUserModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBybyName",
             new String[] { String.class.getName() });
-    private static final String _FINDER_COLUMN_BYNAME_CREATORID_1 = "jiraUser.creatorId IS NULL";
-    private static final String _FINDER_COLUMN_BYNAME_CREATORID_2 = "jiraUser.creatorId = ?";
-    private static final String _FINDER_COLUMN_BYNAME_CREATORID_3 = "(jiraUser.creatorId IS NULL OR jiraUser.creatorId = '')";
+    private static final String _FINDER_COLUMN_BYNAME_CREATORID_1 = "jiraUser.id.creatorId IS NULL";
+    private static final String _FINDER_COLUMN_BYNAME_CREATORID_2 = "jiraUser.id.creatorId = ?";
+    private static final String _FINDER_COLUMN_BYNAME_CREATORID_3 = "(jiraUser.id.creatorId IS NULL OR jiraUser.id.creatorId = '')";
     private static final String _SQL_SELECT_JIRAUSER = "SELECT jiraUser FROM JiraUser jiraUser";
     private static final String _SQL_SELECT_JIRAUSER_WHERE = "SELECT jiraUser FROM JiraUser jiraUser WHERE ";
     private static final String _SQL_COUNT_JIRAUSER = "SELECT COUNT(jiraUser) FROM JiraUser jiraUser";
@@ -468,15 +468,15 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     /**
      * Creates a new jira user with the primary key. Does not add the jira user to the database.
      *
-     * @param creatorId the primary key for the new jira user
+     * @param jiraUserPK the primary key for the new jira user
      * @return the new jira user
      */
     @Override
-    public JiraUser create(String creatorId) {
+    public JiraUser create(JiraUserPK jiraUserPK) {
         JiraUser jiraUser = new JiraUserImpl();
 
         jiraUser.setNew(true);
-        jiraUser.setPrimaryKey(creatorId);
+        jiraUser.setPrimaryKey(jiraUserPK);
 
         return jiraUser;
     }
@@ -484,15 +484,15 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     /**
      * Removes the jira user with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param creatorId the primary key of the jira user
+     * @param jiraUserPK the primary key of the jira user
      * @return the jira user that was removed
      * @throws de.hska.wi.awp.datasource.NoSuchJiraUserException if a jira user with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser remove(String creatorId)
+    public JiraUser remove(JiraUserPK jiraUserPK)
         throws NoSuchJiraUserException, SystemException {
-        return remove((Serializable) creatorId);
+        return remove((Serializable) jiraUserPK);
     }
 
     /**
@@ -616,6 +616,7 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
 
         jiraUserImpl.setCreatorId(jiraUser.getCreatorId());
         jiraUserImpl.setDisplayname(jiraUser.getDisplayname());
+        jiraUserImpl.setGroupId(jiraUser.getGroupId());
 
         return jiraUserImpl;
     }
@@ -648,15 +649,15 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     /**
      * Returns the jira user with the primary key or throws a {@link de.hska.wi.awp.datasource.NoSuchJiraUserException} if it could not be found.
      *
-     * @param creatorId the primary key of the jira user
+     * @param jiraUserPK the primary key of the jira user
      * @return the jira user
      * @throws de.hska.wi.awp.datasource.NoSuchJiraUserException if a jira user with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser findByPrimaryKey(String creatorId)
+    public JiraUser findByPrimaryKey(JiraUserPK jiraUserPK)
         throws NoSuchJiraUserException, SystemException {
-        return findByPrimaryKey((Serializable) creatorId);
+        return findByPrimaryKey((Serializable) jiraUserPK);
     }
 
     /**
@@ -706,14 +707,14 @@ public class JiraUserPersistenceImpl extends BasePersistenceImpl<JiraUser>
     /**
      * Returns the jira user with the primary key or returns <code>null</code> if it could not be found.
      *
-     * @param creatorId the primary key of the jira user
+     * @param jiraUserPK the primary key of the jira user
      * @return the jira user, or <code>null</code> if a jira user with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public JiraUser fetchByPrimaryKey(String creatorId)
+    public JiraUser fetchByPrimaryKey(JiraUserPK jiraUserPK)
         throws SystemException {
-        return fetchByPrimaryKey((Serializable) creatorId);
+        return fetchByPrimaryKey((Serializable) jiraUserPK);
     }
 
     /**
