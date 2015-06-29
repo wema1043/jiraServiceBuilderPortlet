@@ -17,10 +17,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import de.hska.wi.awp.datasource.bean.processedStoryPoints.ProcessedStoryPointsStudentModelBean;
 import de.hska.wi.awp.datasource.bean.processedStoryPoints.ProcessedStoryPointsProjectModelBean;
-import de.hska.wi.awp.datasource.infosys.model.Project;
-import de.hska.wi.awp.datasource.infosys.model.Student;
-import de.hska.wi.awp.datasource.infosys.service.ProjectLocalServiceUtil;
-import de.hska.wi.awp.datasource.infosys.service.StudentLocalServiceUtil;
+import de.hska.wi.awp.datasource.model.JiraUser;
+import de.hska.wi.awp.datasource.service.JiraUserLocalServiceUtil;
+import de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil;
 
 /**
  * 
@@ -56,26 +55,29 @@ public class ProcessedStoryPointsEventHandler implements BridgeEventHandler{
  			processedStoryPointsStudentModelBean.setProjectKey(null);
  			System.out.println("hskaId---"+hskaId);
  			
- 			//get Student from InfoSys
- 			Student student = StudentLocalServiceUtil.findByStudenthskaId(hskaId);
+// 			//get Student from InfoSys
+// 			Student student = StudentLocalServiceUtil.findByStudenthskaId(hskaId);
  			
- 			//get the project key from this student
- 			Project project = null;
-			try {
-				project = ProjectLocalServiceUtil.getProject(student.getProject_id());
-				System.out.println("Print Project from handler ProcessedStoryPointsEventHandler->"+ project.getProjecthskaId());
-			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//get Jira Project Id (//12345) for this Project Key(//AWP)
-			String jiraProjectId = de.hska.wi.awp.datasource.service.ProjectLocalServiceUtil.getProjectIdForProjectName(project.getProjecthskaId());
-			System.out.println("Print jiraProjectId from handler ProcessedStoryPointsEventHandler->"+ jiraProjectId);
-			processedStoryPointsStudentModelBean.setProjectId(jiraProjectId);
+// 			//get the project key from this student
+// 			Project project = null;
+//			try {
+//				project = ProjectLocalServiceUtil.getProject(student.getProject_id());
+//				System.out.println("Print Project from handler ProcessedStoryPointsEventHandler->"+ project.getProjecthskaId());
+//			} catch (SystemException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (PortalException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			//get Jira Project Id (//12345) for this Project Key(//AWP)
+ 			//workaround for the above implementation - get projectName from JIRA.
+ 			//get jira user
+ 			String projectName = JiraUserLocalServiceUtil.getProjectNameForUserId(hskaId);
+ 			String jiraProjectId = ProjectLocalServiceUtil.getProjectIdForProjectName(projectName);
+ 			System.out.println("Print jiraProjectId from handler ProcessedStoryPointsEventHandler->"+ jiraProjectId);
+ 			processedStoryPointsStudentModelBean.setProjectId(jiraProjectId);
 			
 			// set project id for ProcessedStoryPointsProjectModelBean to null
  			ProcessedStoryPointsProjectModelBean processedStoryPointsProjectModelBean = getProcessedStoryPointsProjectModelBean(facesContext);
