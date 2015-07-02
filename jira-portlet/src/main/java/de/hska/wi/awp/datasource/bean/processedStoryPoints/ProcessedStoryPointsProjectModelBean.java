@@ -1,5 +1,6 @@
 package de.hska.wi.awp.datasource.bean.processedStoryPoints;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +22,12 @@ import de.hska.wi.awp.datasource.service.IssueLocalServiceUtil;
 
 @ManagedBean(name = "processedStoryPointsProjectModelBean")
 @SessionScoped
-public class ProcessedStoryPointsProjectModelBean {
+public class ProcessedStoryPointsProjectModelBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6126510254626256402L;
+
 	/**
 	 * Logger Util
 	 */
